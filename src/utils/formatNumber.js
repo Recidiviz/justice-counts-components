@@ -14,4 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-export { default } from "./KeyInsights";
+const formatNumber = (number) => Math.round(number).toLocaleString();
+
+export default formatNumber;

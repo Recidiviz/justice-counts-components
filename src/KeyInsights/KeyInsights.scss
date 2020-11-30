@@ -14,4 +14,29 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-export { default } from "./KeyInsights";
+.KeyInsights {
+  padding-top: 1rem;
+  padding-bottom: 6rem;
+  border-bottom: 1px solid #c4ccd4;
+
+  &__title {
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2rem;
+  }
+
+  &__card-description {
+    margin-top: 2.5rem;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: #808c99;
+  }
+}

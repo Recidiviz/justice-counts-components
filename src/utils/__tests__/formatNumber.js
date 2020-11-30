@@ -14,4 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-export { default } from "./KeyInsights";
+import formatNumber from "../formatNumber";
+
+describe("formatNumber.js", () => {
+  it("should add commas as thousands separator", () => {
+    expect(formatNumber(1)).toBe("1");
+    expect(formatNumber(1001)).toBe("1,001");
+    expect(formatNumber(10000)).toBe("10,000");
+    expect(formatNumber(20004992888)).toBe("20,004,992,888");
+  });
+
+  it("should round to integer", () => {
+    expect(formatNumber(149.49)).toBe("149");
+    expect(formatNumber(120.5)).toBe("121");
+    expect(formatNumber(9999.5)).toBe("10,000");
+  });
+});

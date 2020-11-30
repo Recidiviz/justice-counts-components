@@ -22,14 +22,21 @@ import "./App.scss";
 const App = () => (
   <section className="App">
     <header className="App__header">
-      <h1 className="App__title">Colorado Data Dashboard</h1>
+      <h1 className="App__title">Colorado data dashboard</h1>
       <p className="App__description">
         The following is a broad overview of the corrections system in Colorado, representing the
         up-to-date data and changes compared to last year (September 2019 to September 2020). Two
         additional sections containing crime and jail indicators will be added at a later date.
       </p>
     </header>
-    <KeyInsights />
+    <KeyInsights
+      prisonPopulation={-3075}
+      prisonPopulationPercent={-16}
+      revocations={-139}
+      revocationsPercent={-53}
+      technicalRevocations={-109}
+      technicalRevocationsPercent={-62}
+    />
   </section>
 );
 

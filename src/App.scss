@@ -40,6 +40,10 @@
   font-display: swap;
 }
 
+body {
+  background-color: #f1f2f3;
+}
+
 .App {
   margin-left: auto;
   margin-right: auto;
@@ -47,7 +51,6 @@
   max-width: 58rem;
   padding-top: 4.5rem;
   padding-bottom: 10rem;
-  background-color: #f1f2f3;
   font-family: "GT America", sans-serif;
   color: #132536;
 
@@ -62,6 +65,7 @@
     font-weight: 700;
     line-height: 1.5;
     letter-spacing: -0.02em;
+    text-transform: capitalize;
   }
 
   &__description {
