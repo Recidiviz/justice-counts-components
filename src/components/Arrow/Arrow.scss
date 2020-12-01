@@ -1,0 +1,36 @@
+.Arrow {
+  position: absolute;
+  border-left: 3px solid currentColor;
+  z-index: 1;
+
+  &:before {
+    position: absolute;
+    content: "";
+    width: 0.875rem;
+    height: 0.875rem;
+    border: 3px solid currentColor;
+    border-radius: 50%;
+  }
+
+  &__arrow {
+    position: absolute;
+    content: "";
+    width: 1.375rem;
+    height: 0.675rem;
+    .Arrow--bottom & {
+      bottom: -0.125rem;
+      left: -1.5px;
+      transform: translateX(-52%);
+    }
+  }
+
+  &--bottom {
+    left: 50%;
+    top: 100%;
+    &:before {
+      left: -1.5px;
+      top: -1.125rem;
+      transform: translateX(-52%);
+    }
+  }
+}

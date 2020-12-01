@@ -18,6 +18,7 @@ import React from "react";
 import KeyInsights from "./KeyInsights";
 
 import "./App.scss";
+import FlowDiagram from "./FlowDiagram";
 
 const App = () => (
   <section className="App">
@@ -37,6 +38,7 @@ const App = () => (
       technicalRevocations={-109}
       technicalRevocationsPercent={-62}
     />
+    <FlowDiagram lastDate="September 2020" prevDate="September 2019" />
   </section>
 );
 

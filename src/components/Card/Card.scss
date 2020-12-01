@@ -1,19 +1,91 @@
 .Card {
+  position: relative;
   background-color: #fff;
   border-radius: 0.25rem;
   box-shadow: -1.25rem 1.25rem 2.5rem rgba(72, 132, 166, 0.15);
+  &--population {
+    background-color: #e8f9fb;
+  }
 
   &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 1.25rem 1.5rem;
   }
 
   &__title {
     font-size: 0.9375rem;
+    line-height: 1.6;
+    .Card--not-available & {
+      color: #b8bfc6;
+    }
+    .Card--population &:before {
+      margin-right: 0.5rem;
+      content: "";
+      display: inline-block;
+      width: 1rem;
+      height: 0.625rem;
+      background: url("../../assets/icons/people-icon.svg") center center no-repeat;
+      background-size: cover;
+    }
+  }
+
+  &__warning-box {
+    position: relative;
+  }
+
+  &__warning-icon {
+    content: "";
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: url("../../assets/icons/warning-icon.svg") center center no-repeat;
+    background-size: 1rem 1rem;
+    cursor: pointer;
+    &:hover ~ .Card__warning {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__warning {
+    visibility: hidden;
+    position: absolute;
+    bottom: 2rem;
+    left: 30%;
+    padding: 0.75rem;
+    width: 15.125rem;
+    background-color: #132536;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    color: #ffffff;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    transform: translate(-50%);
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    &:after {
+      content: "";
+      position: absolute;
+      display: block;
+      bottom: -0.3125rem;
+      left: 50%;
+      background-color: #132536;
+      width: 0.625rem;
+      height: 0.625rem;
+      transform: rotate(-45deg);
+    }
   }
 
   &__body {
     border-top: 1px solid #eeeeee;
     padding: 1.5rem 1.5rem 2rem;
+    .Card--population & {
+      border-top-color: #c0e9f1;
+    }
   }
 
   &__number {
@@ -27,6 +99,22 @@
     font-weight: 500;
     font-size: 2.5rem;
     line-height: 1;
-    color: #06AEEE;
+    color: #06aeee;
+  }
+
+  &__not-available-text {
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 700;
+    color: #b8bfc6;
+    letter-spacing: -0.01em;
+    text-transform: capitalize;
+  }
+
+  &__arrow {
+    color: #132536;
+    .Card--not-available & {
+      color: #b8bfc6;
+    }
   }
 }

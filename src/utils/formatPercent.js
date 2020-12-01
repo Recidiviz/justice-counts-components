@@ -14,13 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-const formatNumber = (number, isAbsolute = false) => {
-  let formattedNumber = number;
-  if (isAbsolute) {
-    formattedNumber = Math.abs(formattedNumber);
+const formatPercent = (percent, isPassive) => {
+  const isPositive = percent >= 0;
+  const formattedPercent = parseInt(Math.abs(percent).toString(), 10);
+
+  if (isPassive) {
+    return isPositive
+      ? `increased ${formattedPercent} percent`
+      : `declined ${formattedPercent} percent`;
   }
 
-  return Math.round(formattedNumber).toLocaleString();
+  return `a ${formattedPercent} percent ${isPositive ? "increase" : "decline"}`;
 };
 
-export default formatNumber;
+export default formatPercent;

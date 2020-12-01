@@ -1,0 +1,56 @@
+.FlowDiagram {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  &__date {
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+
+  &__hint {
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: #808c99;
+  }
+
+  &__box {
+    padding-top: 1rem;
+    border-top: 1px dashed #c4ccd4;
+  }
+
+  &__box-name {
+    color: #c4ccd4;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-size: 0.8125rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+  }
+
+  &__row {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__card {
+    width: 20.5rem;
+    &:not(:first-child) {
+      margin-left: 2rem;
+    }
+
+    &--doubled {
+      width: 43rem;
+    }
+
+    &--offset {
+      margin-right: 22.5rem;
+    }
+  }
+}

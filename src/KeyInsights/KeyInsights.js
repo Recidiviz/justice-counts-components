@@ -19,6 +19,7 @@ import PropTypes from "prop-types";
 
 import Card from "../components/Card";
 import formatNumber from "../utils/formatNumber";
+import formatPercent from "../utils/formatPercent";
 
 import "./KeyInsights.scss";
 
@@ -40,15 +41,15 @@ const KeyInsights = ({
           percent={prisonPopulationPercent}
         />
         <p className="KeyInsights__card-description">
-          The prison population declined {formatNumber(prisonPopulation)} percent, a decline of{" "}
-          {prisonPopulationPercent} people.
+          The prison population {formatPercent(prisonPopulationPercent, true)}, a decline of{" "}
+          {formatNumber(prisonPopulation, true)} people.
         </p>
       </div>
       <div className="KeyInsights__card">
         <Card title="Parole revocations" number={revocations} percent={revocationsPercent} />
         <p className="KeyInsights__card-description">
-          The number of people revoked from parole to prison fell by {formatNumber(revocations)}{" "}
-          people, a {revocationsPercent} percent decline.
+          The number of people revoked from parole to prison fell by{" "}
+          {formatNumber(revocations, true)} people, {formatPercent(revocationsPercent)}.
         </p>
       </div>
       <div className="KeyInsights__card">
@@ -59,8 +60,8 @@ const KeyInsights = ({
         />
         <p className="KeyInsights__card-description">
           Revocations to prison for technical violations of parole declined by{" "}
-          {formatNumber(technicalRevocations)} people, a {technicalRevocationsPercent} percent
-          decline.
+          {formatNumber(technicalRevocations, true)} people,{" "}
+          {formatPercent(technicalRevocationsPercent)}.
         </p>
       </div>
     </div>
