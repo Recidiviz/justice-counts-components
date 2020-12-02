@@ -16,9 +16,11 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
       <span className="FlowDiagram__box-name">Court</span>
       <div className="FlowDiagram__row">
         <Card className="FlowDiagram__card" title="Prison sentences" percent={-20} number={337}>
-          <Arrow height="28.5rem" />
+          <Arrow height={28.375} />
         </Card>
-        <Card className="FlowDiagram__card" title="Probation sentences" isNotAvailable />
+        <Card className="FlowDiagram__card" title="Probation sentences" isNotAvailable>
+          <Arrow height={4.25} />
+        </Card>
       </div>
     </div>
     <div className="FlowDiagram__box">
@@ -31,10 +33,15 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
           percent={-8}
           isPopulation
           warning="Probation population was last reported on June 30, 2020 (% change compared to September 2019)."
-        />
+        >
+          <Arrow />
+        </Card>
       </div>
       <div className="FlowDiagram__row">
-        <Card className="FlowDiagram__card" title="Probation population" isNotAvailable />
+        <Card className="FlowDiagram__card" title="Probation population" isNotAvailable>
+          <Arrow direction="topLeft" height={23.25} width={6.625} />
+          <Arrow />
+        </Card>
       </div>
       <div className="FlowDiagram__row">
         <Card
@@ -43,7 +50,9 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
           number={16673}
           percent={-16}
           isPopulation
-        />
+        >
+          <Arrow height={14.25} placement="right" />
+        </Card>
       </div>
       <div className="FlowDiagram__row">
         <Card
@@ -51,7 +60,9 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
           title="Parole revocations"
           number={123}
           percent={-53}
-        />
+        >
+          <Arrow direction="top" />
+        </Card>
       </div>
       <div className="FlowDiagram__row">
         <Card
@@ -60,8 +71,12 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
           number={12847}
           percent={12}
           isPopulation
-        />
-        <Card className="FlowDiagram__card" title="Releases to parole" number={622} percent={-11} />
+        >
+          <Arrow direction="top" />
+        </Card>
+        <Card className="FlowDiagram__card" title="Releases to parole" number={622} percent={-11}>
+          <Arrow direction="left" height={0} width={2} />
+        </Card>
       </div>
     </div>
   </section>

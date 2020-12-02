@@ -4,8 +4,11 @@ import PropTypes from "prop-types";
 
 import "./Arrow.scss";
 
-const Arrow = ({ direction, height, width }) => (
-  <div className={cn("Arrow", `Arrow--${direction}`)} style={{ height, width }}>
+const Arrow = ({ placement, direction, height, width }) => (
+  <div
+    className={cn("Arrow", `Arrow--dir-${direction}`, `Arrow--placement-${placement}`)}
+    style={{ height: `${height}rem`, width: `${width}rem` }}
+  >
     <svg
       className="Arrow__arrow"
       viewBox="0 0 20 12"
@@ -24,13 +27,15 @@ const Arrow = ({ direction, height, width }) => (
 );
 
 Arrow.defaultProps = {
+  placement: "center",
   direction: "bottom",
-  height: "2rem",
-  width: "3px",
+  height: 2,
+  width: 0.1875,
 };
 
 Arrow.propTypes = {
-  direction: PropTypes.oneOf("bottom", "top", "topLeft", "left"),
+  placement: PropTypes.oneOf(["center", "right"]),
+  direction: PropTypes.oneOf(["bottom", "top", "topLeft", "left"]),
   height: PropTypes.string,
   width: PropTypes.string,
 };

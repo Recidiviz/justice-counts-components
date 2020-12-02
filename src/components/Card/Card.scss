@@ -52,8 +52,9 @@
   &__warning {
     visibility: hidden;
     position: absolute;
-    bottom: 2rem;
-    left: 30%;
+    z-index: 2;
+    bottom: 2.25rem;
+    left: 50%;
     padding: 0.75rem;
     width: 15.125rem;
     background-color: #132536;
@@ -61,11 +62,10 @@
     border-radius: 0.25rem;
     color: #ffffff;
     font-size: 0.8125rem;
-    line-height: 1.5;
+    line-height: 1.5675;
     letter-spacing: -0.02em;
     transform: translate(-50%);
     opacity: 0;
-    cursor: pointer;
     transition: opacity 0.2s;
     &:after {
       content: "";
@@ -76,7 +76,7 @@
       background-color: #132536;
       width: 0.625rem;
       height: 0.625rem;
-      transform: rotate(-45deg);
+      transform: translateX(-50%) rotate(-45deg);
     }
   }
 
