@@ -36,7 +36,7 @@ const KeyInsights = ({
     <div className="KeyInsights__cards">
       <div className="KeyInsights__card">
         <Card
-          title="Prison population"
+          title="Prison Population"
           number={prisonPopulation}
           percent={prisonPopulationPercent}
         />
@@ -46,7 +46,7 @@ const KeyInsights = ({
         </p>
       </div>
       <div className="KeyInsights__card">
-        <Card title="Parole revocations" number={revocations} percent={revocationsPercent} />
+        <Card title="Parole Revocations" number={revocations} percent={revocationsPercent} />
         <p className="KeyInsights__card-description">
           The number of people revoked from parole to prison fell by{" "}
           {formatNumber(revocations, true)} people, {formatPercent(revocationsPercent)}.
@@ -54,7 +54,7 @@ const KeyInsights = ({
       </div>
       <div className="KeyInsights__card">
         <Card
-          title="Parole revocations (Technical)"
+          title="Parole Revocations (Technical)"
           number={technicalRevocations}
           percent={technicalRevocationsPercent}
         />

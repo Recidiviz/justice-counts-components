@@ -15,10 +15,35 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import React from "react";
+
 import KeyInsights from "./KeyInsights";
+import FlowDiagram from "./FlowDiagram";
+import Chart from "./Chart";
 
 import "./App.scss";
-import FlowDiagram from "./FlowDiagram";
+
+const mockPopulationsChartData = {
+  datasets: [
+    {
+      label: "Prison Population",
+      data: [700, 820, 740, 800, 700, 650, 600, 550, 500, 400, 400, 400, 420],
+    },
+    {
+      label: "Total Prison Admissions",
+      data: [400, 550, 580, 530, 420, 370, 340, 340, 340, 340, 340, 320, 330],
+    },
+    {
+      label: "New Court Admissions",
+      data: [200, 250, 260, 180, 140, 100, 100, 130, 80, 70, 80, 55, 95],
+    },
+    {
+      label: "Parole Revocations, New Offense",
+      data: [250, 220, 210, 40, 200, 57, 99, 123, 50, 70, 80, 55, 110],
+    },
+  ],
+  // prettier-ignore
+  labels: ["9/19", null, "11/19", null, "1/20", null, "3/20", null, "5/20", null, "7/20", null, "9/20"],
+};
 
 const App = () => (
   <section className="App">
@@ -39,6 +64,18 @@ const App = () => (
       technicalRevocationsPercent={-62}
     />
     <FlowDiagram lastDate="September 2020" prevDate="September 2019" />
+    <Chart
+      labels={mockPopulationsChartData.labels}
+      datasets={mockPopulationsChartData.datasets}
+      title="Populations"
+      hint="By Type (September 2019 - September 2020)"
+    />
+    <Chart
+      labels={mockPopulationsChartData.labels}
+      datasets={mockPopulationsChartData.datasets}
+      title="Prison Admissions"
+      hint="By Type (September 2019 - September 2020)"
+    />
   </section>
 );
 

@@ -46,7 +46,7 @@
 
   &--dir-left {
     right: 100%;
-    bottom: 2.5rem;
+    bottom: 3.25rem;
     border-bottom: 3px solid currentColor;
     &:before {
       bottom: -1.5px;
@@ -81,7 +81,7 @@
       left: -1.5px;
       transform: translateX(-52%) rotate(180deg);
     }
-    
+
     .Arrow--dir-left & {
       top: -0.25rem;
       left: 0;

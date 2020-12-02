@@ -15,10 +15,10 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
     <div className="FlowDiagram__box">
       <span className="FlowDiagram__box-name">Court</span>
       <div className="FlowDiagram__row">
-        <Card className="FlowDiagram__card" title="Prison sentences" percent={-20} number={337}>
+        <Card className="FlowDiagram__card" title="Prison Sentences" percent={-20} number={337}>
           <Arrow height={28.375} />
         </Card>
-        <Card className="FlowDiagram__card" title="Probation sentences" isNotAvailable>
+        <Card className="FlowDiagram__card" title="Probation Sentences" isNotAvailable>
           <Arrow height={4.25} />
         </Card>
       </div>
@@ -28,7 +28,7 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
       <div className="FlowDiagram__row">
         <Card
           className="FlowDiagram__card"
-          title="Probation population"
+          title="Probation Population"
           number={68285}
           percent={-8}
           isPopulation
@@ -38,7 +38,7 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
         </Card>
       </div>
       <div className="FlowDiagram__row">
-        <Card className="FlowDiagram__card" title="Probation population" isNotAvailable>
+        <Card className="FlowDiagram__card" title="Probation Revocations" isNotAvailable>
           <Arrow direction="topLeft" height={23.25} width={6.625} />
           <Arrow />
         </Card>
@@ -46,7 +46,7 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
       <div className="FlowDiagram__row">
         <Card
           className="FlowDiagram__card FlowDiagram__card--doubled"
-          title="Prison population"
+          title="Prison Population"
           number={16673}
           percent={-16}
           isPopulation
@@ -57,7 +57,7 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
       <div className="FlowDiagram__row">
         <Card
           className="FlowDiagram__card FlowDiagram__card--offset"
-          title="Parole revocations"
+          title="Parole Revocations"
           number={123}
           percent={-53}
         >
@@ -67,14 +67,14 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
       <div className="FlowDiagram__row">
         <Card
           className="FlowDiagram__card"
-          title="Parole population"
+          title="Parole Population"
           number={12847}
           percent={12}
           isPopulation
         >
           <Arrow direction="top" />
         </Card>
-        <Card className="FlowDiagram__card" title="Releases to parole" number={622} percent={-11}>
+        <Card className="FlowDiagram__card" title="Releases to Parole" number={622} percent={-11}>
           <Arrow direction="left" height={0} width={2} />
         </Card>
       </div>
