@@ -110,11 +110,4 @@
     letter-spacing: -0.01em;
     text-transform: capitalize;
   }
-
-  &__arrow {
-    color: #132536;
-    .Card--not-available & {
-      color: #b8bfc6;
-    }
-  }
 }

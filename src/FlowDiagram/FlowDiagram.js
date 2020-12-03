@@ -19,7 +19,7 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
           <Arrow height={28.375} />
         </Card>
         <Card className="FlowDiagram__card" title="Probation Sentences" isNotAvailable>
-          <Arrow height={4.25} />
+          <Arrow isDisabled height={4.25} />
         </Card>
       </div>
     </div>
@@ -34,13 +34,13 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
           isPopulation
           warning="Probation population was last reported on June 30, 2020 (% change compared to September 2019)."
         >
-          <Arrow />
+          <Arrow isDisabled />
         </Card>
       </div>
       <div className="FlowDiagram__row">
         <Card className="FlowDiagram__card" title="Probation Revocations" isNotAvailable>
-          <Arrow direction="topLeft" height={23.25} width={6.625} />
-          <Arrow />
+          <Arrow isDisabled direction="topLeft" height={23.25} width={6.625} />
+          <Arrow isDisabled />
         </Card>
       </div>
       <div className="FlowDiagram__row">

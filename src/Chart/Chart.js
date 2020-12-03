@@ -11,12 +11,13 @@ const Chart = ({ title, hint, datasets, labels }) => {
   const styledDatasets = datasets.map((dataset, i) => ({
     ...dataset,
     borderColor: chartColors[i],
-    pointBorderWidth: 0,
     backgroundColor: "transparent",
-    pointBorderColor: "transparent",
+    pointBackgroundColor: chartColors[i],
     pointHoverBackgroundColor: chartColors[i],
-    pointRadius: 12,
-    pointHoverRadios: 12,
+    pointBorderColor: "transparent",
+    pointHoverBorderColor: chartColors[i],
+    pointRadius: 0,
+    pointHitRadius: 12,
   }));
 
   return (
@@ -67,21 +68,20 @@ const Chart = ({ title, hint, datasets, labels }) => {
                       fontSize: 10,
                       fontWeight: 700,
                       lineHeight: "16px",
-                      callback: (tick) => tick,
+                      callback: (tick, index) => (index % 2 ? null : tick),
                     },
                   },
                 ],
               },
               tooltips: {
                 mode: "nearest",
-                intersect: false,
               },
             }}
           />
         </div>
         <div className="Chart__legends">
           {styledDatasets.map((dataset) => (
-            <div className="Chart__legend">
+            <div key={dataset.label} className="Chart__legend">
               <span
                 className="Chart__legend-point"
                 style={{ backgroundColor: dataset.borderColor }}

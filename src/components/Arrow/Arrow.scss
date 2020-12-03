@@ -1,5 +1,6 @@
 .Arrow {
   position: absolute;
+  color: #132536;
   border-left: 3px solid currentColor;
   z-index: 1;
 
@@ -10,6 +11,10 @@
     height: 0.75rem;
     border: 3px solid currentColor;
     border-radius: 50%;
+  }
+
+  &--disabled {
+    color: #b8bfc6;
   }
 
   &--dir-bottom {

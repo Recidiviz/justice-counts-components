@@ -4,9 +4,11 @@ import PropTypes from "prop-types";
 
 import "./Arrow.scss";
 
-const Arrow = ({ placement, direction, height, width }) => (
+const Arrow = ({ isDisabled, placement, direction, height, width }) => (
   <div
-    className={cn("Arrow", `Arrow--dir-${direction}`, `Arrow--placement-${placement}`)}
+    className={cn("Arrow", `Arrow--dir-${direction}`, `Arrow--placement-${placement}`, {
+      "Arrow--disabled": isDisabled,
+    })}
     style={{ height: `${height}rem`, width: `${width}rem` }}
   >
     <svg
@@ -27,6 +29,7 @@ const Arrow = ({ placement, direction, height, width }) => (
 );
 
 Arrow.defaultProps = {
+  isDisabled: false,
   placement: "center",
   direction: "bottom",
   height: 2,
@@ -34,10 +37,11 @@ Arrow.defaultProps = {
 };
 
 Arrow.propTypes = {
+  isDisabled: PropTypes.bool,
   placement: PropTypes.oneOf(["center", "right"]),
   direction: PropTypes.oneOf(["bottom", "top", "topLeft", "left"]),
-  height: PropTypes.string,
-  width: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number,
 };
 
 export default Arrow;
