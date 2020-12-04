@@ -1,0 +1,74 @@
+// Recidiviz - a data platform for criminal justice reform
+// Copyright (C) 2020 Recidiviz, Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// =============================================================================
+.FlowDiagram {
+  padding-bottom: 8rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  &__date {
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+
+  &__hint {
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: #808c99;
+  }
+
+  &__box {
+    padding-top: 1rem;
+    border-top: 1px dashed #c4ccd4;
+  }
+
+  &__box-name {
+    color: #c4ccd4;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    font-size: 0.8125rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+  }
+
+  &__row {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__card {
+    width: 20.5rem;
+    &:not(:first-child) {
+      margin-left: 2rem;
+    }
+
+    &--doubled {
+      width: 43rem;
+    }
+
+    &--offset {
+      margin-right: 22.5rem;
+    }
+  }
+}

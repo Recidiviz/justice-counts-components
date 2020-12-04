@@ -1,0 +1,63 @@
+{
+  "name": "justice-counts-components",
+  "version": "1.0.0",
+  "description": "A set of React components powering a web app for exploring centralized, standardized metrics on the performance of justice systems across the United States",
+  "repository": "git@github.com/Recidiviz/justice-counts-components.git",
+  "author": "Recidiviz <team@recidiviz.org>",
+  "license": "SEE LICENSE IN <LICENSE>",
+  "dependencies": {
+    "chart.js": "^2.9.4",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-app-polyfill": "^2.0.0",
+    "react-chartjs-2": "^2.11.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "^4.0.1"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^11.2.2",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.2",
+    "prettier": "^2.2.1",
+    "sass": "^1.29.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "lint": "eslint ./src",
+    "eject": "react-scripts eject"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    "last 1 chrome version",
+    "last 1 edge version",
+    "last 1 firefox version",
+    "last 1 safari version",
+    "ie 11",
+    "last 1 and_chr version",
+    "last 1 ios_saf version"
+  ],
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+// Recidiviz - a data platform for criminal justice reform
+// Copyright (C) 2020 Recidiviz, Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// =============================================================================
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "GT America";
+  src: url("./assets/fonts/GTAmerica-Bold.woff2") format("woff2"),
+    url("./assets/fonts/GTAmerica-Bold.woff") format("woff"),
+    url("./assets/fonts/GTAmerica-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America";
+  src: url("./assets/fonts/GTAmerica-Regular.woff2") format("woff2"),
+    url("./assets/fonts/GTAmerica-Regular.woff") format("woff"),
+    url("./assets/fonts/GTAmerica-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  background-color: #f1f2f3;
+}
+
+.App {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 58rem;
+  padding-top: 4.5rem;
+  font-family: "GT America", sans-serif;
+  color: #132536;
+
+  &__header {
+    padding-bottom: 4rem;
+    border-bottom: 1px solid #c4ccd4;
+  }
+
+  &__title {
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    text-transform: capitalize;
+  }
+
+  &__description {
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: #808c99;
+  }
+}

@@ -9,7 +9,7 @@
 .env.production.local
 .env.test
 .env.test.local
-
+.eslintcache
 # Production build directory
 build/
 /.firebase

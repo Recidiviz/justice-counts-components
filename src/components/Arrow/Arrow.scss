@@ -1,0 +1,112 @@
+// Recidiviz - a data platform for criminal justice reform
+// Copyright (C) 2020 Recidiviz, Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// =============================================================================
+.Arrow {
+  position: absolute;
+  color: #132536;
+  border-left: 3px solid currentColor;
+  z-index: 1;
+
+  &:before {
+    position: absolute;
+    content: "";
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 3px solid currentColor;
+    border-radius: 50%;
+  }
+
+  &--disabled {
+    color: #b8bfc6;
+  }
+
+  &--dir-bottom {
+    left: 50%;
+    top: 100%;
+    &:before {
+      left: -1.5px;
+      top: -1rem;
+      transform: translateX(-52%);
+    }
+  }
+
+  &--dir-topLeft {
+    border-bottom-left-radius: 1.5rem;
+    right: 100%;
+    bottom: 3rem;
+    border-bottom: 3px solid currentColor;
+    &:before {
+      bottom: -1.5px;
+      right: -1rem;
+      transform: translateY(48%);
+    }
+  }
+
+  &--dir-top {
+    left: 50%;
+    bottom: 100%;
+    &:before {
+      left: -1.5px;
+      bottom: -1rem;
+      transform: translateX(-52%);
+    }
+  }
+
+  &--dir-left {
+    right: 100%;
+    bottom: 3.25rem;
+    border-bottom: 3px solid currentColor;
+    &:before {
+      bottom: -1.5px;
+      right: -1rem;
+      transform: translateY(48%);
+    }
+  }
+
+  &--placement-right {
+    left: 75%;
+  }
+
+  &__arrow {
+    position: absolute;
+    content: "";
+    width: 1.375rem;
+    height: 0.675rem;
+    .Arrow--dir-bottom & {
+      bottom: -0.125rem;
+      left: -1.5px;
+      transform: translateX(-52%);
+    }
+
+    .Arrow--dir-topLeft & {
+      top: -3px;
+      left: -1.5px;
+      transform: rotate(180deg) translateX(52%);
+    }
+
+    .Arrow--dir-top & {
+      top: -0.125rem;
+      left: -1.5px;
+      transform: translateX(-52%) rotate(180deg);
+    }
+
+    .Arrow--dir-left & {
+      top: -0.25rem;
+      left: 0;
+      transform: translateX(-52%) rotate(90deg);
+    }
+  }
+}
