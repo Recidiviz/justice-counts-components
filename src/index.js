@@ -22,7 +22,7 @@ import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App state="US-CO" />
   </React.StrictMode>,
   document.getElementById("root")
 );
