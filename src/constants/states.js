@@ -23,7 +23,7 @@ export default {
   "US-CO": "Colorado",
   "US-CT": "Connecticut",
   "US-DE": "Delaware",
-  "US-DC": "District of Columbia	Federal district",
+  "US-DC": "District of Columbia",
   "US-FL": "Florida",
   "US-GA": "Georgia",
   "US-HI": "Hawaii",
