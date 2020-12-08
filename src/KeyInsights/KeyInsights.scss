@@ -45,11 +45,13 @@
   }
 
   &__card {
-    display: flex;
-    justify-content: space-between;
-    .Card {
-      margin-right: 1rem;
-      flex-grow: 1;
+    @include down($lg) {
+      display: flex;
+      justify-content: space-between;
+      .Card {
+        margin-right: 1rem;
+        flex-grow: 1;
+      }
     }
   }
 

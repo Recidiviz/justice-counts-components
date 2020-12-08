@@ -47,6 +47,7 @@
     letter-spacing: -0.02em;
     color: #808c99;
     @include down($lg) {
+      max-width: calc(50% - 0.5rem);
       font-size: 0.875rem;
     }
   }
