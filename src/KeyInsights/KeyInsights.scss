@@ -14,22 +14,45 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+@import "../assets/scss/variables";
 .KeyInsights {
   padding-top: 1rem;
   padding-bottom: 6rem;
   border-bottom: 1px solid #c4ccd4;
+  @include down($lg) {
+    padding-bottom: 3rem;
+    padding-left: $mobile-offset;
+    padding-right: $mobile-offset;
+  }
 
   &__title {
     margin-bottom: 2rem;
     font-size: 1.25rem;
     line-height: 1.5rem;
     font-weight: 700;
+    @include down($lg) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 2rem;
+    @include down($lg) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    @include down($lg) {
+      display: flex;
+      justify-content: space-between;
+      .Card {
+        margin-right: 1rem;
+        flex-grow: 1;
+      }
+    }
   }
 
   &__card-description {
@@ -38,5 +61,12 @@
     line-height: 1.5;
     letter-spacing: -0.02em;
     color: #808c99;
+    @include down($lg) {
+      flex-basis: calc(50% - 0.5rem);
+      flex-grow: 0;
+      flex-shrink: 0;
+      margin-top: 0;
+      font-size: 0.9375rem;
+    }
   }
 }

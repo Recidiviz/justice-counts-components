@@ -14,20 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+@import "../assets/scss/variables";
 .FlowDiagram {
   padding-bottom: 8rem;
+  @include down($lg) {
+    padding-bottom: 2rem;
+  }
 
   &__header {
     display: flex;
     justify-content: space-between;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    @include down($lg) {
+      padding-left: $mobile-offset;
+      padding-right: $mobile-offset;
+    }
   }
 
   &__date {
     font-weight: 700;
     font-size: 1.25rem;
     line-height: 1.2;
+    @include down($lg) {
+      font-size: 1.125rem;
+    }
   }
 
   &__hint {
@@ -35,11 +46,19 @@
     line-height: 1.5;
     letter-spacing: -0.02em;
     color: #808c99;
+    @include down($lg) {
+      max-width: calc(50% - 0.5rem);
+      font-size: 0.875rem;
+    }
   }
 
   &__box {
     padding-top: 1rem;
     border-top: 1px dashed #c4ccd4;
+    @include down($lg) {
+      padding-left: $mobile-offset;
+      padding-right: $mobile-offset;
+    }
   }
 
   &__box-name {
@@ -49,26 +68,48 @@
     font-size: 0.8125rem;
     line-height: 1rem;
     text-transform: uppercase;
+    @include down($lg) {
+      display: flex;
+      margin-bottom: 0.5rem;
+    }
   }
 
   &__row {
     margin-bottom: 2rem;
     display: flex;
     justify-content: flex-end;
+    @include down($lg) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__card {
     width: 20.5rem;
+    @include down($lg) {
+      flex-basis: calc(50% - 0.5rem);
+      flex-shrink: 0;
+    }
     &:not(:first-child) {
       margin-left: 2rem;
+      @include down($lg) {
+        margin-left: 1rem;
+      }
     }
 
     &--doubled {
       width: 43rem;
+      @include down($lg) {
+        flex-basis: 100%;
+        flex-grow: 0;
+        flex-shrink: 0;
+      }
     }
 
     &--offset {
       margin-right: 22.5rem;
+      @include down($lg) {
+        margin-right: 0;
+      }
     }
   }
 }

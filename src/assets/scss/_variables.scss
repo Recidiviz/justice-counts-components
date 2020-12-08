@@ -1,0 +1,14 @@
+$lg: 1024;
+
+@mixin up($media) {
+  @media only screen and (min-width: #{$media}px) {
+    @content;
+  }
+}
+@mixin down($media) {
+  @media only screen and (max-width: #{$media - 1}px) {
+    @content;
+  }
+}
+
+$mobile-offset: 0.5rem
