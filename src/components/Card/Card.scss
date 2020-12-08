@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+@import "../../assets/scss/variables";
 .Card {
   position: relative;
   background-color: #fff;
@@ -28,11 +29,18 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.25rem 1.5rem;
+    @include down($lg) {
+      padding: 0.75rem;
+    }
   }
 
   &__title {
     font-size: 0.9375rem;
     line-height: 1.6;
+    @include down($lg) {
+      font-size: 0.875rem;
+      line-height: 1.375;
+    }
     .Card--not-available & {
       color: #b8bfc6;
     }
@@ -44,6 +52,9 @@
       height: 0.625rem;
       background: url("../../assets/icons/people-icon.svg") center center no-repeat;
       background-size: cover;
+      @include down($lg) {
+        margin-right: 0.25rem;
+      }
     }
   }
 
@@ -83,6 +94,11 @@
     transform: translate(-50%);
     opacity: 0;
     transition: opacity 0.2s;
+    @include down($lg) {
+      left: auto;
+      right: -1rem;
+      transform: none;
+    }
     &:after {
       content: "";
       position: absolute;
@@ -93,12 +109,20 @@
       width: 0.625rem;
       height: 0.625rem;
       transform: translateX(-50%) rotate(-45deg);
+      @include down($lg) {
+        right: 1.375rem;
+        left: auto;
+        transform: rotate(-45deg);
+      }
     }
   }
 
   &__body {
     border-top: 1px solid #eeeeee;
     padding: 1.5rem 1.5rem 2rem;
+    @include down($lg) {
+      padding: 0.75rem 0.75rem 1rem;
+    }
     .Card--population & {
       border-top-color: #c0e9f1;
     }
@@ -109,6 +133,9 @@
     font-weight: 700;
     font-size: 2.5rem;
     line-height: 1;
+    @include down($lg) {
+      font-size: 1.25rem;
+    }
   }
 
   &__percent {
@@ -116,14 +143,20 @@
     font-size: 2.5rem;
     line-height: 1;
     color: #06aeee;
+    @include down($lg) {
+      font-size: 1.25rem;
+    }
   }
 
   &__not-available-text {
-    font-size: 40px;
+    font-size: 2.5rem;
     line-height: 1;
     font-weight: 700;
     color: #b8bfc6;
     letter-spacing: -0.01em;
     text-transform: capitalize;
+    @include down($lg) {
+      font-size: 1.25rem;
+    }
   }
 }

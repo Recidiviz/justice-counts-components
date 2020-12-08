@@ -14,11 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+@import "../../assets/scss/variables";
 .Arrow {
   position: absolute;
   color: #132536;
   border-left: 3px solid currentColor;
   z-index: 1;
+  @include down($lg) {
+    display: none;
+  }
 
   &:before {
     position: absolute;
