@@ -16,7 +16,11 @@
 // =============================================================================
 const formatPercent = (percent, isPassive) => {
   const isPositive = percent >= 0;
-  const formattedPercent = parseInt(Math.abs(percent).toString(), 10);
+  let formattedPercent = Math.round(Math.abs(percent));
+
+  if (formattedPercent === 0) {
+    formattedPercent = "~0";
+  }
 
   if (isPassive) {
     return isPositive

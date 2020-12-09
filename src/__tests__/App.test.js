@@ -19,8 +19,16 @@ import { render } from "@testing-library/react";
 
 import App from "../App";
 
+jest.mock("react-chartjs-2");
 describe("App.js", () => {
   it("should render without crashing", () => {
-    render(<App />);
+    render(<App state="US-AL" />);
+  });
+
+  it("should render corresponding state name", () => {
+    const { container } = render(<App state="US-AL" />);
+    const [title] = container.getElementsByClassName("App__title");
+
+    expect(title.innerHTML).toBe("Alabama data dashboard");
   });
 });

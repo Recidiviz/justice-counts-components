@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.2",
+    "coveralls": "^3.1.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
@@ -57,7 +58,7 @@
       "src/**/*.js"
     ],
     "moduleNameMapper": {
-      "\\.(css)$": "<rootDir>/__mocks__/styleMock.js"
+      "\\.(scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   }
 }
