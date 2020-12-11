@@ -18,17 +18,36 @@ import React from "react";
 import { render } from "@testing-library/react";
 
 import App from "../App";
+import MainPage from "../components/MainPage";
+import getNormalizedStateData from "../utils/getNormalizedStateData";
+import generateChartData from "../utils/generateChartData";
 
-jest.mock("react-chartjs-2");
+jest.mock("../components/MainPage");
+jest.mock("../utils/getNormalizedStateData");
+jest.mock("../utils/generateChartData");
 describe("App.js", () => {
-  it("should render without crashing", () => {
-    render(<App state="US-AL" />);
+  const mockState = "US-CO";
+  const mockData = [];
+  const mockNormalizedData = "some_normalized_data";
+  const mockChartData = "some_chart_data";
+
+  beforeEach(() => {
+    MainPage.mockReturnValue(null);
+    getNormalizedStateData.mockReturnValue(mockNormalizedData);
+    generateChartData.mockReturnValue(mockChartData);
   });
 
-  it("should render corresponding state name", () => {
-    const { container } = render(<App state="US-AL" />);
-    const [title] = container.getElementsByClassName("App__title");
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-    expect(title.innerHTML).toBe("Alabama data dashboard");
+  it("should provide corresponding state name", () => {
+    render(<App data={mockData} state={mockState} />);
+
+    expect(MainPage).toHaveBeenCalledTimes(1);
+    expect(MainPage.mock.calls[0][0].stateName).toBe("Colorado");
+    expect(MainPage.mock.calls[0][0].populationsChartData).toBe(mockChartData);
+    expect(MainPage.mock.calls[0][0].prisonAdmissionsChartData).toBe(mockChartData);
+    expect(MainPage.mock.calls[0][0].releasesChartData).toBe(mockChartData);
   });
 });

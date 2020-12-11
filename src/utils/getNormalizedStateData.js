@@ -64,6 +64,7 @@ const getNormalizedStateData = (data, stateCode) => {
       }
     }
 
+    console.log(acc);
     return acc;
   }, {});
 };
