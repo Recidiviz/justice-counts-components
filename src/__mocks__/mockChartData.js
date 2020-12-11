@@ -16,8 +16,20 @@
 // =============================================================================
 import mockDataPoints from "./mockDataPoints";
 
-// prettier-ignore
-const mockLabels = ["9/19", "10/19", "11/19", "12/19", "1/20", "2/20", "3/20", "4/20", "5/20", "6/20", "7/20", "8/20", "9/20"];
+const mockLabels = [
+  { month: 9, year: 19 },
+  { month: 10, year: 19 },
+  { month: 11, year: 19 },
+  { month: 0, year: 20 },
+  { month: 1, year: 20 },
+  { month: 2, year: 20 },
+  { month: 3, year: 20 },
+  { month: 4, year: 20 },
+  { month: 5, year: 20 },
+  { month: 6, year: 20 },
+  { month: 7, year: 20 },
+  { month: 8, year: 20 },
+];
 
 export const mockPopulationChartData = {
   datasets: [

@@ -17,66 +17,66 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import KeyInsights from "./KeyInsights";
-import FlowDiagram from "./FlowDiagram";
-import Chart from "./Chart";
+import MainPage from "./components/MainPage";
 import states from "./constants/states";
-
+import getNormalizedStateData from "./utils/getNormalizedStateData";
+import generateChartData from "./utils/generateChartData";
 import {
-  mockPopulationChartData,
-  mockPrisonAdmissionsChartData,
-  mockReleasesChartData,
-} from "./__mocks__/mockChartData";
+  ADMISSIONS,
+  ADMISSIONS_NEW_COURT,
+  ADMISSIONS_REVOCATIONS_PAROLE,
+  ADMISSIONS_REVOCATIONS_PROBATION,
+  POPULATION_PAROLE,
+  POPULATION_PRISON,
+  POPULATION_PROBATION,
+  RELEASES,
+} from "./constants/metrics";
 
-import "./App.scss";
-
-const App = ({ state }) => {
+const App = ({ state, data }) => {
   const stateName = states[state];
+  const stateMetricData = getNormalizedStateData(data, state);
+
+  const populationsChartData = generateChartData(stateMetricData, [
+    POPULATION_PRISON,
+    POPULATION_PAROLE,
+    POPULATION_PROBATION,
+  ]);
+
+  const prisonAdmissionsChartData = generateChartData(stateMetricData, [
+    ADMISSIONS,
+    ADMISSIONS_NEW_COURT,
+    ADMISSIONS_REVOCATIONS_PAROLE,
+    ADMISSIONS_REVOCATIONS_PROBATION,
+  ]);
+
+  const releasesChartData = generateChartData(stateMetricData, [RELEASES]);
 
   return (
-    <section className="App">
-      <header className="App__header">
-        <h1 className="App__title">{stateName} data dashboard</h1>
-        <p className="App__description">
-          The following is a broad overview of the corrections system in {stateName}, representing
-          the up-to-date data and changes compared to last year (September 2019 to September 2020).
-          Two additional sections containing crime and jail indicators will be added at a later
-          date.
-        </p>
-      </header>
-      <KeyInsights
-        prisonPopulation={-3075}
-        prisonPopulationPercent={-16}
-        revocations={-139}
-        revocationsPercent={-53}
-        technicalRevocations={-109}
-        technicalRevocationsPercent={-62}
-      />
-      <FlowDiagram lastDate="September 2020" prevDate="September 2019" />
-      <Chart
-        labels={mockPopulationChartData.labels}
-        datasets={mockPopulationChartData.datasets}
-        title="Populations"
-        hint="By Type (September 2019 - September 2020)"
-      />
-      <Chart
-        labels={mockPrisonAdmissionsChartData.labels}
-        datasets={mockPrisonAdmissionsChartData.datasets}
-        title="Prison Admissions"
-        hint="By Type (September 2019 - September 2020)"
-      />
-      <Chart
-        labels={mockReleasesChartData.labels}
-        datasets={mockReleasesChartData.datasets}
-        title="Releases"
-        hint="By Type (September 2019 - September 2020)"
-      />
-    </section>
+    <MainPage
+      stateName={stateName}
+      populationsChartData={populationsChartData}
+      prisonAdmissionsChartData={prisonAdmissionsChartData}
+      releasesChartData={releasesChartData}
+    />
   );
 };
 
 App.propTypes = {
   state: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      state_code: PropTypes.string.isRequired,
+      metric: PropTypes.string.isRequired,
+      year: PropTypes.string.isRequired,
+      month: PropTypes.string.isRequired,
+      date_reported: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+      compared_to_year: PropTypes.string,
+      compared_to_month: PropTypes.string,
+      value_change: PropTypes.number,
+      percentage_change: PropTypes.number,
+    })
+  ).isRequired,
 };
 
 export default App;

@@ -17,8 +17,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Card from "../components/Card";
-import Arrow from "../components/Arrow";
+import Card from "../shared/Card";
+import Arrow from "../shared/Arrow";
 
 import "./FlowDiagram.scss";
 
