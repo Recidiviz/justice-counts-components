@@ -15,7 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 const mockDataPoints = (min, max, length) => {
-  return Array.from({ length }).map(() => parseInt(min + (max - min) * Math.random(), 10));
+  return Array.from({ length }).map(() => parseInt(min + (max - min) * Math.random()));
 };
 
 export default mockDataPoints;

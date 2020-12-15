@@ -19,7 +19,7 @@ import PropTypes from "prop-types";
 import { Line } from "react-chartjs-2";
 
 import formatDatePeriod from "../../utils/formatDatePeriod";
-import { chartDataPropTypes } from "../../propTypes";
+import { chartDataPropTypes } from "./propTypes";
 
 import "./Chart.scss";
 
@@ -116,6 +116,7 @@ const Chart = ({ title, hint, chartData: { datasets, labels } }) => {
 
 Chart.propTypes = {
   title: PropTypes.string.isRequired,
+  hint: PropTypes.string.isRequired,
   chartData: chartDataPropTypes.isRequired,
 };
 

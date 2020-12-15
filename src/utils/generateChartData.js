@@ -15,46 +15,129 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import { metricToChartName } from "../constants/metrics";
+import { METRICS_NOT_PROVIDED } from "../constants/errors";
+import logger from "./logger";
 
-const generateChartData = (data, metrics, period = 60) => {
-  const datasets = metrics.map((metric) => ({
-    metric,
-    label: metricToChartName[metric],
-    data: [],
-  }));
+export const NO_HUMANIZED_VALUE = (metric) =>
+  `${metric} missing humanized chart name. Fallback to metric name.`;
+
+export const NO_METRIC_DATA = (metric) =>
+  `${metric} doesn't appear in source files. Chart data is not generated.`;
+
+/**
+ * Transforms normalized data to chart.js format.
+ * @param data - normalized data (see @returns of getNormalizedStateData)
+ * @param metrics {string[]} - metric names for which we generate chart data
+ * @returns {{datasets: {
+ * metric: string
+ * label: string
+ * data: (number|null)[]
+ * }[], labels: string[]}}
+ *
+ * ({
+ *   METRIC_NAME: [
+ *   {year: 2020, month: 0, value: 100},
+ *   {year: 2020, month: 1, value: 105},
+ *   {year: 2020, month: 2, value: 107},
+ *   {year: 2020, month: 4, value: 109},
+ *   ]
+ *   ANOTHER_METRIC: [
+ *   {year: 2019, month: 11, value: 50},
+ *   {year: 2020, month: 0, value: 52},
+ *   {year: 2020, month: 1, value: 54},
+ *   {year: 2020, month: 2, value: 56},
+ *   ]
+ *   EXTRA_METRIC: [...]
+ * }, [METRIC_NAME, ANOTHER_METRIC]) => {
+ *   datasets: [
+ *     {
+ *       metric: METRIC_NAME,
+ *       label: HUMANIZED_METRIC_NAME,
+ *       data: [null, 100, 105, 107, null, 109]
+ *     },
+ *     {
+ *       metric: ANOTHER_METRIC,
+ *       label: HUMANIZED_METRIC_NAME,
+ *       data: [50, 52, 54, 56, null, null]
+ *     }
+ *   ],
+ *   labels: [
+ *     {year: 2019, month: 11},
+ *     {year: 2020, month: 0},
+ *     {year: 2020, month: 1},
+ *     {year: 2020, month: 2},
+ *     {year: 2020, month: 3},
+ *     {year: 2020, month: 4},
+ *   ]
+ * }
+ */
+const generateChartData = (data, metrics) => {
+  if (!metrics.length) {
+    throw new Error(METRICS_NOT_PROVIDED);
+  }
+
+  const datasets = metrics.reduce((acc, metric) => {
+    if (!metricToChartName[metric]) {
+      logger.warn(NO_HUMANIZED_VALUE(metric));
+    }
+
+    if (!data[metric]) {
+      logger.warn(NO_METRIC_DATA(metric));
+    } else {
+      acc.push({
+        metric,
+        label: metricToChartName[metric] || metric,
+        data: [],
+      });
+    }
+
+    return acc;
+  }, []);
+
   const labels = [];
 
-  const { latestYear, latestMonth } = metrics.reduce(
-    (acc, metric) => {
-      const { year, month } = data[metric][data[metric].length - 1];
+  const periods = datasets.reduce(
+    (acc, { metric }) => {
+      const { year: startYear, month: startMonth } = data[metric][0];
+      const { year: endYear, month: endMonth } = data[metric][data[metric].length - 1];
 
-      if (year > acc.latestYear) return { latestYear: year, latestMonth: month };
-      if (month > acc.latestMonth) return { latestYear: year, latestMonth: month };
+      if (startYear < acc.startYear) {
+        acc.startYear = startYear;
+        acc.startMonth = startMonth;
+      } else if (startYear === acc.startYear) {
+        acc.startMonth = Math.min(acc.startMonth, startMonth);
+      }
+
+      if (endYear > acc.endYear) {
+        acc.endYear = endYear;
+        acc.endMonth = endMonth;
+      } else if (endYear === acc.endYear) {
+        acc.endMonth = Math.max(acc.endMonth, endMonth);
+      }
 
       return acc;
     },
-    { latestYear: -Infinity, latestMonth: -Infinity }
+    { startYear: Infinity, startMonth: Infinity, endYear: -Infinity, endMonth: -Infinity }
   );
+  const { startYear, startMonth, endYear, endMonth } = periods;
 
-  const dates = Array.from({ length: period }).map((_, i) => {
-    const latestTotalMonths = latestYear * 12 + latestMonth;
-    const totalMonths = latestTotalMonths - period + i + 1;
+  let i = startYear * 12 + startMonth;
+  const lastMonth = endYear * 12 + endMonth;
 
-    return {
-      year: Math.floor(totalMonths / 12),
-      month: totalMonths % 12,
-    };
-  });
+  while (i <= lastMonth) {
+    const year = Math.floor(i / 12);
+    const month = i % 12;
 
-  dates.forEach(({ year, month }) => {
+    labels.push({ year, month });
     datasets.forEach((dataset) => {
       dataset.data.push(
         data[dataset.metric].find((item) => item.year === year && item.month === month)?.value ||
           null
       );
     });
-    labels.push({ year, month });
-  });
+
+    i += 1;
+  }
 
   return { datasets, labels };
 };

@@ -21,7 +21,7 @@ import KeyInsights from "../KeyInsights/KeyInsights";
 import FlowDiagram from "../FlowDiagram";
 import Chart from "../Chart";
 
-import { chartDataPropTypes } from "../../propTypes";
+import { chartDataPropTypes } from "../Chart/propTypes";
 
 import "./MainPage.scss";
 

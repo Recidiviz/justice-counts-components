@@ -9,7 +9,8 @@
     "func-names": 0,
     "react/jsx-wrap-multilines": ["error", { "declaration": false, "assignment": false }],
     "prettier/prettier": "warn",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "radix": "off"
   },
   "env": {
     "browser": true,

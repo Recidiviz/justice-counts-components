@@ -16,8 +16,8 @@
 // =============================================================================
 import months from "../constants/months";
 
-const formatDatePeriod = (firstYear, firstMonth, lastYear, lastMonth) => {
-  return `${months[firstMonth]} ${firstYear} - ${months[lastMonth]} ${lastYear}`;
+const formatDatePeriod = (startYear, startMonth, endYear, endMonth) => {
+  return `${months[startMonth]} ${startYear} - ${months[endMonth]} ${endYear}`;
 };
 
 export default formatDatePeriod;

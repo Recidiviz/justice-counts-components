@@ -48,12 +48,12 @@ const getNormalizedStateData = (data, stateCode) => {
     if (item.state_code === stateCode) {
       const normalizedItem = {
         metric: item.metric,
-        year: parseInt(item.year, 10),
-        month: parseInt(item.month, 10) - 1,
+        year: parseInt(item.year),
+        month: parseInt(item.month) - 1,
         dateReported: item.date_reported,
         value: item.value,
-        comparedToYear: item.compared_to_year ? parseInt(item.compared_to_year, 10) : null,
-        comparedToMonth: item.compared_to_month ? parseInt(item.compared_to_month, 10) - 1 : null,
+        comparedToYear: item.compared_to_year ? parseInt(item.compared_to_year) : null,
+        comparedToMonth: item.compared_to_month ? parseInt(item.compared_to_month) - 1 : null,
         valueChange: typeof item.value_change === "number" ? item.value_change : null,
         percentChange: typeof item.percentage_change === "number" ? item.percentage_change : null,
       };
@@ -64,7 +64,6 @@ const getNormalizedStateData = (data, stateCode) => {
       }
     }
 
-    console.log(acc);
     return acc;
   }, {});
 };
