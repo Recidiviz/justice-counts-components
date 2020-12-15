@@ -14,32 +14,28 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+/**
+ * Takes array of chart data and fills/cuts it to target length
+ * @param data
+ * @param targetLength
+ */
+const processToLength = (data, targetLength) => {
+  const { year: startYear, month: startMonth } = data.labels[0];
+  const totalStartMonths = startYear * 12 + startMonth;
+  const lengthDiff = targetLength - data.labels.length;
 
-@font-face {
-  font-family: "GT America";
-  src: url("./assets/fonts/GTAmerica-Bold.woff2") format("woff2"),
-    url("./assets/fonts/GTAmerica-Bold.woff") format("woff"),
-    url("./assets/fonts/GTAmerica-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+  return {
+    datasets: data.datasets.map((dataset) => ({
+      ...dataset,
+      data: Array.from({ length: lengthDiff }).fill(null).concat(dataset.data.slice(-targetLength)),
+    })),
+    labels: Array.from({ length: lengthDiff })
+      .map((_, i) => ({
+        year: Math.floor((totalStartMonths - lengthDiff + i) / 12),
+        month: (totalStartMonths - lengthDiff + i) % 12,
+      }))
+      .concat(data.labels.slice(-targetLength)),
+  };
+};
 
-@font-face {
-  font-family: "GT America";
-  src: url("./assets/fonts/GTAmerica-Regular.woff2") format("woff2"),
-    url("./assets/fonts/GTAmerica-Regular.woff") format("woff"),
-    url("./assets/fonts/GTAmerica-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-body {
-  background-color: #fafafa;
-}
+export default processToLength;

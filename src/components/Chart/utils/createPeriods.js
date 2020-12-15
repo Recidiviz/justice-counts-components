@@ -14,32 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+const createPeriods = (availableDataLength) => [
+  { value: 60, label: "5 years" },
+  { value: 12, label: "1 year" },
+  { value: availableDataLength, label: "All Time" },
+];
 
-@font-face {
-  font-family: "GT America";
-  src: url("./assets/fonts/GTAmerica-Bold.woff2") format("woff2"),
-    url("./assets/fonts/GTAmerica-Bold.woff") format("woff"),
-    url("./assets/fonts/GTAmerica-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "GT America";
-  src: url("./assets/fonts/GTAmerica-Regular.woff2") format("woff2"),
-    url("./assets/fonts/GTAmerica-Regular.woff") format("woff"),
-    url("./assets/fonts/GTAmerica-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-body {
-  background-color: #fafafa;
-}
+export default createPeriods;
