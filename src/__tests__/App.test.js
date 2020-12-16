@@ -21,6 +21,7 @@ import App from "../App";
 import MainPage from "../components/MainPage";
 import getNormalizedStateData from "../utils/getNormalizedStateData";
 import generateChartData from "../utils/generateChartData";
+import states from "../constants/states";
 
 jest.mock("../components/MainPage");
 jest.mock("../utils/getNormalizedStateData");
@@ -35,9 +36,7 @@ describe("App.js", () => {
     MainPage.mockReturnValue(null);
     getNormalizedStateData.mockReturnValue(mockNormalizedData);
     generateChartData.mockReturnValue(mockChartData);
-  });
 
-  beforeEach(() => {
     jest.clearAllMocks();
   });
 
@@ -45,7 +44,7 @@ describe("App.js", () => {
     render(<App data={mockData} state={mockState} />);
 
     expect(MainPage).toHaveBeenCalledTimes(1);
-    expect(MainPage.mock.calls[0][0].stateName).toBe("Colorado");
+    expect(MainPage.mock.calls[0][0].stateName).toBe(states[mockState]);
     expect(MainPage.mock.calls[0][0].populationsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].prisonAdmissionsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].releasesChartData).toBe(mockChartData);

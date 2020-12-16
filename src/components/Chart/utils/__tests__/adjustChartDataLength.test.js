@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import processToLength from "../processToLength";
+import adjustChartDataLength from "../adjustChartDataLength";
 
 describe("processToLength.js", () => {
   describe("when data items count less than target count", () => {
-    const { labels, datasets } = processToLength(
+    const { labels, datasets } = adjustChartDataLength(
       {
         datasets: [
           { label: "One", data: [null, null, 300] },
@@ -52,7 +52,7 @@ describe("processToLength.js", () => {
   });
 
   describe("when data items count more than target count", () => {
-    const { labels, datasets } = processToLength(
+    const { labels, datasets } = adjustChartDataLength(
       {
         datasets: [
           { label: "One", data: [100, null, null, 300] },

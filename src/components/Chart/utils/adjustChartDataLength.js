@@ -19,7 +19,7 @@
  * @param data
  * @param targetLength
  */
-const processToLength = (data, targetLength) => {
+const adjustChartDataLength = (data, targetLength) => {
   const { year: startYear, month: startMonth } = data.labels[0];
   const totalStartMonths = startYear * 12 + startMonth;
   const lengthDiff = targetLength - data.labels.length;
@@ -38,4 +38,4 @@ const processToLength = (data, targetLength) => {
   };
 };
 
-export default processToLength;
+export default adjustChartDataLength;

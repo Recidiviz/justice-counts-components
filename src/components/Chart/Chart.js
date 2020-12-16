@@ -21,7 +21,7 @@ import { Line } from "react-chartjs-2";
 import PeriodPicker from "./PeriodPicker";
 import formatDatePeriod from "../../utils/formatDatePeriod";
 import createPeriods from "./utils/createPeriods";
-import processToLength from "./utils/processToLength";
+import adjustChartDataLength from "./utils/adjustChartDataLength";
 import { chartDataPropTypes } from "./propTypes";
 
 import "./Chart.scss";
@@ -38,7 +38,7 @@ const Chart = ({ title, hint, chartData }) => {
 
   const initialDataLength = chartData.labels.length;
 
-  const { datasets, labels } = processToLength(chartData, period);
+  const { datasets, labels } = adjustChartDataLength(chartData, period);
 
   const styledDatasets = datasets.map((dataset, i) => ({
     ...dataset,
