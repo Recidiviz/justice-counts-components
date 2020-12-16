@@ -14,18 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import data from "./fixture.json";
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-import "./index.scss";
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App state="US_CO" data={data} />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+export default months;

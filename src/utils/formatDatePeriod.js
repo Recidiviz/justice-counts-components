@@ -14,18 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import data from "./fixture.json";
+import months from "../constants/months";
 
-import "./index.scss";
+const formatDatePeriod = (startYear, startMonth, endYear, endMonth) => {
+  if (startYear === endYear && startMonth === endMonth) {
+    return `${months[startMonth]} ${startYear}`;
+  }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App state="US_CO" data={data} />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  return `${months[startMonth]} ${startYear} - ${months[endMonth]} ${endYear}`;
+};
+
+export default formatDatePeriod;

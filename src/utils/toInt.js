@@ -14,18 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import data from "./fixture.json";
+const toInt = (string) => parseInt(string, 10);
 
-import "./index.scss";
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App state="US_CO" data={data} />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+export default toInt;

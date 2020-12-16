@@ -14,18 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import data from "./fixture.json";
+import toInt from "../toInt";
 
-import "./index.scss";
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App state="US_CO" data={data} />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+describe("toInt.js", () => {
+  it("should format string to decimal integer", () => {
+    expect(toInt("19")).toBe(19);
+    expect(toInt("0x13")).toBe(0);
+  });
+});

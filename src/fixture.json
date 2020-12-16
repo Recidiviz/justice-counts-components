@@ -1,0 +1,842 @@
+[
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2019",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 732
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2019",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 421
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2019",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 221
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2019",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 33
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PROBATION",
+    "year": "2019",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 233
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2019",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 1233
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2019",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 2333
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2019",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 634
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2019",
+    "month": "10",
+    "date_reported": "2019-10-31",
+    "value": 661
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2019",
+    "month": "10",
+    "date_reported": "2019-10-31",
+    "value": 442
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2019",
+    "month": "10",
+    "date_reported": "2019-10-31",
+    "value": 142
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2019",
+    "month": "10",
+    "date_reported": "2019-10-31",
+    "value": 81
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PROBATION",
+    "year": "2019",
+    "month": "10",
+    "date_reported": "2019-10-31",
+    "value": 281
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2019",
+    "month": "10",
+    "date_reported": "2019-10-31",
+    "value": 1281
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2019",
+    "month": "10",
+    "date_reported": "2019-10-31",
+    "value": 2281
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2019",
+    "month": "10",
+    "date_reported": "2019-10-31",
+    "value": 513
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2019",
+    "month": "11",
+    "date_reported": "2019-11-30",
+    "value": 623
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2019",
+    "month": "11",
+    "date_reported": "2019-11-30",
+    "value": 483
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2019",
+    "month": "11",
+    "date_reported": "2019-11-30",
+    "value": 183
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2019",
+    "month": "11",
+    "date_reported": "2019-11-30",
+    "value": 73
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PROBATION",
+    "year": "2019",
+    "month": "11",
+    "date_reported": "2019-11-30",
+    "value": 273
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2019",
+    "month": "11",
+    "date_reported": "2019-11-30",
+    "value": 1273
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2019",
+    "month": "11",
+    "date_reported": "2019-11-30",
+    "value": 2473
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2019",
+    "month": "11",
+    "date_reported": "2019-11-30",
+    "value": 539
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2019",
+    "month": "12",
+    "date_reported": "2019-12-31",
+    "value": 632
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2019",
+    "month": "12",
+    "date_reported": "2019-12-31",
+    "value": 492
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2019",
+    "month": "12",
+    "date_reported": "2019-12-31",
+    "value": 292
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2019",
+    "month": "12",
+    "date_reported": "2019-12-31",
+    "value": 43
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PROBATION",
+    "year": "2019",
+    "month": "12",
+    "date_reported": "2019-12-31",
+    "value": 243
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2019",
+    "month": "12",
+    "date_reported": "2019-12-31",
+    "value": 1243
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2019",
+    "month": "12",
+    "date_reported": "2019-12-31",
+    "value": 2243
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2019",
+    "month": "12",
+    "date_reported": "2019-12-31",
+    "value": 736
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2020",
+    "month": "01",
+    "date_reported": "2020-01-30",
+    "value": 797
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2020",
+    "month": "01",
+    "date_reported": "2020-01-30",
+    "value": 450
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2020",
+    "month": "01",
+    "date_reported": "2020-01-30",
+    "value": 150
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2020",
+    "month": "01",
+    "date_reported": "2020-01-30",
+    "value": 83
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PROBATION",
+    "year": "2020",
+    "month": "01",
+    "date_reported": "2020-01-30",
+    "value": 283
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2020",
+    "month": "01",
+    "date_reported": "2020-01-30",
+    "value": 1283
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2020",
+    "month": "01",
+    "date_reported": "2020-01-30",
+    "value": 2283
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2020",
+    "month": "01",
+    "date_reported": "2020-01-30",
+    "value": 533
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2020",
+    "month": "02",
+    "date_reported": "2020-02-29",
+    "value": 543
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2020",
+    "month": "02",
+    "date_reported": "2020-02-29",
+    "value": 487
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2020",
+    "month": "02",
+    "date_reported": "2020-02-29",
+    "value": 187
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2020",
+    "month": "02",
+    "date_reported": "2020-02-29",
+    "value": 67
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PROBATION",
+    "year": "2020",
+    "month": "02",
+    "date_reported": "2020-02-29",
+    "value": 267
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2020",
+    "month": "02",
+    "date_reported": "2020-02-29",
+    "value": 1267
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2020",
+    "month": "02",
+    "date_reported": "2020-02-29",
+    "value": 2467
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2020",
+    "month": "02",
+    "date_reported": "2020-02-29",
+    "value": 679
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2020",
+    "month": "03",
+    "date_reported": "2020-03-31",
+    "value": 417
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2020",
+    "month": "03",
+    "date_reported": "2020-03-31",
+    "value": 417
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2020",
+    "month": "03",
+    "date_reported": "2020-03-31",
+    "value": 117
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2020",
+    "month": "03",
+    "date_reported": "2020-03-31",
+    "value": 82
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PROBATION",
+    "year": "2020",
+    "month": "03",
+    "date_reported": "2020-03-31",
+    "value": 282
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2020",
+    "month": "03",
+    "date_reported": "2020-03-31",
+    "value": 1282
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2020",
+    "month": "03",
+    "date_reported": "2020-03-31",
+    "value": 2382
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2020",
+    "month": "03",
+    "date_reported": "2020-03-31",
+    "value": 627
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2020",
+    "month": "04",
+    "date_reported": "2020-04-30",
+    "value": 737
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2020",
+    "month": "04",
+    "date_reported": "2020-04-30",
+    "value": 287
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2020",
+    "month": "04",
+    "date_reported": "2020-04-30",
+    "value": 187
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2020",
+    "month": "04",
+    "date_reported": "2020-04-30",
+    "value": 23
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PROBATION",
+    "year": "2020",
+    "month": "04",
+    "date_reported": "2020-04-30",
+    "value": 223
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2020",
+    "month": "04",
+    "date_reported": "2020-04-30",
+    "value": 1223
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2020",
+    "month": "04",
+    "date_reported": "2020-04-30",
+    "value": 2123
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2020",
+    "month": "04",
+    "date_reported": "2020-04-30",
+    "value": 533
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2020",
+    "month": "05",
+    "date_reported": "2020-05-31",
+    "value": 676
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2020",
+    "month": "05",
+    "date_reported": "2020-05-31",
+    "value": 280
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2020",
+    "month": "05",
+    "date_reported": "2020-05-31",
+    "value": 180
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2020",
+    "month": "05",
+    "date_reported": "2020-05-31",
+    "value": 54
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PROBATION",
+    "year": "2020",
+    "month": "05",
+    "date_reported": "2020-05-31",
+    "value": 254
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2020",
+    "month": "05",
+    "date_reported": "2020-05-31",
+    "value": 1254
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2020",
+    "month": "05",
+    "date_reported": "2020-05-31",
+    "value": 2254
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2020",
+    "month": "05",
+    "date_reported": "2020-05-31",
+    "value": 549
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2020",
+    "month": "06",
+    "date_reported": "2020-06-30",
+    "value": 737
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2020",
+    "month": "06",
+    "date_reported": "2020-06-30",
+    "value": 330
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2020",
+    "month": "06",
+    "date_reported": "2020-06-30",
+    "value": 130
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2020",
+    "month": "06",
+    "date_reported": "2020-06-30",
+    "value": 91
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2020",
+    "month": "06",
+    "date_reported": "2020-06-30",
+    "value": 1291
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2020",
+    "month": "06",
+    "date_reported": "2020-06-30",
+    "value": 2491
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2020",
+    "month": "06",
+    "date_reported": "2020-06-30",
+    "value": 913
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2020",
+    "month": "07",
+    "date_reported": "2020-07-31",
+    "value": 634
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2020",
+    "month": "07",
+    "date_reported": "2020-07-31",
+    "value": 321
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2020",
+    "month": "07",
+    "date_reported": "2020-07-31",
+    "value": 124
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2020",
+    "month": "07",
+    "date_reported": "2020-07-31",
+    "value": 76
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2020",
+    "month": "07",
+    "date_reported": "2020-07-31",
+    "value": 1276
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2020",
+    "month": "07",
+    "date_reported": "2020-07-31",
+    "value": 2176
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2020",
+    "month": "07",
+    "date_reported": "2020-07-31",
+    "value": 763
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2020",
+    "month": "08",
+    "date_reported": "2020-08-31",
+    "value": 692
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2020",
+    "month": "08",
+    "date_reported": "2020-08-31",
+    "value": 290
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2020",
+    "month": "08",
+    "date_reported": "2020-08-31",
+    "value": 190
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2020",
+    "month": "08",
+    "date_reported": "2020-08-31",
+    "value": 93
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2020",
+    "month": "08",
+    "date_reported": "2020-08-31",
+    "value": 1193
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2020",
+    "month": "08",
+    "date_reported": "2020-08-31",
+    "value": 2393
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2020",
+    "month": "08",
+    "date_reported": "2020-08-31",
+    "value": 934
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PROBATION",
+    "year": "2020",
+    "month": "06",
+    "date_reported": "2020-06-30",
+    "value": 291,
+    "compared_to_year": "2019",
+    "compared_to_month": "09",
+    "value_change": -123,
+    "percentage_change": -0.12
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS",
+    "year": "2020",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 723,
+    "compared_to_year": "2019",
+    "compared_to_month": "09",
+    "value_change": -9,
+    "percentage_change": -0.02
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_NEW_COURT",
+    "year": "2020",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 337,
+    "compared_to_year": "2019",
+    "compared_to_month": "09",
+    "value_change": -84,
+    "percentage_change": -0.2
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "year": "2020",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 137,
+    "compared_to_year": "2019",
+    "compared_to_month": "09",
+    "value_change": -84,
+    "percentage_change": -0.2
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "year": "2020",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 23,
+    "compared_to_year": "2019",
+    "compared_to_month": "09",
+    "value_change": -10,
+    "percentage_change": -0.31
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PRISON",
+    "year": "2020",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 1223,
+    "compared_to_year": "2019",
+    "compared_to_month": "09",
+    "value_change": -10,
+    "percentage_change": -0.31
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "POPULATION_PAROLE",
+    "year": "2020",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 2123,
+    "compared_to_year": "2019",
+    "compared_to_month": "09",
+    "value_change": -10,
+    "percentage_change": -0.31
+  },
+  {
+    "state_code": "US_CO",
+    "metric": "RELEASES",
+    "year": "2020",
+    "month": "09",
+    "date_reported": "2020-09-30",
+    "value": 737,
+    "compared_to_year": "2019",
+    "compared_to_month": "09",
+    "value_change": 103,
+    "percentage_change": 0.12
+  }
+]

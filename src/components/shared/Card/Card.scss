@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-@import "../../assets/scss/variables";
+@import "../../../assets/scss/variables";
 .Card {
   position: relative;
   background-color: #fff;
@@ -50,7 +50,7 @@
       display: inline-block;
       width: 1rem;
       height: 0.625rem;
-      background: url("../../assets/icons/people-icon.svg") center center no-repeat;
+      background: url("../../../assets/icons/people-icon.svg") center center no-repeat;
       background-size: cover;
       @include down($lg) {
         margin-right: 0.25rem;
@@ -67,7 +67,7 @@
     display: block;
     width: 1.5rem;
     height: 1.5rem;
-    background: url("../../assets/icons/warning-icon.svg") center center no-repeat;
+    background: url("../../../assets/icons/warning-icon.svg") center center no-repeat;
     background-size: 1rem 1rem;
     cursor: pointer;
     &:hover ~ .Card__warning {

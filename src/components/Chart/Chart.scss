@@ -1,0 +1,135 @@
+// Recidiviz - a data platform for criminal justice reform
+// Copyright (C) 2020 Recidiviz, Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// =============================================================================
+@import "../../assets/scss/variables";
+.Chart {
+  padding-bottom: 5.5rem;
+  @include down($lg) {
+    padding-bottom: 2rem;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-top: 1px solid #c4ccd4;
+    border-bottom: 1px solid #c4ccd4;
+    @include down($lg) {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding-left: $mobile-offset;
+      padding-right: $mobile-offset;
+    }
+  }
+
+  &__title {
+    margin-right: 1.375rem;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    font-weight: 700;
+    @include down($lg) {
+      font-size: 1.125rem;
+    }
+  }
+
+  &__period-picker {
+    margin-top: 0.25rem;
+    @include down($lg) {
+      margin-right: auto;
+    }
+  }
+
+  &__hint {
+    margin-left: auto;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #808c99;
+    letter-spacing: -0.02em;
+    @include down($lg) {
+      width: 100%;
+      font-size: 0.875rem;
+    }
+  }
+
+  &__body {
+    display: flex;
+    @include down($lg) {
+      flex-direction: column;
+    }
+  }
+
+  &__chart {
+    height: 19rem;
+    flex-shrink: 0;
+    flex-grow: 1;
+    @include down($lg) {
+      border-bottom: 1px solid #c4ccd4;
+      padding-bottom: 2rem;
+      padding-left: $mobile-offset;
+      padding-right: $mobile-offset;
+    }
+  }
+
+  &__legends {
+    padding-top: 2rem;
+    padding-left: 2rem;
+    flex-shrink: 0;
+    width: 22.5rem;
+    @include down($lg) {
+      padding-top: 1rem;
+      width: 100%;
+      padding-left: $mobile-offset;
+      padding-right: $mobile-offset;
+    }
+  }
+
+  &__legend {
+    display: flex;
+    align-items: center;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+      @include down($lg) {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  &__legend-point {
+    margin-right: 0.5rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+  }
+
+  &__legend-label {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    @include down($lg) {
+      font-size: 0.875rem;
+    }
+  }
+
+  &__legend-percent {
+    margin-left: auto;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    @include down($lg) {
+      font-size: 0.875rem;
+    }
+  }
+}

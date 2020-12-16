@@ -14,8 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-const mockDataPoints = (min, max, length) => {
-  return Array.from({ length }).map(() => parseInt(min + (max - min) * Math.random(), 10));
-};
+import formatDatePeriod from "../formatDatePeriod";
 
-export default mockDataPoints;
+describe("formatDatePeriod.js", () => {
+  it("should format date periods to string", () => {
+    expect(formatDatePeriod(2018, 6, 2020, 11)).toBe("July 2018 - December 2020");
+  });
+
+  it("should return date if start date equal to end date", () => {
+    expect(formatDatePeriod(2018, 6, 2018, 6)).toBe("July 2018");
+  });
+});

@@ -5,9 +5,12 @@
     "import/no-extraneous-dependencies": ["error", { "packageDir": "./" }],
     "no-new": 1,
     "react/jsx-props-no-spreading": 0,
+    "react/prop-types": "warn",
     "func-names": 0,
     "react/jsx-wrap-multilines": ["error", { "declaration": false, "assignment": false }],
-    "prettier/prettier": "error"
+    "prettier/prettier": "warn",
+    "import/prefer-default-export": "off",
+    "radix": "off"
   },
   "env": {
     "browser": true,

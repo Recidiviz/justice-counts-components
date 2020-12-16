@@ -17,9 +17,9 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-import Card from "../components/Card";
-import formatNumber from "../utils/formatNumber";
-import formatPercent from "../utils/formatPercent";
+import Card from "../shared/Card";
+import formatNumber from "../../utils/formatNumber";
+import formatPercent from "../../utils/formatPercent";
 
 import "./KeyInsights.scss";
 

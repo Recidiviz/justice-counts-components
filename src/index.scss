@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-@import "assets/scss/variables";
 * {
   padding: 0;
   margin: 0;
@@ -42,51 +41,5 @@
 }
 
 body {
-  background-color: #f1f2f3;
-}
-
-.App {
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  max-width: 58rem;
-  padding-top: 4.5rem;
-  font-family: "GT America", sans-serif;
-  color: #132536;
-  @include down($lg) {
-    padding-top: 1.5rem;
-  }
-
-  &__header {
-    padding-bottom: 4rem;
-    border-bottom: 1px solid #c4ccd4;
-    @include down($lg) {
-      padding-bottom: 1.5rem;
-      padding-left: $mobile-offset;
-      padding-right: $mobile-offset;
-    }
-  }
-
-  &__title {
-    margin-bottom: 1rem;
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1.5;
-    letter-spacing: -0.02em;
-    text-transform: capitalize;
-    @include down($lg) {
-      font-size: 2.5rem;
-      line-height: 1.25;
-    }
-  }
-
-  &__description {
-    font-size: 1.0625rem;
-    line-height: 1.5;
-    letter-spacing: -0.02em;
-    color: #808c99;
-    @include down($lg) {
-      font-size: 0.9375rem;
-    }
-  }
+  background-color: #fafafa;
 }
