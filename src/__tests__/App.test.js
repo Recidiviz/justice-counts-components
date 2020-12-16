@@ -26,7 +26,7 @@ jest.mock("../components/MainPage");
 jest.mock("../utils/getNormalizedStateData");
 jest.mock("../utils/generateChartData");
 describe("App.js", () => {
-  const mockState = "US-CO";
+  const mockState = "US_CO";
   const mockData = [];
   const mockNormalizedData = "some_normalized_data";
   const mockChartData = "some_chart_data";
