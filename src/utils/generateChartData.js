@@ -18,10 +18,10 @@ import { metricToChartName } from "../constants/metrics";
 import { METRICS_NOT_PROVIDED } from "../constants/errors";
 import logger from "./logger";
 
-export const NO_HUMANIZED_VALUE = (metric) =>
+export const noHumanizedValue = (metric) =>
   `${metric} missing humanized chart name. Fallback to metric name.`;
 
-export const NO_METRIC_DATA = (metric) =>
+export const noMetricData = (metric) =>
   `${metric} doesn't appear in source files. Chart data is not generated.`;
 
 /**
@@ -78,11 +78,11 @@ const generateChartData = (data, metrics) => {
 
   const datasets = metrics.reduce((acc, metric) => {
     if (!metricToChartName[metric]) {
-      logger.warn(NO_HUMANIZED_VALUE(metric));
+      logger.warn(noHumanizedValue(metric));
     }
 
     if (!data[metric]) {
-      logger.warn(NO_METRIC_DATA(metric));
+      logger.warn(noMetricData(metric));
     } else {
       acc.push({
         metric,

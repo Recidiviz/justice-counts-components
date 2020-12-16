@@ -14,5 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-export const METRICS_NOT_PROVIDED =
-  "Cannot generate a chart with empty data. The metrics array should not be empty.";
+const toInt = (string) => parseInt(string, 10);
+
+export default toInt;

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import generateChartData, { NO_HUMANIZED_VALUE, NO_METRIC_DATA } from "../generateChartData";
+import generateChartData, { noHumanizedValue, noMetricData } from "../generateChartData";
 import {
   ADMISSIONS,
   metricToChartName,
@@ -158,7 +158,7 @@ describe("generateChartData.js", () => {
     };
     generateChartData(mockStateData, [metricName]);
 
-    expect(warnSpy).toBeCalledWith(NO_HUMANIZED_VALUE(metricName));
+    expect(warnSpy).toBeCalledWith(noHumanizedValue(metricName));
   });
 
   it("should throw warning if metric data is not provided", () => {
@@ -168,6 +168,6 @@ describe("generateChartData.js", () => {
     };
     generateChartData(mockStateData, [metricName]);
 
-    expect(warnSpy).toBeCalledWith(NO_METRIC_DATA(metricName));
+    expect(warnSpy).toBeCalledWith(noMetricData(metricName));
   });
 });

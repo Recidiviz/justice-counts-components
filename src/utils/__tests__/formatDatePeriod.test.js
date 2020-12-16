@@ -14,5 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-export const METRICS_NOT_PROVIDED =
-  "Cannot generate a chart with empty data. The metrics array should not be empty.";
+import formatDatePeriod from "../formatDatePeriod";
+
+describe("formatDatePeriod.js", () => {
+  it("should format date periods to string", () => {
+    expect(formatDatePeriod(2018, 6, 2020, 11)).toBe("July 2018 - December 2020");
+  });
+
+  it("should return date if start date equal to end date", () => {
+    expect(formatDatePeriod(2018, 6, 2018, 6)).toBe("July 2018");
+  });
+});

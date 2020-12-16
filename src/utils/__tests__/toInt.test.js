@@ -14,5 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-export const METRICS_NOT_PROVIDED =
-  "Cannot generate a chart with empty data. The metrics array should not be empty.";
+import toInt from "../toInt";
+
+describe("toInt.js", () => {
+  it("should format string to decimal integer", () => {
+    expect(toInt("19")).toBe(19);
+    expect(toInt("0x13")).toBe(0);
+  });
+});

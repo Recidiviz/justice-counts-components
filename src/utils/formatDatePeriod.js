@@ -17,6 +17,10 @@
 import months from "../constants/months";
 
 const formatDatePeriod = (startYear, startMonth, endYear, endMonth) => {
+  if (startYear === endYear && startMonth === endMonth) {
+    return `${months[startMonth]} ${startYear}`;
+  }
+
   return `${months[startMonth]} ${startYear} - ${months[endMonth]} ${endYear}`;
 };
 

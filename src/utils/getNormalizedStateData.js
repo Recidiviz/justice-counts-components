@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+import toInt from "./toInt";
+
 /**
  * Filters data by state, normalizes, groups by metric type and sort by year and month
  * @param data {{
@@ -43,17 +45,17 @@
  *  }
  * }}
  */
-const getNormalizedStateData = (data, stateCode) => {
-  return data.reduce((acc, item) => {
+const getNormalizedStateData = (data, stateCode) =>
+  data.reduce((acc, item) => {
     if (item.state_code === stateCode) {
       const normalizedItem = {
         metric: item.metric,
-        year: parseInt(item.year),
-        month: parseInt(item.month) - 1,
+        year: toInt(item.year),
+        month: toInt(item.month) - 1,
         dateReported: item.date_reported,
         value: item.value,
-        comparedToYear: item.compared_to_year ? parseInt(item.compared_to_year) : null,
-        comparedToMonth: item.compared_to_month ? parseInt(item.compared_to_month) - 1 : null,
+        comparedToYear: item.compared_to_year ? toInt(item.compared_to_year) : null,
+        comparedToMonth: item.compared_to_month ? toInt(item.compared_to_month) - 1 : null,
         valueChange: typeof item.value_change === "number" ? item.value_change : null,
         percentChange: typeof item.percentage_change === "number" ? item.percentage_change : null,
       };
@@ -66,6 +68,5 @@ const getNormalizedStateData = (data, stateCode) => {
 
     return acc;
   }, {});
-};
 
 export default getNormalizedStateData;
