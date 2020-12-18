@@ -52,7 +52,7 @@ const getNormalizedStateData = (data, stateCode) =>
         metric: item.metric,
         year: toInt(item.year),
         month: toInt(item.month) - 1,
-        dateReported: item.date_reported,
+        dateReported: new Date(item.date_reported),
         value: item.value,
         comparedToYear: item.compared_to_year ? toInt(item.compared_to_year) : null,
         comparedToMonth: item.compared_to_month ? toInt(item.compared_to_month) - 1 : null,

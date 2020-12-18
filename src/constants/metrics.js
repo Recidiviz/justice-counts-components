@@ -35,3 +35,14 @@ export const metricToChartName = {
 
   [RELEASES]: "Releases",
 };
+
+export const metricToCardName = {
+  [ADMISSIONS]: "Prison Sentences",
+  [ADMISSIONS_NEW_COURT]: "Probation Sentences",
+  [POPULATION_PROBATION]: "Probation Population",
+  [ADMISSIONS_REVOCATIONS_PROBATION]: "Probation Revocations",
+  [POPULATION_PRISON]: "Prison Population",
+  [POPULATION_PAROLE]: "Parole Population",
+  [ADMISSIONS_REVOCATIONS_PAROLE]: "Parole Revocations",
+  [RELEASES]: "Releases to Parole",
+};

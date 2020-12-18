@@ -31,6 +31,7 @@ import {
   POPULATION_PROBATION,
   RELEASES,
 } from "./constants/metrics";
+import generateFlowDiagramData from "./utils/generateFlowDiagramData";
 
 const App = ({ state, data }) => {
   const stateName = states[state];
@@ -51,12 +52,15 @@ const App = ({ state, data }) => {
 
   const releasesChartData = generateChartData(stateMetricData, [RELEASES]);
 
+  const flowDiagramData = generateFlowDiagramData(stateMetricData);
+
   return (
     <MainPage
       stateName={stateName}
       populationsChartData={populationsChartData}
       prisonAdmissionsChartData={prisonAdmissionsChartData}
       releasesChartData={releasesChartData}
+      flowDiagramData={flowDiagramData}
     />
   );
 };
