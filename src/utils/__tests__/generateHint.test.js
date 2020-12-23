@@ -17,20 +17,47 @@
 import generateHint from "../generateHint";
 
 describe("generateHint.js", () => {
-  const mockMetricName = "Releases to Parole";
+  const mockMetricName = "RELEASES";
 
   it("should return null if the date is most recent and is compared to exactly one year before", () => {
-    expect(generateHint(mockMetricName, 2020, 2, 2020, 2, 2019, 2, new Date())).toBe(null);
+    expect(
+      generateHint(2020, 2, {
+        metric: mockMetricName,
+        year: 2020,
+        month: 2,
+        comparedToYear: 2019,
+        comparedToMonth: 2,
+        dateReported: new Date(),
+      })
+    ).toBe(null);
   });
 
   it("should return hint if the date is not most recent", () => {
-    expect(generateHint(mockMetricName, 2020, 8, 2020, 7, 2019, 7, new Date(2020, 8, 30))).toBe(
+    expect(
+      generateHint(2020, 8, {
+        metric: mockMetricName,
+        year: 2020,
+        month: 7,
+        comparedToYear: 2019,
+        comparedToMonth: 7,
+        dateReported: new Date(2020, 8, 30),
+      })
+    ).toBe(
       "Releases to Parole was last reported on September 30, 2020 (% change relative to August 2019)."
     );
   });
 
   it("should return hint if compared date is not exactly one year before", () => {
-    expect(generateHint(mockMetricName, 2020, 9, 2020, 9, 2019, 7, new Date(2020, 9, 30))).toBe(
+    expect(
+      generateHint(2020, 9, {
+        metric: mockMetricName,
+        year: 2020,
+        month: 9,
+        comparedToYear: 2019,
+        comparedToMonth: 7,
+        dateReported: new Date(2020, 9, 30),
+      })
+    ).toBe(
       "Releases to Parole was last reported on October 30, 2020 (% change relative to August 2019)."
     );
   });

@@ -14,28 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import months from "../constants/months";
-import { metricToCardName } from "../constants/metrics";
+const sortByYearAndMonth = (a, b) => (a.year !== b.year ? a.year - b.year : a.month - b.month);
 
-const generateHint = (
-  mostRecentYear,
-  mostRecentMonth,
-  { metric, year, month, comparedToYear, comparedToMonth, dateReported }
-) => {
-  if (
-    mostRecentYear === year &&
-    mostRecentMonth === month &&
-    year === comparedToYear + 1 &&
-    month === comparedToMonth
-  ) {
-    return null;
-  }
-
-  const formattedReportedDate = `${
-    months[dateReported.getMonth()]
-  } ${dateReported.getDate()}, ${dateReported.getFullYear()}`;
-
-  return `${metricToCardName[metric]} was last reported on ${formattedReportedDate} (% change relative to ${months[comparedToMonth]} ${comparedToYear}).`;
-};
-
-export default generateHint;
+export default sortByYearAndMonth;

@@ -30,6 +30,9 @@ const MainPage = ({
   populationsChartData,
   prisonAdmissionsChartData,
   releasesChartData,
+  flowDiagramData,
+  flowDiagramLastDate,
+  flowDiagramPrevDate,
 }) => (
   <section className="MainPage">
     <header className="MainPage__header">
@@ -48,7 +51,11 @@ const MainPage = ({
       technicalRevocations={-1}
       technicalRevocationsPercent={-1}
     />
-    <FlowDiagram lastDate="September 2020" prevDate="September 2019" />
+    <FlowDiagram
+      data={flowDiagramData}
+      lastDate={flowDiagramLastDate}
+      prevDate={flowDiagramPrevDate}
+    />
     <Chart chartData={populationsChartData} title="Populations" hint="By System" />
     <Chart chartData={prisonAdmissionsChartData} title="Prison Admissions" hint="By Type" />
     <Chart chartData={releasesChartData} title="Releases" hint="By Type" />
@@ -60,6 +67,14 @@ MainPage.propTypes = {
   populationsChartData: chartDataPropTypes.isRequired,
   prisonAdmissionsChartData: chartDataPropTypes.isRequired,
   releasesChartData: chartDataPropTypes.isRequired,
+  flowDiagramLastDate: PropTypes.string.isRequired,
+  flowDiagramPrevDate: PropTypes.string.isRequired,
+  flowDiagramData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    isNotAvailable: PropTypes.bool,
+    number: PropTypes.number,
+    percent: PropTypes.number,
+  }).isRequired,
 };
 
 export default MainPage;

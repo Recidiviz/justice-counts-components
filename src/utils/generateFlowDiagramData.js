@@ -25,9 +25,11 @@ import {
   POPULATION_PROBATION,
   RELEASES,
 } from "../constants/metrics";
+import generateHint from "./generateHint";
+import months from "../constants/months";
 
 const generateFlowDiagramData = (data) => {
-  return [
+  const { flowData, mostRecentYear, mostRecentMonth } = [
     ADMISSIONS,
     ADMISSIONS_NEW_COURT,
     POPULATION_PROBATION,
@@ -36,21 +38,51 @@ const generateFlowDiagramData = (data) => {
     POPULATION_PAROLE,
     ADMISSIONS_REVOCATIONS_PAROLE,
     RELEASES,
-  ].reduce((acc, metric) => {
-    if (!data[metric]) {
-      acc[metric] = {
-        title: metricToCardName[metric],
-        isNotAvailable: true,
-      };
-    } else {
-      acc[metric] = {
-        title: metricToCardName[metric],
-        number: data[metric].value,
-        percent: data[metric].percentChange,
-      };
+  ].reduce(
+    (acc, metric) => {
+      if (!data[metric]) {
+        acc.flowData[metric] = {
+          title: metricToCardName[metric],
+          isNotAvailable: true,
+        };
+      } else {
+        const lastItem = data[metric][data[metric].length - 1];
+        acc.flowData[metric] = {
+          title: metricToCardName[metric],
+          number: lastItem.value,
+          percent: lastItem.percentChange * 100,
+          item: lastItem,
+        };
+
+        if (acc.mostRecentYear < lastItem.year) {
+          acc.mostRecentYear = lastItem.year;
+          acc.mostRecentMonth = lastItem.month;
+        } else if (acc.mostRecentYear === lastItem.year) {
+          acc.mostRecentMonth = Math.max(lastItem.month, acc.mostRecentMonth);
+        }
+      }
+
+      return acc;
+    },
+    { flowData: {}, mostRecentYear: -Infinity, mostRecentMonth: -Infinity }
+  );
+
+  Object.values(flowData).forEach((item) => {
+    const hint = item.isNotAvailable
+      ? null
+      : generateHint(mostRecentYear, mostRecentMonth, item.item);
+
+    if (hint) {
+      // eslint-disable-next-line no-param-reassign
+      item.hint = hint;
     }
-    return acc;
-  }, {});
+  });
+
+  return {
+    flowData,
+    lastDate: `${months[mostRecentMonth]} ${mostRecentYear}`,
+    comparedToDate: `${months[mostRecentMonth]} ${mostRecentYear - 1}`,
+  };
 };
 
 export default generateFlowDiagramData;

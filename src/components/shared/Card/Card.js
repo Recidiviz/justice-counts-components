@@ -25,7 +25,7 @@ import "./Card.scss";
 const Card = ({
   isNotAvailable,
   isPopulation,
-  warning,
+  hint,
   title,
   number,
   percent,
@@ -40,10 +40,10 @@ const Card = ({
   >
     <div className="Card__header">
       <h3 className="Card__title">{title}</h3>
-      {warning && (
+      {hint && (
         <div className="Card__warning-box">
           <div className="Card__warning-icon" />
-          <div className="Card__warning">{warning}</div>
+          <div className="Card__warning">{hint}</div>
         </div>
       )}
     </div>
@@ -64,7 +64,7 @@ const Card = ({
 Card.defaultProps = {
   isNotAvailable: false,
   isPopulation: false,
-  warning: null,
+  hint: null,
   number: null,
   percent: null,
   className: "",
@@ -75,7 +75,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   isNotAvailable: PropTypes.bool,
   isPopulation: PropTypes.bool,
-  warning: PropTypes.string,
+  hint: PropTypes.string,
   number: PropTypes.number,
   percent: PropTypes.number,
   className: PropTypes.string,

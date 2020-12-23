@@ -21,6 +21,7 @@ import MainPage from "./components/MainPage";
 import states from "./constants/states";
 import getNormalizedStateData from "./utils/getNormalizedStateData";
 import generateChartData from "./utils/generateChartData";
+import generateFlowDiagramData from "./utils/generateFlowDiagramData";
 import {
   ADMISSIONS,
   ADMISSIONS_NEW_COURT,
@@ -31,7 +32,6 @@ import {
   POPULATION_PROBATION,
   RELEASES,
 } from "./constants/metrics";
-import generateFlowDiagramData from "./utils/generateFlowDiagramData";
 
 const App = ({ state, data }) => {
   const stateName = states[state];
@@ -52,7 +52,7 @@ const App = ({ state, data }) => {
 
   const releasesChartData = generateChartData(stateMetricData, [RELEASES]);
 
-  const flowDiagramData = generateFlowDiagramData(stateMetricData);
+  const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
 
   return (
     <MainPage
@@ -60,7 +60,9 @@ const App = ({ state, data }) => {
       populationsChartData={populationsChartData}
       prisonAdmissionsChartData={prisonAdmissionsChartData}
       releasesChartData={releasesChartData}
-      flowDiagramData={flowDiagramData}
+      flowDiagramData={flowData}
+      flowDiagramLastDate={lastDate}
+      flowDiagramPrevDate={comparedToDate}
     />
   );
 };
