@@ -17,7 +17,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import KeyInsights from "../KeyInsights/KeyInsights";
 import FlowDiagram from "../FlowDiagram";
 import Chart from "../Chart";
 
@@ -43,14 +42,6 @@ const MainPage = ({
         additional sections containing crime and jail indicators will be added at a later date.
       </p>
     </header>
-    <KeyInsights
-      prisonPopulation={-1}
-      prisonPopulationPercent={-1}
-      revocations={-1}
-      revocationsPercent={-1}
-      technicalRevocations={-1}
-      technicalRevocationsPercent={-1}
-    />
     <FlowDiagram
       data={flowDiagramData}
       lastDate={flowDiagramLastDate}
