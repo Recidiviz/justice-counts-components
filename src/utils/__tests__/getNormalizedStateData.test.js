@@ -100,7 +100,7 @@ describe("getNormalizedStateData.test.js", () => {
       mockStateCode1
     );
 
-    expect(normalizedStateData).toMatchObject({
+    expect(normalizedStateData).toStrictEqual({
       [mockMetric2]: [
         {
           metric: mockMetric2,
@@ -135,6 +135,55 @@ describe("getNormalizedStateData.test.js", () => {
           valueChange: null,
           percentChange: null,
         },
+      ],
+    });
+  });
+
+  it("should sort by year and month (ascending)", () => {
+    const normalizedStateData = getNormalizedStateData(
+      [
+        {
+          state_code: mockStateCode1,
+          metric: mockMetric2,
+          value: 105,
+          year: "2020",
+          month: "10",
+          date_reported: "2020-10-30",
+        },
+        {
+          state_code: mockStateCode1,
+          metric: mockMetric2,
+          value: 108,
+          year: "2020",
+          month: "11",
+          date_reported: "2020-11-30",
+        },
+        {
+          state_code: mockStateCode1,
+          metric: mockMetric2,
+          value: 110,
+          year: "2019",
+          month: "11",
+          date_reported: "2019-11-30",
+        },
+        {
+          state_code: mockStateCode1,
+          metric: mockMetric2,
+          value: 110,
+          year: "2019",
+          month: "1",
+          date_reported: "2019-01-30",
+        },
+      ],
+      mockStateCode1
+    );
+
+    expect(normalizedStateData).toMatchObject({
+      [mockMetric2]: [
+        { year: 2019, month: 0 },
+        { year: 2019, month: 10 },
+        { year: 2020, month: 9 },
+        { year: 2020, month: 10 },
       ],
     });
   });

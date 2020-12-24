@@ -28,6 +28,22 @@ import {
 import generateHint from "./generateHint";
 import months from "../constants/months";
 
+/**
+ * Prepares data for flow Diagram
+ * @param data - normalized, grouped and sorted metric data (output of `getNormalizedStateData`)
+ * @returns {{
+ * lastDate: string,
+ * comparedToDate: string,
+ * flowData: {
+ * [metric]: {
+ *   title: string
+ *   number?: number
+ *   percent?: number
+ *   isNotAvailable?: boolean
+ * }
+ * },
+ * }}
+ */
 const generateFlowDiagramData = (data) => {
   const { flowData, mostRecentYear, mostRecentMonth } = [
     ADMISSIONS,

@@ -30,6 +30,7 @@ import {
   POPULATION_PROBATION,
   RELEASES,
 } from "../../constants/metrics";
+import { flowDiagramDataPropTypes } from "./propTypes";
 
 import "./FlowDiagram.scss";
 
@@ -110,7 +111,8 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => (
           <Arrow
             direction="top"
             isDisabled={
-              data[POPULATION_PRISON] || data[ADMISSIONS_REVOCATIONS_PAROLE].isNotAvailable
+              data[POPULATION_PRISON].isNotAvailable ||
+              data[ADMISSIONS_REVOCATIONS_PAROLE].isNotAvailable
             }
           />
         </Card>
@@ -134,14 +136,7 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => (
 );
 
 FlowDiagram.propTypes = {
-  data: PropTypes.objectOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      isNotAvailable: PropTypes.bool,
-      number: PropTypes.number,
-      percent: PropTypes.number,
-    })
-  ).isRequired,
+  data: flowDiagramDataPropTypes.isRequired,
   lastDate: PropTypes.string.isRequired,
   prevDate: PropTypes.string.isRequired,
 };

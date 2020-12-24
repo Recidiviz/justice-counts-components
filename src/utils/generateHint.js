@@ -17,6 +17,19 @@
 import months from "../constants/months";
 import { metricToCardName } from "../constants/metrics";
 
+/**
+ * Generates flow card hint if current date is not the most recent or is compared
+ * not to the exactly one year before
+ * @param mostRecentYear - The most recent year in flow diagram
+ * @param mostRecentMonth - The most recent month in flow diagram
+ * @param metric - Metric name
+ * @param year - Metric report year
+ * @param month - Metric report month
+ * @param comparedToYear - The year metric report compared to
+ * @param comparedToMonth - The month metric report compared to
+ * @param dateReported - Exact date when metric was reported
+ * @returns {string|null}
+ */
 const generateHint = (
   mostRecentYear,
   mostRecentMonth,

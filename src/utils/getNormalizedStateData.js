@@ -18,7 +18,7 @@ import toInt from "./toInt";
 import sortByYearAndMonth from "./sortByYearAndMonth";
 
 /**
- * Filters data by state, normalizes, groups by metric type and sort by year and month
+ * Filters data by state, normalizes, groups by metric type and sorts by date
  * @param data {{
  *   state_code: string
  *   metric: string

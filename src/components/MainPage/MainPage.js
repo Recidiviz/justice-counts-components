@@ -21,6 +21,7 @@ import FlowDiagram from "../FlowDiagram";
 import Chart from "../Chart";
 
 import { chartDataPropTypes } from "../Chart/propTypes";
+import { flowDiagramDataPropTypes } from "../FlowDiagram/propTypes";
 
 import "./MainPage.scss";
 
@@ -60,12 +61,7 @@ MainPage.propTypes = {
   releasesChartData: chartDataPropTypes.isRequired,
   flowDiagramLastDate: PropTypes.string.isRequired,
   flowDiagramPrevDate: PropTypes.string.isRequired,
-  flowDiagramData: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    isNotAvailable: PropTypes.bool,
-    number: PropTypes.number,
-    percent: PropTypes.number,
-  }).isRequired,
+  flowDiagramData: flowDiagramDataPropTypes.isRequired,
 };
 
 export default MainPage;
