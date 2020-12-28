@@ -20,12 +20,11 @@ import { Line } from "react-chartjs-2";
 
 import PeriodPicker from "./PeriodPicker";
 import formatDatePeriod from "../../utils/formatDatePeriod";
-import createPeriods from "./utils/createPeriods";
+import formatPercentage from "./utils/formatPercentage";
 import adjustChartDataLength from "./utils/adjustChartDataLength";
 import { chartDataPropTypes } from "./propTypes";
 
 import "./Chart.scss";
-import formatPercentage from "./utils/formatPercentage";
 
 const TICKS_COLOR = "#808C99";
 const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
@@ -36,8 +35,6 @@ const Chart = ({ title, hint, chartData }) => {
   const changePeriod = useCallback((value) => {
     setPeriod(value);
   }, []);
-
-  const initialDataLength = chartData.labels.length;
 
   const { datasets, labels } = adjustChartDataLength(chartData, period);
 
@@ -65,7 +62,11 @@ const Chart = ({ title, hint, chartData }) => {
         <div className="Chart__period-picker">
           <PeriodPicker
             period={period}
-            periods={createPeriods(initialDataLength)}
+            periods={[
+              { value: 60, label: "5 years" },
+              { value: 12, label: "1 year" },
+              { value: chartData.labels.length, label: "All Time" },
+            ]}
             onChange={changePeriod}
           />
         </div>
