@@ -25,6 +25,7 @@ import adjustChartDataLength from "./utils/adjustChartDataLength";
 import { chartDataPropTypes } from "./propTypes";
 
 import "./Chart.scss";
+import formatPercentage from "./utils/formatPercentage";
 
 const TICKS_COLOR = "#808C99";
 const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
@@ -121,7 +122,7 @@ const Chart = ({ title, hint, chartData }) => {
                 style={{ backgroundColor: dataset.borderColor }}
               />
               <span className="Chart__legend-label">{dataset.label}</span>
-              <span className="Chart__legend-percent">-33%</span>
+              <span className="Chart__legend-percent">{formatPercentage(dataset.data)}</span>
             </div>
           ))}
         </div>
