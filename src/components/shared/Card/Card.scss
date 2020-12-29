@@ -56,6 +56,10 @@
         margin-right: 0.25rem;
       }
     }
+
+    .Card--population.Card--not-available &:before {
+      background-image: url("../../../assets/icons/people-icon_disabled.svg");
+    }
   }
 
   &__warning-box {
