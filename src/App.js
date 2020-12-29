@@ -33,9 +33,9 @@ import {
   RELEASES,
 } from "./constants/metrics";
 
-const App = ({ state, data }) => {
-  const stateName = states[state];
-  const stateMetricData = getNormalizedStateData(data, state);
+const App = ({ stateCode, data }) => {
+  const stateName = states[stateCode];
+  const stateMetricData = getNormalizedStateData(data, stateCode);
 
   const populationsChartData = generateChartData(stateMetricData, [
     POPULATION_PRISON,
@@ -68,7 +68,7 @@ const App = ({ state, data }) => {
 };
 
 App.propTypes = {
-  state: PropTypes.string.isRequired,
+  stateCode: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       state_code: PropTypes.string.isRequired,

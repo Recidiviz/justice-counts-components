@@ -19,13 +19,13 @@ import "react-app-polyfill/stable";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import data from "./fixture.json";
+import data from "./data.json";
 
 import "./index.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App state="US_CO" data={data} />
+    <App stateCode="US_CO" data={data} />
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -27,7 +27,7 @@ jest.mock("../components/MainPage");
 jest.mock("../utils/getNormalizedStateData");
 jest.mock("../utils/generateChartData");
 describe("App.js", () => {
-  const mockState = "US_CO";
+  const mockStateCode = "US_CO";
   const mockData = [];
   const mockNormalizedData = "some_normalized_data";
   const mockChartData = "some_chart_data";
@@ -41,10 +41,10 @@ describe("App.js", () => {
   });
 
   it("should provide corresponding state name", () => {
-    render(<App data={mockData} state={mockState} />);
+    render(<App data={mockData} stateCode={mockStateCode} />);
 
     expect(MainPage).toHaveBeenCalledTimes(1);
-    expect(MainPage.mock.calls[0][0].stateName).toBe(states[mockState]);
+    expect(MainPage.mock.calls[0][0].stateName).toBe(states[mockStateCode]);
     expect(MainPage.mock.calls[0][0].populationsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].prisonAdmissionsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].releasesChartData).toBe(mockChartData);
