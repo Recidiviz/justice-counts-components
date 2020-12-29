@@ -83,13 +83,14 @@ const generateChartData = (data, metrics) => {
 
     if (!data[metric]) {
       logger.warn(noMetricData(metric));
-    } else {
-      acc.push({
-        metric,
-        label: metricToChartName[metric] || metric,
-        data: [],
-      });
     }
+
+    acc.push({
+      metric,
+      label: metricToChartName[metric] || metric,
+      isNotAvailable: !data[metric],
+      data: [],
+    });
 
     return acc;
   }, []);
@@ -97,7 +98,10 @@ const generateChartData = (data, metrics) => {
   const labels = [];
 
   const periods = datasets.reduce(
-    (acc, { metric }) => {
+    (acc, { metric, isNotAvailable }) => {
+      if (isNotAvailable) {
+        return acc;
+      }
       const { year: startYear, month: startMonth } = data[metric][0];
       const { year: endYear, month: endMonth } = data[metric][data[metric].length - 1];
 
@@ -130,10 +134,12 @@ const generateChartData = (data, metrics) => {
 
     labels.push({ year, month });
     datasets.forEach((dataset) => {
-      dataset.data.push(
-        data[dataset.metric].find((item) => item.year === year && item.month === month)?.value ||
-          null
-      );
+      if (!dataset.isNotAvailable) {
+        dataset.data.push(
+          data[dataset.metric].find((item) => item.year === year && item.month === month)?.value ||
+            null
+        );
+      }
     });
 
     i += 1;

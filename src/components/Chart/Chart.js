@@ -16,6 +16,7 @@
 // =============================================================================
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 import { Line } from "react-chartjs-2";
 
 import PeriodPicker from "./PeriodPicker";
@@ -117,13 +118,18 @@ const Chart = ({ title, hint, chartData }) => {
         </div>
         <div className="Chart__legends">
           {styledDatasets.map((dataset) => (
-            <div key={dataset.label} className="Chart__legend">
+            <div
+              key={dataset.label}
+              className={cn("Chart__legend", { "Chart__legend--disabled": dataset.isNotAvailable })}
+            >
               <span
                 className="Chart__legend-point"
                 style={{ backgroundColor: dataset.borderColor }}
               />
               <span className="Chart__legend-label">{dataset.label}</span>
-              <span className="Chart__legend-percent">{formatPercentage(dataset.data)}</span>
+              <span className="Chart__legend-percent">
+                {dataset.isNotAvailable ? "N/A" : formatPercentage(dataset.data)}
+              </span>
             </div>
           ))}
         </div>

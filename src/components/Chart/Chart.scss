@@ -113,6 +113,9 @@
     width: 0.75rem;
     height: 0.75rem;
     border-radius: 50%;
+    .Chart__legend--disabled & {
+      background-color: #b8bfc5 !important;
+    }
   }
 
   &__legend-label {
@@ -120,6 +123,9 @@
     line-height: 1.6;
     @include down($lg) {
       font-size: 0.875rem;
+    }
+    .Chart__legend--disabled & {
+      color: #b8bfc5;
     }
   }
 
@@ -130,6 +136,9 @@
     line-height: 1.6;
     @include down($lg) {
       font-size: 0.875rem;
+    }
+    .Chart__legend--disabled & {
+      color: #b8bfc5;
     }
   }
 }
