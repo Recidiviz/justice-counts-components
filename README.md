@@ -61,7 +61,7 @@ The development server will remain active until you either close your terminal o
 
 To generate a build of the frontend that is suitable for deploys, run: `yarn build`.
 
-Each time this is run, the `/build` directory will be wiped clean. A [bundle analysis](#Bundle-analysis) report, found in `build/report.html`, will also be generated on each invocation of this script.
+Each time this is run, the `/build` directory will be wiped clean.
 
 ## Input Data Format
 
