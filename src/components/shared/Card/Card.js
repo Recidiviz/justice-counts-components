@@ -53,7 +53,10 @@ const Card = ({
       ) : (
         <>
           <span className="Card__number">{formatNumber(number)}</span>
-          <span className="Card__percent">({percent}%)</span>
+          <span className="Card__percent">
+            ({percent > 0 && "+"}
+            {percent}%)
+          </span>
         </>
       )}
     </div>

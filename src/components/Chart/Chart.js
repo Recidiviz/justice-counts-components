@@ -21,7 +21,7 @@ import { Line } from "react-chartjs-2";
 
 import PeriodPicker from "./PeriodPicker";
 import formatDatePeriod from "../../utils/formatDatePeriod";
-import formatPercentage from "./utils/formatPercentage";
+import calcMetricPercentage from "./utils/calcMetricPercentage";
 import adjustChartDataLength from "./utils/adjustChartDataLength";
 import { chartDataPropTypes } from "./propTypes";
 
@@ -128,7 +128,7 @@ const Chart = ({ title, hint, chartData }) => {
               />
               <span className="Chart__legend-label">{dataset.label}</span>
               <span className="Chart__legend-percent">
-                {dataset.isNotAvailable ? "N/A" : formatPercentage(dataset.data)}
+                {dataset.isNotAvailable ? "N/A" : calcMetricPercentage(dataset.data)}
               </span>
             </div>
           ))}

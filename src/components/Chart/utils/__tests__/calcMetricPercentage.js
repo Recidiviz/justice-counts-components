@@ -14,13 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-function formatPercentage(data) {
-  const filteredData = data.filter((item) => item);
+import calcMetricPercentage from "../calcMetricPercentage";
 
-  const ratio = filteredData[filteredData.length - 1] / filteredData[0];
-  const sign = ratio < 1 ? "-" : "+";
-
-  return `${sign}${Math.round(Math.abs((ratio - 1) * 100))}%`;
-}
-
-export default formatPercentage;
+describe("calcPercentage.js", () => {
+  it("should calculate percentage from chart dataset", () => {
+    expect(calcMetricPercentage([100, null, 95, 120, 75, 80, 155])).toBe("+55%");
+    expect(calcMetricPercentage([100, 95, 90, 80, 75, 70])).toBe("-30%");
+  });
+});
