@@ -65,25 +65,25 @@ Each time this is run, the `/build` directory will be wiped clean.
 
 ## Input Data Format
 
-App should receive 2 required props: `data` and `stateCode`.
+The main app component should receive 2 required properties: `data` and `stateCode`.
 
-`stateCode` controls state for which data should be visualized.
+`stateCode` controls which state we should be visualizing data for, in a format of `US_XX`, e.g. `US_CO` or `US_PA`.
 
-`data` is the array of metric data, format could be found below.
+`data` is an array of metric data points, in the format described below.
 
-Now the `data.json` file is used to display data. It lives in `src/data.json` but could be moved around trivially, or pulled from a CDN or an API, for different deployment styles.
+For now, the `data.json` file is used to provide data to the app components. It lives in `src/data.json` but could be moved around trivially, or pulled from a CDN or an API, for different deployment styles.
 
 An _example_ of a valid `data.json` file can be found in [`data.json`](src/data.json).
 
-`data.json` is the array that consists of JSON objects with fields:
+`data.json` contains a JSON array where each object has the following fields:
 
-- `state_code` - state code e.g. `US_CO`
-- `metric` - metric name e.g. `RELEASES`
-- `year` - year e.g. `2020`
-- `month` - month (01-12) e.g. `02`
-- `date_reported` - Date, when metric was reported. e.g. `2019-12-31`
-- `value` - Value of the metric. e.g. `500`
-- `compared_to_year` - Year, which is used for comparing. e.g. `2019`
-- `compared_to_month` - Month, which is used for comparing. e.g. `04`
-- `value_change` - Metric value change between `compared_to_year\month` and `year\month` e.g. `-20`
-- `percentage_change` - Metric value change between `compared_to_year\month` and `year\month` in percents e.g. `-0.12`
+- `state_code` - state code, e.g. `US_CO`
+- `metric` - metric name, e.g. `RELEASES`
+- `year` - year, e.g. `2020`
+- `month` - month (01-12), e.g. `02` or `2` (leading zero is not required)
+- `date_reported` - Date when the metric was reported, e.g. `2019-12-31`
+- `value` - Value of the metric, e.g. `500`
+- `compared_to_year` - The year of the comparison data point, which is the most recent data point to compare against for trend analysis, no less than one year before this current data point, e.g. `2019`
+- `compared_to_month` - The month of the comparison data point, which is the most recent data point to compare against for trend analysis, no less than one year before this current data point, e.g. `04`
+- `value_change` - Metric value change between `compared_to_year/month` and `year/month`, e.g. `-20`
+- `percentage_change` - Metric value change between `compared_to_year/month` and `year/month` in percents, e.g. `-0.12`

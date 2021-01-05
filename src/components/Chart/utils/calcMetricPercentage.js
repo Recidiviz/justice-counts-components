@@ -14,7 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+import logger from "../../../utils/logger";
+
+export const NO_DATA_ERROR = "Cannot generate percentage for empty metric.";
+
+/**
+ * Transforms data points array and returns percentage diff between first and last data points
+ * @param data (number|null)[]
+ * @returns {string}
+ */
 function calcMetricPercentage(data) {
+  if (!data.length) {
+    logger.error(NO_DATA_ERROR);
+
+    return "N/A";
+  }
+
+  if (data.length === 1) {
+    return "0%";
+  }
+
   const filteredData = data.filter((item) => item);
 
   const ratio = filteredData[filteredData.length - 1] / filteredData[0];

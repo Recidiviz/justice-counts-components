@@ -14,11 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import calcMetricPercentage from "../calcMetricPercentage";
+import calcMetricPercentage, { NO_DATA_ERROR } from "../calcMetricPercentage";
+import logger from "../../../../utils/logger";
 
 describe("calcPercentage.js", () => {
+  const logErrorSpy = jest.spyOn(logger, "error");
+
   it("should calculate percentage from chart dataset", () => {
     expect(calcMetricPercentage([100, null, 95, 120, 75, 80, 155])).toBe("+55%");
     expect(calcMetricPercentage([100, 95, 90, 80, 75, 70])).toBe("-30%");
+  });
+
+  it("should throw error to console when data array is empty", () => {
+    expect(calcMetricPercentage([])).toBe("N/A");
+    expect(logErrorSpy).toBeCalledWith(NO_DATA_ERROR);
+  });
+
+  it("should work when array consists of the only data point", () => {
+    expect(calcMetricPercentage([1])).toBe("0%");
   });
 });
