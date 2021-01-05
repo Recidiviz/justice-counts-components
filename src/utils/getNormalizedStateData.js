@@ -15,9 +15,10 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import toInt from "./toInt";
+import sortByYearAndMonth from "./sortByYearAndMonth";
 
 /**
- * Filters data by state, normalizes, groups by metric type and sort by year and month
+ * Filters data by state, normalizes, groups by metric type and sorts by date
  * @param data {{
  *   state_code: string
  *   metric: string
@@ -45,14 +46,14 @@ import toInt from "./toInt";
  *  }
  * }}
  */
-const getNormalizedStateData = (data, stateCode) =>
-  data.reduce((acc, item) => {
+const getNormalizedStateData = (data, stateCode) => {
+  const normalizedData = data.reduce((acc, item) => {
     if (item.state_code === stateCode) {
       const normalizedItem = {
         metric: item.metric,
         year: toInt(item.year),
         month: toInt(item.month) - 1,
-        dateReported: item.date_reported,
+        dateReported: new Date(item.date_reported),
         value: item.value,
         comparedToYear: item.compared_to_year ? toInt(item.compared_to_year) : null,
         comparedToMonth: item.compared_to_month ? toInt(item.compared_to_month) - 1 : null,
@@ -68,5 +69,10 @@ const getNormalizedStateData = (data, stateCode) =>
 
     return acc;
   }, {});
+
+  Object.values(normalizedData).forEach((metricData) => metricData.sort(sortByYearAndMonth));
+
+  return normalizedData;
+};
 
 export default getNormalizedStateData;

@@ -14,21 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-const formatPercent = (percent, isPassive) => {
-  const isPositive = percent >= 0;
-  let formattedPercent = Math.round(Math.abs(percent));
+import logger from "../../../utils/logger";
 
-  if (formattedPercent === 0) {
-    formattedPercent = "~0";
+export const NO_DATA_ERROR = "Cannot generate percentage for empty metric.";
+
+/**
+ * Transforms data points array and returns percentage diff between first and last data points
+ * @param data (number|null)[]
+ * @returns {string}
+ */
+function calcMetricPercentage(data) {
+  if (!data.length) {
+    logger.error(NO_DATA_ERROR);
+
+    return "N/A";
   }
 
-  if (isPassive) {
-    return isPositive
-      ? `increased ${formattedPercent} percent`
-      : `declined ${formattedPercent} percent`;
+  if (data.length === 1) {
+    return "0%";
   }
 
-  return `a ${formattedPercent} percent ${isPositive ? "increase" : "decline"}`;
-};
+  const filteredData = data.filter((item) => item);
 
-export default formatPercent;
+  const ratio = filteredData[filteredData.length - 1] / filteredData[0];
+  const sign = ratio < 1 ? "-" : "+";
+
+  return `${sign}${Math.round(Math.abs((ratio - 1) * 100))}%`;
+}
+
+export default calcMetricPercentage;

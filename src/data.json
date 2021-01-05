@@ -39,14 +39,7 @@
     "date_reported": "2020-09-30",
     "value": 233
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2019",
-    "month": "09",
-    "date_reported": "2020-09-30",
-    "value": 1233
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -103,14 +96,7 @@
     "date_reported": "2019-10-31",
     "value": 281
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2019",
-    "month": "10",
-    "date_reported": "2019-10-31",
-    "value": 1281
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -167,14 +153,7 @@
     "date_reported": "2019-11-30",
     "value": 273
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2019",
-    "month": "11",
-    "date_reported": "2019-11-30",
-    "value": 1273
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -231,14 +210,7 @@
     "date_reported": "2019-12-31",
     "value": 243
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2019",
-    "month": "12",
-    "date_reported": "2019-12-31",
-    "value": 1243
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -295,14 +267,7 @@
     "date_reported": "2020-01-30",
     "value": 283
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2020",
-    "month": "01",
-    "date_reported": "2020-01-30",
-    "value": 1283
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -359,14 +324,7 @@
     "date_reported": "2020-02-29",
     "value": 267
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2020",
-    "month": "02",
-    "date_reported": "2020-02-29",
-    "value": 1267
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -423,14 +381,7 @@
     "date_reported": "2020-03-31",
     "value": 282
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2020",
-    "month": "03",
-    "date_reported": "2020-03-31",
-    "value": 1282
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -487,14 +438,7 @@
     "date_reported": "2020-04-30",
     "value": 223
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2020",
-    "month": "04",
-    "date_reported": "2020-04-30",
-    "value": 1223
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -551,14 +495,7 @@
     "date_reported": "2020-05-31",
     "value": 254
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2020",
-    "month": "05",
-    "date_reported": "2020-05-31",
-    "value": 1254
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -607,14 +544,7 @@
     "date_reported": "2020-06-30",
     "value": 91
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2020",
-    "month": "06",
-    "date_reported": "2020-06-30",
-    "value": 1291
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -663,14 +593,7 @@
     "date_reported": "2020-07-31",
     "value": 76
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2020",
-    "month": "07",
-    "date_reported": "2020-07-31",
-    "value": 1276
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -719,14 +642,7 @@
     "date_reported": "2020-08-31",
     "value": 93
   },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2020",
-    "month": "08",
-    "date_reported": "2020-08-31",
-    "value": 1193
-  },
+
   {
     "state_code": "US_CO",
     "metric": "POPULATION_PAROLE",
@@ -798,18 +714,6 @@
     "month": "09",
     "date_reported": "2020-09-30",
     "value": 23,
-    "compared_to_year": "2019",
-    "compared_to_month": "09",
-    "value_change": -10,
-    "percentage_change": -0.31
-  },
-  {
-    "state_code": "US_CO",
-    "metric": "POPULATION_PRISON",
-    "year": "2020",
-    "month": "09",
-    "date_reported": "2020-09-30",
-    "value": 1223,
     "compared_to_year": "2019",
     "compared_to_month": "09",
     "value_change": -10,

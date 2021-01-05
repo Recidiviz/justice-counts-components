@@ -70,7 +70,7 @@ describe("getNormalizedStateData.test.js", () => {
           value: 105,
           year: "2020",
           month: "11",
-          date_reported: "2020/11",
+          date_reported: "2020-11-30",
           compared_to_year: "2019",
           compared_to_month: "11",
           value_change: 0,
@@ -82,7 +82,7 @@ describe("getNormalizedStateData.test.js", () => {
           value: 108,
           year: "2020",
           month: "12",
-          date_reported: "2020/11",
+          date_reported: "2020-11-30",
           compared_to_year: "2019",
           compared_to_month: "12",
           value_change: 10,
@@ -94,7 +94,7 @@ describe("getNormalizedStateData.test.js", () => {
           value: 110,
           year: "2021",
           month: "1",
-          date_reported: "2020/11",
+          date_reported: "2020-11-30",
         },
       ],
       mockStateCode1
@@ -107,7 +107,7 @@ describe("getNormalizedStateData.test.js", () => {
           value: 105,
           year: 2020,
           month: 10,
-          dateReported: "2020/11",
+          dateReported: new Date("2020-11-30"),
           comparedToYear: 2019,
           comparedToMonth: 10,
           valueChange: 0,
@@ -118,7 +118,7 @@ describe("getNormalizedStateData.test.js", () => {
           value: 108,
           year: 2020,
           month: 11,
-          dateReported: "2020/11",
+          dateReported: new Date("2020-11-30"),
           comparedToYear: 2019,
           comparedToMonth: 11,
           valueChange: 10,
@@ -129,12 +129,61 @@ describe("getNormalizedStateData.test.js", () => {
           value: 110,
           year: 2021,
           month: 0,
-          dateReported: "2020/11",
+          dateReported: new Date("2020-11-30"),
           comparedToYear: null,
           comparedToMonth: null,
           valueChange: null,
           percentChange: null,
         },
+      ],
+    });
+  });
+
+  it("should sort by year and month (ascending)", () => {
+    const normalizedStateData = getNormalizedStateData(
+      [
+        {
+          state_code: mockStateCode1,
+          metric: mockMetric2,
+          value: 105,
+          year: "2020",
+          month: "10",
+          date_reported: "2020-10-30",
+        },
+        {
+          state_code: mockStateCode1,
+          metric: mockMetric2,
+          value: 108,
+          year: "2020",
+          month: "11",
+          date_reported: "2020-11-30",
+        },
+        {
+          state_code: mockStateCode1,
+          metric: mockMetric2,
+          value: 110,
+          year: "2019",
+          month: "11",
+          date_reported: "2019-11-30",
+        },
+        {
+          state_code: mockStateCode1,
+          metric: mockMetric2,
+          value: 110,
+          year: "2019",
+          month: "1",
+          date_reported: "2019-01-30",
+        },
+      ],
+      mockStateCode1
+    );
+
+    expect(normalizedStateData).toMatchObject({
+      [mockMetric2]: [
+        { year: 2019, month: 0 },
+        { year: 2019, month: 10 },
+        { year: 2020, month: 9 },
+        { year: 2020, month: 10 },
       ],
     });
   });

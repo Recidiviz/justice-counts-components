@@ -17,11 +17,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import KeyInsights from "../KeyInsights/KeyInsights";
 import FlowDiagram from "../FlowDiagram";
 import Chart from "../Chart";
 
 import { chartDataPropTypes } from "../Chart/propTypes";
+import { flowDiagramDataPropTypes } from "../FlowDiagram/propTypes";
 
 import "./MainPage.scss";
 
@@ -30,6 +30,9 @@ const MainPage = ({
   populationsChartData,
   prisonAdmissionsChartData,
   releasesChartData,
+  flowDiagramData,
+  flowDiagramLastDate,
+  flowDiagramPrevDate,
 }) => (
   <section className="MainPage">
     <header className="MainPage__header">
@@ -40,15 +43,11 @@ const MainPage = ({
         additional sections containing crime and jail indicators will be added at a later date.
       </p>
     </header>
-    <KeyInsights
-      prisonPopulation={-1}
-      prisonPopulationPercent={-1}
-      revocations={-1}
-      revocationsPercent={-1}
-      technicalRevocations={-1}
-      technicalRevocationsPercent={-1}
+    <FlowDiagram
+      data={flowDiagramData}
+      lastDate={flowDiagramLastDate}
+      prevDate={flowDiagramPrevDate}
     />
-    <FlowDiagram lastDate="September 2020" prevDate="September 2019" />
     <Chart chartData={populationsChartData} title="Populations" hint="By System" />
     <Chart chartData={prisonAdmissionsChartData} title="Prison Admissions" hint="By Type" />
     <Chart chartData={releasesChartData} title="Releases" hint="By Type" />
@@ -60,6 +59,9 @@ MainPage.propTypes = {
   populationsChartData: chartDataPropTypes.isRequired,
   prisonAdmissionsChartData: chartDataPropTypes.isRequired,
   releasesChartData: chartDataPropTypes.isRequired,
+  flowDiagramLastDate: PropTypes.string.isRequired,
+  flowDiagramPrevDate: PropTypes.string.isRequired,
+  flowDiagramData: flowDiagramDataPropTypes.isRequired,
 };
 
 export default MainPage;

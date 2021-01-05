@@ -44,6 +44,7 @@ describe("generateChartData.js", () => {
             metric: RELEASES,
             label: metricToChartName[RELEASES],
             data: [1002, 1001, 1000],
+            isNotAvailable: false,
           },
         ],
         labels: [
@@ -77,11 +78,13 @@ describe("generateChartData.js", () => {
             metric: RELEASES,
             label: metricToChartName[RELEASES],
             data: [null, 1002, 1001, 1000],
+            isNotAvailable: false,
           },
           {
             metric: ADMISSIONS,
             label: metricToChartName[ADMISSIONS],
             data: [705, 700, 703, null],
+            isNotAvailable: false,
           },
         ],
         labels: [
@@ -115,11 +118,13 @@ describe("generateChartData.js", () => {
             metric: POPULATION_PAROLE,
             label: metricToChartName[POPULATION_PAROLE],
             data: [1002, null, null, null, null, null, null, 1001, 1000],
+            isNotAvailable: false,
           },
           {
             metric: POPULATION_PRISON,
             label: metricToChartName[POPULATION_PRISON],
             data: [null, 705, null, null, null, null, 700, 703, null],
+            isNotAvailable: false,
           },
         ],
         labels: [
@@ -151,7 +156,7 @@ describe("generateChartData.js", () => {
     });
   });
 
-  it("should throw warning if metric data is not provided", () => {
+  it("should throw warning if humanized metric name is not provided", () => {
     const metricName = "some metric";
     const mockStateData = {
       [metricName]: [{ year: 2020, month: 8, value: 1002 }],
@@ -162,11 +167,21 @@ describe("generateChartData.js", () => {
   });
 
   it("should throw warning if metric data is not provided", () => {
-    const metricName = "some metric";
+    const metricName = "POPULATION_PAROLE";
     const mockStateData = {
       anotherMetric: [{ year: 2020, month: 8, value: 1002 }],
     };
-    generateChartData(mockStateData, [metricName]);
+    expect(generateChartData(mockStateData, [metricName])).toStrictEqual({
+      datasets: [
+        {
+          metric: metricName,
+          label: metricToChartName[metricName],
+          isNotAvailable: true,
+          data: [],
+        },
+      ],
+      labels: [],
+    });
 
     expect(warnSpy).toBeCalledWith(noMetricData(metricName));
   });

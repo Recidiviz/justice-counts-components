@@ -18,11 +18,23 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Card from "../shared/Card";
-import Arrow from "../shared/Arrow";
+import Arrow from "./Arrow";
+
+import {
+  ADMISSIONS,
+  ADMISSIONS_NEW_COURT,
+  ADMISSIONS_REVOCATIONS_PAROLE,
+  ADMISSIONS_REVOCATIONS_PROBATION,
+  POPULATION_PAROLE,
+  POPULATION_PRISON,
+  POPULATION_PROBATION,
+  RELEASES,
+} from "../../constants/metrics";
+import { flowDiagramDataPropTypes } from "./propTypes";
 
 import "./FlowDiagram.scss";
 
-const FlowDiagram = ({ lastDate, prevDate }) => (
+const FlowDiagram = ({ data, lastDate, prevDate }) => (
   <section className="FlowDiagram">
     <div className="FlowDiagram__header">
       <div className="FlowDiagram__date">{lastDate}</div>
@@ -31,66 +43,91 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
     <div className="FlowDiagram__box">
       <span className="FlowDiagram__box-name">Court</span>
       <div className="FlowDiagram__row">
-        <Card className="FlowDiagram__card" title="Prison Sentences" percent={-20} number={337}>
-          <Arrow height={28.375} />
+        <Card className="FlowDiagram__card" {...data[ADMISSIONS]}>
+          <Arrow
+            height={28.375}
+            isDisabled={data[ADMISSIONS].isNotAvailable || data[POPULATION_PRISON].isNotAvailable}
+          />
         </Card>
-        <Card className="FlowDiagram__card" title="Probation Sentences" isNotAvailable>
-          <Arrow isDisabled height={4.25} />
+        <Card className="FlowDiagram__card" {...data[ADMISSIONS_NEW_COURT]}>
+          <Arrow
+            isDisabled={
+              data[ADMISSIONS_NEW_COURT].isNotAvailable || data[POPULATION_PROBATION].isNotAvailable
+            }
+            height={4.25}
+          />
         </Card>
       </div>
     </div>
     <div className="FlowDiagram__box">
       <span className="FlowDiagram__box-name">Corrections</span>
       <div className="FlowDiagram__row">
-        <Card
-          className="FlowDiagram__card"
-          title="Probation Population"
-          number={68285}
-          percent={-8}
-          isPopulation
-          warning="Probation population was last reported on June 30, 2020 (% change compared to September 2019)."
-        >
-          <Arrow isDisabled />
+        <Card className="FlowDiagram__card" isPopulation {...data[POPULATION_PROBATION]}>
+          <Arrow
+            isDisabled={
+              data[POPULATION_PROBATION].isNotAvailable ||
+              data[ADMISSIONS_REVOCATIONS_PROBATION].isNotAvailable
+            }
+          />
         </Card>
       </div>
       <div className="FlowDiagram__row">
-        <Card className="FlowDiagram__card" title="Probation Revocations" isNotAvailable>
-          <Arrow isDisabled direction="topLeft" height={23.25} width={6.625} />
-          <Arrow isDisabled />
+        <Card className="FlowDiagram__card" {...data[ADMISSIONS_REVOCATIONS_PROBATION]}>
+          <Arrow
+            isDisabled={
+              data[ADMISSIONS_REVOCATIONS_PROBATION].isNotAvailable ||
+              data[ADMISSIONS].isNotAvailable
+            }
+            direction="topLeft"
+            height={23.25}
+            width={6.625}
+          />
+          <Arrow
+            isDisabled={
+              data[ADMISSIONS_REVOCATIONS_PROBATION].isNotAvailable ||
+              data[POPULATION_PRISON].isNotAvailable
+            }
+          />
         </Card>
       </div>
       <div className="FlowDiagram__row">
         <Card
           className="FlowDiagram__card FlowDiagram__card--doubled"
-          title="Prison Population"
-          number={16673}
-          percent={-16}
           isPopulation
+          {...data[POPULATION_PRISON]}
         >
-          <Arrow height={14.25} placement="right" />
+          <Arrow
+            height={14.25}
+            placement="right"
+            isDisabled={data[RELEASES].isNotAvailable || data[POPULATION_PRISON].isNotAvailable}
+          />
         </Card>
       </div>
       <div className="FlowDiagram__row">
         <Card
           className="FlowDiagram__card FlowDiagram__card--offset"
-          title="Parole Revocations"
-          number={123}
-          percent={-53}
+          {...data[ADMISSIONS_REVOCATIONS_PAROLE]}
         >
-          <Arrow direction="top" />
+          <Arrow
+            direction="top"
+            isDisabled={
+              data[POPULATION_PRISON].isNotAvailable ||
+              data[ADMISSIONS_REVOCATIONS_PAROLE].isNotAvailable
+            }
+          />
         </Card>
       </div>
       <div className="FlowDiagram__row">
-        <Card
-          className="FlowDiagram__card"
-          title="Parole Population"
-          number={12847}
-          percent={12}
-          isPopulation
-        >
-          <Arrow direction="top" />
+        <Card className="FlowDiagram__card" isPopulation {...data[POPULATION_PAROLE]}>
+          <Arrow
+            direction="top"
+            isDisabled={
+              data[POPULATION_PAROLE].isNotAvailable ||
+              data[ADMISSIONS_REVOCATIONS_PAROLE].isNotAvailable
+            }
+          />
         </Card>
-        <Card className="FlowDiagram__card" title="Releases to Parole" number={622} percent={-11}>
+        <Card className="FlowDiagram__card" {...data[RELEASES]}>
           <Arrow direction="left" height={0} width={2} />
         </Card>
       </div>
@@ -99,6 +136,7 @@ const FlowDiagram = ({ lastDate, prevDate }) => (
 );
 
 FlowDiagram.propTypes = {
+  data: flowDiagramDataPropTypes.isRequired,
   lastDate: PropTypes.string.isRequired,
   prevDate: PropTypes.string.isRequired,
 };

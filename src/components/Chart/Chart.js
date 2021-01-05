@@ -16,11 +16,12 @@
 // =============================================================================
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 import { Line } from "react-chartjs-2";
 
 import PeriodPicker from "./PeriodPicker";
 import formatDatePeriod from "../../utils/formatDatePeriod";
-import createPeriods from "./utils/createPeriods";
+import calcMetricPercentage from "./utils/calcMetricPercentage";
 import adjustChartDataLength from "./utils/adjustChartDataLength";
 import { chartDataPropTypes } from "./propTypes";
 
@@ -35,8 +36,6 @@ const Chart = ({ title, hint, chartData }) => {
   const changePeriod = useCallback((value) => {
     setPeriod(value);
   }, []);
-
-  const initialDataLength = chartData.labels.length;
 
   const { datasets, labels } = adjustChartDataLength(chartData, period);
 
@@ -64,7 +63,11 @@ const Chart = ({ title, hint, chartData }) => {
         <div className="Chart__period-picker">
           <PeriodPicker
             period={period}
-            periods={createPeriods(initialDataLength)}
+            periods={[
+              { value: 60, label: "5 years" },
+              { value: 12, label: "1 year" },
+              { value: chartData.labels.length, label: "All Time" },
+            ]}
             onChange={changePeriod}
           />
         </div>
@@ -115,13 +118,18 @@ const Chart = ({ title, hint, chartData }) => {
         </div>
         <div className="Chart__legends">
           {styledDatasets.map((dataset) => (
-            <div key={dataset.label} className="Chart__legend">
+            <div
+              key={dataset.label}
+              className={cn("Chart__legend", { "Chart__legend--disabled": dataset.isNotAvailable })}
+            >
               <span
                 className="Chart__legend-point"
                 style={{ backgroundColor: dataset.borderColor }}
               />
               <span className="Chart__legend-label">{dataset.label}</span>
-              <span className="Chart__legend-percent">-33%</span>
+              <span className="Chart__legend-percent">
+                {dataset.isNotAvailable ? "N/A" : calcMetricPercentage(dataset.data)}
+              </span>
             </div>
           ))}
         </div>

@@ -21,6 +21,7 @@ import MainPage from "./components/MainPage";
 import states from "./constants/states";
 import getNormalizedStateData from "./utils/getNormalizedStateData";
 import generateChartData from "./utils/generateChartData";
+import generateFlowDiagramData from "./utils/generateFlowDiagramData";
 import {
   ADMISSIONS,
   ADMISSIONS_NEW_COURT,
@@ -32,9 +33,9 @@ import {
   RELEASES,
 } from "./constants/metrics";
 
-const App = ({ state, data }) => {
-  const stateName = states[state];
-  const stateMetricData = getNormalizedStateData(data, state);
+const App = ({ stateCode, data }) => {
+  const stateName = states[stateCode];
+  const stateMetricData = getNormalizedStateData(data, stateCode);
 
   const populationsChartData = generateChartData(stateMetricData, [
     POPULATION_PRISON,
@@ -51,18 +52,23 @@ const App = ({ state, data }) => {
 
   const releasesChartData = generateChartData(stateMetricData, [RELEASES]);
 
+  const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
+
   return (
     <MainPage
       stateName={stateName}
       populationsChartData={populationsChartData}
       prisonAdmissionsChartData={prisonAdmissionsChartData}
       releasesChartData={releasesChartData}
+      flowDiagramData={flowData}
+      flowDiagramLastDate={lastDate}
+      flowDiagramPrevDate={comparedToDate}
     />
   );
 };
 
 App.propTypes = {
-  state: PropTypes.string.isRequired,
+  stateCode: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       state_code: PropTypes.string.isRequired,

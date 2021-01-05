@@ -14,10 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-const createPeriods = (availableDataLength) => [
-  { value: 60, label: "5 years" },
-  { value: 12, label: "1 year" },
-  { value: availableDataLength, label: "All Time" },
-];
+const sortByYearAndMonth = (a, b) => (a.year !== b.year ? a.year - b.year : a.month - b.month);
 
-export default createPeriods;
+export default sortByYearAndMonth;
