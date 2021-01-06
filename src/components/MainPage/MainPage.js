@@ -20,6 +20,7 @@ import PropTypes from "prop-types";
 import FlowDiagram from "../FlowDiagram";
 import Chart from "../Chart";
 
+import ErrorBoundary from "../shared/ErrorBoundary";
 import { chartDataPropTypes } from "../Chart/propTypes";
 import { flowDiagramDataPropTypes } from "../FlowDiagram/propTypes";
 
@@ -43,14 +44,22 @@ const MainPage = ({
         additional sections containing crime and jail indicators will be added at a later date.
       </p>
     </header>
-    <FlowDiagram
-      data={flowDiagramData}
-      lastDate={flowDiagramLastDate}
-      prevDate={flowDiagramPrevDate}
-    />
-    <Chart chartData={populationsChartData} title="Populations" hint="By System" />
-    <Chart chartData={prisonAdmissionsChartData} title="Prison Admissions" hint="By Type" />
-    <Chart chartData={releasesChartData} title="Releases" hint="By Type" />
+    <ErrorBoundary placeholder="Unable to render Flow Diagram. An unhandled error happened. More info could be found in the console.">
+      <FlowDiagram
+        data={flowDiagramData}
+        lastDate={flowDiagramLastDate}
+        prevDate={flowDiagramPrevDate}
+      />
+    </ErrorBoundary>
+    <ErrorBoundary placeholder="Unable to render Populations Chart. An unhandled error happened. More info could be found in the console.">
+      <Chart chartData={populationsChartData} title="Populations" hint="By System" />
+    </ErrorBoundary>
+    <ErrorBoundary placeholder="Unable to render Prison Admissions Chart. An unhandled error happened. More info could be found in the console.">
+      <Chart chartData={prisonAdmissionsChartData} title="Prison Admissions" hint="By Type" />
+    </ErrorBoundary>
+    <ErrorBoundary placeholder="Unable to render Releases Chart. An unhandled error happened. More info could be found in the console.">
+      <Chart chartData={releasesChartData} title="Releases" hint="By Type" />
+    </ErrorBoundary>
   </section>
 );
 
