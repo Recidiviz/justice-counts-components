@@ -38,9 +38,10 @@ const MainPage = ({
     <header className="MainPage__header">
       <h1 className="MainPage__title">{stateName} data dashboard</h1>
       <p className="MainPage__description">
-        The following is a broad overview of the corrections system in {stateName}, representing the
-        up-to-date data and changes compared to last year (September 2019 to September 2020). Two
-        additional sections containing crime and jail indicators will be added at a later date.
+        The following is a broad overview of the corrections system in {stateName}, representing
+        up-to-date data and changes compared to last year ({flowDiagramPrevDate} to{" "}
+        {flowDiagramLastDate}). Two additional sections containing crime and jail indicators will be
+        added at a later date.
       </p>
     </header>
     <FlowDiagram
