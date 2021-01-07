@@ -71,10 +71,12 @@
     display: block;
     width: 1.5rem;
     height: 1.5rem;
-    background: url("../../../assets/icons/warning-icon.svg") center center no-repeat;
+    border: 0;
+    background: transparent url("../../../assets/icons/warning-icon.svg") center center no-repeat;
     background-size: 1rem 1rem;
     cursor: pointer;
-    &:hover ~ .Card__warning {
+    &:hover ~ .Card__warning,
+    &:focus ~ .Card__warning {
       visibility: visible;
       opacity: 1;
     }

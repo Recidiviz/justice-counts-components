@@ -42,7 +42,7 @@ const Card = ({
       <h3 className="Card__title">{title}</h3>
       {hint && (
         <div className="Card__warning-box">
-          <div className="Card__warning-icon" />
+          <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={hint} />
           <div className="Card__warning">{hint}</div>
         </div>
       )}
