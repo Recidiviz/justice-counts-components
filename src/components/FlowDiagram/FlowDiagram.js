@@ -48,6 +48,13 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => (
             height={28.375}
             isDisabled={data[ADMISSIONS].isNotAvailable || data[POPULATION_PRISON].isNotAvailable}
           />
+          <Arrow
+            width={2.5}
+            height={51}
+            isDisabled={data[ADMISSIONS].isNotAvailable || data[POPULATION_PRISON].isNotAvailable}
+            isMobile
+            placement="left"
+          />
         </Card>
         <Card className="FlowDiagram__card" {...data[ADMISSIONS_NEW_COURT]}>
           <Arrow
@@ -55,6 +62,13 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => (
               data[ADMISSIONS_NEW_COURT].isNotAvailable || data[POPULATION_PROBATION].isNotAvailable
             }
             height={4.25}
+          />
+          <Arrow
+            isMobile
+            isDisabled={
+              data[ADMISSIONS_NEW_COURT].isNotAvailable || data[POPULATION_PROBATION].isNotAvailable
+            }
+            height={2.5}
           />
         </Card>
       </div>
@@ -68,6 +82,14 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => (
               data[POPULATION_PROBATION].isNotAvailable ||
               data[ADMISSIONS_REVOCATIONS_PROBATION].isNotAvailable
             }
+          />
+          <Arrow
+            isMobile
+            isDisabled={
+              data[POPULATION_PROBATION].isNotAvailable ||
+              data[ADMISSIONS_REVOCATIONS_PROBATION].isNotAvailable
+            }
+            height={2.5}
           />
         </Card>
       </div>
@@ -83,10 +105,29 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => (
             width={6.625}
           />
           <Arrow
+            isMobile
+            isDisabled={
+              data[ADMISSIONS_REVOCATIONS_PROBATION].isNotAvailable ||
+              data[ADMISSIONS].isNotAvailable
+            }
+            direction="top"
+            placement="right"
+            height={37.375}
+            width={2.5}
+          />
+          <Arrow
             isDisabled={
               data[ADMISSIONS_REVOCATIONS_PROBATION].isNotAvailable ||
               data[POPULATION_PRISON].isNotAvailable
             }
+          />
+          <Arrow
+            isMobile
+            isDisabled={
+              data[ADMISSIONS_REVOCATIONS_PROBATION].isNotAvailable ||
+              data[POPULATION_PRISON].isNotAvailable
+            }
+            height={2.5}
           />
         </Card>
       </div>
@@ -98,6 +139,13 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => (
         >
           <Arrow
             height={14.25}
+            placement="right"
+            isDisabled={data[RELEASES].isNotAvailable || data[POPULATION_PRISON].isNotAvailable}
+          />
+          <Arrow
+            isMobile
+            height={37.375}
+            width={2.5}
             placement="right"
             isDisabled={data[RELEASES].isNotAvailable || data[POPULATION_PRISON].isNotAvailable}
           />
@@ -115,6 +163,15 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => (
               data[ADMISSIONS_REVOCATIONS_PAROLE].isNotAvailable
             }
           />
+          <Arrow
+            height={2.5}
+            isMobile
+            direction="top"
+            isDisabled={
+              data[POPULATION_PRISON].isNotAvailable ||
+              data[ADMISSIONS_REVOCATIONS_PAROLE].isNotAvailable
+            }
+          />
         </Card>
       </div>
       <div className="FlowDiagram__row">
@@ -126,9 +183,29 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => (
               data[ADMISSIONS_REVOCATIONS_PAROLE].isNotAvailable
             }
           />
+          <Arrow
+            isMobile
+            direction="top"
+            isDisabled={
+              data[POPULATION_PAROLE].isNotAvailable ||
+              data[ADMISSIONS_REVOCATIONS_PAROLE].isNotAvailable
+            }
+            height={2.5}
+          />
         </Card>
         <Card className="FlowDiagram__card" {...data[RELEASES]}>
-          <Arrow direction="left" height={0} width={2} />
+          <Arrow
+            direction="left"
+            height={0}
+            width={2}
+            isDisabled={data[RELEASES].isNotAvailable || data[POPULATION_PAROLE].isNotAvailable}
+          />
+          <Arrow
+            isMobile
+            direction="top"
+            height={2.5}
+            isDisabled={data[RELEASES].isNotAvailable || data[POPULATION_PAROLE].isNotAvailable}
+          />
         </Card>
       </div>
     </div>

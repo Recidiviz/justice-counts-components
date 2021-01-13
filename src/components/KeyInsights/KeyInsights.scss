@@ -1,0 +1,86 @@
+// Recidiviz - a data platform for criminal justice reform
+// Copyright (C) 2020 Recidiviz, Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// =============================================================================
+@import "../../assets/scss/variables";
+.KeyInsights {
+  padding-top: 1rem;
+  padding-bottom: 6rem;
+  border-bottom: 1px solid #c4ccd4;
+  @include down($lg) {
+    padding-bottom: 1rem;
+    padding-left: $mobile-offset;
+    padding-right: $mobile-offset;
+    border-bottom: 0;
+  }
+
+  &__title {
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    line-height: 1.2rem;
+    font-weight: 700;
+    @include down($lg) {
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #c4ccd4;
+    }
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2rem;
+    @include down($lg) {
+      margin-left: -$mobile-offset;
+      margin-right: -$mobile-offset;
+      display: flex;
+      padding-bottom: 2rem;
+      overflow: auto;
+      grid-gap: 0;
+      &:before,
+      &:after {
+        content: "";
+        display: block;
+        width: $mobile-offset;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__card {
+    @include down($lg) {
+      margin-right: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 17.875rem;
+      flex-shrink: 0;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__card-description {
+    margin-top: 2.5rem;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: #808c99;
+    @include down($lg) {
+      margin-top: 2rem;
+    }
+  }
+}

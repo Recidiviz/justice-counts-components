@@ -32,6 +32,7 @@ import {
   POPULATION_PROBATION,
   RELEASES,
 } from "./constants/metrics";
+import generateKeyInsightsData from "./utils/generateKeyInsightsData";
 
 const App = ({ stateCode, data }) => {
   const stateName = states[stateCode];
@@ -54,6 +55,8 @@ const App = ({ stateCode, data }) => {
 
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
 
+  const keyInsightsData = generateKeyInsightsData(flowData);
+
   return (
     <MainPage
       stateName={stateName}
@@ -63,6 +66,7 @@ const App = ({ stateCode, data }) => {
       flowDiagramData={flowData}
       flowDiagramLastDate={lastDate}
       flowDiagramPrevDate={comparedToDate}
+      keyInsightsData={keyInsightsData}
     />
   );
 };

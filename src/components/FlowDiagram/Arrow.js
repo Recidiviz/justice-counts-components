@@ -20,10 +20,11 @@ import PropTypes from "prop-types";
 
 import "./Arrow.scss";
 
-const Arrow = ({ isDisabled, placement, direction, height, width }) => (
+const Arrow = ({ isDisabled, placement, direction, height, width, isMobile }) => (
   <div
     className={cn("Arrow", `Arrow--dir-${direction}`, `Arrow--placement-${placement}`, {
       "Arrow--disabled": isDisabled,
+      "Arrow--mobile": isMobile,
     })}
     style={{ height: `${height}rem`, width: `${width}rem` }}
   >
@@ -45,6 +46,7 @@ const Arrow = ({ isDisabled, placement, direction, height, width }) => (
 );
 
 Arrow.defaultProps = {
+  isMobile: false,
   isDisabled: false,
   placement: "center",
   direction: "bottom",
@@ -54,7 +56,8 @@ Arrow.defaultProps = {
 
 Arrow.propTypes = {
   isDisabled: PropTypes.bool,
-  placement: PropTypes.oneOf(["center", "right"]),
+  isMobile: PropTypes.bool,
+  placement: PropTypes.oneOf(["center", "right", "left"]),
   direction: PropTypes.oneOf(["bottom", "top", "topLeft", "left"]),
   height: PropTypes.number,
   width: PropTypes.number,

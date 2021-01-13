@@ -67,6 +67,7 @@ const generateFlowDiagramData = (data) => {
           title: metricToCardName[metric],
           number: lastItem.value,
           percent: lastItem.percentChange * 100,
+          numberChange: lastItem.valueChange,
           item: lastItem,
         };
 

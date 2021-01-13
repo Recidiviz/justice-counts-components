@@ -20,13 +20,16 @@ import { render } from "@testing-library/react";
 import MainPage from "../MainPage";
 import Chart from "../../Chart";
 import FlowDiagram from "../../FlowDiagram";
+import KeyInsights from "../../KeyInsights";
 
 jest.mock("../../FlowDiagram");
+jest.mock("../../KeyInsights");
 jest.mock("../../Chart");
 describe("MainPage.js", () => {
   const mockStateName = "Alabama";
 
   beforeEach(() => {
+    KeyInsights.mockReturnValue(null);
     Chart.mockReturnValue(null);
     FlowDiagram.mockReturnValue(null);
   });
@@ -41,6 +44,7 @@ describe("MainPage.js", () => {
         populationsChartData={{}}
         prisonAdmissionsChartData={{}}
         releasesChartData={{}}
+        keyInsightsData={[]}
       />
     );
 

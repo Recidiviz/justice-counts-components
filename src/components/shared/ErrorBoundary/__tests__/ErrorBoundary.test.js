@@ -22,8 +22,7 @@ import logger from "../../../../utils/logger";
 describe("ErrorBoundary.js", () => {
   const mockError = new Error("some error");
   const componentId = "component-id";
-  const placeholderId = "placeholder-test-id";
-  const mockPlaceholder = <div data-testid={placeholderId}>placeholder</div>;
+  const mockPlaceholder = "placeholder";
   const logErrorSpy = jest.spyOn(logger, "error");
 
   beforeEach(() => {
@@ -35,13 +34,13 @@ describe("ErrorBoundary.js", () => {
       throw mockError;
     };
 
-    const { getByTestId } = render(
+    const { getByText } = render(
       <ErrorBoundary placeholder={mockPlaceholder}>
         <ComponentWithError />
       </ErrorBoundary>
     );
 
-    expect(getByTestId(placeholderId)).toBeInTheDocument();
+    expect(getByText(mockPlaceholder)).toBeInTheDocument();
     expect(logErrorSpy.mock.calls[0][0]).toEqual(mockError);
   });
 
