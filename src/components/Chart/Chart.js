@@ -28,7 +28,7 @@ import { chartDataPropTypes } from "./propTypes";
 import "./Chart.scss";
 
 const TICKS_COLOR = "#808C99";
-const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
+const chartColors = ["#0DB4E4", "#00475D", "#7FC241", "#FFA600"];
 
 const Chart = ({ title, hint, chartData }) => {
   const [period, setPeriod] = useState(12);
