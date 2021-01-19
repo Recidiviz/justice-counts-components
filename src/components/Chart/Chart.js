@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
@@ -28,7 +29,8 @@ import { chartDataPropTypes } from "./propTypes";
 import "./Chart.scss";
 
 const TICKS_COLOR = "#808C99";
-const chartColors = ["#0DB4E4", "#00475D", "#7FC241", "#FFA600"];
+const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
+const CONNECTING_LINE_COLOR = "#00475D";
 
 const Chart = ({ title, hint, chartData }) => {
   const [period, setPeriod] = useState(12);
@@ -56,6 +58,28 @@ const Chart = ({ title, hint, chartData }) => {
   const { month: startMonth, year: startYear } = labels[0];
   const { month: endMonth, year: endYear } = labels[labels.length - 1];
 
+  const drawLinePlugin = {
+    afterDraw(chart) {
+      if (chart.tooltip._active && chart.tooltip._active.length) {
+        const activePoint = chart.tooltip._active[0];
+        const { ctx } = chart;
+        const { x } = activePoint.tooltipPosition();
+        const topY = chart.legend.bottom;
+        const bottomY = chart.chartArea.bottom;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(x, topY);
+        ctx.lineTo(x, bottomY);
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = CONNECTING_LINE_COLOR;
+        ctx.setLineDash([3, 3]);
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
+  };
+
   return (
     <div className="Chart">
       <div className="Chart__header">
@@ -80,6 +104,9 @@ const Chart = ({ title, hint, chartData }) => {
           <Line
             data={{ datasets: styledDatasets, labels: formattedLabels }}
             options={{
+              hover: {
+                intersect: false,
+              },
               maintainAspectRatio: false,
               legend: { display: false },
               scales: {
@@ -112,8 +139,20 @@ const Chart = ({ title, hint, chartData }) => {
                   },
                 ],
               },
-              tooltips: { mode: "nearest" },
+              tooltips: {
+                callbacks: {
+                  title: () => null,
+                },
+                backgroundColor: CONNECTING_LINE_COLOR,
+                yPadding: 10,
+                xPadding: 16,
+                cornerRadius: 4,
+                bodySpacing: 10,
+                intersect: false,
+                mode: "index",
+              },
             }}
+            plugins={[drawLinePlugin]}
           />
         </div>
         <div className="Chart__legends">
