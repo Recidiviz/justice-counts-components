@@ -19,8 +19,8 @@ import generateHint from "../generateHint";
 import {
   ADMISSIONS,
   ADMISSIONS_NEW_COURT,
-  ADMISSIONS_REVOCATIONS_PAROLE,
-  ADMISSIONS_REVOCATIONS_PROBATION,
+  ADMISSIONS_FROM_PAROLE,
+  ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
   POPULATION_PRISON,
   POPULATION_PROBATION,
@@ -84,21 +84,21 @@ describe("generateFlowDiagramData.js", () => {
 
   it("should put isNotAvailable flag is no metric data provided", () => {
     expect(flowDiagramData.flowData[ADMISSIONS_NEW_COURT].isNotAvailable).toBe(true);
-    expect(flowDiagramData.flowData[ADMISSIONS_REVOCATIONS_PROBATION].isNotAvailable).toBe(true);
+    expect(flowDiagramData.flowData[ADMISSIONS_FROM_PROBATION].isNotAvailable).toBe(true);
     expect(flowDiagramData.flowData[POPULATION_PRISON].isNotAvailable).toBe(true);
     expect(flowDiagramData.flowData[POPULATION_PAROLE].isNotAvailable).toBe(true);
-    expect(flowDiagramData.flowData[ADMISSIONS_REVOCATIONS_PAROLE].isNotAvailable).toBe(true);
+    expect(flowDiagramData.flowData[ADMISSIONS_FROM_PAROLE].isNotAvailable).toBe(true);
   });
 
   it("should produce flow diagram card data", () => {
-    expect(flowDiagramData.flowData[ADMISSIONS]).toMatchObject({ number: 100, percent: 10 });
-    expect(flowDiagramData.flowData[RELEASES]).toMatchObject({ number: 110, percent: 15 });
+    expect(flowDiagramData.flowData[ADMISSIONS]).toMatchObject({ number: 100, percentChange: 10 });
+    expect(flowDiagramData.flowData[RELEASES]).toMatchObject({ number: 110, percentChange: 15 });
   });
 
   it("should add hint if data is not most recent or compared not to strictly year before", () => {
     expect(flowDiagramData.flowData[POPULATION_PROBATION]).toMatchObject({
       number: 95,
-      percent: 18,
+      percentChange: 18,
       hint: mockHint,
     });
   });

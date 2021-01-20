@@ -25,8 +25,8 @@ import generateFlowDiagramData from "./utils/generateFlowDiagramData";
 import {
   ADMISSIONS,
   ADMISSIONS_NEW_COURT,
-  ADMISSIONS_REVOCATIONS_PAROLE,
-  ADMISSIONS_REVOCATIONS_PROBATION,
+  ADMISSIONS_FROM_PAROLE,
+  ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
   POPULATION_PRISON,
   POPULATION_PROBATION,
@@ -47,8 +47,8 @@ const App = ({ stateCode, data }) => {
   const prisonAdmissionsChartData = generateChartData(stateMetricData, [
     ADMISSIONS,
     ADMISSIONS_NEW_COURT,
-    ADMISSIONS_REVOCATIONS_PAROLE,
-    ADMISSIONS_REVOCATIONS_PROBATION,
+    ADMISSIONS_FROM_PAROLE,
+    ADMISSIONS_FROM_PROBATION,
   ]);
 
   const releasesChartData = generateChartData(stateMetricData, [RELEASES]);

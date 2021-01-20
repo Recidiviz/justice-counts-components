@@ -20,7 +20,9 @@ import Card from "../Card";
 
 describe("Card.js", () => {
   it("should render standard card", () => {
-    const { getByText, container } = render(<Card title="Some title" number={12} percent={10} />);
+    const { getByText, container } = render(
+      <Card title="Some title" number={12} percentChange={10} />
+    );
 
     expect(getByText("Some title")).toBeInTheDocument();
     expect(getByText("(+10%)")).toBeInTheDocument();
@@ -28,14 +30,14 @@ describe("Card.js", () => {
   });
 
   it("should render negative percent change", () => {
-    const { getByText } = render(<Card title="Some title" number={12} percent={-10} />);
+    const { getByText } = render(<Card title="Some title" number={12} percentChange={-10} />);
 
     expect(getByText("(-10%)")).toBeInTheDocument();
   });
 
   it("should render warning is hint is provided", () => {
     const { container } = render(
-      <Card title="Some title" number={15} percent={-20} hint="Some warning" />
+      <Card title="Some title" number={15} percentChange={-20} hint="Some warning" />
     );
 
     expect(container.querySelector(".Card__warning")).toBeInTheDocument();
@@ -43,7 +45,7 @@ describe("Card.js", () => {
 
   it("should render not available card if isNotAvailable flag is set", () => {
     const { container } = render(
-      <Card title="Some title" number={15} percent={-20} isNotAvailable />
+      <Card title="Some title" number={15} percentChange={-20} isNotAvailable />
     );
 
     expect(container.querySelector(".Card__not-available-text")).toBeInTheDocument();

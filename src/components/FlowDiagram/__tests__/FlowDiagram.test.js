@@ -20,8 +20,8 @@ import FlowDiagram from "../FlowDiagram";
 import {
   ADMISSIONS,
   ADMISSIONS_NEW_COURT,
-  ADMISSIONS_REVOCATIONS_PAROLE,
-  ADMISSIONS_REVOCATIONS_PROBATION,
+  ADMISSIONS_FROM_PAROLE,
+  ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
   POPULATION_PRISON,
   POPULATION_PROBATION,
@@ -36,13 +36,13 @@ describe("FlowDiagram.js", () => {
     [ADMISSIONS_NEW_COURT]: { title: "ADMISSIONS_NEW_COURT", isNotAvailable: false },
     [POPULATION_PRISON]: { title: "POPULATION_PRISON", isNotAvailable: false },
     [POPULATION_PROBATION]: { title: "POPULATION_PROBATION", isNotAvailable: false },
-    [ADMISSIONS_REVOCATIONS_PROBATION]: {
-      title: "ADMISSIONS_REVOCATIONS_PROBATION",
+    [ADMISSIONS_FROM_PROBATION]: {
+      title: "ADMISSIONS_FROM_PROBATION",
       isNotAvailable: false,
     },
     [RELEASES]: { title: "RELEASES", isNotAvailable: false },
-    [ADMISSIONS_REVOCATIONS_PAROLE]: {
-      title: "ADMISSIONS_REVOCATIONS_PAROLE",
+    [ADMISSIONS_FROM_PAROLE]: {
+      title: "ADMISSIONS_FROM_PAROLE",
       isNotAvailable: false,
     },
     [POPULATION_PAROLE]: { title: "POPULATION_PAROLE", isNotAvailable: false },

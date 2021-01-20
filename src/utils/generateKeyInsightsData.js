@@ -15,56 +15,65 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import {
-  ADMISSIONS_REVOCATIONS_PAROLE,
-  ADMISSIONS_REVOCATIONS_PROBATION,
+  ADMISSIONS_FROM_PAROLE,
+  ADMISSIONS_FROM_PAROLE_TECHNICAL,
+  ADMISSIONS_FROM_PROBATION,
+  ADMISSIONS_FROM_PROBATION_TECHNICAL,
   POPULATION_PRISON,
 } from "../constants/metrics";
 
-const generateKeyInsightsData = (flowData) => {
-  const keyInsights = [];
+const generateRevocationsCaption = (source) => (percentChange, numberChange) => {
+  const isPositive = numberChange > 0;
 
-  if (!flowData[POPULATION_PRISON].isNotAvailable) {
-    const isPositive = flowData[POPULATION_PRISON].numberChange > 0;
-
-    keyInsights.push({
-      ...flowData[POPULATION_PRISON],
-      caption: `The prison population ${isPositive ? "rose" : "fell"} ${Math.abs(
-        flowData[POPULATION_PRISON].percent
-      )}, ${isPositive ? "an increase" : "a decline"} of ${Math.abs(
-        flowData[POPULATION_PRISON].numberChange
-      )} people.`,
-    });
-  }
-
-  if (!flowData[ADMISSIONS_REVOCATIONS_PAROLE].isNotAvailable) {
-    const isPositive = flowData[ADMISSIONS_REVOCATIONS_PAROLE].numberChange > 0;
-
-    keyInsights.push({
-      ...flowData[ADMISSIONS_REVOCATIONS_PAROLE],
-      caption: `The number of people revoked from parole to prison ${
-        isPositive ? "rose" : "fell"
-      } by ${Math.abs(flowData[ADMISSIONS_REVOCATIONS_PAROLE].numberChange)} people, a ${Math.abs(
-        flowData[ADMISSIONS_REVOCATIONS_PAROLE].percent
-      )} percent ${isPositive ? "increase" : "decline"}.`,
-    });
-  }
-
-  if (!flowData[ADMISSIONS_REVOCATIONS_PROBATION].isNotAvailable) {
-    const isPositive = flowData[ADMISSIONS_REVOCATIONS_PROBATION].numberChange > 0;
-
-    keyInsights.push({
-      ...flowData[ADMISSIONS_REVOCATIONS_PROBATION],
-      caption: `The number of people revoked from probation to prison ${
-        isPositive ? "rose" : "fell"
-      } by ${Math.abs(
-        flowData[ADMISSIONS_REVOCATIONS_PROBATION].numberChange
-      )} people, a ${Math.abs(flowData[ADMISSIONS_REVOCATIONS_PROBATION].percent)} percent ${
-        isPositive ? "increase" : "decline"
-      }.`,
-    });
-  }
-
-  return keyInsights;
+  return `The number of people revoked from ${source} to prison ${
+    isPositive ? "rose" : "fell"
+  } by ${Math.abs(numberChange)} people, a ${Math.abs(percentChange)} percent ${
+    isPositive ? "increase" : "decline"
+  }.`;
 };
+
+const generateTechnicalRevocationsCaption = (source) => (percentChange, numberChange) => {
+  const isPositive = numberChange > 0;
+
+  return `Revocations to prison for technical violations of ${source} ${
+    isPositive ? "rose" : "fell"
+  } by ${Math.abs(numberChange)} people, a ${percentChange} percent ${
+    isPositive ? "increase" : "decline"
+  }.`;
+};
+
+const getCaptionMap = {
+  [POPULATION_PRISON]: (isPositive, percentChange, numberChange) =>
+    `The prison population ${isPositive ? "rose" : "fell"} ${Math.abs(percentChange)}, ${
+      isPositive ? "an increase" : "a decline"
+    } of ${Math.abs(numberChange)} people.`,
+  [ADMISSIONS_FROM_PAROLE]: generateRevocationsCaption("parole"),
+  [ADMISSIONS_FROM_PROBATION]: generateRevocationsCaption("probation"),
+  [ADMISSIONS_FROM_PAROLE_TECHNICAL]: generateTechnicalRevocationsCaption("parole"),
+  [ADMISSIONS_FROM_PROBATION_TECHNICAL]: generateTechnicalRevocationsCaption("probation"),
+};
+
+const generateKeyInsightsData = (flowData) =>
+  [
+    POPULATION_PRISON,
+    ADMISSIONS_FROM_PAROLE,
+    ADMISSIONS_FROM_PROBATION,
+    ADMISSIONS_FROM_PAROLE_TECHNICAL,
+    ADMISSIONS_FROM_PROBATION_TECHNICAL,
+  ]
+    .reduce((keyInsights, metric) => {
+      if (!flowData[metric].isNotAvailable) {
+        keyInsights.push({
+          ...flowData[metric],
+          caption: getCaptionMap[metric](
+            flowData[metric].percentChange,
+            flowData[metric].numberChange
+          ),
+        });
+      }
+
+      return keyInsights;
+    }, [])
+    .slice(0, 3);
 
 export default generateKeyInsightsData;

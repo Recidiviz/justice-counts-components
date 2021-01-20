@@ -20,13 +20,32 @@ import PropTypes from "prop-types";
 
 import "./Arrow.scss";
 
-const Arrow = ({ isDisabled, placement, direction, height, width, isMobile }) => (
+const Arrow = ({
+  isDisabled,
+  placement,
+  direction,
+  height,
+  width,
+  mobileHeight,
+  mobileWidth,
+  mobilePlacement,
+  mobileDirection,
+  isMobile,
+}) => (
   <div
-    className={cn("Arrow", `Arrow--dir-${direction}`, `Arrow--placement-${placement}`, {
-      "Arrow--disabled": isDisabled,
-      "Arrow--mobile": isMobile,
-    })}
-    style={{ height: `${height}rem`, width: `${width}rem` }}
+    className={cn(
+      "Arrow",
+      `Arrow--dir-${isMobile ? mobileDirection : direction}`,
+      `Arrow--placement-${isMobile ? mobilePlacement : placement}`,
+      {
+        "Arrow--disabled": isDisabled,
+        "Arrow--mobile": isMobile,
+      }
+    )}
+    style={{
+      height: `${isMobile ? mobileHeight : height}rem`,
+      width: `${isMobile ? mobileWidth : width}rem`,
+    }}
   >
     <svg
       className="Arrow__arrow"
@@ -52,15 +71,23 @@ Arrow.defaultProps = {
   direction: "bottom",
   height: 2,
   width: 0.1875,
+  mobilePlacement: "center",
+  mobileHeight: 2,
+  mobileWidth: 0.1875,
+  mobileDirection: "bottom",
 };
 
 Arrow.propTypes = {
   isDisabled: PropTypes.bool,
   isMobile: PropTypes.bool,
-  placement: PropTypes.oneOf(["center", "right", "left"]),
+  placement: PropTypes.oneOf(["center", "right"]),
   direction: PropTypes.oneOf(["bottom", "top", "topLeft", "left"]),
   height: PropTypes.number,
   width: PropTypes.number,
+  mobileHeight: PropTypes.number,
+  mobileWidth: PropTypes.number,
+  mobilePlacement: PropTypes.oneOf(["center", "right", "left"]),
+  mobileDirection: PropTypes.oneOf(["bottom", "top"]),
 };
 
 export default Arrow;

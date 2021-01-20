@@ -16,9 +16,11 @@
 // =============================================================================
 import {
   ADMISSIONS,
+  ADMISSIONS_FROM_PAROLE_TECHNICAL,
+  ADMISSIONS_FROM_PROBATION_TECHNICAL,
   ADMISSIONS_NEW_COURT,
-  ADMISSIONS_REVOCATIONS_PAROLE,
-  ADMISSIONS_REVOCATIONS_PROBATION,
+  ADMISSIONS_FROM_PAROLE,
+  ADMISSIONS_FROM_PROBATION,
   metricToCardName,
   POPULATION_PAROLE,
   POPULATION_PRISON,
@@ -38,7 +40,8 @@ import months from "../constants/months";
  * [metric]: {
  *   title: string
  *   number?: number
- *   percent?: number
+ *   percentChange?: number
+ *   numberChange?: number
  *   isNotAvailable?: boolean
  * }
  * },
@@ -49,11 +52,13 @@ const generateFlowDiagramData = (data) => {
     ADMISSIONS,
     ADMISSIONS_NEW_COURT,
     POPULATION_PROBATION,
-    ADMISSIONS_REVOCATIONS_PROBATION,
+    ADMISSIONS_FROM_PROBATION,
     POPULATION_PRISON,
     POPULATION_PAROLE,
-    ADMISSIONS_REVOCATIONS_PAROLE,
+    ADMISSIONS_FROM_PAROLE,
     RELEASES,
+    ADMISSIONS_FROM_PAROLE_TECHNICAL,
+    ADMISSIONS_FROM_PROBATION_TECHNICAL,
   ].reduce(
     (acc, metric) => {
       if (!data[metric]) {
@@ -66,7 +71,7 @@ const generateFlowDiagramData = (data) => {
         acc.flowData[metric] = {
           title: metricToCardName[metric],
           number: lastItem.value,
-          percent: lastItem.percentChange * 100,
+          percentChange: lastItem.percentChange * 100,
           numberChange: lastItem.valueChange,
           item: lastItem,
         };

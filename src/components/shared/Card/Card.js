@@ -28,7 +28,7 @@ const Card = ({
   hint,
   title,
   number,
-  percent,
+  percentChange,
   className,
   children,
 }) => (
@@ -54,8 +54,8 @@ const Card = ({
         <>
           <span className="Card__number">{formatNumber(number)}</span>
           <span className="Card__percent">
-            ({percent > 0 && "+"}
-            {percent}%)
+            ({percentChange > 0 && "+"}
+            {percentChange}%)
           </span>
         </>
       )}
@@ -69,7 +69,7 @@ Card.defaultProps = {
   isPopulation: false,
   hint: null,
   number: null,
-  percent: null,
+  percentChange: null,
   className: "",
   children: null,
 };
@@ -80,7 +80,7 @@ Card.propTypes = {
   isPopulation: PropTypes.bool,
   hint: PropTypes.string,
   number: PropTypes.number,
-  percent: PropTypes.number,
+  percentChange: PropTypes.number,
   className: PropTypes.string,
   children: PropTypes.node,
 };

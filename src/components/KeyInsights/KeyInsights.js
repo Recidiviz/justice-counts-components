@@ -27,7 +27,7 @@ const KeyInsights = ({ keyInsightsData }) => (
     <div className="KeyInsights__cards">
       {keyInsightsData.map((card) => (
         <div className="KeyInsights__card">
-          <Card title={card.title} number={card.number} percent={card.percent} />
+          <Card title={card.title} number={card.number} percentChange={card.percentChange} />
           <p className="KeyInsights__card-description">{card.caption}</p>
         </div>
       ))}
@@ -40,7 +40,7 @@ KeyInsights.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       number: PropTypes.number.isRequired,
-      percent: PropTypes.number.isRequired,
+      percentChange: PropTypes.number.isRequired,
       caption: PropTypes.string.isRequired,
     })
   ).isRequired,
