@@ -53,7 +53,7 @@
 
   &__box {
     padding-top: 1rem;
-    border-top: 1px dashed #c4ccd4;
+    border-top: 1px dashed #8C8C8C;
     @include down($lg) {
       border-top: 0;
       padding-top: 0;
@@ -61,7 +61,7 @@
   }
 
   &__box-name {
-    color: #c4ccd4;
+    color: #8C8C8C;
     font-weight: 700;
     letter-spacing: 0.05em;
     font-size: 0.8125rem;
