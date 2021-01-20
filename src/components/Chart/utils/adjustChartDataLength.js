@@ -20,7 +20,10 @@
  * @param targetLength
  */
 const adjustChartDataLength = (data, targetLength) => {
-  const { year: startYear, month: startMonth } = data.labels[0];
+  const { year: startYear, month: startMonth } = data.labels[0] || {
+    year: new Date().getFullYear(),
+    month: new Date().getMonth(),
+  };
   const totalStartMonths = startYear * 12 + startMonth;
   const lengthDiff = targetLength - data.labels.length;
 
