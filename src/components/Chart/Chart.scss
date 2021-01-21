@@ -47,6 +47,8 @@
   }
 
   &__period-picker {
+    position: relative;
+    z-index: 1;
     margin-top: 0.25rem;
     @include down($lg) {
       margin-right: auto;
