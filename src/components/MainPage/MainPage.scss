@@ -8,16 +8,17 @@
   font-family: "GT America", sans-serif;
   color: #132536;
   @include down($lg) {
-    padding-top: 1.5rem;
+    padding-top: 3.625rem;
   }
 
   &__header {
     padding-bottom: 4rem;
     border-bottom: 1px solid #c4ccd4;
     @include down($lg) {
-      padding-bottom: 1.5rem;
+      padding-bottom: 3rem;
       padding-left: $mobile-offset;
       padding-right: $mobile-offset;
+      border-bottom: 0;
     }
   }
 
@@ -29,8 +30,8 @@
     letter-spacing: -0.02em;
     text-transform: capitalize;
     @include down($lg) {
-      font-size: 2.5rem;
-      line-height: 1.25;
+      font-size: 1.5rem;
+      line-height: 1.5;
     }
   }
 
@@ -40,7 +41,7 @@
     letter-spacing: -0.02em;
     color: #808c99;
     @include down($lg) {
-      font-size: 0.9375rem;
+      font-size: 0.875rem;
     }
   }
 }

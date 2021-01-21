@@ -19,6 +19,8 @@
   padding-bottom: 8rem;
   @include down($lg) {
     padding-bottom: 2rem;
+    padding-left: $mobile-offset;
+    padding-right: $mobile-offset;
   }
 
   &__header {
@@ -27,8 +29,9 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
     @include down($lg) {
-      padding-left: $mobile-offset;
-      padding-right: $mobile-offset;
+      margin-bottom: 1.125rem;
+      border-bottom: 1px solid #c4ccd4;
+      flex-direction: column;
     }
   }
 
@@ -36,9 +39,6 @@
     font-weight: 700;
     font-size: 1.25rem;
     line-height: 1.2;
-    @include down($lg) {
-      font-size: 1.125rem;
-    }
   }
 
   &__hint {
@@ -47,7 +47,6 @@
     letter-spacing: -0.02em;
     color: #808c99;
     @include down($lg) {
-      max-width: calc(50% - 0.5rem);
       font-size: 0.875rem;
     }
   }
@@ -56,8 +55,8 @@
     padding-top: 1rem;
     border-top: 1px dashed #8C8C8C;
     @include down($lg) {
-      padding-left: $mobile-offset;
-      padding-right: $mobile-offset;
+      border-top: 0;
+      padding-top: 0;
     }
   }
 
@@ -69,8 +68,7 @@
     line-height: 1rem;
     text-transform: uppercase;
     @include down($lg) {
-      display: flex;
-      margin-bottom: 0.5rem;
+      display: none;
     }
   }
 
@@ -79,36 +77,36 @@
     display: flex;
     justify-content: flex-end;
     @include down($lg) {
-      margin-bottom: 1rem;
+      margin-bottom: 0;
+      flex-direction: column;
     }
   }
 
   &__card {
     width: 20.5rem;
-    @include down($lg) {
-      flex-basis: calc(50% - 0.5rem);
-      flex-shrink: 0;
-    }
     &:not(:first-child) {
-      margin-left: 2rem;
-      @include down($lg) {
-        margin-left: 1rem;
+      @include up($lg) {
+        margin-left: 2rem;
       }
+    }
+    @include down($lg) {
+      margin-left: 2.5rem;
+      margin-right: 2.5rem;
+      width: auto;
+      margin-bottom: 2.5rem;
     }
 
     &--doubled {
       width: 43rem;
       @include down($lg) {
-        flex-basis: 100%;
-        flex-grow: 0;
-        flex-shrink: 0;
+        width: auto;
       }
     }
 
     &--offset {
       margin-right: 22.5rem;
       @include down($lg) {
-        margin-right: 0;
+        margin-right: 3rem;
       }
     }
   }

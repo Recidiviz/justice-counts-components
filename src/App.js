@@ -25,13 +25,14 @@ import generateFlowDiagramData from "./utils/generateFlowDiagramData";
 import {
   ADMISSIONS,
   ADMISSIONS_NEW_COURT,
-  ADMISSIONS_REVOCATIONS_PAROLE,
-  ADMISSIONS_REVOCATIONS_PROBATION,
+  ADMISSIONS_FROM_PAROLE,
+  ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
   POPULATION_PRISON,
   POPULATION_PROBATION,
   RELEASES,
 } from "./constants/metrics";
+import generateKeyInsightsData from "./utils/generateKeyInsightsData";
 
 const App = ({ stateCode, data }) => {
   const stateName = states[stateCode];
@@ -46,13 +47,15 @@ const App = ({ stateCode, data }) => {
   const prisonAdmissionsChartData = generateChartData(stateMetricData, [
     ADMISSIONS,
     ADMISSIONS_NEW_COURT,
-    ADMISSIONS_REVOCATIONS_PAROLE,
-    ADMISSIONS_REVOCATIONS_PROBATION,
+    ADMISSIONS_FROM_PAROLE,
+    ADMISSIONS_FROM_PROBATION,
   ]);
 
   const releasesChartData = generateChartData(stateMetricData, [RELEASES]);
 
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
+
+  const keyInsightsData = generateKeyInsightsData(flowData);
 
   return (
     <MainPage
@@ -63,6 +66,7 @@ const App = ({ stateCode, data }) => {
       flowDiagramData={flowData}
       flowDiagramLastDate={lastDate}
       flowDiagramPrevDate={comparedToDate}
+      keyInsightsData={keyInsightsData}
     />
   );
 };

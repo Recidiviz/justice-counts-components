@@ -17,12 +17,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import KeyInsights from "../KeyInsights/KeyInsights";
 import FlowDiagram from "../FlowDiagram";
 import Chart from "../Chart";
 
 import ErrorBoundary from "../shared/ErrorBoundary";
 import { chartDataPropTypes } from "../Chart/propTypes";
 import { flowDiagramDataPropTypes } from "../FlowDiagram/propTypes";
+import { keyInsightsPropTypes } from "../KeyInsights/propTypes";
 
 import "./MainPage.scss";
 
@@ -34,6 +36,7 @@ const MainPage = ({
   flowDiagramData,
   flowDiagramLastDate,
   flowDiagramPrevDate,
+  keyInsightsData,
 }) => (
   <section className="MainPage">
     <header className="MainPage__header">
@@ -45,6 +48,7 @@ const MainPage = ({
         added at a later date.
       </p>
     </header>
+    <KeyInsights keyInsightsData={keyInsightsData} />
     <ErrorBoundary placeholder="Unable to render Flow Diagram. An unhandled error happened. More info could be found in the console.">
       <FlowDiagram
         data={flowDiagramData}
@@ -72,6 +76,7 @@ MainPage.propTypes = {
   flowDiagramLastDate: PropTypes.string.isRequired,
   flowDiagramPrevDate: PropTypes.string.isRequired,
   flowDiagramData: flowDiagramDataPropTypes.isRequired,
+  keyInsightsData: keyInsightsPropTypes.isRequired,
 };
 
 export default MainPage;

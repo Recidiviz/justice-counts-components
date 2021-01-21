@@ -17,7 +17,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2019",
     "month": "09",
     "date_reported": "2020-09-30",
@@ -25,7 +25,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2019",
     "month": "09",
     "date_reported": "2020-09-30",
@@ -74,7 +74,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2019",
     "month": "10",
     "date_reported": "2019-10-31",
@@ -82,7 +82,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2019",
     "month": "10",
     "date_reported": "2019-10-31",
@@ -131,7 +131,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2019",
     "month": "11",
     "date_reported": "2019-11-30",
@@ -139,7 +139,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2019",
     "month": "11",
     "date_reported": "2019-11-30",
@@ -188,7 +188,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2019",
     "month": "12",
     "date_reported": "2019-12-31",
@@ -196,7 +196,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2019",
     "month": "12",
     "date_reported": "2019-12-31",
@@ -245,7 +245,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2020",
     "month": "01",
     "date_reported": "2020-01-30",
@@ -253,7 +253,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2020",
     "month": "01",
     "date_reported": "2020-01-30",
@@ -302,7 +302,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2020",
     "month": "02",
     "date_reported": "2020-02-29",
@@ -310,7 +310,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2020",
     "month": "02",
     "date_reported": "2020-02-29",
@@ -359,7 +359,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2020",
     "month": "03",
     "date_reported": "2020-03-31",
@@ -367,7 +367,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2020",
     "month": "03",
     "date_reported": "2020-03-31",
@@ -416,7 +416,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2020",
     "month": "04",
     "date_reported": "2020-04-30",
@@ -424,7 +424,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2020",
     "month": "04",
     "date_reported": "2020-04-30",
@@ -473,7 +473,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2020",
     "month": "05",
     "date_reported": "2020-05-31",
@@ -481,7 +481,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2020",
     "month": "05",
     "date_reported": "2020-05-31",
@@ -530,7 +530,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2020",
     "month": "06",
     "date_reported": "2020-06-30",
@@ -538,7 +538,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2020",
     "month": "06",
     "date_reported": "2020-06-30",
@@ -579,7 +579,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2020",
     "month": "07",
     "date_reported": "2020-07-31",
@@ -587,7 +587,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2020",
     "month": "07",
     "date_reported": "2020-07-31",
@@ -628,7 +628,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2020",
     "month": "08",
     "date_reported": "2020-08-31",
@@ -636,7 +636,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2020",
     "month": "08",
     "date_reported": "2020-08-31",
@@ -697,7 +697,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PAROLE",
+    "metric": "ADMISSIONS_FROM_PAROLE",
     "year": "2020",
     "month": "09",
     "date_reported": "2020-09-30",
@@ -709,7 +709,7 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "ADMISSIONS_REVOCATIONS_PROBATION",
+    "metric": "ADMISSIONS_FROM_PROBATION",
     "year": "2020",
     "month": "09",
     "date_reported": "2020-09-30",

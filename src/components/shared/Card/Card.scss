@@ -28,19 +28,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 1.5rem;
+    padding: 1rem 1.5rem;
     @include down($lg) {
-      padding: 0.75rem;
+      padding: 1rem 1.25rem;
     }
   }
 
   &__title {
     font-size: 0.9375rem;
     line-height: 1.6;
-    @include down($lg) {
-      font-size: 0.875rem;
-      line-height: 1.375;
-    }
     .Card--not-available & {
       color: #b8bfc6;
     }
@@ -52,9 +48,6 @@
       height: 0.625rem;
       background: url("../../../assets/icons/people-icon.svg") center center no-repeat;
       background-size: cover;
-      @include down($lg) {
-        margin-right: 0.25rem;
-      }
     }
 
     .Card--population.Card--not-available &:before {
@@ -125,9 +118,10 @@
 
   &__body {
     border-top: 1px solid #eeeeee;
-    padding: 1.5rem 1.5rem 2rem;
+    padding: 2rem 1.5rem 2rem;
     @include down($lg) {
-      padding: 0.75rem 0.75rem 1rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
     }
     .Card--population & {
       border-top-color: #c0e9f1;
@@ -139,9 +133,6 @@
     font-weight: 700;
     font-size: 2.5rem;
     line-height: 1;
-    @include down($lg) {
-      font-size: 1.25rem;
-    }
   }
 
   &__percent {
@@ -161,8 +152,6 @@
     color: #b8bfc6;
     letter-spacing: -0.01em;
     text-transform: capitalize;
-    @include down($lg) {
-      font-size: 1.25rem;
-    }
+    white-space: nowrap;
   }
 }

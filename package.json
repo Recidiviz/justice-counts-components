@@ -6,6 +6,7 @@
   "author": "Recidiviz <team@recidiviz.org>",
   "license": "SEE LICENSE IN <LICENSE>",
   "dependencies": {
+    "@react-hook/window-size": "^3.0.7",
     "chart.js": "^2.9.4",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
