@@ -24,6 +24,7 @@ import Chart from "../Chart";
 import ErrorBoundary from "../shared/ErrorBoundary";
 import { chartDataPropTypes } from "../Chart/propTypes";
 import { flowDiagramDataPropTypes } from "../FlowDiagram/propTypes";
+import { keyInsightsPropTypes } from "../KeyInsights/propTypes";
 
 import "./MainPage.scss";
 
@@ -75,6 +76,7 @@ MainPage.propTypes = {
   flowDiagramLastDate: PropTypes.string.isRequired,
   flowDiagramPrevDate: PropTypes.string.isRequired,
   flowDiagramData: flowDiagramDataPropTypes.isRequired,
+  keyInsightsData: keyInsightsPropTypes.isRequired,
 };
 
 export default MainPage;

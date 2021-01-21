@@ -15,9 +15,9 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import React from "react";
-import PropTypes from "prop-types";
 
 import Card from "../shared/Card";
+import { keyInsightsPropTypes } from "./propTypes";
 
 import "./KeyInsights.scss";
 
@@ -26,7 +26,7 @@ const KeyInsights = ({ keyInsightsData }) => (
     <h2 className="KeyInsights__title">Key insights</h2>
     <div className="KeyInsights__cards">
       {keyInsightsData.map((card) => (
-        <div className="KeyInsights__card">
+        <div key={card.title} className="KeyInsights__card">
           <Card title={card.title} number={card.number} percentChange={card.percentChange} />
           <p className="KeyInsights__card-description">{card.caption}</p>
         </div>
@@ -36,14 +36,7 @@ const KeyInsights = ({ keyInsightsData }) => (
 );
 
 KeyInsights.propTypes = {
-  keyInsightsData: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      number: PropTypes.number.isRequired,
-      percentChange: PropTypes.number.isRequired,
-      caption: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  keyInsightsData: keyInsightsPropTypes.isRequired,
 };
 
 export default KeyInsights;
