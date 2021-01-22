@@ -15,7 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 /**
- * Takes array of chart data and fills/cuts it to target length
+ * Takes an array of chart data and fills/cuts it to target length
  * @param data
  * @param targetLength
  */
