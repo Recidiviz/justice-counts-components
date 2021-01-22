@@ -39,7 +39,11 @@ const Chart = ({ title, hint, chartData }) => {
     setPeriod(value);
   }, []);
 
-  const { datasets, labels } = adjustChartDataLength(chartData, period);
+  const isChartUnavailable = chartData.datasets.every(
+    (dataset) => !dataset.data.filter((dataPoint) => dataPoint !== null).length
+  );
+
+  const { datasets, labels } = adjustChartDataLength(chartData, isChartUnavailable ? 12 : period);
 
   const styledDatasets = datasets.map((dataset, i) => ({
     ...dataset,
@@ -101,6 +105,7 @@ const Chart = ({ title, hint, chartData }) => {
       </div>
       <div className="Chart__body">
         <div className="Chart__chart">
+          {isChartUnavailable && <div className="Chart__chart-unavailable">No Data Available</div>}
           <Line
             data={{ datasets: styledDatasets, labels: formattedLabels }}
             options={{

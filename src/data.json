@@ -50,14 +50,6 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2019",
-    "month": "09",
-    "date_reported": "2020-09-30",
-    "value": 634
-  },
-  {
-    "state_code": "US_CO",
     "metric": "ADMISSIONS",
     "year": "2019",
     "month": "10",
@@ -104,14 +96,6 @@
     "month": "10",
     "date_reported": "2019-10-31",
     "value": 2281
-  },
-  {
-    "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2019",
-    "month": "10",
-    "date_reported": "2019-10-31",
-    "value": 513
   },
   {
     "state_code": "US_CO",
@@ -164,14 +148,6 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2019",
-    "month": "11",
-    "date_reported": "2019-11-30",
-    "value": 539
-  },
-  {
-    "state_code": "US_CO",
     "metric": "ADMISSIONS",
     "year": "2019",
     "month": "12",
@@ -218,14 +194,6 @@
     "month": "12",
     "date_reported": "2019-12-31",
     "value": 2243
-  },
-  {
-    "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2019",
-    "month": "12",
-    "date_reported": "2019-12-31",
-    "value": 736
   },
   {
     "state_code": "US_CO",
@@ -278,14 +246,6 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2020",
-    "month": "01",
-    "date_reported": "2020-01-30",
-    "value": 533
-  },
-  {
-    "state_code": "US_CO",
     "metric": "ADMISSIONS",
     "year": "2020",
     "month": "02",
@@ -332,14 +292,6 @@
     "month": "02",
     "date_reported": "2020-02-29",
     "value": 2467
-  },
-  {
-    "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2020",
-    "month": "02",
-    "date_reported": "2020-02-29",
-    "value": 679
   },
   {
     "state_code": "US_CO",
@@ -392,14 +344,6 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2020",
-    "month": "03",
-    "date_reported": "2020-03-31",
-    "value": 627
-  },
-  {
-    "state_code": "US_CO",
     "metric": "ADMISSIONS",
     "year": "2020",
     "month": "04",
@@ -446,14 +390,6 @@
     "month": "04",
     "date_reported": "2020-04-30",
     "value": 2123
-  },
-  {
-    "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2020",
-    "month": "04",
-    "date_reported": "2020-04-30",
-    "value": 533
   },
   {
     "state_code": "US_CO",
@@ -506,14 +442,6 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2020",
-    "month": "05",
-    "date_reported": "2020-05-31",
-    "value": 549
-  },
-  {
-    "state_code": "US_CO",
     "metric": "ADMISSIONS",
     "year": "2020",
     "month": "06",
@@ -552,14 +480,6 @@
     "month": "06",
     "date_reported": "2020-06-30",
     "value": 2491
-  },
-  {
-    "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2020",
-    "month": "06",
-    "date_reported": "2020-06-30",
-    "value": 913
   },
   {
     "state_code": "US_CO",
@@ -604,14 +524,6 @@
   },
   {
     "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2020",
-    "month": "07",
-    "date_reported": "2020-07-31",
-    "value": 763
-  },
-  {
-    "state_code": "US_CO",
     "metric": "ADMISSIONS",
     "year": "2020",
     "month": "08",
@@ -650,14 +562,6 @@
     "month": "08",
     "date_reported": "2020-08-31",
     "value": 2393
-  },
-  {
-    "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2020",
-    "month": "08",
-    "date_reported": "2020-08-31",
-    "value": 934
   },
   {
     "state_code": "US_CO",
@@ -730,17 +634,5 @@
     "compared_to_month": "09",
     "value_change": -10,
     "percentage_change": -0.31
-  },
-  {
-    "state_code": "US_CO",
-    "metric": "RELEASES",
-    "year": "2020",
-    "month": "09",
-    "date_reported": "2020-09-30",
-    "value": 737,
-    "compared_to_year": "2019",
-    "compared_to_month": "09",
-    "value_change": 103,
-    "percentage_change": 0.12
   }
 ]
