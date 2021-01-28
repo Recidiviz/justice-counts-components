@@ -22,14 +22,14 @@ import Card from "../shared/Card";
 import Arrow from "./Arrow";
 
 import {
-  ADMISSIONS,
-  ADMISSIONS_NEW_COURT,
+  ADMISSIONS_NEW_COMMITMENTS,
+  PROBATION_SENTENCES,
   ADMISSIONS_FROM_PAROLE,
   ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
   POPULATION_PRISON,
   POPULATION_PROBATION,
-  RELEASES,
+  RELEASES_TO_PAROLE,
 } from "../../constants/metrics";
 import { flowDiagramDataPropTypes } from "./propTypes";
 
@@ -48,9 +48,12 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
       <div className="FlowDiagram__box">
         <span className="FlowDiagram__box-name">Court</span>
         <div className="FlowDiagram__row">
-          <Card className="FlowDiagram__card" {...data[ADMISSIONS]}>
+          <Card className="FlowDiagram__card" {...data[ADMISSIONS_NEW_COMMITMENTS]}>
             <Arrow
-              isDisabled={data[ADMISSIONS].isNotAvailable || data[POPULATION_PRISON].isNotAvailable}
+              isDisabled={
+                data[ADMISSIONS_NEW_COMMITMENTS].isNotAvailable ||
+                data[POPULATION_PRISON].isNotAvailable
+              }
               height={28.375}
               isMobile={isMobile}
               mobileHeight={51}
@@ -58,10 +61,10 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
               mobilePlacement="left"
             />
           </Card>
-          <Card className="FlowDiagram__card" {...data[ADMISSIONS_NEW_COURT]}>
+          <Card className="FlowDiagram__card" {...data[PROBATION_SENTENCES]}>
             <Arrow
               isDisabled={
-                data[ADMISSIONS_NEW_COURT].isNotAvailable ||
+                data[PROBATION_SENTENCES].isNotAvailable ||
                 data[POPULATION_PROBATION].isNotAvailable
               }
               height={4.25}
@@ -89,7 +92,8 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
           <Card className="FlowDiagram__card" {...data[ADMISSIONS_FROM_PROBATION]}>
             <Arrow
               isDisabled={
-                data[ADMISSIONS_FROM_PROBATION].isNotAvailable || data[ADMISSIONS].isNotAvailable
+                data[ADMISSIONS_FROM_PROBATION].isNotAvailable ||
+                data[ADMISSIONS_NEW_COMMITMENTS].isNotAvailable
               }
               direction="topLeft"
               height={23.25}
@@ -117,7 +121,9 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
             {...data[POPULATION_PRISON]}
           >
             <Arrow
-              isDisabled={data[RELEASES].isNotAvailable || data[POPULATION_PRISON].isNotAvailable}
+              isDisabled={
+                data[RELEASES_TO_PAROLE].isNotAvailable || data[POPULATION_PRISON].isNotAvailable
+              }
               height={14.25}
               placement="right"
               isMobile={isMobile}
@@ -157,9 +163,11 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
               mobileHeight={2.5}
             />
           </Card>
-          <Card className="FlowDiagram__card" {...data[RELEASES]}>
+          <Card className="FlowDiagram__card" {...data[RELEASES_TO_PAROLE]}>
             <Arrow
-              isDisabled={data[RELEASES].isNotAvailable || data[POPULATION_PAROLE].isNotAvailable}
+              isDisabled={
+                data[RELEASES_TO_PAROLE].isNotAvailable || data[POPULATION_PAROLE].isNotAvailable
+              }
               direction="left"
               height={0}
               width={2}

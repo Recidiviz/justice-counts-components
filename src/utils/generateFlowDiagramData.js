@@ -15,20 +15,21 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import {
-  ADMISSIONS,
+  ADMISSIONS_NEW_COMMITMENTS,
   ADMISSIONS_FROM_PAROLE_TECHNICAL,
   ADMISSIONS_FROM_PROBATION_TECHNICAL,
-  ADMISSIONS_NEW_COURT,
+  PROBATION_SENTENCES,
   ADMISSIONS_FROM_PAROLE,
   ADMISSIONS_FROM_PROBATION,
   metricToCardName,
   POPULATION_PAROLE,
   POPULATION_PRISON,
   POPULATION_PROBATION,
-  RELEASES,
+  RELEASES_TO_PAROLE,
 } from "../constants/metrics";
 import generateHint from "./generateHint";
 import months from "../constants/months";
+import generateSourceText from "./generateSourceText";
 
 /**
  * Prepares data for flow Diagram
@@ -49,14 +50,14 @@ import months from "../constants/months";
  */
 const generateFlowDiagramData = (data) => {
   const { flowData, mostRecentYear, mostRecentMonth } = [
-    ADMISSIONS,
-    ADMISSIONS_NEW_COURT,
+    ADMISSIONS_NEW_COMMITMENTS,
+    PROBATION_SENTENCES,
     POPULATION_PROBATION,
     ADMISSIONS_FROM_PROBATION,
     POPULATION_PRISON,
     POPULATION_PAROLE,
     ADMISSIONS_FROM_PAROLE,
-    RELEASES,
+    RELEASES_TO_PAROLE,
     ADMISSIONS_FROM_PAROLE_TECHNICAL,
     ADMISSIONS_FROM_PROBATION_TECHNICAL,
   ].reduce(
@@ -73,6 +74,8 @@ const generateFlowDiagramData = (data) => {
           number: lastItem.value,
           percentChange: lastItem.percentChange * 100,
           numberChange: lastItem.valueChange,
+          sourceText: generateSourceText(lastItem.sourceName, lastItem.sourceCategories),
+          sourceUrl: lastItem.sourceUrl,
           item: lastItem,
         };
 

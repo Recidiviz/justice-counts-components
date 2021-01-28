@@ -17,7 +17,7 @@
 import generateHint from "../generateHint";
 
 describe("generateHint.js", () => {
-  const mockMetricName = "RELEASES";
+  const mockMetricName = "RELEASES_TO_PAROLE";
 
   it("should return null if the date is most recent and is compared to exactly one year before", () => {
     expect(

@@ -14,29 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import React from "react";
+const generateSourceData = (flowData) => {
+  const sourceDataMap = Object.values(flowData).reduce((acc, { isNotAvailable, item }) => {
+    if (isNotAvailable) {
+      return acc;
+    }
 
-import Card from "../shared/Card";
-import { keyInsightsPropTypes } from "./propTypes";
+    if (!acc[item.sourceName]) {
+      acc[item.sourceName] = new Set([item.sourceUrl]);
+    } else {
+      acc[item.sourceName].add(item.sourceUrl);
+    }
 
-import "./KeyInsights.scss";
+    return acc;
+  }, {});
 
-const KeyInsights = ({ keyInsightsData }) => (
-  <div className="KeyInsights">
-    <h2 className="KeyInsights__title">Key insights</h2>
-    <div className="KeyInsights__cards">
-      {keyInsightsData.map((card) => (
-        <div key={card.title} className="KeyInsights__card">
-          <Card {...card} />
-          <p className="KeyInsights__card-description">{card.caption}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-);
+  return Object.entries(sourceDataMap).reduce((acc, [name, links]) => {
+    acc.push({ name, links: Array.from(links) });
 
-KeyInsights.propTypes = {
-  keyInsightsData: keyInsightsPropTypes.isRequired,
+    return acc;
+  }, []);
 };
 
-export default KeyInsights;
+export default generateSourceData;

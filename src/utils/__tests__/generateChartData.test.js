@@ -14,13 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import generateChartData, { noHumanizedValue, noMetricData } from "../generateChartData";
+import generateChartData, { noMetricData } from "../generateChartData";
 import {
-  ADMISSIONS,
-  metricToChartName,
+  ADMISSIONS_NEW_COMMITMENTS,
   POPULATION_PAROLE,
   POPULATION_PRISON,
-  RELEASES,
+  RELEASES_COMPLETED,
 } from "../../constants/metrics";
 import { METRICS_NOT_PROVIDED } from "../../constants/errors";
 import logger from "../logger";
@@ -30,19 +29,22 @@ describe("generateChartData.js", () => {
 
   describe("should work with single metric", () => {
     const mockStateData = {
-      [RELEASES]: [
+      [RELEASES_COMPLETED]: [
         { year: 2020, month: 8, value: 1002 },
         { year: 2020, month: 9, value: 1001 },
         { year: 2020, month: 10, value: 1000 },
       ],
     };
+    const mockMetricName = "Releases";
 
     it("should convert data to chart.js format ", () => {
-      expect(generateChartData(mockStateData, [RELEASES])).toStrictEqual({
+      expect(
+        generateChartData(mockStateData, [RELEASES_COMPLETED], [mockMetricName])
+      ).toStrictEqual({
         datasets: [
           {
-            metric: RELEASES,
-            label: metricToChartName[RELEASES],
+            metric: RELEASES_COMPLETED,
+            label: mockMetricName,
             data: [1002, 1001, 1000],
             isNotAvailable: false,
           },
@@ -60,29 +62,37 @@ describe("generateChartData.js", () => {
     it(`should generate data starting from the earliest date, ending on the
      most recent filling the gaps with nulls`, () => {
       const mockStateData = {
-        [RELEASES]: [
+        [RELEASES_COMPLETED]: [
           { year: 2020, month: 8, value: 1002 },
           { year: 2020, month: 9, value: 1001 },
           { year: 2020, month: 10, value: 1000 },
         ],
-        [ADMISSIONS]: [
+        [ADMISSIONS_NEW_COMMITMENTS]: [
           { year: 2020, month: 7, value: 705 },
           { year: 2020, month: 8, value: 700 },
           { year: 2020, month: 9, value: 703 },
         ],
       };
+      const mockMetric1Name = "Releases";
+      const mockMetric2Name = "Admissions";
 
-      expect(generateChartData(mockStateData, [RELEASES, ADMISSIONS])).toStrictEqual({
+      expect(
+        generateChartData(
+          mockStateData,
+          [RELEASES_COMPLETED, ADMISSIONS_NEW_COMMITMENTS],
+          [mockMetric1Name, mockMetric2Name]
+        )
+      ).toStrictEqual({
         datasets: [
           {
-            metric: RELEASES,
-            label: metricToChartName[RELEASES],
+            metric: RELEASES_COMPLETED,
+            label: mockMetric1Name,
             data: [null, 1002, 1001, 1000],
             isNotAvailable: false,
           },
           {
-            metric: ADMISSIONS,
-            label: metricToChartName[ADMISSIONS],
+            metric: ADMISSIONS_NEW_COMMITMENTS,
+            label: mockMetric2Name,
             data: [705, 700, 703, null],
             isNotAvailable: false,
           },
@@ -109,20 +119,26 @@ describe("generateChartData.js", () => {
           { year: 2020, month: 2, value: 703 },
         ],
       };
+      const mockMetric1Name = "Population parole";
+      const mockMetric2Name = "Population prison";
 
       expect(
-        generateChartData(mockStateData, [POPULATION_PAROLE, POPULATION_PRISON])
+        generateChartData(
+          mockStateData,
+          [POPULATION_PAROLE, POPULATION_PRISON],
+          [mockMetric1Name, mockMetric2Name]
+        )
       ).toStrictEqual({
         datasets: [
           {
             metric: POPULATION_PAROLE,
-            label: metricToChartName[POPULATION_PAROLE],
+            label: mockMetric1Name,
             data: [1002, null, null, null, null, null, null, 1001, 1000],
             isNotAvailable: false,
           },
           {
             metric: POPULATION_PRISON,
-            label: metricToChartName[POPULATION_PRISON],
+            label: mockMetric2Name,
             data: [null, 705, null, null, null, null, 700, 703, null],
             isNotAvailable: false,
           },
@@ -145,7 +161,7 @@ describe("generateChartData.js", () => {
   describe("edge cases", () => {
     it("should throw error if metric array is empty", () => {
       const mockStateData = {
-        [RELEASES]: [
+        [RELEASES_COMPLETED]: [
           { year: 2020, month: 8, value: 1002 },
           { year: 2020, month: 9, value: 1001 },
           { year: 2020, month: 10, value: 1000 },
@@ -156,26 +172,17 @@ describe("generateChartData.js", () => {
     });
   });
 
-  it("should throw warning if humanized metric name is not provided", () => {
-    const metricName = "some metric";
-    const mockStateData = {
-      [metricName]: [{ year: 2020, month: 8, value: 1002 }],
-    };
-    generateChartData(mockStateData, [metricName]);
-
-    expect(warnSpy).toBeCalledWith(noHumanizedValue(metricName));
-  });
-
   it("should throw warning if metric data is not provided", () => {
+    const mockMetricLabel = "Population parole";
     const metricName = "POPULATION_PAROLE";
     const mockStateData = {
       anotherMetric: [{ year: 2020, month: 8, value: 1002 }],
     };
-    expect(generateChartData(mockStateData, [metricName])).toStrictEqual({
+    expect(generateChartData(mockStateData, [metricName], [mockMetricLabel])).toStrictEqual({
       datasets: [
         {
           metric: metricName,
-          label: metricToChartName[metricName],
+          label: mockMetricLabel,
           isNotAvailable: true,
           data: [],
         },

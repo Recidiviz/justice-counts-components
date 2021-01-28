@@ -14,29 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import React from "react";
+import PropTypes from "prop-types";
 
-import Card from "../shared/Card";
-import { keyInsightsPropTypes } from "./propTypes";
-
-import "./KeyInsights.scss";
-
-const KeyInsights = ({ keyInsightsData }) => (
-  <div className="KeyInsights">
-    <h2 className="KeyInsights__title">Key insights</h2>
-    <div className="KeyInsights__cards">
-      {keyInsightsData.map((card) => (
-        <div key={card.title} className="KeyInsights__card">
-          <Card {...card} />
-          <p className="KeyInsights__card-description">{card.caption}</p>
-        </div>
-      ))}
-    </div>
-  </div>
+export const sourcesPropTypes = PropTypes.arrayOf(
+  PropTypes.shape({
+    name: PropTypes.string,
+    links: PropTypes.arrayOf(PropTypes.string),
+  })
 );
-
-KeyInsights.propTypes = {
-  keyInsightsData: keyInsightsPropTypes.isRequired,
-};
-
-export default KeyInsights;

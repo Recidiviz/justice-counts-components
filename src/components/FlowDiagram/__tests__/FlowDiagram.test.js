@@ -18,29 +18,29 @@ import React from "react";
 import { render } from "@testing-library/react";
 import FlowDiagram from "../FlowDiagram";
 import {
-  ADMISSIONS,
-  ADMISSIONS_NEW_COURT,
+  ADMISSIONS_NEW_COMMITMENTS,
+  PROBATION_SENTENCES,
   ADMISSIONS_FROM_PAROLE,
   ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
   POPULATION_PRISON,
   POPULATION_PROBATION,
-  RELEASES,
+  RELEASES_TO_PAROLE,
 } from "../../../constants/metrics";
 
 describe("FlowDiagram.js", () => {
   const mockLastDate = "September 2020";
   const mockPrevDate = "October 2019";
   const mockData = {
-    [ADMISSIONS]: { title: "ADMISSIONS", isNotAvailable: false },
-    [ADMISSIONS_NEW_COURT]: { title: "ADMISSIONS_NEW_COURT", isNotAvailable: false },
+    [ADMISSIONS_NEW_COMMITMENTS]: { title: "ADMISSIONS", isNotAvailable: false },
+    [PROBATION_SENTENCES]: { title: "ADMISSIONS_NEW_COURT", isNotAvailable: false },
     [POPULATION_PRISON]: { title: "POPULATION_PRISON", isNotAvailable: false },
     [POPULATION_PROBATION]: { title: "POPULATION_PROBATION", isNotAvailable: false },
     [ADMISSIONS_FROM_PROBATION]: {
       title: "ADMISSIONS_FROM_PROBATION",
       isNotAvailable: false,
     },
-    [RELEASES]: { title: "RELEASES", isNotAvailable: false },
+    [RELEASES_TO_PAROLE]: { title: "RELEASES", isNotAvailable: false },
     [ADMISSIONS_FROM_PAROLE]: {
       title: "ADMISSIONS_FROM_PAROLE",
       isNotAvailable: false,
