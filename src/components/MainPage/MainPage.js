@@ -26,7 +26,7 @@ import ErrorBoundary from "../shared/ErrorBoundary";
 import { chartDataPropTypes } from "../Chart/propTypes";
 import { flowDiagramDataPropTypes } from "../FlowDiagram/propTypes";
 import { keyInsightsPropTypes } from "../KeyInsights/propTypes";
-import { sourcesPropTypes } from "../Sources/propTypes";
+import { sourcePropTypes } from "../Sources/propTypes";
 
 import "./MainPage.scss";
 
@@ -95,7 +95,7 @@ MainPage.propTypes = {
   flowDiagramPrevDate: PropTypes.string.isRequired,
   flowDiagramData: flowDiagramDataPropTypes.isRequired,
   keyInsightsData: keyInsightsPropTypes.isRequired,
-  sourceData: sourcesPropTypes.isRequired,
+  sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
 };
 
 export default MainPage;

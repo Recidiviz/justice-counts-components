@@ -14,9 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import PropTypes from "prop-types";
+import React from "react";
+import { sourcePropTypes } from "./propTypes";
 
-export const sourcePropTypes = {
-  name: PropTypes.string,
-  links: PropTypes.arrayOf(PropTypes.string),
-};
+const Source = ({ name, links }) => (
+  <span className="Sources__text">
+    {name} (
+    {links.map((link, index) => (
+      <a key={link} target="_blank" rel="noreferrer" className="Sources__link" href={link}>
+        link {index + 1}
+      </a>
+    ))}
+    )
+  </span>
+);
+
+Source.propTypes = sourcePropTypes;
+
+export default Source;

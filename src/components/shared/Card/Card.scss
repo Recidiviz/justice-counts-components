@@ -155,9 +155,6 @@
     font-size: 2.5rem;
     line-height: 1;
     color: #0db4e4;
-    @include down($lg) {
-      font-size: 1.25rem;
-    }
   }
 
   &__not-available-text {

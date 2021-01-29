@@ -85,6 +85,8 @@ const Card = ({
 
 Card.defaultProps = {
   isNotAvailable: false,
+  sourceText: null,
+  sourceUrl: null,
   isPopulation: false,
   hint: null,
   number: null,
@@ -95,8 +97,8 @@ Card.defaultProps = {
 
 Card.propTypes = {
   title: PropTypes.string.isRequired,
-  sourceText: PropTypes.string.isRequired,
-  sourceUrl: PropTypes.string.isRequired,
+  sourceText: PropTypes.string,
+  sourceUrl: PropTypes.string,
   isNotAvailable: PropTypes.bool,
   isPopulation: PropTypes.bool,
   hint: PropTypes.string,

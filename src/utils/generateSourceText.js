@@ -14,6 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+/**
+ * Takes source name and source categories and produces formatted string.
+ * @param sourceName {string}
+ * @param sourceCategories {string[]}
+ * @returns {string}
+ */
 const generateSourceText = (sourceName, sourceCategories) => {
   if (sourceCategories.length) {
     return `Includes data for the following categories from ${sourceName}'s public reports: ${sourceCategories.join(

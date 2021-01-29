@@ -43,11 +43,13 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 2rem;
     @include down($lg) {
+      margin-top: -10rem;
       margin-left: -$mobile-offset;
       margin-right: -$mobile-offset;
       display: flex;
       padding-bottom: 2rem;
-      overflow: auto;
+      padding-top: 10rem;
+      overflow-x: auto;
       grid-gap: 0;
       &:before,
       &:after {
@@ -64,7 +66,6 @@
       margin-right: 2rem;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       width: 17.875rem;
       flex-shrink: 0;
       &:last-child {

@@ -15,52 +15,32 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import React from "react";
-import { sourcesPropTypes } from "./propTypes";
+import PropTypes from "prop-types";
+
+import Source from "./Source";
+
+import { sourcePropTypes } from "./propTypes";
 
 import "./Sources.scss";
 
-const Sources = ({ data }) => {
-  const sourcesText = data.reduce((acc, { name, links }, index) => {
-    if (data.length > 1 && index === data.length - 1) {
-      acc.push("and");
-    } else if (index !== 0) {
-      acc.push(",");
-    }
-
-    acc.push(` ${name} (`);
-
-    links.forEach((link, linkIndex) => {
-      acc.push(
-        <a target="_blank" rel="noreferrer" className="Sources__link" href={link}>
-          link {linkIndex + 1}
-        </a>
-      );
-      if (linkIndex !== links.length - 1) {
-        acc.push(",");
-      }
-    });
-
-    acc.push(") ");
-
-    return acc;
-  }, []);
-
-  return (
-    <div className="Sources">
-      <h2 className="Sources__title">Sources</h2>
-      {!data.length ? (
-        <p className="Sources__no-data">No public sources available.</p>
-      ) : (
-        <p className="Sources__data">
-          All data for these visualizations was from public reports published by the {sourcesText}
-        </p>
-      )}
-    </div>
-  );
-};
+const Sources = ({ data }) => (
+  <div className="Sources">
+    <h2 className="Sources__title">Sources</h2>
+    {!data.length ? (
+      <p className="Sources__no-data">No public sources available.</p>
+    ) : (
+      <p className="Sources__data">
+        All data for these visualizations comes from public reports published by the{" "}
+        {data.map((source) => (
+          <Source key={source.name} {...source} />
+        ))}
+      </p>
+    )}
+  </div>
+);
 
 Sources.propTypes = {
-  data: sourcesPropTypes.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
 };
 
 export default Sources;

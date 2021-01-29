@@ -22,6 +22,8 @@ import states from "./constants/states";
 import getNormalizedStateData from "./utils/getNormalizedStateData";
 import generateChartData from "./utils/generateChartData";
 import generateFlowDiagramData from "./utils/generateFlowDiagramData";
+import generateKeyInsightsData from "./utils/generateKeyInsightsData";
+import generateSourceData from "./utils/generateSourceData";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
   ADMISSIONS_FROM_PAROLE,
@@ -36,8 +38,6 @@ import {
   ADMISSIONS_FROM_PROBATION_TECHNICAL,
   ADMISSIONS_FROM_PROBATION_NEW_CRIME,
 } from "./constants/metrics";
-import generateKeyInsightsData from "./utils/generateKeyInsightsData";
-import generateSourceData from "./utils/generateSourceData";
 
 const App = ({ stateCode, data }) => {
   const stateName = states[stateCode];
