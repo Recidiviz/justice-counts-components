@@ -18,5 +18,10 @@ import PropTypes from "prop-types";
 
 export const sourcePropTypes = {
   name: PropTypes.string,
-  links: PropTypes.arrayOf(PropTypes.string),
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      src: PropTypes.string,
+    })
+  ),
 };

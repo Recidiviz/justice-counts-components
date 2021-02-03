@@ -23,7 +23,7 @@
 const generateSourceText = (sourceName, sourceCategories) => {
   if (sourceCategories.length) {
     return `Includes data for the following categories from ${sourceName}'s public reports: ${sourceCategories.join(
-      ","
+      ", "
     )}`;
   }
   return `Includes data from ${sourceName}'s public reports`;

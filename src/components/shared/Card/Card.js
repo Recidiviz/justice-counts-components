@@ -31,6 +31,7 @@ const Card = ({
   percentChange,
   className,
   sourceText,
+  reportName,
   sourceUrl,
   children,
 }) => (
@@ -59,7 +60,7 @@ const Card = ({
           <div className="Card__warning">
             {sourceText} (
             <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
-              source
+              {reportName}
             </a>
             )
           </div>
@@ -86,6 +87,7 @@ const Card = ({
 Card.defaultProps = {
   isNotAvailable: false,
   sourceText: null,
+  reportName: null,
   sourceUrl: null,
   isPopulation: false,
   hint: null,
@@ -98,6 +100,7 @@ Card.defaultProps = {
 Card.propTypes = {
   title: PropTypes.string.isRequired,
   sourceText: PropTypes.string,
+  reportName: PropTypes.string,
   sourceUrl: PropTypes.string,
   isNotAvailable: PropTypes.bool,
   isPopulation: PropTypes.bool,

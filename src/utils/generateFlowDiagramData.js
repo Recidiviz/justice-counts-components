@@ -76,6 +76,7 @@ const generateFlowDiagramData = (data) => {
           numberChange: lastItem.valueChange,
           sourceText: generateSourceText(lastItem.sourceName, lastItem.sourceCategories),
           sourceUrl: lastItem.sourceUrl,
+          reportName: lastItem.reportName,
           item: lastItem,
         };
 

@@ -32,6 +32,7 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
  *   percentage_change?: number
  *   source_name: string
  *   source_url: string
+ *   report_name: string
  *   raw_source_categories: string[]
  * }[]}
  * @param stateCode {string}
@@ -48,6 +49,7 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
  *    percentChange: number | null
  *    sourceName: string
  *    sourceUrl: string
+ *    reportName: string
  *    sourceCategories: string[]
  *  }
  * }}
@@ -67,6 +69,7 @@ const getNormalizedStateData = (data, stateCode) => {
         percentChange: typeof item.percentage_change === "number" ? item.percentage_change : null,
         sourceName: item.source_name,
         sourceUrl: item.source_url,
+        reportName: item.report_name,
         sourceCategories: item.raw_source_categories,
       };
       if (acc[normalizedItem.metric]) {

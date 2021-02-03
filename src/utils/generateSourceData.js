@@ -14,6 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+/**
+ * Generates source links array from flowData.
+ * @param flowData
+ * @returns {{
+ *   name: string
+ *   links: {
+ *     name: string
+ *     src: string
+ *   }[]
+ * }[]}
+ */
 const generateSourceData = (flowData) => {
   const sourceDataMap = Object.values(flowData).reduce((acc, { isNotAvailable, item }) => {
     if (isNotAvailable) {
@@ -21,16 +32,19 @@ const generateSourceData = (flowData) => {
     }
 
     if (!acc[item.sourceName]) {
-      acc[item.sourceName] = new Set([item.sourceUrl]);
+      acc[item.sourceName] = { [item.sourceUrl]: item.reportName };
     } else {
-      acc[item.sourceName].add(item.sourceUrl);
+      acc[item.sourceName][item.sourceUrl] = item.reportName;
     }
 
     return acc;
   }, {});
 
-  return Object.entries(sourceDataMap).reduce((acc, [name, links]) => {
-    acc.push({ name, links: Array.from(links) });
+  return Object.entries(sourceDataMap).reduce((acc, [sourceName, links]) => {
+    acc.push({
+      name: sourceName,
+      links: Object.entries(links).map(([linkSrc, linkName]) => ({ name: linkName, src: linkSrc })),
+    });
 
     return acc;
   }, []);
