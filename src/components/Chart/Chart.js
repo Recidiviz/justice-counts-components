@@ -56,6 +56,7 @@ const Chart = ({ title, hint, chartData }) => {
     pointHoverBorderColor: chartColors[i],
     pointRadius: 0,
     pointHitRadius: 12,
+    spanGaps: true,
   }));
   const formattedLabels = labels.map(({ year, month }) => `${month + 1}/${year % 100}`);
 
