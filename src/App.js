@@ -22,51 +22,81 @@ import states from "./constants/states";
 import getNormalizedStateData from "./utils/getNormalizedStateData";
 import generateChartData from "./utils/generateChartData";
 import generateFlowDiagramData from "./utils/generateFlowDiagramData";
+import generateKeyInsightsData from "./utils/generateKeyInsightsData";
+import generateSourceData from "./utils/generateSourceData";
 import {
-  ADMISSIONS,
-  ADMISSIONS_NEW_COURT,
+  ADMISSIONS_NEW_COMMITMENTS,
   ADMISSIONS_FROM_PAROLE,
   ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
   POPULATION_PRISON,
   POPULATION_PROBATION,
-  RELEASES,
+  RELEASES_COMPLETED,
+  ADMISSIONS,
+  ADMISSIONS_FROM_PAROLE_NEW_CRIME,
+  ADMISSIONS_FROM_PAROLE_TECHNICAL,
+  ADMISSIONS_FROM_PROBATION_TECHNICAL,
+  ADMISSIONS_FROM_PROBATION_NEW_CRIME,
 } from "./constants/metrics";
-import generateKeyInsightsData from "./utils/generateKeyInsightsData";
 
 const App = ({ stateCode, data }) => {
   const stateName = states[stateCode];
   const stateMetricData = getNormalizedStateData(data, stateCode);
 
-  const populationsChartData = generateChartData(stateMetricData, [
-    POPULATION_PRISON,
-    POPULATION_PAROLE,
-    POPULATION_PROBATION,
-  ]);
+  const populationsChartData = generateChartData(
+    stateMetricData,
+    [POPULATION_PRISON, POPULATION_PAROLE, POPULATION_PROBATION],
+    ["Prison Population", "Parole Population", "Probation Population"]
+  );
 
-  const prisonAdmissionsChartData = generateChartData(stateMetricData, [
-    ADMISSIONS,
-    ADMISSIONS_NEW_COURT,
-    ADMISSIONS_FROM_PAROLE,
-    ADMISSIONS_FROM_PROBATION,
-  ]);
+  const prisonAdmissionsChartData = generateChartData(
+    stateMetricData,
+    [ADMISSIONS, ADMISSIONS_NEW_COMMITMENTS, ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PROBATION],
+    [
+      "Total Prison Admissions",
+      "New Court Admissions",
+      "Parole Revocations (Total)",
+      "Probation Revocations (Total)",
+    ]
+  );
 
-  const releasesChartData = generateChartData(stateMetricData, [RELEASES]);
+  const paroleRevocationsChartData = generateChartData(
+    stateMetricData,
+    [ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PAROLE_NEW_CRIME, ADMISSIONS_FROM_PAROLE_TECHNICAL],
+    ["Total", "New Crime", "Technical Violation"]
+  );
+
+  const probationRevocationsChartData = generateChartData(
+    stateMetricData,
+    [
+      ADMISSIONS_FROM_PROBATION,
+      ADMISSIONS_FROM_PROBATION_NEW_CRIME,
+      ADMISSIONS_FROM_PROBATION_TECHNICAL,
+    ],
+    ["Total", "New Crime", "Technical Violation"]
+  );
+
+  const releasesChartData = generateChartData(stateMetricData, [RELEASES_COMPLETED], ["Releases"]);
 
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
 
   const keyInsightsData = generateKeyInsightsData(flowData);
+
+  const sourceData = generateSourceData(flowData);
 
   return (
     <MainPage
       stateName={stateName}
       populationsChartData={populationsChartData}
       prisonAdmissionsChartData={prisonAdmissionsChartData}
+      paroleRevocationsChartData={paroleRevocationsChartData}
+      probationRevocationsChartData={probationRevocationsChartData}
       releasesChartData={releasesChartData}
       flowDiagramData={flowData}
       flowDiagramLastDate={lastDate}
       flowDiagramPrevDate={comparedToDate}
       keyInsightsData={keyInsightsData}
+      sourceData={sourceData}
     />
   );
 };

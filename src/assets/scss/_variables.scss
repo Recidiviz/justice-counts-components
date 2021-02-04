@@ -1,5 +1,5 @@
 $lg: 1024;
-
+$sm: 380;
 @mixin up($media) {
   @media only screen and (min-width: #{$media}px) {
     @content;
@@ -11,4 +11,5 @@ $lg: 1024;
   }
 }
 
-$mobile-offset: 2rem
+$mobile-offset: 2rem;
+$extra-mobile-offset: 1.5rem;

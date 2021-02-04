@@ -87,3 +87,7 @@ An _example_ of a valid `data.json` file can be found in [`data.json`](src/data.
 - `compared_to_month` - The month of the comparison data point, which is the most recent data point to compare against for trend analysis, no less than one year before this current data point, e.g. `04`
 - `value_change` - Metric value change between `compared_to_year/month` and `year/month`, e.g. `-20`
 - `percentage_change` - Metric value change between `compared_to_year/month` and `year/month` in percents, e.g. `-0.12`
+- `source_name` - Name of the data source provider
+- `source_url` - URL of the data source provider
+- `report_name` - Human-friendly report name
+- `raw_source_categories` - Categories of data provided by the data source

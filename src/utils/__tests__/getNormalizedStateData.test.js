@@ -100,7 +100,7 @@ describe("getNormalizedStateData.test.js", () => {
       mockStateCode1
     );
 
-    expect(normalizedStateData).toStrictEqual({
+    expect(normalizedStateData).toMatchObject({
       [mockMetric2]: [
         {
           metric: mockMetric2,

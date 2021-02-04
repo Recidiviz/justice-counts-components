@@ -30,6 +30,10 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
  *   compared_to_month?: string
  *   value_change?: number
  *   percentage_change?: number
+ *   source_name: string
+ *   source_url: string
+ *   report_name: string
+ *   raw_source_categories: string[]
  * }[]}
  * @param stateCode {string}
  * @returns {{
@@ -43,6 +47,10 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
  *    comparedToMonth: number | null
  *    valueChange: number | null
  *    percentChange: number | null
+ *    sourceName: string
+ *    sourceUrl: string
+ *    reportName: string
+ *    sourceCategories: string[]
  *  }
  * }}
  */
@@ -59,6 +67,10 @@ const getNormalizedStateData = (data, stateCode) => {
         comparedToMonth: item.compared_to_month ? toInt(item.compared_to_month) - 1 : null,
         valueChange: typeof item.value_change === "number" ? item.value_change : null,
         percentChange: typeof item.percentage_change === "number" ? item.percentage_change : null,
+        sourceName: item.source_name,
+        sourceUrl: item.source_url,
+        reportName: item.report_name,
+        sourceCategories: item.raw_source_categories,
       };
       if (acc[normalizedItem.metric]) {
         acc[normalizedItem.metric].push(normalizedItem);

@@ -16,21 +16,23 @@
 // =============================================================================
 import generateFlowDiagramData from "../generateFlowDiagramData";
 import generateHint from "../generateHint";
+import generateSourceText from "../generateSourceText";
 import {
-  ADMISSIONS,
-  ADMISSIONS_NEW_COURT,
+  ADMISSIONS_NEW_COMMITMENTS,
+  PROBATION_SENTENCES,
   ADMISSIONS_FROM_PAROLE,
   ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
   POPULATION_PRISON,
   POPULATION_PROBATION,
-  RELEASES,
+  RELEASES_TO_PAROLE,
 } from "../../constants/metrics";
 
+jest.mock("../generateSourceText");
 jest.mock("../generateHint");
 describe("generateFlowDiagramData.js", () => {
   const mockData = {
-    [ADMISSIONS]: [
+    [ADMISSIONS_NEW_COMMITMENTS]: [
       {
         value: 100,
         percentChange: 0.1,
@@ -40,7 +42,7 @@ describe("generateFlowDiagramData.js", () => {
         comparedToMonth: 1,
       },
     ],
-    [RELEASES]: [
+    [RELEASES_TO_PAROLE]: [
       {
         value: 110,
         percentChange: 0.15,
@@ -62,6 +64,7 @@ describe("generateFlowDiagramData.js", () => {
     ],
   };
   const mockHint = "some hint";
+  const mockSourceText = "source text";
 
   generateHint.mockImplementation((a, b, item) => {
     if (
@@ -75,6 +78,8 @@ describe("generateFlowDiagramData.js", () => {
     return null;
   });
 
+  generateSourceText.mockReturnValue(mockSourceText);
+
   const flowDiagramData = generateFlowDiagramData(mockData);
 
   it("should return most recent year", () => {
@@ -83,7 +88,7 @@ describe("generateFlowDiagramData.js", () => {
   });
 
   it("should put isNotAvailable flag is no metric data provided", () => {
-    expect(flowDiagramData.flowData[ADMISSIONS_NEW_COURT].isNotAvailable).toBe(true);
+    expect(flowDiagramData.flowData[PROBATION_SENTENCES].isNotAvailable).toBe(true);
     expect(flowDiagramData.flowData[ADMISSIONS_FROM_PROBATION].isNotAvailable).toBe(true);
     expect(flowDiagramData.flowData[POPULATION_PRISON].isNotAvailable).toBe(true);
     expect(flowDiagramData.flowData[POPULATION_PAROLE].isNotAvailable).toBe(true);
@@ -91,8 +96,14 @@ describe("generateFlowDiagramData.js", () => {
   });
 
   it("should produce flow diagram card data", () => {
-    expect(flowDiagramData.flowData[ADMISSIONS]).toMatchObject({ number: 100, percentChange: 10 });
-    expect(flowDiagramData.flowData[RELEASES]).toMatchObject({ number: 110, percentChange: 15 });
+    expect(flowDiagramData.flowData[ADMISSIONS_NEW_COMMITMENTS]).toMatchObject({
+      number: 100,
+      percentChange: 10,
+    });
+    expect(flowDiagramData.flowData[RELEASES_TO_PAROLE]).toMatchObject({
+      number: 110,
+      percentChange: 15,
+    });
   });
 
   it("should add hint if data is not most recent or compared not to strictly year before", () => {

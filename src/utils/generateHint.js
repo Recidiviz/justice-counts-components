@@ -48,7 +48,13 @@ const generateHint = (
     months[dateReported.getMonth()]
   } ${dateReported.getDate()}, ${dateReported.getFullYear()}`;
 
-  return `${metricToCardName[metric]} was last reported on ${formattedReportedDate} (% change relative to ${months[comparedToMonth]} ${comparedToYear}).`;
+  let hint = `${metricToCardName[metric]} was last reported on ${formattedReportedDate}`;
+
+  if (comparedToMonth && comparedToYear) {
+    hint += ` (% change relative to ${months[comparedToMonth]} ${comparedToYear})`;
+  }
+
+  return `${hint}.`;
 };
 
 export default generateHint;

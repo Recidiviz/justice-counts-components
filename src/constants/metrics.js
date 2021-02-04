@@ -15,38 +15,29 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 export const ADMISSIONS = "ADMISSIONS";
-export const ADMISSIONS_NEW_COURT = "ADMISSIONS_NEW_COURT";
+export const ADMISSIONS_NEW_COMMITMENTS = "ADMISSIONS_NEW_COMMITMENTS";
+export const PROBATION_SENTENCES = "PROBATION_SENTENCES";
 export const ADMISSIONS_FROM_PAROLE = "ADMISSIONS_FROM_PAROLE";
+export const ADMISSIONS_FROM_PAROLE_NEW_CRIME = "ADMISSIONS_FROM_PAROLE_NEW_CRIME";
 export const ADMISSIONS_FROM_PROBATION = "ADMISSIONS_FROM_PROBATION";
+export const ADMISSIONS_FROM_PROBATION_NEW_CRIME = "ADMISSIONS_FROM_PROBATION_NEW_CRIME";
 export const POPULATION_PAROLE = "POPULATION_PAROLE";
 export const POPULATION_PRISON = "POPULATION_PRISON";
 export const POPULATION_PROBATION = "POPULATION_PROBATION";
-export const RELEASES = "RELEASES";
+export const RELEASES_TO_PAROLE = "RELEASES_TO_PAROLE";
+export const RELEASES_COMPLETED = "RELEASES_COMPLETED";
 export const ADMISSIONS_FROM_PAROLE_TECHNICAL = "ADMISSIONS_FROM_PAROLE_TECHNICAL";
 export const ADMISSIONS_FROM_PROBATION_TECHNICAL = "ADMISSIONS_FROM_PROBATION_TECHNICAL";
 
-export const metricToChartName = {
-  [POPULATION_PRISON]: "Prison Population",
-  [POPULATION_PAROLE]: "Parole Population",
-  [POPULATION_PROBATION]: "Probation Population",
-
-  [ADMISSIONS]: "Total Prison Admissions",
-  [ADMISSIONS_NEW_COURT]: "New Court Admissions",
-  [ADMISSIONS_FROM_PAROLE]: "Parole Revocations",
-  [ADMISSIONS_FROM_PROBATION]: "Probation Revocations",
-
-  [RELEASES]: "Releases",
-};
-
 export const metricToCardName = {
-  [ADMISSIONS]: "Prison Sentences",
-  [ADMISSIONS_NEW_COURT]: "Probation Sentences",
+  [ADMISSIONS_NEW_COMMITMENTS]: "Prison Sentences",
+  [PROBATION_SENTENCES]: "Probation Sentences",
   [POPULATION_PROBATION]: "Probation Population",
   [ADMISSIONS_FROM_PROBATION]: "Probation Revocations",
   [POPULATION_PRISON]: "Prison Population",
   [POPULATION_PAROLE]: "Parole Population",
   [ADMISSIONS_FROM_PAROLE]: "Parole Revocations",
-  [RELEASES]: "Releases to Parole",
+  [RELEASES_TO_PAROLE]: "Releases to Parole",
   [ADMISSIONS_FROM_PAROLE_TECHNICAL]: "Parole Revocations (Technical)",
   [ADMISSIONS_FROM_PROBATION_TECHNICAL]: "Probation Revocations (Technical)",
 };

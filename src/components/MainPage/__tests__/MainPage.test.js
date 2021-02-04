@@ -43,6 +43,9 @@ describe("MainPage.js", () => {
         flowDiagramData={{}}
         populationsChartData={{}}
         prisonAdmissionsChartData={{}}
+        paroleRevocationsChartData={{}}
+        probationRevocationsChartData={{}}
+        sourceData={[]}
         releasesChartData={{}}
         keyInsightsData={[]}
       />

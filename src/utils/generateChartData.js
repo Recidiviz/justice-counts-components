@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import { metricToChartName } from "../constants/metrics";
 import { METRICS_NOT_PROVIDED } from "../constants/errors";
 import logger from "./logger";
 
@@ -28,6 +27,7 @@ export const noMetricData = (metric) =>
  * Transforms normalized data to chart.js format.
  * @param data - normalized data (see @returns of getNormalizedStateData)
  * @param metrics {string[]} - metric names for which we generate chart data
+ * @param metricLabels {string[]} - humanized metric names
  * @returns {{datasets: {
  * metric: string
  * label: string
@@ -71,23 +71,19 @@ export const noMetricData = (metric) =>
  *   ]
  * }
  */
-const generateChartData = (data, metrics) => {
+const generateChartData = (data, metrics, metricLabels = []) => {
   if (!metrics.length) {
     throw new Error(METRICS_NOT_PROVIDED);
   }
 
-  const datasets = metrics.reduce((acc, metric) => {
-    if (!metricToChartName[metric]) {
-      logger.warn(noHumanizedValue(metric));
-    }
-
+  const datasets = metrics.reduce((acc, metric, index) => {
     if (!data[metric]) {
       logger.warn(noMetricData(metric));
     }
 
     acc.push({
       metric,
-      label: metricToChartName[metric] || metric,
+      label: metricLabels[index],
       isNotAvailable: !data[metric],
       data: [],
     });

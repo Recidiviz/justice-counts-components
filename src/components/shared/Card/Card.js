@@ -30,6 +30,9 @@ const Card = ({
   number,
   percentChange,
   className,
+  sourceText,
+  reportName,
+  sourceUrl,
   children,
 }) => (
   <div
@@ -44,6 +47,23 @@ const Card = ({
         <div className="Card__warning-box">
           <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={hint} />
           <div className="Card__warning">{hint}</div>
+        </div>
+      )}
+      {sourceText && (
+        <div className="Card__warning-box Card__warning-box--hint">
+          <button
+            type="button"
+            tabIndex={0}
+            className="Card__warning-icon"
+            aria-label={sourceText}
+          />
+          <div className="Card__warning">
+            {sourceText} (
+            <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
+              {reportName}
+            </a>
+            )
+          </div>
         </div>
       )}
     </div>
@@ -66,6 +86,9 @@ const Card = ({
 
 Card.defaultProps = {
   isNotAvailable: false,
+  sourceText: null,
+  reportName: null,
+  sourceUrl: null,
   isPopulation: false,
   hint: null,
   number: null,
@@ -76,6 +99,9 @@ Card.defaultProps = {
 
 Card.propTypes = {
   title: PropTypes.string.isRequired,
+  sourceText: PropTypes.string,
+  reportName: PropTypes.string,
+  sourceUrl: PropTypes.string,
   isNotAvailable: PropTypes.bool,
   isPopulation: PropTypes.bool,
   hint: PropTypes.string,

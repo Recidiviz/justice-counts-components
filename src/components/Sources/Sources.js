@@ -15,28 +15,32 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import React from "react";
+import PropTypes from "prop-types";
 
-import Card from "../shared/Card";
-import { keyInsightsPropTypes } from "./propTypes";
+import Source from "./Source";
 
-import "./KeyInsights.scss";
+import { sourcePropTypes } from "./propTypes";
 
-const KeyInsights = ({ keyInsightsData }) => (
-  <div className="KeyInsights">
-    <h2 className="KeyInsights__title">Key insights</h2>
-    <div className="KeyInsights__cards">
-      {keyInsightsData.map((card) => (
-        <div key={card.title} className="KeyInsights__card">
-          <Card {...card} />
-          <p className="KeyInsights__card-description">{card.caption}</p>
-        </div>
-      ))}
-    </div>
+import "./Sources.scss";
+
+const Sources = ({ data }) => (
+  <div className="Sources">
+    <h2 className="Sources__title">Sources</h2>
+    {!data.length ? (
+      <p className="Sources__no-data">No public sources available.</p>
+    ) : (
+      <p className="Sources__data">
+        All data for these visualizations comes from public reports published by the{" "}
+        {data.map((source) => (
+          <Source key={source.name} {...source} />
+        ))}
+      </p>
+    )}
   </div>
 );
 
-KeyInsights.propTypes = {
-  keyInsightsData: keyInsightsPropTypes.isRequired,
+Sources.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
 };
 
-export default KeyInsights;
+export default Sources;
