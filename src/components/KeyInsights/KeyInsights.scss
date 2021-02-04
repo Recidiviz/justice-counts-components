@@ -25,6 +25,10 @@
     padding-right: $mobile-offset;
     border-bottom: 0;
   }
+  @include down($sm) {
+    padding-left: $extra-mobile-offset;
+    padding-right: $extra-mobile-offset;
+  }
 
   &__title {
     margin-bottom: 2rem;
@@ -57,7 +61,14 @@
         display: block;
         width: $mobile-offset;
         flex-shrink: 0;
+        @include down($sm) {
+          width: $extra-mobile-offset;
+        }
       }
+    }
+    @include down($sm) {
+      margin-left: -$extra-mobile-offset;
+      margin-right: -$extra-mobile-offset;
     }
   }
 

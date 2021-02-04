@@ -148,6 +148,9 @@
     font-weight: 700;
     font-size: 2.5rem;
     line-height: 1;
+    @media (max-width: 439px) {
+      font-size: calc(1.5rem + ((100vw - 320px) / 119 * 16));
+    }
   }
 
   &__percent {
@@ -155,6 +158,9 @@
     font-size: 2.5rem;
     line-height: 1;
     color: #0db4e4;
+    @media (max-width: 439px) {
+      font-size: calc(1.5rem + ((100vw - 320px) / 119 * 16));
+    }
   }
 
   &__not-available-text {
@@ -165,5 +171,8 @@
     letter-spacing: -0.01em;
     text-transform: capitalize;
     white-space: nowrap;
+    @media (max-width: 439px) {
+      font-size: calc(1.5rem + ((100vw - 320px) / 119 * 16));
+    }
   }
 }

@@ -22,6 +22,10 @@
     padding-left: $mobile-offset;
     padding-right: $mobile-offset;
   }
+  @include down($sm) {
+    padding-left: $extra-mobile-offset;
+    padding-right: $extra-mobile-offset;
+  }
 
   &__header {
     display: flex;
@@ -53,7 +57,7 @@
 
   &__box {
     padding-top: 1rem;
-    border-top: 1px dashed #8C8C8C;
+    border-top: 1px dashed #8c8c8c;
     @include down($lg) {
       border-top: 0;
       padding-top: 0;
@@ -61,7 +65,7 @@
   }
 
   &__box-name {
-    color: #8C8C8C;
+    color: #8c8c8c;
     font-weight: 700;
     letter-spacing: 0.05em;
     font-size: 0.8125rem;

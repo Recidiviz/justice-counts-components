@@ -20,6 +20,10 @@
       padding-right: $mobile-offset;
       border-bottom: 0;
     }
+    @include down($sm) {
+      padding-left: $extra-mobile-offset;
+      padding-right: $extra-mobile-offset;
+    }
   }
 
   &__title {

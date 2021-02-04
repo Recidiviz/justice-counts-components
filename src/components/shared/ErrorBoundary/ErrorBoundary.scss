@@ -22,6 +22,10 @@
   @include down($lg) {
     padding: 1rem $mobile-offset;
   }
+  @include down($sm) {
+    padding-left: $extra-mobile-offset;
+    padding-right: $extra-mobile-offset;
+  }
 
   &__error {
     font-style: italic;

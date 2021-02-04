@@ -23,6 +23,10 @@
     padding-left: $mobile-offset;
     padding-right: $mobile-offset;
   }
+  @include down($sm) {
+    padding-left: $extra-mobile-offset;
+    padding-right: $extra-mobile-offset;
+  }
 
   &__title {
     margin-bottom: 1.25rem;
