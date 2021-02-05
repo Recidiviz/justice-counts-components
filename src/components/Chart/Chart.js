@@ -49,6 +49,7 @@ const Chart = ({ title, hint, chartData }) => {
     ...dataset,
     data: dataset.data,
     borderColor: chartColors[i],
+    isNotAvailable: dataset.isNotAvailable || dataset.data.every((dataPoint) => dataPoint === null),
     backgroundColor: "transparent",
     pointBackgroundColor: chartColors[i],
     pointHoverBackgroundColor: chartColors[i],
