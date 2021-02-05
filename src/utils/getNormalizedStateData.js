@@ -62,15 +62,17 @@ const getNormalizedStateData = (data, stateCode) => {
         year: toInt(item.year),
         month: toInt(item.month) - 1,
         dateReported: new Date(item.date_reported),
-        value: item.value,
+        value: toInt(item.value),
         comparedToYear: item.compared_to_year ? toInt(item.compared_to_year) : null,
         comparedToMonth: item.compared_to_month ? toInt(item.compared_to_month) - 1 : null,
-        valueChange: typeof item.value_change === "number" ? item.value_change : null,
-        percentChange: typeof item.percentage_change === "number" ? item.percentage_change : null,
         sourceName: item.source_name,
         sourceUrl: item.source_url,
         reportName: item.report_name,
         sourceCategories: item.raw_source_categories,
+        valueChange: Number.isNaN(Number(item.value_change)) ? null : Number(item.value_change),
+        percentChange: Number.isNaN(Number(item.percentage_change))
+          ? null
+          : Number(item.percentage_change),
       };
       if (acc[normalizedItem.metric]) {
         acc[normalizedItem.metric].push(normalizedItem);

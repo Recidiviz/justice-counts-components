@@ -110,11 +110,11 @@ App.propTypes = {
       year: PropTypes.string.isRequired,
       month: PropTypes.string.isRequired,
       date_reported: PropTypes.string.isRequired,
-      value: PropTypes.number.isRequired,
+      value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       compared_to_year: PropTypes.string,
       compared_to_month: PropTypes.string,
-      value_change: PropTypes.number,
-      percentage_change: PropTypes.number,
+      value_change: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      percentage_change: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     })
   ).isRequired,
 };
