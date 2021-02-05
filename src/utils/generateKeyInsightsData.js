@@ -27,7 +27,7 @@ const generateRevocationsCaption = (source) => (percentChange, numberChange) => 
 
   return `The number of people revoked from ${source} to prison ${
     isPositive ? "rose" : "fell"
-  } by ${Math.abs(numberChange)} people, a ${Math.abs(percentChange)} percent ${
+  } by ${Math.abs(numberChange)} people, a ${Math.abs(Math.round(percentChange))} percent ${
     isPositive ? "increase" : "decline"
   }.`;
 };
@@ -37,7 +37,7 @@ const generateTechnicalRevocationsCaption = (source) => (percentChange, numberCh
 
   return `Revocations to prison for technical violations of ${source} ${
     isPositive ? "rose" : "fell"
-  } by ${Math.abs(numberChange)} people, a ${percentChange} percent ${
+  } by ${Math.abs(numberChange)} people, a ${Math.abs(Math.round(percentChange))} percent ${
     isPositive ? "increase" : "decline"
   }.`;
 };
@@ -45,7 +45,7 @@ const generateTechnicalRevocationsCaption = (source) => (percentChange, numberCh
 const getCaptionMap = {
   [POPULATION_PRISON]: (percentChange, numberChange) =>
     `The prison population ${numberChange > 0 ? "rose" : "fell"} ${Math.abs(
-      percentChange
+      Math.round(percentChange)
     )} percent, ${numberChange > 0 ? "an increase" : "a decline"} of ${Math.abs(
       numberChange
     )} people.`,
