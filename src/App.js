@@ -82,7 +82,13 @@ const App = ({ stateCode, data }) => {
 
   const keyInsightsData = generateKeyInsightsData(flowData);
 
-  const sourceData = generateSourceData(flowData);
+  const sourceData = generateSourceData(flowData, [
+    populationsChartData.sourceData,
+    prisonAdmissionsChartData.sourceData,
+    paroleRevocationsChartData.sourceData,
+    probationRevocationsChartData.sourceData,
+    releasesChartData.sourceData,
+  ]);
 
   return (
     <MainPage
