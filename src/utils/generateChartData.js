@@ -17,9 +17,6 @@
 import { METRICS_NOT_PROVIDED } from "../constants/errors";
 import logger from "./logger";
 
-export const noHumanizedValue = (metric) =>
-  `${metric} missing humanized chart name. Fallback to metric name.`;
-
 export const noMetricData = (metric) =>
   `${metric} doesn't appear in source files. Chart data is not generated.`;
 
@@ -28,11 +25,19 @@ export const noMetricData = (metric) =>
  * @param data - normalized data (see @returns of getNormalizedStateData)
  * @param metrics {string[]} - metric names for which we generate chart data
  * @param metricLabels {string[]} - humanized metric names
- * @returns {{datasets: {
- * metric: string
- * label: string
- * data: (number|null)[]
- * }[], labels: string[]}}
+ * @returns {{
+ * datasets: {
+ *   metric: string
+ *   label: string
+ *   data: (number|null)[]
+ * }[],
+ * labels: string[],
+ * sourceData: {
+ *   [sourceName]: {
+ *     [sourceUrl]: [reportName]
+ *   }
+ * }
+ * }}
  *
  * ({
  *   METRIC_NAME: [
@@ -124,6 +129,8 @@ const generateChartData = (data, metrics, metricLabels = []) => {
   let i = startYear * 12 + startMonth;
   const lastMonth = endYear * 12 + endMonth;
 
+  const sourceData = {};
+
   while (i <= lastMonth) {
     const year = Math.floor(i / 12);
     const month = i % 12;
@@ -131,17 +138,24 @@ const generateChartData = (data, metrics, metricLabels = []) => {
     labels.push({ year, month });
     datasets.forEach((dataset) => {
       if (!dataset.isNotAvailable) {
-        dataset.data.push(
-          data[dataset.metric].find((item) => item.year === year && item.month === month)?.value ||
-            null
+        const dataPoint = data[dataset.metric].find(
+          (item) => item.year === year && item.month === month
         );
+        dataset.data.push(dataPoint?.value || null);
+        if (dataPoint) {
+          if (!sourceData[dataPoint.sourceName]) {
+            sourceData[dataPoint.sourceName] = { [dataPoint.sourceUrl]: dataPoint.reportName };
+          } else {
+            sourceData[dataPoint.sourceName][dataPoint.sourceUrl] = dataPoint.reportName;
+          }
+        }
       }
     });
 
     i += 1;
   }
 
-  return { datasets, labels };
+  return { datasets, labels, sourceData };
 };
 
 export default generateChartData;

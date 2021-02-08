@@ -14,9 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+import { merge } from "merge";
+
 /**
  * Generates source links array from flowData.
- * @param flowData
+ * @param flowData - data used for flowData render
+ * @param chartSourceData - prepared source data from charts
  * @returns {{
  *   name: string
  *   links: {
@@ -25,25 +28,33 @@
  *   }[]
  * }[]}
  */
-const generateSourceData = (flowData) => {
-  const sourceDataMap = Object.values(flowData).reduce((acc, { isNotAvailable, item }) => {
-    if (isNotAvailable) {
+const generateSourceData = (flowData, chartSourceData) => {
+  const flowDiagramSourceDataMap = Object.values(flowData).reduce(
+    (acc, { isNotAvailable, item }) => {
+      if (isNotAvailable) {
+        return acc;
+      }
+
+      if (!acc[item.sourceName]) {
+        acc[item.sourceName] = { [item.sourceUrl]: item.reportName };
+      } else {
+        acc[item.sourceName][item.sourceUrl] = item.reportName;
+      }
+
       return acc;
-    }
+    },
+    {}
+  );
 
-    if (!acc[item.sourceName]) {
-      acc[item.sourceName] = { [item.sourceUrl]: item.reportName };
-    } else {
-      acc[item.sourceName][item.sourceUrl] = item.reportName;
-    }
-
-    return acc;
-  }, {});
+  const sourceDataMap = merge(flowDiagramSourceDataMap, ...chartSourceData);
 
   return Object.entries(sourceDataMap).reduce((acc, [sourceName, links]) => {
     acc.push({
       name: sourceName,
-      links: Object.entries(links).map(([linkSrc, linkName]) => ({ name: linkName, src: linkSrc })),
+      links: Object.entries(links).map(([linkSrc, linkName]) => ({
+        name: linkName,
+        src: linkSrc,
+      })),
     });
 
     return acc;

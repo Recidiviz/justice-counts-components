@@ -40,7 +40,7 @@ describe("generateChartData.js", () => {
     it("should convert data to chart.js format ", () => {
       expect(
         generateChartData(mockStateData, [RELEASES_COMPLETED], [mockMetricName])
-      ).toStrictEqual({
+      ).toMatchObject({
         datasets: [
           {
             metric: RELEASES_COMPLETED,
@@ -82,7 +82,7 @@ describe("generateChartData.js", () => {
           [RELEASES_COMPLETED, ADMISSIONS_NEW_COMMITMENTS],
           [mockMetric1Name, mockMetric2Name]
         )
-      ).toStrictEqual({
+      ).toMatchObject({
         datasets: [
           {
             metric: RELEASES_COMPLETED,
@@ -128,7 +128,7 @@ describe("generateChartData.js", () => {
           [POPULATION_PAROLE, POPULATION_PRISON],
           [mockMetric1Name, mockMetric2Name]
         )
-      ).toStrictEqual({
+      ).toMatchObject({
         datasets: [
           {
             metric: POPULATION_PAROLE,
@@ -178,7 +178,7 @@ describe("generateChartData.js", () => {
     const mockStateData = {
       anotherMetric: [{ year: 2020, month: 8, value: 1002 }],
     };
-    expect(generateChartData(mockStateData, [metricName], [mockMetricLabel])).toStrictEqual({
+    expect(generateChartData(mockStateData, [metricName], [mockMetricLabel])).toMatchObject({
       datasets: [
         {
           metric: metricName,
