@@ -3,10 +3,8 @@ const { loaderByName, addBeforeLoader } = require("@craco/craco");
 module.exports = {
   webpack: {
     configure: (webpackConfig) => {
-      webpackConfig.resolve.extensions.push(".jsonl");
-
       const jsonLinesLoader = {
-        test: /\.jsonl$/,
+        test: require.resolve("./src/data.json"),
         use: "jsonlines-loader",
         type: "javascript/auto",
       };

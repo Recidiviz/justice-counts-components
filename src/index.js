@@ -20,7 +20,7 @@ import "react-app-polyfill/stable";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import data from "./data.jsonl";
+import data from "./data.json";
 
 import "./index.scss";
 
