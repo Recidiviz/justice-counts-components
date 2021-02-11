@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-@import "../../assets/scss/variables";
+@import "../../../assets/scss/variables";
 .Chart {
   padding-bottom: 5.5rem;
   @include down($lg) {

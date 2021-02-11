@@ -12,8 +12,7 @@
   }
 
   &__header {
-    padding-bottom: 4rem;
-    border-bottom: 1px solid #c4ccd4;
+    padding-bottom: 2.6875rem;
     @include down($lg) {
       padding-bottom: 3rem;
       padding-left: $mobile-offset;
@@ -46,6 +45,37 @@
     color: #808c99;
     @include down($lg) {
       font-size: 0.875rem;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    border-bottom: 1px solid #c4ccd4;
+  }
+
+  &__tab {
+    margin-right: 1.25rem;
+    min-width: 6.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 6px;
+    font-weight: 800;
+    color: #cccccc;
+    font-size: 17px;
+    line-height: 1.41;
+    background: transparent;
+    border: 0;
+    border-bottom: 3px solid #cccccc;
+    transition: border-bottom-color 0.2s, color 0.2s;
+    cursor: pointer;
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    &_active,
+    &:hover {
+      border-bottom-color: #06aeee;
+      color: #06aeee;
     }
   }
 }

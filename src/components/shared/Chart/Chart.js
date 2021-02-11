@@ -21,7 +21,7 @@ import cn from "classnames";
 import { Line } from "react-chartjs-2";
 
 import PeriodPicker from "./PeriodPicker";
-import formatDatePeriod from "../../utils/formatDatePeriod";
+import formatDatePeriod from "../../../utils/formatDatePeriod";
 import calcMetricPercentage from "./utils/calcMetricPercentage";
 import adjustChartDataLength from "./utils/adjustChartDataLength";
 import { chartDataPropTypes } from "./propTypes";

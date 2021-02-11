@@ -18,7 +18,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useWindowWidth } from "@react-hook/window-size";
 
-import Card from "../shared/Card";
+import Card from "../../shared/Card";
 import Arrow from "./Arrow";
 
 import {
@@ -30,7 +30,7 @@ import {
   POPULATION_PRISON,
   POPULATION_PROBATION,
   RELEASES_TO_PAROLE,
-} from "../../constants/metrics";
+} from "../../../constants/metrics";
 import { flowDiagramDataPropTypes } from "./propTypes";
 
 import "./FlowDiagram.scss";

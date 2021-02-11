@@ -18,20 +18,14 @@ import React from "react";
 import { render } from "@testing-library/react";
 
 import MainPage from "../MainPage";
-import Chart from "../../Chart";
-import FlowDiagram from "../../FlowDiagram";
-import KeyInsights from "../../KeyInsights";
+import Corrections from "../../Corrections";
 
-jest.mock("../../FlowDiagram");
-jest.mock("../../KeyInsights");
-jest.mock("../../Chart");
+jest.mock("../../Corrections");
 describe("MainPage.js", () => {
   const mockStateName = "Alabama";
 
   beforeEach(() => {
-    KeyInsights.mockReturnValue(null);
-    Chart.mockReturnValue(null);
-    FlowDiagram.mockReturnValue(null);
+    Corrections.mockReturnValue(null);
   });
 
   it("should render MainPage with specified state name", () => {

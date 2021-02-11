@@ -14,46 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-@import "../../assets/scss/variables";
-.Sources {
-  padding-top: 1rem;
-  padding-bottom: 6rem;
-  border-top: 1px solid #c4ccd4;
-  @include down($lg) {
-    padding-left: $mobile-offset;
-    padding-right: $mobile-offset;
-  }
-  @include down($sm) {
-    padding-left: $extra-mobile-offset;
-    padding-right: $extra-mobile-offset;
+import logger from "../../../../utils/logger";
+
+export const NO_DATA_ERROR = "Cannot generate percentage for empty metric.";
+
+/**
+ * Transforms data points array and returns percentage diff between first and last data points
+ * @param data (number|null)[]
+ * @returns {string}
+ */
+function calcMetricPercentage(data) {
+  if (!data.length) {
+    logger.error(NO_DATA_ERROR);
+
+    return "N/A";
   }
 
-  &__title {
-    margin-bottom: 1.25rem;
-    font-weight: 800;
-    font-size: 1.25rem;
-    line-height: 1.2;
+  if (data.length === 1) {
+    return "0%";
   }
 
-  &__data {
-    font-weight: 400;
-    font-size: 0.9375rem;
-    line-height: 1.6;
-  }
+  const filteredData = data.filter((item) => item);
 
-  &__text {
-    &:after {
-      content: ", ";
-    }
-    &:last-child:before {
-      content: "and ";
-    }
-    &:last-child:after {
-      content: ".";
-    }
-  }
+  const ratio = filteredData[filteredData.length - 1] / filteredData[0];
+  const sign = ratio < 1 ? "-" : "+";
 
-  &__link {
-    color: #0db4e4;
-  }
+  return `${sign}${Math.round(Math.abs((ratio - 1) * 100))}%`;
 }
+
+export default calcMetricPercentage;

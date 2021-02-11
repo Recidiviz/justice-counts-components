@@ -22,13 +22,13 @@ import PeriodPicker from "../PeriodPicker";
 import Chart from "../Chart";
 import calcMetricPercentage from "../utils/calcMetricPercentage";
 import adjustChartDataLength from "../utils/adjustChartDataLength";
-import formatDatePeriod from "../../../utils/formatDatePeriod";
+import formatDatePeriod from "../../../../utils/formatDatePeriod";
 
 jest.mock("react-chartjs-2");
 jest.mock("../PeriodPicker");
 jest.mock("../utils/adjustChartDataLength");
 jest.mock("../utils/calcMetricPercentage");
-jest.mock("../../../utils/formatDatePeriod");
+jest.mock("../../../../utils/formatDatePeriod");
 describe("Chart.js", () => {
   const mockDatePeriod = "September 2019 - October 2020";
   const mockHint = "By System";

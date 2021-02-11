@@ -14,19 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import KeyInsights from "../KeyInsights/KeyInsights";
-import FlowDiagram from "../FlowDiagram";
-import Chart from "../Chart";
-import Sources from "../Sources";
-import ErrorBoundary from "../shared/ErrorBoundary";
+import Tabs from "./Tabs";
+import Corrections from "../Corrections";
+import Jails from "../Jails";
 
-import { chartDataPropTypes } from "../Chart/propTypes";
-import { flowDiagramDataPropTypes } from "../FlowDiagram/propTypes";
-import { keyInsightsPropTypes } from "../KeyInsights/propTypes";
-import { sourcePropTypes } from "../Sources/propTypes";
+import { chartDataPropTypes } from "../shared/Chart/propTypes";
+import { flowDiagramDataPropTypes } from "../Corrections/FlowDiagram/propTypes";
+import { keyInsightsPropTypes } from "../shared/KeyInsights/propTypes";
+import { sourcePropTypes } from "../shared/Sources/propTypes";
+import { CORRECTIONS, JAILS, LS_TAB_KEY } from "./constants";
 
 import "./MainPage.scss";
 
@@ -42,47 +41,43 @@ const MainPage = ({
   flowDiagramPrevDate,
   keyInsightsData,
   sourceData,
-}) => (
-  <section className="MainPage">
-    <header className="MainPage__header">
-      <h1 className="MainPage__title">{stateName} data dashboard</h1>
-      <p className="MainPage__description">
-        The following is a broad overview of the corrections system in {stateName}, representing
-        up-to-date data and changes compared to last year ({flowDiagramPrevDate} to{" "}
-        {flowDiagramLastDate}). Two additional sections containing crime and jail indicators will be
-        added at a later date.
-      </p>
-    </header>
-    <KeyInsights keyInsightsData={keyInsightsData} />
-    <ErrorBoundary placeholder="Unable to render Flow Diagram. An unhandled error happened. More info could be found in the console.">
-      <FlowDiagram
-        data={flowDiagramData}
-        lastDate={flowDiagramLastDate}
-        prevDate={flowDiagramPrevDate}
-      />
-    </ErrorBoundary>
-    <ErrorBoundary placeholder="Unable to render Populations Chart. An unhandled error happened. More info could be found in the console.">
-      <Chart chartData={populationsChartData} title="Populations" hint="By System" />
-    </ErrorBoundary>
-    <ErrorBoundary placeholder="Unable to render Admissions to Prison. An unhandled error happened. More info could be found in the console.">
-      <Chart chartData={prisonAdmissionsChartData} title="Admissions to Prison" hint="By Type" />
-    </ErrorBoundary>
-    <ErrorBoundary placeholder="Unable to render Parole Revocations chart. An unhandled error happened. More info could be found in the console.">
-      <Chart chartData={paroleRevocationsChartData} title="Parole Revocations" hint="By Type" />
-    </ErrorBoundary>
-    <ErrorBoundary placeholder="Unable to render Probation Revocations Chart. An unhandled error happened. More info could be found in the console.">
-      <Chart
-        chartData={probationRevocationsChartData}
-        title="Probation Revocations"
-        hint="By Type"
-      />
-    </ErrorBoundary>
-    <ErrorBoundary placeholder="Unable to render Releases Chart. An unhandled error happened. More info could be found in the console.">
-      <Chart chartData={releasesChartData} title="Releases" hint="By Type" />
-    </ErrorBoundary>
-    <Sources data={sourceData} />
-  </section>
-);
+}) => {
+  const [activeTab, setActiveTab] = useState(localStorage.getItem(LS_TAB_KEY) || CORRECTIONS);
+
+  const onActiveTabChange = (newTab) => {
+    setActiveTab(newTab);
+    localStorage.setItem(LS_TAB_KEY, newTab);
+  };
+
+  return (
+    <section className="MainPage">
+      <header className="MainPage__header">
+        <h1 className="MainPage__title">{stateName} data dashboard</h1>
+        <p className="MainPage__description">
+          The following is a broad overview of the criminal justice system in {stateName},
+          representing the up-to-date data and changes compared to last year. You can switch between
+          the available sections (Corrections, Jails, and Policing) with the tabs below.
+        </p>
+      </header>
+      <Tabs activeTab={activeTab} onTabChange={onActiveTabChange} />
+      {activeTab === CORRECTIONS && (
+        <Corrections
+          populationsChartData={populationsChartData}
+          prisonAdmissionsChartData={prisonAdmissionsChartData}
+          paroleRevocationsChartData={paroleRevocationsChartData}
+          probationRevocationsChartData={probationRevocationsChartData}
+          releasesChartData={releasesChartData}
+          flowDiagramData={flowDiagramData}
+          flowDiagramLastDate={flowDiagramLastDate}
+          flowDiagramPrevDate={flowDiagramPrevDate}
+          keyInsightsData={keyInsightsData}
+          sourceData={sourceData}
+        />
+      )}
+      {activeTab === JAILS && <Jails />}
+    </section>
+  );
+};
 
 MainPage.propTypes = {
   stateName: PropTypes.string.isRequired,
