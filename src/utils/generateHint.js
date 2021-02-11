@@ -45,12 +45,12 @@ const generateHint = (
   }
 
   const formattedReportedDate = `${
-    months[dateReported.getMonth()]
-  } ${dateReported.getDate()}, ${dateReported.getFullYear()}`;
+    months[dateReported.getUTCMonth()]
+  } ${dateReported.getUTCDate()}, ${dateReported.getUTCFullYear()}`;
 
   let hint = `${metricToCardName[metric]} was last reported on ${formattedReportedDate}`;
 
-  if (comparedToMonth && comparedToYear) {
+  if (comparedToMonth !== null && comparedToYear !== null) {
     hint += ` (% change relative to ${months[comparedToMonth]} ${comparedToYear})`;
   }
 
