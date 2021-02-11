@@ -61,4 +61,19 @@ describe("generateHint.js", () => {
       "Releases to Parole was last reported on October 30, 2020 (% change relative to August 2019)."
     );
   });
+
+  it("should return hint if compared date is not exactly one year before and month is zero", () => {
+    expect(
+      generateHint(2020, 9, {
+        metric: mockMetricName,
+        year: 2020,
+        month: 9,
+        comparedToYear: 2019,
+        comparedToMonth: 0,
+        dateReported: new Date(2020, 9, 30),
+      })
+    ).toBe(
+      "Releases to Parole was last reported on October 30, 2020 (% change relative to January 2019)."
+    );
+  });
 });
