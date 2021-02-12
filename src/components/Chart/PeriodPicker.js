@@ -25,9 +25,13 @@ const PeriodPicker = ({ period, periods, onChange }) => {
   const ref = useRef();
   const [isOpened, setIsOpened] = useState(false);
 
-  const currentPeriod = (periods.find(({ value }) => value === period) || {}).label;
+  const currentPeriod = (
+    periods.find(({ value, label }) => value === period.value && label === period.label) || {}
+  ).label;
 
-  const notChosenPeriods = periods.filter(({ value }) => value !== period);
+  const notChosenPeriods = periods.filter(
+    ({ value, label }) => !(value === period.value && label === period.label)
+  );
 
   const toggleOptions = useCallback(() => {
     setIsOpened(!isOpened);
@@ -63,11 +67,11 @@ const PeriodPicker = ({ period, periods, onChange }) => {
           {notChosenPeriods.map(({ value, label }) => (
             <button
               type="button"
-              key={value}
+              key={`${value}-${label}`}
               className={cn("PeriodPicker__option", {
-                "PeriodPicker__option--active": value === period,
+                "PeriodPicker__option--active": value === period.value && label === period.label,
               })}
-              onClick={createOnChange(value)}
+              onClick={createOnChange({ value, label })}
             >
               {label}
             </button>
@@ -78,14 +82,11 @@ const PeriodPicker = ({ period, periods, onChange }) => {
   );
 };
 
+const optionPropTypes = PropTypes.shape({ value: PropTypes.number, label: PropTypes.string });
+
 PeriodPicker.propTypes = {
-  period: PropTypes.number.isRequired,
-  periods: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.number,
-      label: PropTypes.string,
-    })
-  ).isRequired,
+  period: optionPropTypes.isRequired,
+  periods: PropTypes.arrayOf(optionPropTypes).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

@@ -57,12 +57,12 @@ describe("Chart.js", () => {
     );
 
     // should pass initial value to period picker
-    expect(PeriodPicker.mock.calls[0][0].period).toBe(12);
+    expect(PeriodPicker.mock.calls[0][0].period).toMatchObject({ value: 13, label: "1 year" });
 
     // should pass options to period picker
-    expect(PeriodPicker.mock.calls[0][0].periods).toStrictEqual([
-      { value: 60, label: "5 years" },
-      { value: 12, label: "1 year" },
+    expect(PeriodPicker.mock.calls[0][0].periods).toMatchObject([
+      { value: 13, label: "1 year" },
+      { value: 61, label: "5 years" },
       { value: 1, label: "All Time" },
     ]);
 
@@ -86,7 +86,7 @@ describe("Chart.js", () => {
   it("should change visible period", () => {
     render(<Chart hint={mockHint} title={mockTitle} chartData={mockChartData} />);
 
-    expect(PeriodPicker.mock.calls[0][0].period).toBe(12);
+    expect(PeriodPicker.mock.calls[0][0].period).toMatchObject({ value: 13, label: "1 year" });
 
     const option = PeriodPicker.mock.calls[0][0].periods[0];
 

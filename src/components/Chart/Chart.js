@@ -33,7 +33,12 @@ const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
 const CONNECTING_LINE_COLOR = "#00475D";
 
 const Chart = ({ title, hint, chartData }) => {
-  const [period, setPeriod] = useState(12);
+  const availablePeriods = [
+    { value: 13, label: "1 year" },
+    { value: 61, label: "5 years" },
+    { value: chartData.labels.length, label: "All Time" },
+  ];
+  const [period, setPeriod] = useState(availablePeriods[0]);
 
   const changePeriod = useCallback((value) => {
     setPeriod(value);
@@ -43,7 +48,10 @@ const Chart = ({ title, hint, chartData }) => {
     (dataset) => !dataset.data.filter((dataPoint) => dataPoint !== null).length
   );
 
-  const { datasets, labels } = adjustChartDataLength(chartData, isChartUnavailable ? 12 : period);
+  const { datasets, labels } = adjustChartDataLength(
+    chartData,
+    isChartUnavailable ? 13 : period.value
+  );
 
   const styledDatasets = datasets.map((dataset, i) => ({
     ...dataset,
@@ -91,15 +99,7 @@ const Chart = ({ title, hint, chartData }) => {
       <div className="Chart__header">
         <div className="Chart__title">{title}</div>
         <div className="Chart__period-picker">
-          <PeriodPicker
-            period={period}
-            periods={[
-              { value: 60, label: "5 years" },
-              { value: 12, label: "1 year" },
-              { value: chartData.labels.length, label: "All Time" },
-            ]}
-            onChange={changePeriod}
-          />
+          <PeriodPicker period={period} periods={availablePeriods} onChange={changePeriod} />
         </div>
         <div className="Chart__hint">
           {hint} ({formatDatePeriod(startYear, startMonth, endYear, endMonth)})
