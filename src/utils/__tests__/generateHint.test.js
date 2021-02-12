@@ -77,7 +77,7 @@ describe("generateHint.js", () => {
     );
   });
 
-  it("should return not return hint if compared date is null", () => {
+  it("should return null if compared date is null", () => {
     expect(
       generateHint(2020, 9, {
         metric: mockMetricName,
