@@ -38,8 +38,8 @@ const generateHint = (
   if (
     mostRecentYear === year &&
     mostRecentMonth === month &&
-    year === comparedToYear + 1 &&
-    month === comparedToMonth
+    ((comparedToYear === null && comparedToMonth === null) ||
+      (year === comparedToYear + 1 && month === comparedToMonth))
   ) {
     return null;
   }
