@@ -41,7 +41,7 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
  *    metric: string
  *    year: number
  *    month: number
- *    dateReported: string
+ *    dateReported: { year: number, month: number, day: number }
  *    value: number
  *    comparedToYear: number | null,
  *    comparedToMonth: number | null
@@ -57,11 +57,19 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
 const getNormalizedStateData = (data, stateCode) => {
   const normalizedData = data.reduce((acc, item) => {
     if (item.state_code === stateCode) {
+      const [yearReported, monthReported, dayReported] = item.date_reported
+        ? item.date_reported.split("-")
+        : [];
+
       const normalizedItem = {
         metric: item.metric,
         year: toInt(item.year),
         month: toInt(item.month) - 1,
-        dateReported: new Date(item.date_reported),
+        dateReported: {
+          year: toInt(yearReported),
+          month: toInt(monthReported - 1),
+          day: toInt(dayReported),
+        },
         value: toInt(item.value),
         comparedToYear: item.compared_to_year ? toInt(item.compared_to_year) : null,
         comparedToMonth: item.compared_to_month ? toInt(item.compared_to_month) - 1 : null,

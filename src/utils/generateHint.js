@@ -38,19 +38,19 @@ const generateHint = (
   if (
     mostRecentYear === year &&
     mostRecentMonth === month &&
-    year === comparedToYear + 1 &&
-    month === comparedToMonth
+    ((comparedToYear === null && comparedToMonth === null) ||
+      (year === comparedToYear + 1 && month === comparedToMonth))
   ) {
     return null;
   }
 
-  const formattedReportedDate = `${
-    months[dateReported.getMonth()]
-  } ${dateReported.getDate()}, ${dateReported.getFullYear()}`;
+  const formattedReportedDate = `${months[dateReported.month]} ${dateReported.day}, ${
+    dateReported.year
+  }`;
 
   let hint = `${metricToCardName[metric]} was last reported on ${formattedReportedDate}`;
 
-  if (comparedToMonth && comparedToYear) {
+  if (comparedToMonth !== null && comparedToYear !== null) {
     hint += ` (% change relative to ${months[comparedToMonth]} ${comparedToYear})`;
   }
 
