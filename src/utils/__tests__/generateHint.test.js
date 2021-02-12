@@ -27,7 +27,7 @@ describe("generateHint.js", () => {
         month: 2,
         comparedToYear: 2019,
         comparedToMonth: 2,
-        dateReported: new Date(),
+        dateReported: { year: 2020, month: 3, day: 30 },
       })
     ).toBe(null);
   });
@@ -40,7 +40,7 @@ describe("generateHint.js", () => {
         month: 7,
         comparedToYear: 2019,
         comparedToMonth: 7,
-        dateReported: new Date(2020, 8, 30),
+        dateReported: { year: 2020, month: 8, day: 30 },
       })
     ).toBe(
       "Releases to Parole was last reported on September 30, 2020 (% change relative to August 2019)."
@@ -55,7 +55,7 @@ describe("generateHint.js", () => {
         month: 9,
         comparedToYear: 2019,
         comparedToMonth: 7,
-        dateReported: new Date(2020, 9, 30),
+        dateReported: { year: 2020, month: 9, day: 30 },
       })
     ).toBe(
       "Releases to Parole was last reported on October 30, 2020 (% change relative to August 2019)."
@@ -70,7 +70,7 @@ describe("generateHint.js", () => {
         month: 9,
         comparedToYear: 2019,
         comparedToMonth: 0,
-        dateReported: new Date(2020, 9, 30),
+        dateReported: { year: 2020, month: 9, day: 30 },
       })
     ).toBe(
       "Releases to Parole was last reported on October 30, 2020 (% change relative to January 2019)."
@@ -85,7 +85,7 @@ describe("generateHint.js", () => {
         month: 9,
         comparedToYear: null,
         comparedToMonth: null,
-        dateReported: new Date(2020, 9, 30),
+        dateReported: { year: 2020, month: 9, day: 30 },
       })
     ).toBe(null);
   });

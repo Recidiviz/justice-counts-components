@@ -44,9 +44,9 @@ const generateHint = (
     return null;
   }
 
-  const formattedReportedDate = `${
-    months[dateReported.getUTCMonth()]
-  } ${dateReported.getUTCDate()}, ${dateReported.getUTCFullYear()}`;
+  const formattedReportedDate = `${months[dateReported.month]} ${dateReported.day}, ${
+    dateReported.year
+  }`;
 
   let hint = `${metricToCardName[metric]} was last reported on ${formattedReportedDate}`;
 
