@@ -25,10 +25,10 @@ import formatDatePeriod from "../../utils/formatDatePeriod";
 import calcMetricPercentage from "./utils/calcMetricPercentage";
 import adjustChartDataLength from "./utils/adjustChartDataLength";
 import { chartDataPropTypes } from "./propTypes";
-
-import "./Chart.scss";
 import formatNumber from "../../utils/formatNumber";
 import months from "../../constants/months";
+
+import "./Chart.scss";
 
 const TICKS_COLOR = "#808C99";
 const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
@@ -54,7 +54,6 @@ const Chart = ({ title, hint, chartData }) => {
     chartData,
     isChartUnavailable ? 13 : period.value
   );
-  console.log(datasets);
 
   const styledDatasets = datasets.map((dataset, i) => ({
     ...dataset,
