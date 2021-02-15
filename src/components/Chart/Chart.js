@@ -27,6 +27,8 @@ import adjustChartDataLength from "./utils/adjustChartDataLength";
 import { chartDataPropTypes } from "./propTypes";
 
 import "./Chart.scss";
+import formatNumber from "../../utils/formatNumber";
+import months from "../../constants/months";
 
 const TICKS_COLOR = "#808C99";
 const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
@@ -52,6 +54,7 @@ const Chart = ({ title, hint, chartData }) => {
     chartData,
     isChartUnavailable ? 13 : period.value
   );
+  console.log(datasets);
 
   const styledDatasets = datasets.map((dataset, i) => ({
     ...dataset,
@@ -63,7 +66,7 @@ const Chart = ({ title, hint, chartData }) => {
     pointHoverBackgroundColor: chartColors[i],
     pointBorderColor: "transparent",
     pointHoverBorderColor: chartColors[i],
-    pointRadius: 0,
+    pointRadius: dataset.data.filter((dataPoint) => dataPoint !== null).length === 1 ? 4 : 0,
     pointHitRadius: 12,
     spanGaps: true,
   }));
@@ -129,6 +132,7 @@ const Chart = ({ title, hint, chartData }) => {
                       min: 0,
                       maxTicksLimit: 6,
                       stepSize: 100,
+                      callback: (label) => formatNumber(label),
                     },
                   },
                 ],
@@ -148,7 +152,14 @@ const Chart = ({ title, hint, chartData }) => {
               },
               tooltips: {
                 callbacks: {
-                  title: () => null,
+                  title: (item) => {
+                    const [month, year] = item[0].label.split("/");
+                    return `${months[month - 1]} ${year}`;
+                  },
+                  label: (tooltipItem, data) =>
+                    `${data.datasets[tooltipItem.datasetIndex].label}: ${formatNumber(
+                      tooltipItem.value
+                    )}`,
                 },
                 backgroundColor: CONNECTING_LINE_COLOR,
                 yPadding: 10,

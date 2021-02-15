@@ -83,11 +83,10 @@
     height: 19rem;
     flex-shrink: 0;
     flex-grow: 1;
+    padding-top: 0.5rem;
     @include down($lg) {
+      padding: 0.5rem $mobile-offset 2rem;
       border-bottom: 1px solid #c4ccd4;
-      padding-bottom: 2rem;
-      padding-left: $mobile-offset;
-      padding-right: $mobile-offset;
     }
     @include down($sm) {
       padding-left: $extra-mobile-offset;
@@ -99,12 +98,14 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    margin-top: -1rem;
     padding: 0.25rem 0.5rem;
     color: #8c8c8c;
     font-weight: 700;
     border: 2px solid #8c8c8c;
     border-radius: 0.25rem;
     transform: translate(-50%, -50%);
+    background-color: #ffffff;
   }
 
   &__legends {

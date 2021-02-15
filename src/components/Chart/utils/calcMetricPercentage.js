@@ -37,7 +37,15 @@ function calcMetricPercentage(data) {
   const filteredData = data.filter((item) => item);
 
   const ratio = filteredData[filteredData.length - 1] / filteredData[0];
-  const sign = ratio < 1 ? "-" : "+";
+  const sign = (() => {
+    if (ratio < 1) {
+      return "-";
+    }
+    if (ratio > 1) {
+      return "+";
+    }
+    return "";
+  })();
 
   return `${sign}${Math.round(Math.abs((ratio - 1) * 100))}%`;
 }
