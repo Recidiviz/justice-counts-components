@@ -77,7 +77,7 @@ const Card = ({
             <span className="Card__percent">(--%)</span>
           ) : (
             <span className="Card__percent">
-              ({percentChange > 0 && "+"}
+              ({Math.round(percentChange) > 0 && "+"}
               {Math.round(percentChange)}%)
             </span>
           )}
