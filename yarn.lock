@@ -6078,6 +6078,11 @@ is-docker@^2.0.0:
   resolved "https://registry.yarnpkg.com/is-docker/-/is-docker-2.1.1.tgz#4125a88e44e450d384e09047ede71adc2d144156"
   integrity sha512-ZOoqiXfEwtGknTiuDEy8pN2CfE3TxMHprvNer1mXiqwkOT77Rw3YVrUQ52EqAOU3QAWDQ+bQdx7HJzrv7LS2Hw==
 
+is-empty-obj@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/is-empty-obj/-/is-empty-obj-1.0.12.tgz#72c8f1b815ad829286d4121d87acaff36cd6d64e"
+  integrity sha512-qHBAsU2hONx/K5o0VwTLRVfHb/cAsJY8+cYLLQBupCdKu0v5bxT83K9Dr997Go7gIoc4J6J0pD5qIIIvBFQZBQ==
+
 is-extendable@^0.1.0, is-extendable@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/is-extendable/-/is-extendable-0.1.1.tgz#62b110e289a471418e3ec36a617d472e301dfc89"
