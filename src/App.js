@@ -16,6 +16,7 @@
 // =============================================================================
 import React from "react";
 import PropTypes from "prop-types";
+import isEmptyObj from "is-empty-obj";
 
 import MainPage from "./components/MainPage";
 import states from "./constants/states";
@@ -42,6 +43,8 @@ import {
 const App = ({ stateCode, data }) => {
   const stateName = states[stateCode];
   const stateMetricData = getNormalizedStateData(data, stateCode);
+
+  const isNoData = isEmptyObj(stateMetricData);
 
   const populationsChartData = generateChartData(
     stateMetricData,
@@ -103,6 +106,7 @@ const App = ({ stateCode, data }) => {
       flowDiagramPrevDate={comparedToDate}
       keyInsightsData={keyInsightsData}
       sourceData={sourceData}
+      isNoData={isNoData}
     />
   );
 };

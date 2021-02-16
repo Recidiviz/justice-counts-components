@@ -16,6 +16,7 @@
 // =============================================================================
 import React from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 
 import KeyInsights from "../KeyInsights/KeyInsights";
 import FlowDiagram from "../FlowDiagram";
@@ -42,45 +43,70 @@ const MainPage = ({
   flowDiagramPrevDate,
   keyInsightsData,
   sourceData,
+  isNoData,
 }) => (
   <section className="MainPage">
-    <header className="MainPage__header">
+    <header className={cn("MainPage__header", { "MainPage__header--without-border": isNoData })}>
       <h1 className="MainPage__title">{stateName} data dashboard</h1>
-      <p className="MainPage__description">
-        The following is a broad overview of the corrections system in {stateName}, representing
-        up-to-date data and changes compared to last year ({flowDiagramPrevDate} to{" "}
-        {flowDiagramLastDate}). Two additional sections containing crime and jail indicators will be
-        added at a later date.
-      </p>
+      {isNoData ? (
+        <p className="MainPage__description">
+          No data was publicly available for this state. If you are a representative of this state
+          and would like to contribute your data to this site, please{" "}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://justicecounts.csgjusticecenter.org/stay-in-touch/"
+            className="MainPage__contact-link"
+          >
+            contact us
+          </a>
+          .
+        </p>
+      ) : (
+        <p className="MainPage__description">
+          The following is a broad overview of the corrections system in {stateName}, representing
+          up-to-date data and changes compared to last year ({flowDiagramPrevDate} to{" "}
+          {flowDiagramLastDate}). Two additional sections containing crime and jail indicators will
+          be added at a later date.
+        </p>
+      )}
     </header>
-    <KeyInsights keyInsightsData={keyInsightsData} />
-    <ErrorBoundary placeholder="Unable to render Flow Diagram. An unhandled error happened. More info could be found in the console.">
-      <FlowDiagram
-        data={flowDiagramData}
-        lastDate={flowDiagramLastDate}
-        prevDate={flowDiagramPrevDate}
-      />
-    </ErrorBoundary>
-    <ErrorBoundary placeholder="Unable to render Populations Chart. An unhandled error happened. More info could be found in the console.">
-      <Chart chartData={populationsChartData} title="Populations" hint="By System" />
-    </ErrorBoundary>
-    <ErrorBoundary placeholder="Unable to render Admissions to Prison. An unhandled error happened. More info could be found in the console.">
-      <Chart chartData={prisonAdmissionsChartData} title="Admissions to Prison" hint="By Type" />
-    </ErrorBoundary>
-    <ErrorBoundary placeholder="Unable to render Parole Revocations chart. An unhandled error happened. More info could be found in the console.">
-      <Chart chartData={paroleRevocationsChartData} title="Parole Revocations" hint="By Type" />
-    </ErrorBoundary>
-    <ErrorBoundary placeholder="Unable to render Probation Revocations Chart. An unhandled error happened. More info could be found in the console.">
-      <Chart
-        chartData={probationRevocationsChartData}
-        title="Probation Revocations"
-        hint="By Type"
-      />
-    </ErrorBoundary>
-    <ErrorBoundary placeholder="Unable to render Releases Chart. An unhandled error happened. More info could be found in the console.">
-      <Chart chartData={releasesChartData} title="Releases" hint="By Type" />
-    </ErrorBoundary>
-    <Sources data={sourceData} />
+    {!isNoData && (
+      <>
+        <KeyInsights keyInsightsData={keyInsightsData} />
+        <ErrorBoundary placeholder="Unable to render Flow Diagram. An unhandled error happened. More info could be found in the console.">
+          <FlowDiagram
+            data={flowDiagramData}
+            lastDate={flowDiagramLastDate}
+            prevDate={flowDiagramPrevDate}
+          />
+        </ErrorBoundary>
+        <ErrorBoundary placeholder="Unable to render Populations Chart. An unhandled error happened. More info could be found in the console.">
+          <Chart chartData={populationsChartData} title="Populations" hint="By System" />
+        </ErrorBoundary>
+        <ErrorBoundary placeholder="Unable to render Admissions to Prison. An unhandled error happened. More info could be found in the console.">
+          <Chart
+            chartData={prisonAdmissionsChartData}
+            title="Admissions to Prison"
+            hint="By Type"
+          />
+        </ErrorBoundary>
+        <ErrorBoundary placeholder="Unable to render Parole Revocations chart. An unhandled error happened. More info could be found in the console.">
+          <Chart chartData={paroleRevocationsChartData} title="Parole Revocations" hint="By Type" />
+        </ErrorBoundary>
+        <ErrorBoundary placeholder="Unable to render Probation Revocations Chart. An unhandled error happened. More info could be found in the console.">
+          <Chart
+            chartData={probationRevocationsChartData}
+            title="Probation Revocations"
+            hint="By Type"
+          />
+        </ErrorBoundary>
+        <ErrorBoundary placeholder="Unable to render Releases Chart. An unhandled error happened. More info could be found in the console.">
+          <Chart chartData={releasesChartData} title="Releases" hint="By Type" />
+        </ErrorBoundary>
+        <Sources data={sourceData} />
+      </>
+    )}
   </section>
 );
 
@@ -96,6 +122,7 @@ MainPage.propTypes = {
   flowDiagramData: flowDiagramDataPropTypes.isRequired,
   keyInsightsData: keyInsightsPropTypes.isRequired,
   sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
+  isNoData: PropTypes.bool.isRequired,
 };
 
 export default MainPage;
