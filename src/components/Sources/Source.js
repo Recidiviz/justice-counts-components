@@ -20,10 +20,19 @@ import { sourcePropTypes } from "./propTypes";
 const Source = ({ name, links }) => (
   <span className="Sources__text">
     {name} (
-    {links.map((link) => (
-      <a key={link.src} target="_blank" rel="noreferrer" className="Sources__link" href={link.src}>
-        {link.name}
-      </a>
+    {links.map((link, index) => (
+      <>
+        <a
+          key={link.src}
+          target="_blank"
+          rel="noreferrer"
+          className="Sources__link"
+          href={link.src}
+        >
+          {link.name}
+        </a>
+        {index !== links.length - 1 && ", "}
+      </>
     ))}
     )
   </span>

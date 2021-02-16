@@ -23,6 +23,10 @@ import {
 } from "../constants/metrics";
 
 const generateRevocationsCaption = (source) => (percentChange, numberChange) => {
+  if (numberChange === 0) {
+    return `There was no net change in number of people revoked from ${source} to prison during this time period.`;
+  }
+
   const isPositive = numberChange > 0;
 
   return `The number of people revoked from ${source} to prison ${
@@ -33,6 +37,10 @@ const generateRevocationsCaption = (source) => (percentChange, numberChange) => 
 };
 
 const generateTechnicalRevocationsCaption = (source) => (percentChange, numberChange) => {
+  if (numberChange === 0) {
+    return `There was no net change in revocations to prison for technical violations of ${source} during this time period.`;
+  }
+
   const isPositive = numberChange > 0;
 
   return `Revocations to prison for technical violations of ${source} ${
@@ -43,12 +51,17 @@ const generateTechnicalRevocationsCaption = (source) => (percentChange, numberCh
 };
 
 const getCaptionMap = {
-  [POPULATION_PRISON]: (percentChange, numberChange) =>
-    `The prison population ${numberChange > 0 ? "rose" : "fell"} ${Math.abs(
+  [POPULATION_PRISON]: (percentChange, numberChange) => {
+    if (numberChange === 0) {
+      return `There was no net change in prison population during this time period.`;
+    }
+
+    return `The prison population ${numberChange > 0 ? "rose" : "fell"} ${Math.abs(
       Math.round(percentChange)
     )} percent, ${numberChange > 0 ? "an increase" : "a decline"} of ${Math.abs(
       numberChange
-    )} people.`,
+    )} people.`;
+  },
   [ADMISSIONS_FROM_PAROLE]: generateRevocationsCaption("parole"),
   [ADMISSIONS_FROM_PROBATION]: generateRevocationsCaption("probation"),
   [ADMISSIONS_FROM_PAROLE_TECHNICAL]: generateTechnicalRevocationsCaption("parole"),

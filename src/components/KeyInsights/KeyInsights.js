@@ -23,7 +23,7 @@ import "./KeyInsights.scss";
 
 const KeyInsights = ({ keyInsightsData }) => (
   <div className="KeyInsights">
-    <h2 className="KeyInsights__title">Key insights</h2>
+    <h2 className="KeyInsights__title">Key Insights</h2>
     <div className="KeyInsights__cards">
       {keyInsightsData.map((card) => (
         <div key={card.title} className="KeyInsights__card">

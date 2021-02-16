@@ -39,7 +39,7 @@
     font-size: 0.9375rem;
     line-height: 1.6;
     .Card--not-available & {
-      color: #b8bfc6;
+      color: #8c8c8c;
     }
     .Card--population &:before {
       margin-right: 0.5rem;
@@ -167,7 +167,7 @@
     font-size: 2.5rem;
     line-height: 1;
     font-weight: 700;
-    color: #b8bfc6;
+    color: #8c8c8c;
     letter-spacing: -0.01em;
     text-transform: capitalize;
     white-space: nowrap;

@@ -73,10 +73,14 @@ const Card = ({
       ) : (
         <>
           <span className="Card__number">{formatNumber(number)}</span>
-          <span className="Card__percent">
-            ({percentChange > 0 && "+"}
-            {Math.round(percentChange)}%)
-          </span>
+          {percentChange === null ? (
+            <span className="Card__percent">(--%)</span>
+          ) : (
+            <span className="Card__percent">
+              ({Math.round(percentChange) > 0 && "+"}
+              {Math.round(percentChange)}%)
+            </span>
+          )}
         </>
       )}
     </div>
