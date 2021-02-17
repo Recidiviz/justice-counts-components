@@ -29,6 +29,7 @@ import formatNumber from "../../utils/formatNumber";
 import months from "../../constants/months";
 
 import "./Chart.scss";
+import toInt from "../../utils/toInt";
 
 const TICKS_COLOR = "#808C99";
 const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
@@ -153,7 +154,7 @@ const Chart = ({ title, hint, chartData }) => {
                 callbacks: {
                   title: (item) => {
                     const [month, year] = item[0].label.split("/");
-                    return `${months[month - 1]} ${year}`;
+                    return `${months[month - 1]} ${2000 + toInt(year)}`;
                   },
                   label: (tooltipItem, data) =>
                     `${data.datasets[tooltipItem.datasetIndex].label}: ${formatNumber(
