@@ -10,6 +10,7 @@
     "@react-hook/window-size": "^3.0.7",
     "chart.js": "^2.9.4",
     "classnames": "^2.2.6",
+    "is-empty-obj": "^1.0.12",
     "merge": "^2.1.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
