@@ -77,10 +77,15 @@ describe("Chart.js", () => {
     expect(container.querySelectorAll(".Chart__legend--disabled").length).toBe(1);
     // should hide even labels
     expect(
-      ["01.02.20", "02.02.20", "03.02.20", "04.02.20"].map((item, index) =>
+      [
+        { year: 2019, month: 0 },
+        { year: 2019, month: 1 },
+        { year: 2019, month: 2 },
+        { year: 2019, month: 3 },
+      ].map((item, index) =>
         Line.mock.calls[0][0].options.scales.xAxes[0].ticks.callback(item, index)
       )
-    ).toStrictEqual(["01.02.20", null, "03.02.20", null]);
+    ).toStrictEqual(["1/19", null, "3/19", null]);
   });
 
   it("should change visible period", () => {

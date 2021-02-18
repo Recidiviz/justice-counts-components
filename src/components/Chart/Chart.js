@@ -29,7 +29,6 @@ import formatNumber from "../../utils/formatNumber";
 import months from "../../constants/months";
 
 import "./Chart.scss";
-import toInt from "../../utils/toInt";
 
 const TICKS_COLOR = "#808C99";
 const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
@@ -70,8 +69,6 @@ const Chart = ({ title, hint, chartData }) => {
     pointHitRadius: 12,
     spanGaps: true,
   }));
-  const formattedLabels = labels.map(({ year, month }) => `${month + 1}/${year % 100}`);
-
   const { month: startMonth, year: startYear } = labels[0];
   const { month: endMonth, year: endYear } = labels[labels.length - 1];
 
@@ -112,7 +109,7 @@ const Chart = ({ title, hint, chartData }) => {
         <div className="Chart__chart">
           {isChartUnavailable && <div className="Chart__chart-unavailable">No Data Available</div>}
           <Line
-            data={{ datasets: styledDatasets, labels: formattedLabels }}
+            data={{ datasets: styledDatasets, labels }}
             options={{
               hover: {
                 intersect: false,
@@ -145,17 +142,15 @@ const Chart = ({ title, hint, chartData }) => {
                       fontSize: 10,
                       fontWeight: 700,
                       lineHeight: "16px",
-                      callback: (tick, index) => (index % 2 ? null : tick),
+                      callback: (tick, index) =>
+                        index % 2 ? null : `${tick.month + 1}/${tick.year % 100}`,
                     },
                   },
                 ],
               },
               tooltips: {
                 callbacks: {
-                  title: (item) => {
-                    const [month, year] = item[0].label.split("/");
-                    return `${months[month - 1]} ${2000 + toInt(year)}`;
-                  },
+                  title: (item) => `${months[item[0].xLabel.month]} ${item[0].xLabel.year}`,
                   label: (tooltipItem, data) =>
                     `${data.datasets[tooltipItem.datasetIndex].label}: ${formatNumber(
                       tooltipItem.value
