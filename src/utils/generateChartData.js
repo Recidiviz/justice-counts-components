@@ -141,7 +141,11 @@ const generateChartData = (data, metrics, metricLabels = []) => {
         const dataPoint = data[dataset.metric].find(
           (item) => item.year === year && item.month === month
         );
-        dataset.data.push(dataPoint?.value || null);
+        if (dataPoint) {
+          dataset.data.push(dataPoint.value);
+        } else {
+          dataset.data.push(null);
+        }
         if (dataPoint) {
           if (!sourceData[dataPoint.sourceName]) {
             sourceData[dataPoint.sourceName] = { [dataPoint.sourceUrl]: dataPoint.reportName };

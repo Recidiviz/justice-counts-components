@@ -25,6 +25,8 @@ import formatDatePeriod from "../../utils/formatDatePeriod";
 import calcMetricPercentage from "./utils/calcMetricPercentage";
 import adjustChartDataLength from "./utils/adjustChartDataLength";
 import { chartDataPropTypes } from "./propTypes";
+import formatNumber from "../../utils/formatNumber";
+import months from "../../constants/months";
 
 import "./Chart.scss";
 
@@ -63,12 +65,10 @@ const Chart = ({ title, hint, chartData }) => {
     pointHoverBackgroundColor: chartColors[i],
     pointBorderColor: "transparent",
     pointHoverBorderColor: chartColors[i],
-    pointRadius: 0,
+    pointRadius: dataset.data.filter((dataPoint) => dataPoint !== null).length === 1 ? 4 : 0,
     pointHitRadius: 12,
     spanGaps: true,
   }));
-  const formattedLabels = labels.map(({ year, month }) => `${month + 1}/${year % 100}`);
-
   const { month: startMonth, year: startYear } = labels[0];
   const { month: endMonth, year: endYear } = labels[labels.length - 1];
 
@@ -109,7 +109,7 @@ const Chart = ({ title, hint, chartData }) => {
         <div className="Chart__chart">
           {isChartUnavailable && <div className="Chart__chart-unavailable">No Data Available</div>}
           <Line
-            data={{ datasets: styledDatasets, labels: formattedLabels }}
+            data={{ datasets: styledDatasets, labels }}
             options={{
               hover: {
                 intersect: false,
@@ -129,6 +129,7 @@ const Chart = ({ title, hint, chartData }) => {
                       min: 0,
                       maxTicksLimit: 6,
                       stepSize: 100,
+                      callback: (label) => formatNumber(label),
                     },
                   },
                 ],
@@ -141,14 +142,19 @@ const Chart = ({ title, hint, chartData }) => {
                       fontSize: 10,
                       fontWeight: 700,
                       lineHeight: "16px",
-                      callback: (tick, index) => (index % 2 ? null : tick),
+                      callback: (tick, index) =>
+                        index % 2 ? null : `${tick.month + 1}/${tick.year % 100}`,
                     },
                   },
                 ],
               },
               tooltips: {
                 callbacks: {
-                  title: () => null,
+                  title: (item) => `${months[item[0].xLabel.month]} ${item[0].xLabel.year}`,
+                  label: (tooltipItem, data) =>
+                    `${data.datasets[tooltipItem.datasetIndex].label}: ${formatNumber(
+                      tooltipItem.value
+                    )}`,
                 },
                 backgroundColor: CONNECTING_LINE_COLOR,
                 yPadding: 10,

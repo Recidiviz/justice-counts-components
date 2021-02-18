@@ -14,25 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import React from "react";
+import React, { Fragment } from "react";
 import { sourcePropTypes } from "./propTypes";
 
 const Source = ({ name, links }) => (
   <span className="Sources__text">
     {name} (
     {links.map((link, index) => (
-      <>
-        <a
-          key={link.src}
-          target="_blank"
-          rel="noreferrer"
-          className="Sources__link"
-          href={link.src}
-        >
+      <Fragment key={link.src}>
+        <a target="_blank" rel="noreferrer" className="Sources__link" href={link.src}>
           {link.name}
         </a>
         {index !== links.length - 1 && ", "}
-      </>
+      </Fragment>
     ))}
     )
   </span>
