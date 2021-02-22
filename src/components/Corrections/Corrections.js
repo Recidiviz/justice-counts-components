@@ -38,42 +38,38 @@ const Corrections = ({
   flowDiagramPrevDate,
   keyInsightsData,
   sourceData,
-}) => {
-  return (
-    <>
-      <ErrorBoundary placeholder="Unable to render Key Insights. An unhandled error happened. More info could be found in the console.">
-        <KeyInsights keyInsightsData={keyInsightsData} />
-      </ErrorBoundary>
-      <ErrorBoundary placeholder="Unable to render Flow Diagram. An unhandled error happened. More info could be found in the console.">
-        <FlowDiagram
-          data={flowDiagramData}
-          lastDate={flowDiagramLastDate}
-          prevDate={flowDiagramPrevDate}
-        />
-      </ErrorBoundary>
-      <ErrorBoundary placeholder="Unable to render Populations Chart. An unhandled error happened. More info could be found in the console.">
-        <Chart chartData={populationsChartData} title="Populations" hint="By System" />
-      </ErrorBoundary>
-      <ErrorBoundary placeholder="Unable to render Admissions to Prison. An unhandled error happened. More info could be found in the console.">
-        <Chart chartData={prisonAdmissionsChartData} title="Admissions to Prison" hint="By Type" />
-      </ErrorBoundary>
-      <ErrorBoundary placeholder="Unable to render Parole Revocations chart. An unhandled error happened. More info could be found in the console.">
-        <Chart chartData={paroleRevocationsChartData} title="Parole Revocations" hint="By Type" />
-      </ErrorBoundary>
-      <ErrorBoundary placeholder="Unable to render Probation Revocations Chart. An unhandled error happened. More info could be found in the console.">
-        <Chart
-          chartData={probationRevocationsChartData}
-          title="Probation Revocations"
-          hint="By Type"
-        />
-      </ErrorBoundary>
-      <ErrorBoundary placeholder="Unable to render Releases Chart. An unhandled error happened. More info could be found in the console.">
-        <Chart chartData={releasesChartData} title="Releases" hint="By Type" />
-      </ErrorBoundary>
-      <Sources data={sourceData} />
-    </>
-  );
-};
+}) => (
+  <>
+    <KeyInsights keyInsightsData={keyInsightsData} />
+    <ErrorBoundary placeholder="Unable to render Flow Diagram. An unhandled error happened. More info could be found in the console.">
+      <FlowDiagram
+        data={flowDiagramData}
+        lastDate={flowDiagramLastDate}
+        prevDate={flowDiagramPrevDate}
+      />
+    </ErrorBoundary>
+    <ErrorBoundary placeholder="Unable to render Populations Chart. An unhandled error happened. More info could be found in the console.">
+      <Chart chartData={populationsChartData} title="Populations" hint="By System" />
+    </ErrorBoundary>
+    <ErrorBoundary placeholder="Unable to render Admissions to Prison. An unhandled error happened. More info could be found in the console.">
+      <Chart chartData={prisonAdmissionsChartData} title="Admissions to Prison" hint="By Type" />
+    </ErrorBoundary>
+    <ErrorBoundary placeholder="Unable to render Parole Revocations chart. An unhandled error happened. More info could be found in the console.">
+      <Chart chartData={paroleRevocationsChartData} title="Parole Revocations" hint="By Type" />
+    </ErrorBoundary>
+    <ErrorBoundary placeholder="Unable to render Probation Revocations Chart. An unhandled error happened. More info could be found in the console.">
+      <Chart
+        chartData={probationRevocationsChartData}
+        title="Probation Revocations"
+        hint="By Type"
+      />
+    </ErrorBoundary>
+    <ErrorBoundary placeholder="Unable to render Releases Chart. An unhandled error happened. More info could be found in the console.">
+      <Chart chartData={releasesChartData} title="Releases" hint="By Type" />
+    </ErrorBoundary>
+    <Sources data={sourceData} />
+  </>
+);
 
 Corrections.propTypes = {
   populationsChartData: chartDataPropTypes.isRequired,

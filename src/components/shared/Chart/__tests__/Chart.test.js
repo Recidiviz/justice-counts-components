@@ -57,12 +57,12 @@ describe("Chart.js", () => {
     );
 
     // should pass initial value to period picker
-    expect(PeriodPicker.mock.calls[0][0].period).toBe(12);
+    expect(PeriodPicker.mock.calls[0][0].period).toMatchObject({ value: 13, label: "1 year" });
 
     // should pass options to period picker
-    expect(PeriodPicker.mock.calls[0][0].periods).toStrictEqual([
-      { value: 60, label: "5 years" },
-      { value: 12, label: "1 year" },
+    expect(PeriodPicker.mock.calls[0][0].periods).toMatchObject([
+      { value: 13, label: "1 year" },
+      { value: 61, label: "5 years" },
       { value: 1, label: "All Time" },
     ]);
 
@@ -77,16 +77,21 @@ describe("Chart.js", () => {
     expect(container.querySelectorAll(".Chart__legend--disabled").length).toBe(1);
     // should hide even labels
     expect(
-      ["01.02.20", "02.02.20", "03.02.20", "04.02.20"].map((item, index) =>
+      [
+        { year: 2019, month: 0 },
+        { year: 2019, month: 1 },
+        { year: 2019, month: 2 },
+        { year: 2019, month: 3 },
+      ].map((item, index) =>
         Line.mock.calls[0][0].options.scales.xAxes[0].ticks.callback(item, index)
       )
-    ).toStrictEqual(["01.02.20", null, "03.02.20", null]);
+    ).toStrictEqual(["1/19", null, "3/19", null]);
   });
 
   it("should change visible period", () => {
     render(<Chart hint={mockHint} title={mockTitle} chartData={mockChartData} />);
 
-    expect(PeriodPicker.mock.calls[0][0].period).toBe(12);
+    expect(PeriodPicker.mock.calls[0][0].period).toMatchObject({ value: 13, label: "1 year" });
 
     const option = PeriodPicker.mock.calls[0][0].periods[0];
 

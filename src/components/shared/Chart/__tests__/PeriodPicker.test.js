@@ -25,7 +25,7 @@ describe("PeriodPicker.js", () => {
     { value: 12, label: "1 year" },
     { value: 30, label: "All Time" },
   ];
-  const mockPeriod = 12;
+  const mockPeriod = { value: 12, label: "1 year" };
   const mockOnChange = jest.fn();
 
   it("period picker flow tests", () => {

@@ -41,6 +41,7 @@ const MainPage = ({
   flowDiagramPrevDate,
   keyInsightsData,
   sourceData,
+  isNoData,
 }) => {
   const [activeTab, setActiveTab] = useState(localStorage.getItem(LS_TAB_KEY) || CORRECTIONS);
 
@@ -53,11 +54,28 @@ const MainPage = ({
     <section className="MainPage">
       <header className="MainPage__header">
         <h1 className="MainPage__title">{stateName} data dashboard</h1>
-        <p className="MainPage__description">
-          The following is a broad overview of the criminal justice system in {stateName},
-          representing the up-to-date data and changes compared to last year. You can switch between
-          the available sections (Corrections, Jails, and Policing) with the tabs below.
-        </p>
+        {isNoData ? (
+          <p className="MainPage__description">
+            No data was publicly available for this state. If you are a representative of this state
+            and would like to contribute your data to this site, please{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://justicecounts.csgjusticecenter.org/stay-in-touch/"
+              className="MainPage__contact-link"
+            >
+              contact us
+            </a>
+            .
+          </p>
+        ) : (
+          <p className="MainPage__description">
+            The following is a broad overview of the corrections system in {stateName}, representing
+            up-to-date data and changes compared to last year ({flowDiagramPrevDate} to{" "}
+            {flowDiagramLastDate}). Two additional sections containing crime and jail indicators
+            will be added at a later date.
+          </p>
+        )}
       </header>
       <Tabs activeTab={activeTab} onTabChange={onActiveTabChange} />
       {activeTab === CORRECTIONS && (
@@ -91,6 +109,7 @@ MainPage.propTypes = {
   flowDiagramData: flowDiagramDataPropTypes.isRequired,
   keyInsightsData: keyInsightsPropTypes.isRequired,
   sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
+  isNoData: PropTypes.bool.isRequired,
 };
 
 export default MainPage;

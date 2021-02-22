@@ -23,6 +23,9 @@
       padding-left: $extra-mobile-offset;
       padding-right: $extra-mobile-offset;
     }
+    &--without-border {
+      border-bottom: 0;
+    }
   }
 
   &__title {
@@ -46,6 +49,11 @@
     @include down($lg) {
       font-size: 0.875rem;
     }
+  }
+
+  &__contact-link {
+    color: #0088b6;
+    text-decoration: underline;
   }
 
   &__tabs {
