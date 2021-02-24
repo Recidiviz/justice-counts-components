@@ -72,15 +72,18 @@ const Card = ({
         <span className="Card__not-available-text">Not available</span>
       ) : (
         <>
-          <span className="Card__number">{formatNumber(number)}</span>
-          {percentChange === null ? (
-            <span className="Card__percent">(--%)</span>
-          ) : (
-            <span className="Card__percent">
-              ({Math.round(percentChange) > 0 && "+"}
-              {Math.round(percentChange)}%)
-            </span>
-          )}
+          <span className="Card__number">
+            {title === "Counties Reporting" ? `${formatNumber(number)}%` : formatNumber(number)}
+          </span>
+          {title !== "Counties Reporting" &&
+            (percentChange === null ? (
+              <span className="Card__percent">(--%)</span>
+            ) : (
+              <span className="Card__percent">
+                ({Math.round(percentChange) > 0 && "+"}
+                {Math.round(percentChange)}%)
+              </span>
+            ))}
         </>
       )}
     </div>

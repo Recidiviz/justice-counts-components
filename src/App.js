@@ -24,6 +24,7 @@ import getNormalizedStateData from "./utils/getNormalizedStateData";
 import generateChartData from "./utils/generateChartData";
 import generateFlowDiagramData from "./utils/generateFlowDiagramData";
 import generateKeyInsightsData from "./utils/generateKeyInsightsData";
+import generateJailsKeyInsightsData from "./utils/generateJailsKeyInsightsData";
 import generateSourceData from "./utils/generateSourceData";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
@@ -40,9 +41,10 @@ import {
   ADMISSIONS_FROM_PROBATION_NEW_CRIME,
 } from "./constants/metrics";
 
-const App = ({ stateCode, data }) => {
+const App = ({ stateCode, correctionsData, jailsData }) => {
   const stateName = states[stateCode];
-  const stateMetricData = getNormalizedStateData(data, stateCode);
+  const stateMetricData = getNormalizedStateData(correctionsData, stateCode);
+  const jailsMetricData = getNormalizedStateData(jailsData, stateCode);
 
   const isNoData = isEmptyObj(stateMetricData);
 
@@ -84,6 +86,7 @@ const App = ({ stateCode, data }) => {
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
 
   const keyInsightsData = generateKeyInsightsData(flowData);
+  const keyInsightsDataJails = generateJailsKeyInsightsData(jailsMetricData);
 
   const sourceData = generateSourceData(flowData, [
     populationsChartData.sourceData,
@@ -105,6 +108,7 @@ const App = ({ stateCode, data }) => {
       flowDiagramLastDate={lastDate}
       flowDiagramPrevDate={comparedToDate}
       keyInsightsData={keyInsightsData}
+      keyInsightsDataJails={keyInsightsDataJails}
       sourceData={sourceData}
       isNoData={isNoData}
     />
@@ -113,9 +117,24 @@ const App = ({ stateCode, data }) => {
 
 App.propTypes = {
   stateCode: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(
+  correctionsData: PropTypes.arrayOf(
     PropTypes.shape({
       state_code: PropTypes.string.isRequired,
+      metric: PropTypes.string.isRequired,
+      year: PropTypes.string.isRequired,
+      month: PropTypes.string.isRequired,
+      date_reported: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      compared_to_year: PropTypes.string,
+      compared_to_month: PropTypes.string,
+      value_change: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      percentage_change: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    })
+  ).isRequired,
+  jailsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      state_code: PropTypes.string.isRequired,
+      county_code: PropTypes.string.isRequired,
       metric: PropTypes.string.isRequired,
       year: PropTypes.string.isRequired,
       month: PropTypes.string.isRequired,

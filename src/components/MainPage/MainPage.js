@@ -40,6 +40,7 @@ const MainPage = ({
   flowDiagramLastDate,
   flowDiagramPrevDate,
   keyInsightsData,
+  keyInsightsDataJails,
   sourceData,
   isNoData,
 }) => {
@@ -92,7 +93,7 @@ const MainPage = ({
           sourceData={sourceData}
         />
       )}
-      {activeTab === JAILS && <Jails />}
+      {activeTab === JAILS && <Jails keyInsightsData={keyInsightsDataJails} />}
     </section>
   );
 };
@@ -108,6 +109,7 @@ MainPage.propTypes = {
   flowDiagramPrevDate: PropTypes.string.isRequired,
   flowDiagramData: flowDiagramDataPropTypes.isRequired,
   keyInsightsData: keyInsightsPropTypes.isRequired,
+  keyInsightsDataJails: keyInsightsPropTypes.isRequired,
   sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
   isNoData: PropTypes.bool.isRequired,
 };

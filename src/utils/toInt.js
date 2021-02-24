@@ -14,6 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-const toInt = (string) => parseInt(string, 10);
+const toInt = (string) => parseFloat(string, 10);
 
 export default toInt;
