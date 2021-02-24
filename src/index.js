@@ -20,13 +20,13 @@ import "react-app-polyfill/stable";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import data from "./data.json";
+import { correctionsData, jailsData } from "./data";
 
 import "./index.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App stateCode="US_CO" data={data} />
+    <App stateCode="US_CO" correctionsData={correctionsData} jailsData={jailsData} />
   </React.StrictMode>,
   document.getElementById("root")
 );
