@@ -4,7 +4,7 @@ module.exports = {
   webpack: {
     configure: (webpackConfig) => {
       const jsonLinesLoader = {
-        test: /\.json$/,
+        test: /\.jsonl$/,
         use: "jsonlines-loader",
         type: "javascript/auto",
       };

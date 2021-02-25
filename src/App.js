@@ -85,8 +85,8 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
 
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
 
-  const keyInsightsData = generateKeyInsightsData(flowData);
-  const keyInsightsDataJails = generateJailsKeyInsightsData(jailsMetricData);
+  const correctionsKeyInsightsData = generateKeyInsightsData(flowData);
+  const jailsKeyInsightsData = generateJailsKeyInsightsData(jailsMetricData);
 
   const sourceData = generateSourceData(flowData, [
     populationsChartData.sourceData,
@@ -107,8 +107,8 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
       flowDiagramData={flowData}
       flowDiagramLastDate={lastDate}
       flowDiagramPrevDate={comparedToDate}
-      keyInsightsData={keyInsightsData}
-      keyInsightsDataJails={keyInsightsDataJails}
+      correctionsKeyInsightsData={correctionsKeyInsightsData}
+      jailsKeyInsightsData={jailsKeyInsightsData}
       sourceData={sourceData}
       isNoData={isNoData}
     />

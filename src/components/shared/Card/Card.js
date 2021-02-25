@@ -25,6 +25,7 @@ import "./Card.scss";
 const Card = ({
   isNotAvailable,
   isPopulation,
+  isNumberPercent,
   hint,
   title,
   number,
@@ -73,9 +74,10 @@ const Card = ({
       ) : (
         <>
           <span className="Card__number">
-            {title === "Counties Reporting" ? `${formatNumber(number)}%` : formatNumber(number)}
+            {formatNumber(number)}
+            {isNumberPercent && "%"}
           </span>
-          {title !== "Counties Reporting" &&
+          {!isNumberPercent &&
             (percentChange === null ? (
               <span className="Card__percent">(--%)</span>
             ) : (
@@ -93,6 +95,7 @@ const Card = ({
 
 Card.defaultProps = {
   isNotAvailable: false,
+  isNumberPercent: false,
   sourceText: null,
   reportName: null,
   sourceUrl: null,
@@ -111,6 +114,7 @@ Card.propTypes = {
   sourceUrl: PropTypes.string,
   isNotAvailable: PropTypes.bool,
   isPopulation: PropTypes.bool,
+  isNumberPercent: PropTypes.bool,
   hint: PropTypes.string,
   number: PropTypes.number,
   percentChange: PropTypes.number,

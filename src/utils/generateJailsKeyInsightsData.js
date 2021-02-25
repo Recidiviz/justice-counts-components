@@ -39,7 +39,7 @@ import formatNumber from "./formatNumber";
  * }}
  */
 
-const generateCountiesCaption = () => (coveredCounty, coveredPopulation) => {
+const generateCountiesCaption = (coveredCounty, coveredPopulation) => {
   return `Currently, about ${formatNumber(
     coveredCounty
   )} percent of counties report their jail populations on at least a monthly basis, representing about ${formatNumber(
@@ -47,7 +47,7 @@ const generateCountiesCaption = () => (coveredCounty, coveredPopulation) => {
   )} percent of the state population.`;
 };
 
-const generatePopulationCaption = () => (percentChange, numberChange) => {
+const generatePopulationCaption = (percentChange, numberChange) => {
   if (numberChange === 0) {
     return `There was no net change in jail population during this time period.`;
   }
@@ -59,7 +59,7 @@ const generatePopulationCaption = () => (percentChange, numberChange) => {
   )} people.`;
 };
 
-const generateIncarcerationCaption = () => (percentChange, numberChange) => {
+const generateIncarcerationCaption = (percentChange, numberChange) => {
   if (numberChange === 0) {
     return `There was no net change in incarceration rate during this time period.`;
   }
@@ -70,9 +70,9 @@ const generateIncarcerationCaption = () => (percentChange, numberChange) => {
 };
 
 const getCaptionMap = {
-  [INCARCERATION_RATE_JAIL]: generateIncarcerationCaption(),
-  [POPULATION_JAIL]: generatePopulationCaption(),
-  [PERCENTAGE_COVERED_COUNTY]: generateCountiesCaption(),
+  [INCARCERATION_RATE_JAIL]: generateIncarcerationCaption,
+  [POPULATION_JAIL]: generatePopulationCaption,
+  [PERCENTAGE_COVERED_COUNTY]: generateCountiesCaption,
 };
 
 const generateJailsKeyInsightsData = (data) => {
@@ -96,6 +96,7 @@ const generateJailsKeyInsightsData = (data) => {
           number: metric === PERCENTAGE_COVERED_COUNTY ? lastItem.value * 100 : lastItem.value,
           percentChange: lastItem.percentChange * 100,
           numberChange: lastItem.valueChange,
+          isNumberPercent: metric === PERCENTAGE_COVERED_COUNTY,
           item: lastItem,
         };
       }
