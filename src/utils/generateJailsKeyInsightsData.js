@@ -21,6 +21,7 @@ import {
   INCARCERATION_RATE_JAIL,
   metricToCardName,
 } from "../constants/metrics";
+import formatNumber from "./formatNumber";
 
 /**
  * @param data - normalized, grouped and sorted metric data (output of `getNormalizedStateData`)
@@ -38,8 +39,12 @@ import {
  * }}
  */
 
-const generateCountiesCaption = () => (number) => {
-  return `Currently, about ${number} percent of counties report their jail populations on at least a monthly basis, representing about YY percent of the state population.`;
+const generateCountiesCaption = () => (coveredCounty, coveredPopulation) => {
+  return `Currently, about ${formatNumber(
+    coveredCounty
+  )} percent of counties report their jail populations on at least a monthly basis, representing about ${formatNumber(
+    coveredPopulation * 100
+  )} percent of the state population.`;
 };
 
 const generatePopulationCaption = () => (percentChange, numberChange) => {
@@ -66,8 +71,8 @@ const generateIncarcerationCaption = () => (percentChange, numberChange) => {
 
 const getCaptionMap = {
   [INCARCERATION_RATE_JAIL]: generateIncarcerationCaption(),
-  [PERCENTAGE_COVERED_COUNTY]: generateCountiesCaption(),
   [POPULATION_JAIL]: generatePopulationCaption(),
+  [PERCENTAGE_COVERED_COUNTY]: generateCountiesCaption(),
 };
 
 const generateJailsKeyInsightsData = (data) => {
@@ -103,13 +108,25 @@ const generateJailsKeyInsightsData = (data) => {
   return [INCARCERATION_RATE_JAIL, PERCENTAGE_COVERED_COUNTY, POPULATION_JAIL].reduce(
     (keyInsights, metric) => {
       if (!flowData[metric].isNotAvailable) {
-        keyInsights.push({
-          ...flowData[metric],
-          caption: getCaptionMap[metric](
-            flowData[metric].percentChange,
-            flowData[metric].numberChange
-          ),
-        });
+        switch (metric) {
+          case PERCENTAGE_COVERED_COUNTY:
+            keyInsights.push({
+              ...flowData[metric],
+              caption: getCaptionMap[metric](
+                flowData[metric].number,
+                flowData[PERCENTAGE_COVERED_POPULATION].number
+              ),
+            });
+            break;
+          default:
+            keyInsights.push({
+              ...flowData[metric],
+              caption: getCaptionMap[metric](
+                flowData[metric].percentChange,
+                flowData[metric].numberChange
+              ),
+            });
+        }
       }
 
       return keyInsights;

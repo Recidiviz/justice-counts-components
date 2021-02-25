@@ -134,7 +134,7 @@ App.propTypes = {
   jailsData: PropTypes.arrayOf(
     PropTypes.shape({
       state_code: PropTypes.string.isRequired,
-      county_code: PropTypes.string.isRequired,
+      county_code: PropTypes.string,
       metric: PropTypes.string.isRequired,
       year: PropTypes.string.isRequired,
       month: PropTypes.string.isRequired,
