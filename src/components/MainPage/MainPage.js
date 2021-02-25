@@ -41,6 +41,7 @@ const MainPage = ({
   flowDiagramPrevDate,
   keyInsightsData,
   keyInsightsDataJails,
+  incarcerationRateChartData,
   sourceData,
   isNoData,
 }) => {
@@ -93,7 +94,12 @@ const MainPage = ({
           sourceData={sourceData}
         />
       )}
-      {activeTab === JAILS && <Jails keyInsightsData={keyInsightsDataJails} />}
+      {activeTab === JAILS && (
+        <Jails
+          keyInsightsData={keyInsightsDataJails}
+          incarcerationRateChartData={incarcerationRateChartData}
+        />
+      )}
     </section>
   );
 };

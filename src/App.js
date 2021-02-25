@@ -39,6 +39,7 @@ import {
   ADMISSIONS_FROM_PAROLE_TECHNICAL,
   ADMISSIONS_FROM_PROBATION_TECHNICAL,
   ADMISSIONS_FROM_PROBATION_NEW_CRIME,
+  INCARCERATION_RATE_JAIL,
 } from "./constants/metrics";
 
 const App = ({ stateCode, correctionsData, jailsData }) => {
@@ -52,6 +53,12 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
     stateMetricData,
     [POPULATION_PRISON, POPULATION_PAROLE, POPULATION_PROBATION],
     ["Prison Population", "Parole Population", "Probation Population"]
+  );
+
+  const incarcerationRateChartData = generateChartData(
+    jailsMetricData,
+    [INCARCERATION_RATE_JAIL],
+    ["Statewide (per 100,000)"]
   );
 
   const prisonAdmissionsChartData = generateChartData(
@@ -109,6 +116,7 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
       flowDiagramPrevDate={comparedToDate}
       keyInsightsData={keyInsightsData}
       keyInsightsDataJails={keyInsightsDataJails}
+      incarcerationRateChartData={incarcerationRateChartData}
       sourceData={sourceData}
       isNoData={isNoData}
     />

@@ -20,14 +20,14 @@ import Chart from "../shared/Chart";
 import Sources from "../shared/Sources";
 import { keyInsightsPropTypes } from "../shared/KeyInsights/propTypes";
 
-const Jails = ({ keyInsightsData }) => {
+const Jails = ({ keyInsightsData, incarcerationRateChartData }) => {
   return (
     <div className="Jails">
       <KeyInsights keyInsightsData={keyInsightsData} />
       <Chart
-        hint="By Type (January 2020 - January 2021)"
+        hint="By Type"
         title="Jail Incarceration Rate"
-        chartData={{ datasets: [], labels: [] }}
+        chartData={incarcerationRateChartData}
       />
       <Chart
         hint="By Type (January 2019–January 2020)"
