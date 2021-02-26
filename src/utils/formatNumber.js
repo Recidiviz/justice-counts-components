@@ -20,7 +20,7 @@ const formatNumber = (number, isAbsolute = false) => {
     formattedNumber = Math.abs(formattedNumber);
   }
 
-  return Math.round(formattedNumber).toLocaleString();
+  return Math.round(formattedNumber).toLocaleString("en-US");
 };
 
 export default formatNumber;

@@ -23,7 +23,7 @@ import states from "./constants/states";
 import getNormalizedStateData from "./utils/getNormalizedStateData";
 import generateChartData from "./utils/generateChartData";
 import generateFlowDiagramData from "./utils/generateFlowDiagramData";
-import generateKeyInsightsData from "./utils/generateKeyInsightsData";
+import generateCorrectionsKeyInsightsData from "./utils/generateCorrectionsKeyInsightsData";
 import generateJailsKeyInsightsData from "./utils/generateJailsKeyInsightsData";
 import generateSourceData from "./utils/generateSourceData";
 import {
@@ -85,7 +85,7 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
 
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
 
-  const correctionsKeyInsightsData = generateKeyInsightsData(flowData);
+  const correctionsKeyInsightsData = generateCorrectionsKeyInsightsData(flowData);
   const jailsKeyInsightsData = generateJailsKeyInsightsData(jailsMetricData);
 
   const sourceData = generateSourceData(flowData, [
