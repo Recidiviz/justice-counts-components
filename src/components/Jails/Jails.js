@@ -18,11 +18,12 @@ import React from "react";
 import KeyInsights from "../shared/KeyInsights";
 import Chart from "../shared/Chart";
 import Sources from "../shared/Sources";
+import { keyInsightsPropTypes } from "../shared/KeyInsights/propTypes";
 
-const Jails = () => {
+const Jails = ({ keyInsightsData }) => {
   return (
     <div className="Jails">
-      <KeyInsights keyInsightsData={[]} />
+      <KeyInsights keyInsightsData={keyInsightsData} />
       <Chart
         hint="By Type (January 2020 - January 2021)"
         title="Jail Incarceration Rate"
@@ -36,6 +37,10 @@ const Jails = () => {
       <Sources data={[]} />
     </div>
   );
+};
+
+Jails.propTypes = {
+  keyInsightsData: keyInsightsPropTypes.isRequired,
 };
 
 export default Jails;

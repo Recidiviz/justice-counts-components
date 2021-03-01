@@ -4,7 +4,10 @@ module.exports = {
   webpack: {
     configure: (webpackConfig) => {
       const jsonLinesLoader = {
-        test: require.resolve("./src/data.json"),
+        test: [
+          require.resolve("./src/data/corrections_data.json"),
+          require.resolve("./src/data/jails_data.json"),
+        ],
         use: "jsonlines-loader",
         type: "javascript/auto",
       };

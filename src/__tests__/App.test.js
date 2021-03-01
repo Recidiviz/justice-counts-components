@@ -41,7 +41,7 @@ describe("App.js", () => {
   });
 
   it("should provide corresponding state name", () => {
-    render(<App data={mockData} stateCode={mockStateCode} />);
+    render(<App correctionsData={mockData} jailsData={mockData} stateCode={mockStateCode} />);
 
     expect(MainPage).toHaveBeenCalledTimes(1);
     expect(MainPage.mock.calls[0][0].stateName).toBe(states[mockStateCode]);
