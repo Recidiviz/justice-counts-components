@@ -23,7 +23,7 @@ import states from "./constants/states";
 import getNormalizedStateData from "./utils/getNormalizedStateData";
 import generateChartData from "./utils/generateChartData";
 import generateFlowDiagramData from "./utils/generateFlowDiagramData";
-import generateKeyInsightsData from "./utils/generateKeyInsightsData";
+import generateCorrectionsKeyInsightsData from "./utils/generateCorrectionsKeyInsightsData";
 import generateJailsKeyInsightsData from "./utils/generateJailsKeyInsightsData";
 import generateSourceData from "./utils/generateSourceData";
 import {
@@ -92,8 +92,8 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
 
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
 
-  const keyInsightsData = generateKeyInsightsData(flowData);
-  const keyInsightsDataJails = generateJailsKeyInsightsData(jailsMetricData);
+  const correctionsKeyInsightsData = generateCorrectionsKeyInsightsData(flowData);
+  const jailsKeyInsightsData = generateJailsKeyInsightsData(jailsMetricData);
 
   const sourceData = generateSourceData(flowData, [
     populationsChartData.sourceData,
@@ -110,13 +110,13 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
       prisonAdmissionsChartData={prisonAdmissionsChartData}
       paroleRevocationsChartData={paroleRevocationsChartData}
       probationRevocationsChartData={probationRevocationsChartData}
+      incarcerationRateChartData={incarcerationRateChartData}
       releasesChartData={releasesChartData}
       flowDiagramData={flowData}
       flowDiagramLastDate={lastDate}
       flowDiagramPrevDate={comparedToDate}
-      keyInsightsData={keyInsightsData}
-      keyInsightsDataJails={keyInsightsDataJails}
-      incarcerationRateChartData={incarcerationRateChartData}
+      correctionsKeyInsightsData={correctionsKeyInsightsData}
+      jailsKeyInsightsData={jailsKeyInsightsData}
       sourceData={sourceData}
       isNoData={isNoData}
     />
@@ -128,6 +128,7 @@ App.propTypes = {
   correctionsData: PropTypes.arrayOf(
     PropTypes.shape({
       state_code: PropTypes.string.isRequired,
+      county_code: PropTypes.string,
       metric: PropTypes.string.isRequired,
       year: PropTypes.string.isRequired,
       month: PropTypes.string.isRequired,

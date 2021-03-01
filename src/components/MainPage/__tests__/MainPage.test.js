@@ -41,7 +41,8 @@ describe("MainPage.js", () => {
         probationRevocationsChartData={{}}
         sourceData={[]}
         releasesChartData={{}}
-        keyInsightsData={[]}
+        correctionsKeyInsightsData={[]}
+        jailsKeyInsightsData={[]}
       />
     );
 

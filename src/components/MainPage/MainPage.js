@@ -35,13 +35,13 @@ const MainPage = ({
   prisonAdmissionsChartData,
   paroleRevocationsChartData,
   probationRevocationsChartData,
+  incarcerationRateChartData,
   releasesChartData,
   flowDiagramData,
   flowDiagramLastDate,
   flowDiagramPrevDate,
-  keyInsightsData,
-  keyInsightsDataJails,
-  incarcerationRateChartData,
+  correctionsKeyInsightsData,
+  jailsKeyInsightsData,
   sourceData,
   isNoData,
 }) => {
@@ -90,13 +90,13 @@ const MainPage = ({
           flowDiagramData={flowDiagramData}
           flowDiagramLastDate={flowDiagramLastDate}
           flowDiagramPrevDate={flowDiagramPrevDate}
-          keyInsightsData={keyInsightsData}
+          keyInsightsData={correctionsKeyInsightsData}
           sourceData={sourceData}
         />
       )}
       {activeTab === JAILS && (
         <Jails
-          keyInsightsData={keyInsightsDataJails}
+          keyInsightsData={jailsKeyInsightsData}
           incarcerationRateChartData={incarcerationRateChartData}
         />
       )}
@@ -114,8 +114,8 @@ MainPage.propTypes = {
   flowDiagramLastDate: PropTypes.string.isRequired,
   flowDiagramPrevDate: PropTypes.string.isRequired,
   flowDiagramData: flowDiagramDataPropTypes.isRequired,
-  keyInsightsData: keyInsightsPropTypes.isRequired,
-  keyInsightsDataJails: keyInsightsPropTypes.isRequired,
+  correctionsKeyInsightsData: keyInsightsPropTypes.isRequired,
+  jailsKeyInsightsData: keyInsightsPropTypes.isRequired,
   sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
   isNoData: PropTypes.bool.isRequired,
 };
