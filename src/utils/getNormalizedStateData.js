@@ -15,7 +15,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import toInt from "./toInt";
-import toFloat from "./toFloat";
 import sortByYearAndMonth from "./sortByYearAndMonth";
 
 /**
@@ -73,7 +72,7 @@ const getNormalizedStateData = (data, stateCode) => {
           month: toInt(monthReported - 1),
           day: toInt(dayReported),
         },
-        value: toFloat(item.value),
+        value: parseFloat(item.value),
         countyCode: item.county_code,
         comparedToYear: item.compared_to_year ? toInt(item.compared_to_year) : null,
         comparedToMonth: item.compared_to_month ? toInt(item.compared_to_month) - 1 : null,
