@@ -76,7 +76,7 @@ export const noMetricData = (metric) =>
  *   ]
  * }
  */
-const generateChartData = (data, metrics, metricLabels = []) => {
+const generateCorrectionsChartData = (data, metrics, metricLabels = []) => {
   if (!metrics.length) {
     throw new Error(METRICS_NOT_PROVIDED);
   }
@@ -162,4 +162,4 @@ const generateChartData = (data, metrics, metricLabels = []) => {
   return { datasets, labels, sourceData };
 };
 
-export default generateChartData;
+export default generateCorrectionsChartData;

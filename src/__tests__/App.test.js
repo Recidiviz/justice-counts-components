@@ -20,12 +20,12 @@ import { render } from "@testing-library/react";
 import App from "../App";
 import MainPage from "../components/MainPage";
 import getNormalizedStateData from "../utils/getNormalizedStateData";
-import generateChartData from "../utils/generateChartData";
+import generateCorrectionsChartData from "../utils/generateCorrectionsChartData";
 import states from "../constants/states";
 
 jest.mock("../components/MainPage");
 jest.mock("../utils/getNormalizedStateData");
-jest.mock("../utils/generateChartData");
+jest.mock("../utils/generateCorrectionsChartData");
 describe("App.js", () => {
   const mockStateCode = "US_CO";
   const mockData = [];
@@ -35,8 +35,7 @@ describe("App.js", () => {
   beforeEach(() => {
     MainPage.mockReturnValue(null);
     getNormalizedStateData.mockReturnValue(mockNormalizedData);
-    generateChartData.mockReturnValue(mockChartData);
-
+    generateCorrectionsChartData.mockReturnValue(mockChartData);
     jest.clearAllMocks();
   });
 

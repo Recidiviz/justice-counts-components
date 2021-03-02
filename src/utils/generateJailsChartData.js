@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import { METRICS_NOT_PROVIDED } from "../constants/errors";
+import { COUNTIES_NOT_PROVIDED } from "../constants/errors";
 import formatNumber from "./formatNumber";
 import logger from "./logger";
 
@@ -26,7 +26,7 @@ export const noMetricData = (metric) =>
  * @param data - normalized data (see @returns of getNormalizedStateData)
  * @param metric - metric name for which we generate chart data
  * @param counties {string[]} - counties for which we generate chart data
- * @param metricLabels {string[]} - humanized metric names
+ * @param countyLabels {string[]} - humanized county names
  * @param coveredCounty - counties reporting percent
  * @returns {{
  * datasets: {
@@ -42,9 +42,9 @@ export const noMetricData = (metric) =>
  * }}
  */
 
-const generateJailsChartData = (data, metric, counties, metricLabels = [], coveredCounty) => {
+const generateJailsChartData = (data, metric, counties, countyLabels = [], coveredCounty) => {
   if (!counties.length) {
-    throw new Error(METRICS_NOT_PROVIDED);
+    throw new Error(COUNTIES_NOT_PROVIDED);
   }
 
   const datasets = counties.reduce((acc, county, index) => {
@@ -56,7 +56,7 @@ const generateJailsChartData = (data, metric, counties, metricLabels = [], cover
       metric,
       county,
       coveredCounty: coveredCounty ? `(${formatNumber(coveredCounty)}% counties reporting)` : null,
-      label: metricLabels[index],
+      label: countyLabels[index],
       isNotAvailable: !data[metric],
       isStatewide: county === "Statewide",
       data: [],

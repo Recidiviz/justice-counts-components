@@ -21,7 +21,7 @@ import isEmptyObj from "is-empty-obj";
 import MainPage from "./components/MainPage";
 import states from "./constants/states";
 import getNormalizedStateData from "./utils/getNormalizedStateData";
-import generateChartData from "./utils/generateChartData";
+import generateCorrectionsChartData from "./utils/generateCorrectionsChartData";
 import generateFlowDiagramData from "./utils/generateFlowDiagramData";
 import generateCorrectionsKeyInsightsData from "./utils/generateCorrectionsKeyInsightsData";
 import generateJailsKeyInsightsData from "./utils/generateJailsKeyInsightsData";
@@ -50,13 +50,13 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
 
   const isNoData = isEmptyObj(stateMetricData);
 
-  const populationsChartData = generateChartData(
+  const populationsChartData = generateCorrectionsChartData(
     stateMetricData,
     [POPULATION_PRISON, POPULATION_PAROLE, POPULATION_PROBATION],
     ["Prison Population", "Parole Population", "Probation Population"]
   );
 
-  const prisonAdmissionsChartData = generateChartData(
+  const prisonAdmissionsChartData = generateCorrectionsChartData(
     stateMetricData,
     [ADMISSIONS, ADMISSIONS_NEW_COMMITMENTS, ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PROBATION],
     [
@@ -67,13 +67,13 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
     ]
   );
 
-  const paroleRevocationsChartData = generateChartData(
+  const paroleRevocationsChartData = generateCorrectionsChartData(
     stateMetricData,
     [ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PAROLE_NEW_CRIME, ADMISSIONS_FROM_PAROLE_TECHNICAL],
     ["Total", "New Crime", "Technical Violation"]
   );
 
-  const probationRevocationsChartData = generateChartData(
+  const probationRevocationsChartData = generateCorrectionsChartData(
     stateMetricData,
     [
       ADMISSIONS_FROM_PROBATION,
@@ -83,7 +83,11 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
     ["Total", "New Crime", "Technical Violation"]
   );
 
-  const releasesChartData = generateChartData(stateMetricData, [RELEASES_COMPLETED], ["Releases"]);
+  const releasesChartData = generateCorrectionsChartData(
+    stateMetricData,
+    [RELEASES_COMPLETED],
+    ["Releases"]
+  );
 
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
 

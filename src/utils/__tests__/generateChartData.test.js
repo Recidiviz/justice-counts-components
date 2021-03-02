@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import generateChartData, { noMetricData } from "../generateChartData";
+import generateCorrectionsChartData, { noMetricData } from "../generateCorrectionsChartData";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
   POPULATION_PAROLE,
@@ -24,7 +24,7 @@ import {
 import { METRICS_NOT_PROVIDED } from "../../constants/errors";
 import logger from "../logger";
 
-describe("generateChartData.js", () => {
+describe("generateCorrectionsChartData.js", () => {
   const warnSpy = jest.spyOn(logger, "warn");
 
   describe("should work with single metric", () => {
@@ -39,7 +39,7 @@ describe("generateChartData.js", () => {
 
     it("should convert data to chart.js format ", () => {
       expect(
-        generateChartData(mockStateData, [RELEASES_COMPLETED], [mockMetricName])
+        generateCorrectionsChartData(mockStateData, [RELEASES_COMPLETED], [mockMetricName])
       ).toMatchObject({
         datasets: [
           {
@@ -77,7 +77,7 @@ describe("generateChartData.js", () => {
       const mockMetric2Name = "Admissions";
 
       expect(
-        generateChartData(
+        generateCorrectionsChartData(
           mockStateData,
           [RELEASES_COMPLETED, ADMISSIONS_NEW_COMMITMENTS],
           [mockMetric1Name, mockMetric2Name]
@@ -123,7 +123,7 @@ describe("generateChartData.js", () => {
       const mockMetric2Name = "Population prison";
 
       expect(
-        generateChartData(
+        generateCorrectionsChartData(
           mockStateData,
           [POPULATION_PAROLE, POPULATION_PRISON],
           [mockMetric1Name, mockMetric2Name]
@@ -168,7 +168,9 @@ describe("generateChartData.js", () => {
         ],
       };
 
-      expect(() => generateChartData(mockStateData, [])).toThrowError(METRICS_NOT_PROVIDED);
+      expect(() => generateCorrectionsChartData(mockStateData, [])).toThrowError(
+        METRICS_NOT_PROVIDED
+      );
     });
   });
 
@@ -178,7 +180,9 @@ describe("generateChartData.js", () => {
     const mockStateData = {
       anotherMetric: [{ year: 2020, month: 8, value: 1002 }],
     };
-    expect(generateChartData(mockStateData, [metricName], [mockMetricLabel])).toMatchObject({
+    expect(
+      generateCorrectionsChartData(mockStateData, [metricName], [mockMetricLabel])
+    ).toMatchObject({
       datasets: [
         {
           metric: metricName,
