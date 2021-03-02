@@ -107,32 +107,38 @@ const generateJailsKeyInsightsData = (data) => {
     { flowData: {} }
   );
 
-  return [INCARCERATION_RATE_JAIL, PERCENTAGE_COVERED_COUNTY, POPULATION_JAIL].reduce(
-    (keyInsights, metric) => {
-      if (!flowData[metric].isNotAvailable) {
-        if (flowData[metric].isNumberPercent) {
-          keyInsights.push({
-            ...flowData[metric],
-            caption: getCaptionMap[metric](
-              flowData[metric].number,
-              flowData[PERCENTAGE_COVERED_POPULATION].number
-            ),
-          });
-        } else {
-          keyInsights.push({
-            ...flowData[metric],
-            caption: getCaptionMap[metric](
-              flowData[metric].percentChange,
-              flowData[metric].numberChange
-            ),
-          });
-        }
+  const jailsKeyInsightsData = [
+    INCARCERATION_RATE_JAIL,
+    PERCENTAGE_COVERED_COUNTY,
+    POPULATION_JAIL,
+  ].reduce((keyInsights, metric) => {
+    if (!flowData[metric].isNotAvailable) {
+      if (flowData[metric].isNumberPercent) {
+        keyInsights.push({
+          ...flowData[metric],
+          caption: getCaptionMap[metric](
+            flowData[metric].number,
+            flowData[PERCENTAGE_COVERED_POPULATION].number
+          ),
+        });
+      } else {
+        keyInsights.push({
+          ...flowData[metric],
+          caption: getCaptionMap[metric](
+            flowData[metric].percentChange,
+            flowData[metric].numberChange
+          ),
+        });
       }
+    }
 
-      return keyInsights;
-    },
-    []
-  );
+    return keyInsights;
+  }, []);
+
+  return {
+    jailsKeyInsightsData,
+    coveredCounty: flowData[PERCENTAGE_COVERED_COUNTY].number,
+  };
 };
 
 export default generateJailsKeyInsightsData;

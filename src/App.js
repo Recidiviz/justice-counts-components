@@ -25,6 +25,7 @@ import generateChartData from "./utils/generateChartData";
 import generateFlowDiagramData from "./utils/generateFlowDiagramData";
 import generateCorrectionsKeyInsightsData from "./utils/generateCorrectionsKeyInsightsData";
 import generateJailsKeyInsightsData from "./utils/generateJailsKeyInsightsData";
+import generateJailsChartData from "./utils/generateJailsChartData";
 import generateSourceData from "./utils/generateSourceData";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
@@ -53,12 +54,6 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
     stateMetricData,
     [POPULATION_PRISON, POPULATION_PAROLE, POPULATION_PROBATION],
     ["Prison Population", "Parole Population", "Probation Population"]
-  );
-
-  const incarcerationRateChartData = generateChartData(
-    jailsMetricData,
-    [INCARCERATION_RATE_JAIL],
-    ["Statewide (per 100,000)"]
   );
 
   const prisonAdmissionsChartData = generateChartData(
@@ -93,7 +88,6 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
 
   const correctionsKeyInsightsData = generateCorrectionsKeyInsightsData(flowData);
-  const jailsKeyInsightsData = generateJailsKeyInsightsData(jailsMetricData);
 
   const sourceData = generateSourceData(flowData, [
     populationsChartData.sourceData,
@@ -103,6 +97,23 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
     releasesChartData.sourceData,
   ]);
 
+  const { jailsKeyInsightsData, coveredCounty } = generateJailsKeyInsightsData(jailsMetricData);
+
+  const incarcerationRateChartData = generateJailsChartData(
+    jailsMetricData,
+    INCARCERATION_RATE_JAIL,
+    ["Statewide", "US_CO_ARAPAHOE"],
+    ["Statewide", "Arapahoe county"],
+    coveredCounty
+  );
+
+  const incarcerationRateTopCountiesChartData = generateJailsChartData(
+    jailsMetricData,
+    INCARCERATION_RATE_JAIL,
+    ["US_CO_DENVER", "US_CO_EL_PASO", "US_CO_ARAPAHOE", "US_CO_JEFFERSON", "US_CO_ADAMS"],
+    ["Denver county", "El Paso county", "Arapahoe county", "Jefferson county", "Adams county"]
+  );
+
   return (
     <MainPage
       stateName={stateName}
@@ -111,6 +122,7 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
       paroleRevocationsChartData={paroleRevocationsChartData}
       probationRevocationsChartData={probationRevocationsChartData}
       incarcerationRateChartData={incarcerationRateChartData}
+      incarcerationRateTopCountiesChartData={incarcerationRateTopCountiesChartData}
       releasesChartData={releasesChartData}
       flowDiagramData={flowData}
       flowDiagramLastDate={lastDate}
