@@ -55,22 +55,22 @@ describe("generateJailsKeyInsightsData.js", () => {
     ],
   };
 
-  const flowData = generateJailsKeyInsightsData(mockData);
+  const { jailsKeyInsightsData } = generateJailsKeyInsightsData(mockData);
 
   it("should put isNumberPercent flag if metric value less than 1", () => {
-    expect(flowData[1].isNumberPercent).toBe(true);
+    expect(jailsKeyInsightsData[1].isNumberPercent).toBe(true);
   });
 
   it("should produce card data", () => {
-    expect(flowData[0]).toMatchObject({
+    expect(jailsKeyInsightsData[0]).toMatchObject({
       number: 95,
       percentChange: 18,
     });
-    expect(flowData[1]).toMatchObject({
+    expect(jailsKeyInsightsData[1]).toMatchObject({
       number: 10,
       percentChange: 15,
     });
-    expect(flowData[2]).toMatchObject({
+    expect(jailsKeyInsightsData[2]).toMatchObject({
       number: 100,
       percentChange: 10,
     });
