@@ -21,11 +21,13 @@ import App from "../App";
 import MainPage from "../components/MainPage";
 import getNormalizedStateData from "../utils/getNormalizedStateData";
 import generateCorrectionsChartData from "../utils/generateCorrectionsChartData";
+import generateJailsChartData from "../utils/generateJailsChartData";
 import states from "../constants/states";
 
 jest.mock("../components/MainPage");
 jest.mock("../utils/getNormalizedStateData");
 jest.mock("../utils/generateCorrectionsChartData");
+jest.mock("../utils/generateJailsChartData");
 describe("App.js", () => {
   const mockStateCode = "US_CO";
   const mockData = [];
@@ -36,6 +38,7 @@ describe("App.js", () => {
     MainPage.mockReturnValue(null);
     getNormalizedStateData.mockReturnValue(mockNormalizedData);
     generateCorrectionsChartData.mockReturnValue(mockChartData);
+    generateJailsChartData.mockReturnValue(mockChartData);
     jest.clearAllMocks();
   });
 
@@ -47,5 +50,7 @@ describe("App.js", () => {
     expect(MainPage.mock.calls[0][0].populationsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].prisonAdmissionsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].releasesChartData).toBe(mockChartData);
+    expect(MainPage.mock.calls[0][0].incarcerationRateChartData).toBe(mockChartData);
+    expect(MainPage.mock.calls[0][0].incarcerationRateTopCountiesChartData).toBe(mockChartData);
   });
 });

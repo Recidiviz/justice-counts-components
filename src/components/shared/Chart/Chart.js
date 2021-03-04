@@ -180,7 +180,7 @@ const Chart = ({ title, hint, chartData, switchCounties }) => {
               />
               <span className="Chart__legend-label">
                 {dataset.label}&nbsp;
-                {dataset.isStatewide ? dataset.coveredCounty : switchCounties}
+                {dataset.isStatewide ? dataset.countyCoverage : switchCounties}
               </span>
               <span className="Chart__legend-percent">
                 {dataset.isNotAvailable ? "N/A" : calcMetricPercentage(dataset.data)}

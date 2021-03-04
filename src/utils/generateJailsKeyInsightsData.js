@@ -23,11 +23,11 @@ import {
 } from "../constants/metrics";
 import formatNumber from "./formatNumber";
 
-const generateCountiesCaption = (coveredCounty, coveredPopulation) => {
+const generateCountiesCaption = (countyCoverage, populationCoverage) => {
   return `Currently, about ${formatNumber(
-    coveredCounty
+    countyCoverage
   )} percent of counties report their jail populations on at least a monthly basis, representing about ${formatNumber(
-    coveredPopulation
+    populationCoverage
   )} percent of the state population.`;
 };
 
@@ -137,7 +137,7 @@ const generateJailsKeyInsightsData = (data) => {
 
   return {
     jailsKeyInsightsData,
-    coveredCounty: flowData[PERCENTAGE_COVERED_COUNTY].number,
+    countyCoverage: flowData[PERCENTAGE_COVERED_COUNTY].number,
   };
 };
 

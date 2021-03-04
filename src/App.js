@@ -101,14 +101,14 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
     releasesChartData.sourceData,
   ]);
 
-  const { jailsKeyInsightsData, coveredCounty } = generateJailsKeyInsightsData(jailsMetricData);
+  const { jailsKeyInsightsData, countyCoverage } = generateJailsKeyInsightsData(jailsMetricData);
 
   const incarcerationRateChartData = generateJailsChartData(
     jailsMetricData,
     INCARCERATION_RATE_JAIL,
     ["Statewide", "US_CO_ARAPAHOE"],
     ["Statewide", "Arapahoe county"],
-    coveredCounty
+    countyCoverage
   );
 
   const incarcerationRateTopCountiesChartData = generateJailsChartData(

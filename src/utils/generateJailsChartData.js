@@ -17,6 +17,7 @@
 import { COUNTIES_NOT_PROVIDED } from "../constants/errors";
 import formatNumber from "./formatNumber";
 import logger from "./logger";
+import chartPeriods from "./chartPeriods";
 
 export const noMetricData = (metric) =>
   `${metric} doesn't appear in source files. Chart data is not generated.`;
@@ -27,7 +28,7 @@ export const noMetricData = (metric) =>
  * @param metric - metric name for which we generate chart data
  * @param counties {string[]} - counties for which we generate chart data
  * @param countyLabels {string[]} - humanized county names
- * @param coveredCounty - counties reporting percent
+ * @param countyCoverage - percentage of counties in the state reporting data
  * @returns {{
  * datasets: {
  *   metric: string
@@ -42,7 +43,7 @@ export const noMetricData = (metric) =>
  * }}
  */
 
-const generateJailsChartData = (data, metric, counties, countyLabels = [], coveredCounty) => {
+const generateJailsChartData = (data, metric, counties, countyLabels = [], countyCoverage) => {
   if (!counties.length) {
     throw new Error(COUNTIES_NOT_PROVIDED);
   }
@@ -55,7 +56,9 @@ const generateJailsChartData = (data, metric, counties, countyLabels = [], cover
     acc.push({
       metric,
       county,
-      coveredCounty: coveredCounty ? `(${formatNumber(coveredCounty)}% counties reporting)` : null,
+      countyCoverage: countyCoverage
+        ? `(${formatNumber(countyCoverage)}% counties reporting)`
+        : null,
       label: countyLabels[index],
       isNotAvailable: !data[metric],
       isStatewide: county === "Statewide",
@@ -67,36 +70,8 @@ const generateJailsChartData = (data, metric, counties, countyLabels = [], cover
 
   const labels = [];
 
-  const periods = datasets.reduce(
-    (acc, { isNotAvailable }) => {
-      if (isNotAvailable) {
-        return acc;
-      }
-      const { year: startYear, month: startMonth } = data[metric][0];
-      const { year: endYear, month: endMonth } = data[metric][data[metric].length - 1];
-
-      if (startYear < acc.startYear) {
-        acc.startYear = startYear;
-        acc.startMonth = startMonth;
-      } else if (startYear === acc.startYear) {
-        acc.startMonth = Math.min(acc.startMonth, startMonth);
-      }
-
-      if (endYear > acc.endYear) {
-        acc.endYear = endYear;
-        acc.endMonth = endMonth;
-      } else if (endYear === acc.endYear) {
-        acc.endMonth = Math.max(acc.endMonth, endMonth);
-      }
-
-      return acc;
-    },
-    { startYear: Infinity, startMonth: Infinity, endYear: -Infinity, endMonth: -Infinity }
-  );
-  const { startYear, startMonth, endYear, endMonth } = periods;
-
-  let i = startYear * 12 + startMonth;
-  const lastMonth = endYear * 12 + endMonth;
+  const { firstMonth, lastMonth } = chartPeriods(data, datasets);
+  let i = firstMonth;
 
   while (i <= lastMonth) {
     const year = Math.floor(i / 12);
