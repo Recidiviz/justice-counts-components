@@ -42,8 +42,15 @@ describe("App.js", () => {
     jest.clearAllMocks();
   });
 
-  it("should provide corresponding state name", () => {
-    render(<App correctionsData={mockData} jailsData={mockData} stateCode={mockStateCode} />);
+  it("should provide corresponding state name and data", () => {
+    render(
+      <App
+        correctionsData={mockData}
+        jailsData={mockData}
+        countiesData={mockData}
+        stateCode={mockStateCode}
+      />
+    );
 
     expect(MainPage).toHaveBeenCalledTimes(1);
     expect(MainPage.mock.calls[0][0].stateName).toBe(states[mockStateCode]);
