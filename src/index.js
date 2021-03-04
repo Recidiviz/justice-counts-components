@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,13 +20,18 @@ import "react-app-polyfill/stable";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { correctionsData, jailsData } from "./data";
+import { correctionsData, jailsData, countiesData } from "./data";
 
 import "./index.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App stateCode="US_CO" correctionsData={correctionsData} jailsData={jailsData} />
+    <App
+      stateCode="US_CO"
+      correctionsData={correctionsData}
+      jailsData={jailsData}
+      countiesData={countiesData}
+    />
   </React.StrictMode>,
   document.getElementById("root")
 );
