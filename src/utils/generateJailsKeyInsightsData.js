@@ -62,17 +62,16 @@ const getCaptionMap = {
 /**
  * @param data - normalized, grouped and sorted metric data (output of `getNormalizedStateData`)
  * @returns {{
- * keyInsightsData: {
- * []: {
- *   title: string
- *   number?: number
- *   isNumberPercent: boolean
- *   countyCode?: string
- *   percentChange?: number
- *   numberChange?: number
- *   isNotAvailable?: boolean
- * }
- * },
+ *   keyInsightsData: {
+ *     title: string
+ *     number?: number
+ *     isNumberPercent: boolean
+ *     countyCode?: string
+ *     percentChange?: number
+ *     numberChange?: number
+ *     isNotAvailable?: boolean
+ *   }[],
+ *   countyCoverage: number
  * }}
  */
 

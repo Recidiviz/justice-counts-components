@@ -15,6 +15,16 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 
+/**
+ * Transforms normalized data to chart.js format.
+ * @param data - normalized data (see @returns of getNormalizedStateData)
+ * @param datasets - sets of data for charts
+ * @returns {{
+ * firstMonth: number,
+ * lastMonth: number,
+ * }}
+ */
+
 const chartPeriods = (data, datasets) => {
   const periods = datasets.reduce(
     (acc, { isNotAvailable, metric }) => {

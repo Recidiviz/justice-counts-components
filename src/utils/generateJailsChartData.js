@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,16 +30,16 @@ export const noMetricData = (metric) =>
  * @param countyLabels {string[]} - humanized county names
  * @param countyCoverage - percentage of counties in the state reporting data
  * @returns {{
- * datasets: {
- *   metric: string
- *   county: string
- *   coveredCounty: string
- *   isNotAvailable: boolean
- *   isStatewide: boolean
- *   label: string
- *   data: (number|null)[]
- * }[],
- * labels: string[],
+ *   datasets: {
+ *     metric: string
+ *     county: string
+ *     countyCoverage: string
+ *     isNotAvailable: boolean
+ *     isStatewide: boolean
+ *     label: string
+ *     data: (number|null)[]
+ *   }[],
+ *   labels: string[],
  * }}
  */
 

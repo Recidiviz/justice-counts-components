@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,6 +27,7 @@ import generateCorrectionsKeyInsightsData from "./utils/generateCorrectionsKeyIn
 import generateJailsKeyInsightsData from "./utils/generateJailsKeyInsightsData";
 import generateJailsChartData from "./utils/generateJailsChartData";
 import generateSourceData from "./utils/generateSourceData";
+import getNormalizedCountyData from "./utils/getNormalizedCountyData";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
   ADMISSIONS_FROM_PAROLE,
@@ -43,10 +44,11 @@ import {
   INCARCERATION_RATE_JAIL,
 } from "./constants/metrics";
 
-const App = ({ stateCode, correctionsData, jailsData }) => {
+const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
   const stateName = states[stateCode];
   const stateMetricData = getNormalizedStateData(correctionsData, stateCode);
   const jailsMetricData = getNormalizedStateData(jailsData, stateCode);
+  const countyNamesData = getNormalizedCountyData(countiesData, stateCode);
 
   const isNoData = isEmptyObj(stateMetricData);
 
@@ -114,8 +116,8 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
   const incarcerationRateTopCountiesChartData = generateJailsChartData(
     jailsMetricData,
     INCARCERATION_RATE_JAIL,
-    ["US_CO_DENVER", "US_CO_EL_PASO", "US_CO_ARAPAHOE", "US_CO_JEFFERSON", "US_CO_ADAMS"],
-    ["Denver county", "El Paso county", "Arapahoe county", "Jefferson county", "Adams county"]
+    countyNamesData.slice(0, 5).map((county) => county.code),
+    countyNamesData.slice(0, 5).map((county) => county.name)
   );
 
   return (
@@ -169,6 +171,14 @@ App.propTypes = {
       compared_to_month: PropTypes.string,
       value_change: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       percentage_change: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    })
+  ).isRequired,
+  countiesData: PropTypes.arrayOf(
+    PropTypes.shape({
+      state_code: PropTypes.string.isRequired,
+      county_code: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      population: PropTypes.string.isRequired,
     })
   ).isRequired,
 };
