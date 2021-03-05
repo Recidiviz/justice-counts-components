@@ -35,6 +35,8 @@ const MainPage = ({
   prisonAdmissionsChartData,
   paroleRevocationsChartData,
   probationRevocationsChartData,
+  incarcerationRateChartData,
+  incarcerationRateTopCountiesChartData,
   releasesChartData,
   flowDiagramData,
   flowDiagramLastDate,
@@ -93,7 +95,13 @@ const MainPage = ({
           sourceData={sourceData}
         />
       )}
-      {activeTab === JAILS && <Jails keyInsightsData={jailsKeyInsightsData} />}
+      {activeTab === JAILS && (
+        <Jails
+          keyInsightsData={jailsKeyInsightsData}
+          incarcerationRateChartData={incarcerationRateChartData}
+          incarcerationRateTopCountiesChartData={incarcerationRateTopCountiesChartData}
+        />
+      )}
     </section>
   );
 };
@@ -105,6 +113,8 @@ MainPage.propTypes = {
   paroleRevocationsChartData: chartDataPropTypes.isRequired,
   probationRevocationsChartData: chartDataPropTypes.isRequired,
   releasesChartData: chartDataPropTypes.isRequired,
+  incarcerationRateChartData: chartDataPropTypes.isRequired,
+  incarcerationRateTopCountiesChartData: chartDataPropTypes.isRequired,
   flowDiagramLastDate: PropTypes.string.isRequired,
   flowDiagramPrevDate: PropTypes.string.isRequired,
   flowDiagramData: flowDiagramDataPropTypes.isRequired,

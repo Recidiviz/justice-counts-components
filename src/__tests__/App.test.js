@@ -20,12 +20,14 @@ import { render } from "@testing-library/react";
 import App from "../App";
 import MainPage from "../components/MainPage";
 import getNormalizedStateData from "../utils/getNormalizedStateData";
-import generateChartData from "../utils/generateChartData";
+import generateCorrectionsChartData from "../utils/generateCorrectionsChartData";
+import generateJailsChartData from "../utils/generateJailsChartData";
 import states from "../constants/states";
 
 jest.mock("../components/MainPage");
 jest.mock("../utils/getNormalizedStateData");
-jest.mock("../utils/generateChartData");
+jest.mock("../utils/generateCorrectionsChartData");
+jest.mock("../utils/generateJailsChartData");
 describe("App.js", () => {
   const mockStateCode = "US_CO";
   const mockData = [];
@@ -35,18 +37,27 @@ describe("App.js", () => {
   beforeEach(() => {
     MainPage.mockReturnValue(null);
     getNormalizedStateData.mockReturnValue(mockNormalizedData);
-    generateChartData.mockReturnValue(mockChartData);
-
+    generateCorrectionsChartData.mockReturnValue(mockChartData);
+    generateJailsChartData.mockReturnValue(mockChartData);
     jest.clearAllMocks();
   });
 
-  it("should provide corresponding state name", () => {
-    render(<App correctionsData={mockData} jailsData={mockData} stateCode={mockStateCode} />);
+  it("should provide corresponding state name and data", () => {
+    render(
+      <App
+        correctionsData={mockData}
+        jailsData={mockData}
+        countiesData={mockData}
+        stateCode={mockStateCode}
+      />
+    );
 
     expect(MainPage).toHaveBeenCalledTimes(1);
     expect(MainPage.mock.calls[0][0].stateName).toBe(states[mockStateCode]);
     expect(MainPage.mock.calls[0][0].populationsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].prisonAdmissionsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].releasesChartData).toBe(mockChartData);
+    expect(MainPage.mock.calls[0][0].incarcerationRateChartData).toBe(mockChartData);
+    expect(MainPage.mock.calls[0][0].incarcerationRateTopCountiesChartData).toBe(mockChartData);
   });
 });

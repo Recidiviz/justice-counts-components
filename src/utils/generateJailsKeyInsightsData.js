@@ -23,11 +23,11 @@ import {
 } from "../constants/metrics";
 import formatNumber from "./formatNumber";
 
-const generateCountiesCaption = (coveredCounty, coveredPopulation) => {
+const generateCountiesCaption = (countyCoverage, populationCoverage) => {
   return `Currently, about ${formatNumber(
-    coveredCounty
+    countyCoverage
   )} percent of counties report their jail populations on at least a monthly basis, representing about ${formatNumber(
-    coveredPopulation
+    populationCoverage
   )} percent of the state population.`;
 };
 
@@ -62,17 +62,16 @@ const getCaptionMap = {
 /**
  * @param data - normalized, grouped and sorted metric data (output of `getNormalizedStateData`)
  * @returns {{
- * keyInsightsData: {
- * []: {
- *   title: string
- *   number?: number
- *   isNumberPercent: boolean
- *   countyCode?: string
- *   percentChange?: number
- *   numberChange?: number
- *   isNotAvailable?: boolean
- * }
- * },
+ *   keyInsightsData: {
+ *     title: string
+ *     number?: number
+ *     isNumberPercent: boolean
+ *     countyCode?: string
+ *     percentChange?: number
+ *     numberChange?: number
+ *     isNotAvailable?: boolean
+ *   }[],
+ *   countyCoverage: number
  * }}
  */
 
@@ -107,32 +106,38 @@ const generateJailsKeyInsightsData = (data) => {
     { flowData: {} }
   );
 
-  return [INCARCERATION_RATE_JAIL, PERCENTAGE_COVERED_COUNTY, POPULATION_JAIL].reduce(
-    (keyInsights, metric) => {
-      if (!flowData[metric].isNotAvailable) {
-        if (flowData[metric].isNumberPercent) {
-          keyInsights.push({
-            ...flowData[metric],
-            caption: getCaptionMap[metric](
-              flowData[metric].number,
-              flowData[PERCENTAGE_COVERED_POPULATION].number
-            ),
-          });
-        } else {
-          keyInsights.push({
-            ...flowData[metric],
-            caption: getCaptionMap[metric](
-              flowData[metric].percentChange,
-              flowData[metric].numberChange
-            ),
-          });
-        }
+  const jailsKeyInsightsData = [
+    INCARCERATION_RATE_JAIL,
+    PERCENTAGE_COVERED_COUNTY,
+    POPULATION_JAIL,
+  ].reduce((keyInsights, metric) => {
+    if (!flowData[metric].isNotAvailable) {
+      if (flowData[metric].isNumberPercent) {
+        keyInsights.push({
+          ...flowData[metric],
+          caption: getCaptionMap[metric](
+            flowData[metric].number,
+            flowData[PERCENTAGE_COVERED_POPULATION].number
+          ),
+        });
+      } else {
+        keyInsights.push({
+          ...flowData[metric],
+          caption: getCaptionMap[metric](
+            flowData[metric].percentChange,
+            flowData[metric].numberChange
+          ),
+        });
       }
+    }
 
-      return keyInsights;
-    },
-    []
-  );
+    return keyInsights;
+  }, []);
+
+  return {
+    jailsKeyInsightsData,
+    countyCoverage: flowData[PERCENTAGE_COVERED_COUNTY].number,
+  };
 };
 
 export default generateJailsKeyInsightsData;

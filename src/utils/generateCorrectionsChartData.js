@@ -16,6 +16,7 @@
 // =============================================================================
 import { METRICS_NOT_PROVIDED } from "../constants/errors";
 import logger from "./logger";
+import chartPeriods from "./chartPeriods";
 
 export const noMetricData = (metric) =>
   `${metric} doesn't appear in source files. Chart data is not generated.`;
@@ -76,7 +77,7 @@ export const noMetricData = (metric) =>
  *   ]
  * }
  */
-const generateChartData = (data, metrics, metricLabels = []) => {
+const generateCorrectionsChartData = (data, metrics, metricLabels = []) => {
   if (!metrics.length) {
     throw new Error(METRICS_NOT_PROVIDED);
   }
@@ -98,36 +99,8 @@ const generateChartData = (data, metrics, metricLabels = []) => {
 
   const labels = [];
 
-  const periods = datasets.reduce(
-    (acc, { metric, isNotAvailable }) => {
-      if (isNotAvailable) {
-        return acc;
-      }
-      const { year: startYear, month: startMonth } = data[metric][0];
-      const { year: endYear, month: endMonth } = data[metric][data[metric].length - 1];
-
-      if (startYear < acc.startYear) {
-        acc.startYear = startYear;
-        acc.startMonth = startMonth;
-      } else if (startYear === acc.startYear) {
-        acc.startMonth = Math.min(acc.startMonth, startMonth);
-      }
-
-      if (endYear > acc.endYear) {
-        acc.endYear = endYear;
-        acc.endMonth = endMonth;
-      } else if (endYear === acc.endYear) {
-        acc.endMonth = Math.max(acc.endMonth, endMonth);
-      }
-
-      return acc;
-    },
-    { startYear: Infinity, startMonth: Infinity, endYear: -Infinity, endMonth: -Infinity }
-  );
-  const { startYear, startMonth, endYear, endMonth } = periods;
-
-  let i = startYear * 12 + startMonth;
-  const lastMonth = endYear * 12 + endMonth;
+  const { firstMonth, lastMonth } = chartPeriods(data, datasets);
+  let i = firstMonth;
 
   const sourceData = {};
 
@@ -162,4 +135,4 @@ const generateChartData = (data, metrics, metricLabels = []) => {
   return { datasets, labels, sourceData };
 };
 
-export default generateChartData;
+export default generateCorrectionsChartData;

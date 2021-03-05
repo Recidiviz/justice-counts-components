@@ -19,20 +19,26 @@ import KeyInsights from "../shared/KeyInsights";
 import Chart from "../shared/Chart";
 import Sources from "../shared/Sources";
 import { keyInsightsPropTypes } from "../shared/KeyInsights/propTypes";
+import { chartDataPropTypes } from "../shared/Chart/propTypes";
 
-const Jails = ({ keyInsightsData }) => {
+const Jails = ({
+  keyInsightsData,
+  incarcerationRateChartData,
+  incarcerationRateTopCountiesChartData,
+}) => {
   return (
     <div className="Jails">
       <KeyInsights keyInsightsData={keyInsightsData} />
       <Chart
-        hint="By Type (January 2020 - January 2021)"
+        hint="By Type"
         title="Jail Incarceration Rate"
-        chartData={{ datasets: [], labels: [] }}
+        chartData={incarcerationRateChartData}
+        switchCounties={<a href="/">(Switch counties)</a>}
       />
       <Chart
-        hint="By Type (January 2019–January 2020)"
+        hint="By Type"
         title="Jail Incarceration Rate (Top Counties)"
-        chartData={{ datasets: [], labels: [] }}
+        chartData={incarcerationRateTopCountiesChartData}
       />
       <Sources data={[]} />
     </div>
@@ -41,6 +47,8 @@ const Jails = ({ keyInsightsData }) => {
 
 Jails.propTypes = {
   keyInsightsData: keyInsightsPropTypes.isRequired,
+  incarcerationRateChartData: chartDataPropTypes.isRequired,
+  incarcerationRateTopCountiesChartData: chartDataPropTypes.isRequired,
 };
 
 export default Jails;

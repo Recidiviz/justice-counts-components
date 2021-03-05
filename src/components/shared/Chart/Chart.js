@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -31,10 +31,10 @@ import months from "../../../constants/months";
 import "./Chart.scss";
 
 const TICKS_COLOR = "#808C99";
-const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
+const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D", "#FFA600"];
 const CONNECTING_LINE_COLOR = "#00475D";
 
-const Chart = ({ title, hint, chartData }) => {
+const Chart = ({ title, hint, chartData, switchCounties }) => {
   const availablePeriods = [
     { value: 13, label: "1 year" },
     { value: 61, label: "5 years" },
@@ -154,7 +154,7 @@ const Chart = ({ title, hint, chartData }) => {
                   label: (tooltipItem, data) =>
                     `${data.datasets[tooltipItem.datasetIndex].label}: ${formatNumber(
                       tooltipItem.value
-                    )}`,
+                    )} ${styledDatasets.some((dataset) => dataset.county) ? "per 100,000" : ""}`,
                 },
                 backgroundColor: CONNECTING_LINE_COLOR,
                 yPadding: 10,
@@ -178,7 +178,10 @@ const Chart = ({ title, hint, chartData }) => {
                 className="Chart__legend-point"
                 style={{ backgroundColor: dataset.borderColor }}
               />
-              <span className="Chart__legend-label">{dataset.label}</span>
+              <span className="Chart__legend-label">
+                {dataset.label}&nbsp;
+                {dataset.isStatewide ? dataset.countyCoverage : switchCounties}
+              </span>
               <span className="Chart__legend-percent">
                 {dataset.isNotAvailable ? "N/A" : calcMetricPercentage(dataset.data)}
               </span>
@@ -190,10 +193,15 @@ const Chart = ({ title, hint, chartData }) => {
   );
 };
 
+Chart.defaultProps = {
+  switchCounties: null,
+};
+
 Chart.propTypes = {
   title: PropTypes.string.isRequired,
   hint: PropTypes.string.isRequired,
   chartData: chartDataPropTypes.isRequired,
+  switchCounties: PropTypes.node,
 };
 
 export default Chart;

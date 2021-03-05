@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,11 +21,13 @@ import isEmptyObj from "is-empty-obj";
 import MainPage from "./components/MainPage";
 import states from "./constants/states";
 import getNormalizedStateData from "./utils/getNormalizedStateData";
-import generateChartData from "./utils/generateChartData";
+import generateCorrectionsChartData from "./utils/generateCorrectionsChartData";
 import generateFlowDiagramData from "./utils/generateFlowDiagramData";
 import generateCorrectionsKeyInsightsData from "./utils/generateCorrectionsKeyInsightsData";
 import generateJailsKeyInsightsData from "./utils/generateJailsKeyInsightsData";
+import generateJailsChartData from "./utils/generateJailsChartData";
 import generateSourceData from "./utils/generateSourceData";
+import getNormalizedCountyData from "./utils/getNormalizedCountyData";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
   ADMISSIONS_FROM_PAROLE,
@@ -39,22 +41,24 @@ import {
   ADMISSIONS_FROM_PAROLE_TECHNICAL,
   ADMISSIONS_FROM_PROBATION_TECHNICAL,
   ADMISSIONS_FROM_PROBATION_NEW_CRIME,
+  INCARCERATION_RATE_JAIL,
 } from "./constants/metrics";
 
-const App = ({ stateCode, correctionsData, jailsData }) => {
+const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
   const stateName = states[stateCode];
   const stateMetricData = getNormalizedStateData(correctionsData, stateCode);
   const jailsMetricData = getNormalizedStateData(jailsData, stateCode);
+  const countyNamesData = getNormalizedCountyData(countiesData, stateCode);
 
   const isNoData = isEmptyObj(stateMetricData);
 
-  const populationsChartData = generateChartData(
+  const populationsChartData = generateCorrectionsChartData(
     stateMetricData,
     [POPULATION_PRISON, POPULATION_PAROLE, POPULATION_PROBATION],
     ["Prison Population", "Parole Population", "Probation Population"]
   );
 
-  const prisonAdmissionsChartData = generateChartData(
+  const prisonAdmissionsChartData = generateCorrectionsChartData(
     stateMetricData,
     [ADMISSIONS, ADMISSIONS_NEW_COMMITMENTS, ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PROBATION],
     [
@@ -65,13 +69,13 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
     ]
   );
 
-  const paroleRevocationsChartData = generateChartData(
+  const paroleRevocationsChartData = generateCorrectionsChartData(
     stateMetricData,
     [ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PAROLE_NEW_CRIME, ADMISSIONS_FROM_PAROLE_TECHNICAL],
     ["Total", "New Crime", "Technical Violation"]
   );
 
-  const probationRevocationsChartData = generateChartData(
+  const probationRevocationsChartData = generateCorrectionsChartData(
     stateMetricData,
     [
       ADMISSIONS_FROM_PROBATION,
@@ -81,12 +85,15 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
     ["Total", "New Crime", "Technical Violation"]
   );
 
-  const releasesChartData = generateChartData(stateMetricData, [RELEASES_COMPLETED], ["Releases"]);
+  const releasesChartData = generateCorrectionsChartData(
+    stateMetricData,
+    [RELEASES_COMPLETED],
+    ["Releases"]
+  );
 
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
 
   const correctionsKeyInsightsData = generateCorrectionsKeyInsightsData(flowData);
-  const jailsKeyInsightsData = generateJailsKeyInsightsData(jailsMetricData);
 
   const sourceData = generateSourceData(flowData, [
     populationsChartData.sourceData,
@@ -96,6 +103,23 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
     releasesChartData.sourceData,
   ]);
 
+  const { jailsKeyInsightsData, countyCoverage } = generateJailsKeyInsightsData(jailsMetricData);
+
+  const incarcerationRateChartData = generateJailsChartData(
+    jailsMetricData,
+    INCARCERATION_RATE_JAIL,
+    ["Statewide", "US_CO_ARAPAHOE"],
+    ["Statewide", "Arapahoe county"],
+    countyCoverage
+  );
+
+  const incarcerationRateTopCountiesChartData = generateJailsChartData(
+    jailsMetricData,
+    INCARCERATION_RATE_JAIL,
+    countyNamesData.slice(0, 5).map((county) => county.code),
+    countyNamesData.slice(0, 5).map((county) => county.name)
+  );
+
   return (
     <MainPage
       stateName={stateName}
@@ -103,6 +127,8 @@ const App = ({ stateCode, correctionsData, jailsData }) => {
       prisonAdmissionsChartData={prisonAdmissionsChartData}
       paroleRevocationsChartData={paroleRevocationsChartData}
       probationRevocationsChartData={probationRevocationsChartData}
+      incarcerationRateChartData={incarcerationRateChartData}
+      incarcerationRateTopCountiesChartData={incarcerationRateTopCountiesChartData}
       releasesChartData={releasesChartData}
       flowDiagramData={flowData}
       flowDiagramLastDate={lastDate}
@@ -120,6 +146,7 @@ App.propTypes = {
   correctionsData: PropTypes.arrayOf(
     PropTypes.shape({
       state_code: PropTypes.string.isRequired,
+      county_code: PropTypes.string,
       metric: PropTypes.string.isRequired,
       year: PropTypes.string.isRequired,
       month: PropTypes.string.isRequired,
@@ -144,6 +171,14 @@ App.propTypes = {
       compared_to_month: PropTypes.string,
       value_change: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       percentage_change: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    })
+  ).isRequired,
+  countiesData: PropTypes.arrayOf(
+    PropTypes.shape({
+      state_code: PropTypes.string.isRequired,
+      county_code: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      population: PropTypes.string.isRequired,
     })
   ).isRequired,
 };
