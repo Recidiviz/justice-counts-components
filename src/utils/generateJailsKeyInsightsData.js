@@ -17,7 +17,6 @@
 import {
   POPULATION_JAIL,
   PERCENTAGE_COVERED_COUNTY,
-  PERCENTAGE_COVERED_POPULATION,
   INCARCERATION_RATE_JAIL,
   metricToCardName,
 } from "../constants/metrics";
@@ -76,12 +75,7 @@ const getCaptionMap = {
  */
 
 const generateJailsKeyInsightsData = (data) => {
-  const { flowData } = [
-    POPULATION_JAIL,
-    PERCENTAGE_COVERED_COUNTY,
-    PERCENTAGE_COVERED_POPULATION,
-    INCARCERATION_RATE_JAIL,
-  ].reduce(
+  const { flowData } = [POPULATION_JAIL, PERCENTAGE_COVERED_COUNTY, INCARCERATION_RATE_JAIL].reduce(
     (acc, metric) => {
       if (!data[metric]) {
         acc.flowData[metric] = {
@@ -96,6 +90,8 @@ const generateJailsKeyInsightsData = (data) => {
           number: lastItem.value < 1 ? lastItem.value * 100 : lastItem.value,
           percentChange: lastItem.percentChange * 100,
           numberChange: lastItem.valueChange,
+          populationCoverage: lastItem.populationCoverage * 100,
+          countyCoverage: lastItem.countyCoverage * 100,
           isNumberPercent: lastItem.value < 1,
           item: lastItem,
         };
@@ -112,23 +108,17 @@ const generateJailsKeyInsightsData = (data) => {
     POPULATION_JAIL,
   ].reduce((keyInsights, metric) => {
     if (!flowData[metric].isNotAvailable) {
-      if (flowData[metric].isNumberPercent) {
-        keyInsights.push({
-          ...flowData[metric],
-          caption: getCaptionMap[metric](
-            flowData[metric].number,
-            flowData[PERCENTAGE_COVERED_POPULATION].number
-          ),
-        });
-      } else {
-        keyInsights.push({
-          ...flowData[metric],
-          caption: getCaptionMap[metric](
-            flowData[metric].percentChange,
-            flowData[metric].numberChange
-          ),
-        });
-      }
+      keyInsights.push({
+        ...flowData[metric],
+        caption: getCaptionMap[metric](
+          flowData[metric].isNumberPercent
+            ? flowData[POPULATION_JAIL].countyCoverage
+            : flowData[metric].percentChange,
+          flowData[metric].isNumberPercent
+            ? flowData[POPULATION_JAIL].populationCoverage
+            : flowData[metric].numberChange
+        ),
+      });
     }
 
     return keyInsights;

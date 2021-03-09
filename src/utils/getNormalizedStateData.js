@@ -74,6 +74,8 @@ const getNormalizedStateData = (data, stateCode) => {
         },
         value: parseFloat(item.value),
         countyCode: item.county_code,
+        countyCoverage: parseFloat(item.percentage_covered_county),
+        populationCoverage: parseFloat(item.percentage_covered_population),
         comparedToYear: item.compared_to_year ? toInt(item.compared_to_year) : null,
         comparedToMonth: item.compared_to_month ? toInt(item.compared_to_month) - 1 : null,
         sourceName: item.source_name,
