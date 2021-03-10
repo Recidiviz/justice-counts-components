@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@ import { chartDataPropTypes } from "../shared/Chart/propTypes";
 import { flowDiagramDataPropTypes } from "../Corrections/FlowDiagram/propTypes";
 import { keyInsightsPropTypes } from "../shared/KeyInsights/propTypes";
 import { sourcePropTypes } from "../shared/Sources/propTypes";
+import { countySelectorPropTypes } from "../shared/CountySelector/propTypes";
 import { CORRECTIONS, JAILS, LS_TAB_KEY } from "./constants";
 
 import "./MainPage.scss";
@@ -43,6 +44,7 @@ const MainPage = ({
   flowDiagramPrevDate,
   correctionsKeyInsightsData,
   jailsKeyInsightsData,
+  countySelectorData,
   sourceData,
   isNoData,
 }) => {
@@ -98,6 +100,7 @@ const MainPage = ({
       {activeTab === JAILS && (
         <Jails
           keyInsightsData={jailsKeyInsightsData}
+          countySelectorData={countySelectorData}
           incarcerationRateChartData={incarcerationRateChartData}
           incarcerationRateTopCountiesChartData={incarcerationRateTopCountiesChartData}
         />
@@ -120,6 +123,7 @@ MainPage.propTypes = {
   flowDiagramData: flowDiagramDataPropTypes.isRequired,
   correctionsKeyInsightsData: keyInsightsPropTypes.isRequired,
   jailsKeyInsightsData: keyInsightsPropTypes.isRequired,
+  countySelectorData: countySelectorPropTypes.isRequired,
   sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
   isNoData: PropTypes.bool.isRequired,
 };

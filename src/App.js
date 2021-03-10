@@ -122,6 +122,7 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
 
   return (
     <MainPage
+      countySelectorData={countyNamesData}
       stateName={stateName}
       populationsChartData={populationsChartData}
       prisonAdmissionsChartData={prisonAdmissionsChartData}
