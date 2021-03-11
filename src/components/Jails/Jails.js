@@ -15,17 +15,17 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import React from "react";
+import PropTypes from "prop-types";
+
 import KeyInsights from "../shared/KeyInsights";
 import Chart from "../shared/Chart";
 import Sources from "../shared/Sources";
-import CountySelector from "../shared/CountySelector/CountySelector";
 import { keyInsightsPropTypes } from "../shared/KeyInsights/propTypes";
 import { chartDataPropTypes } from "../shared/Chart/propTypes";
-import { countySelectorPropTypes } from "../shared/CountySelector/propTypes";
 
 const Jails = ({
   keyInsightsData,
-  countySelectorData,
+  countySelector,
   incarcerationRateChartData,
   incarcerationRateTopCountiesChartData,
 }) => {
@@ -36,7 +36,7 @@ const Jails = ({
         hint="By Type"
         title="Jail Incarceration Rate"
         chartData={incarcerationRateChartData}
-        switchCounties={<CountySelector counties={countySelectorData} />}
+        countySelector={countySelector}
       />
       <Chart
         hint="By Type"
@@ -50,7 +50,7 @@ const Jails = ({
 
 Jails.propTypes = {
   keyInsightsData: keyInsightsPropTypes.isRequired,
-  countySelectorData: countySelectorPropTypes.isRequired,
+  countySelector: PropTypes.node.isRequired,
   incarcerationRateChartData: chartDataPropTypes.isRequired,
   incarcerationRateTopCountiesChartData: chartDataPropTypes.isRequired,
 };

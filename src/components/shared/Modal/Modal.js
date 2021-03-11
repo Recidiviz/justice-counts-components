@@ -14,13 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import React from "react";
+import React, { useRef } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
+import useOnClickOutside from "use-onclickoutside";
 
 import "./Modal.scss";
 
-const Modal = ({ isShowing, hide, title, subtitle, selectedCounty, children }) => {
+const Modal = ({ isShowing, hide, children }) => {
+  const ref = useRef();
+  useOnClickOutside(ref, hide);
+
   document.body.className = isShowing ? "Modal__open" : "";
 
   return isShowing
@@ -28,7 +32,7 @@ const Modal = ({ isShowing, hide, title, subtitle, selectedCounty, children }) =
         <div className="Modal">
           <div className="Modal__overlay" />
           <div className="Modal__wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
-            <div className="Modal__body">
+            <div className="Modal__body" ref={ref}>
               <div className="Modal__header">
                 <button
                   type="button"
@@ -38,18 +42,7 @@ const Modal = ({ isShowing, hide, title, subtitle, selectedCounty, children }) =
                   onClick={hide}
                 />
               </div>
-              <h1 className="Modal__title">{title}</h1>
-              <div className="Modal__subtitle">{subtitle}</div>
-              <div className="Modal__body-content">{children}</div>
-              <div className="Modal__footer">
-                <div className="Modal__footer-county">
-                  SELECTED COUNTY:&nbsp;
-                  <span className="Modal__footer-county--selected">{selectedCounty}</span>
-                </div>
-                <button type="button" className="Modal__footer-button">
-                  View County
-                </button>
-              </div>
+              {children}
             </div>
           </div>
         </div>,
@@ -61,9 +54,6 @@ const Modal = ({ isShowing, hide, title, subtitle, selectedCounty, children }) =
 Modal.propTypes = {
   isShowing: PropTypes.bool.isRequired,
   hide: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  selectedCounty: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 

@@ -15,6 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 @import "../../../assets/scss/variables";
+
 .Modal {
   font-family: "GT America", sans-serif;
   font-style: normal;
@@ -69,18 +70,6 @@
     justify-content: flex-end;
   }
 
-  &__title {
-    font-weight: 800;
-    font-size: 2.25rem;
-    margin-bottom: 0.625rem;
-  }
-
-  &__subtitle {
-    font-weight: normal;
-    font-size: 1rem;
-    margin-bottom: 0.625rem;
-  }
-
   &__close-button {
     content: "";
     display: block;
@@ -90,40 +79,5 @@
     border: none;
     background: transparent url("../../../assets/icons/close-icon.svg") center center no-repeat;
     cursor: pointer;
-  }
-
-  &__body-content {
-    overflow-y: auto;
-  }
-
-  &__footer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    border-top: 1px solid #a3a3a3;
-    padding-top: 1rem;
-    margin-top: auto;
-
-    &-button {
-      background: #06aeee;
-      border-radius: 0.3125rem;
-      padding: 1rem 1.875rem;
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 800;
-      cursor: pointer;
-      border: none;
-    }
-
-    &-county {
-      font-size: 1rem;
-      font-weight: bold;
-      color: #808c99;
-      padding-right: 1.25rem;
-
-      &--selected {
-        font-weight: normal;
-      }
-    }
   }
 }

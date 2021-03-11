@@ -28,6 +28,8 @@ import generateJailsKeyInsightsData from "./utils/generateJailsKeyInsightsData";
 import generateJailsChartData from "./utils/generateJailsChartData";
 import generateSourceData from "./utils/generateSourceData";
 import getNormalizedCountyData from "./utils/getNormalizedCountyData";
+import CountySelector from "./components/Jails/CountySelector";
+import generateTopCountiesByPopulation from "./utils/generateTopCounties";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
   ADMISSIONS_FROM_PAROLE,
@@ -105,25 +107,32 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
 
   const { jailsKeyInsightsData, countyCoverage } = generateJailsKeyInsightsData(jailsMetricData);
 
+  const { countySelectorComponent, selectorCountyCode, selectorCountyName } = CountySelector(
+    countyNamesData,
+    stateName
+  );
+
   const incarcerationRateChartData = generateJailsChartData(
     jailsMetricData,
     INCARCERATION_RATE_JAIL,
-    ["Statewide", "US_CO_ARAPAHOE"],
-    ["Statewide", "Arapahoe county"],
+    ["Statewide", selectorCountyCode],
+    ["Statewide", selectorCountyName],
     countyCoverage
   );
+
+  const topCountiesByPopulation = generateTopCountiesByPopulation(countyNamesData);
 
   const incarcerationRateTopCountiesChartData = generateJailsChartData(
     jailsMetricData,
     INCARCERATION_RATE_JAIL,
-    countyNamesData.slice(0, 5).map((county) => county.code),
-    countyNamesData.slice(0, 5).map((county) => county.name)
+    topCountiesByPopulation.map((county) => county.code),
+    topCountiesByPopulation.map((county) => county.name)
   );
 
   return (
     <MainPage
-      countySelectorData={countyNamesData}
       stateName={stateName}
+      countySelector={countySelectorComponent}
       populationsChartData={populationsChartData}
       prisonAdmissionsChartData={prisonAdmissionsChartData}
       paroleRevocationsChartData={paroleRevocationsChartData}

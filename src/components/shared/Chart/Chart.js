@@ -34,7 +34,7 @@ const TICKS_COLOR = "#808C99";
 const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D", "#FFA600"];
 const CONNECTING_LINE_COLOR = "#00475D";
 
-const Chart = ({ title, hint, chartData, switchCounties }) => {
+const Chart = ({ title, hint, chartData, countySelector }) => {
   const availablePeriods = [
     { value: 13, label: "1 year" },
     { value: 61, label: "5 years" },
@@ -180,7 +180,7 @@ const Chart = ({ title, hint, chartData, switchCounties }) => {
               />
               <span className="Chart__legend-label">
                 {dataset.label}&nbsp;
-                {dataset.isStatewide ? dataset.countyCoverage : switchCounties}
+                {dataset.isStatewide ? dataset.countyCoverage : countySelector}
               </span>
               <span className="Chart__legend-percent">
                 {dataset.isNotAvailable ? "N/A" : calcMetricPercentage(dataset.data)}
@@ -194,14 +194,14 @@ const Chart = ({ title, hint, chartData, switchCounties }) => {
 };
 
 Chart.defaultProps = {
-  switchCounties: null,
+  countySelector: null,
 };
 
 Chart.propTypes = {
   title: PropTypes.string.isRequired,
   hint: PropTypes.string.isRequired,
   chartData: chartDataPropTypes.isRequired,
-  switchCounties: PropTypes.node,
+  countySelector: PropTypes.node,
 };
 
 export default Chart;

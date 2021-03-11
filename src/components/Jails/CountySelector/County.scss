@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+@import "../../../assets/scss/variables";
+
 .County {
   padding: 1rem;
   font-size: 1rem;
@@ -27,6 +29,9 @@
   outline: none;
   background: #fff;
   border-radius: 0.25rem;
+  @include down($md) {
+    width: 100%;
+  }
 
   &__population {
     color: #808c99;

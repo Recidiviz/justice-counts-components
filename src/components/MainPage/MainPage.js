@@ -25,7 +25,6 @@ import { chartDataPropTypes } from "../shared/Chart/propTypes";
 import { flowDiagramDataPropTypes } from "../Corrections/FlowDiagram/propTypes";
 import { keyInsightsPropTypes } from "../shared/KeyInsights/propTypes";
 import { sourcePropTypes } from "../shared/Sources/propTypes";
-import { countySelectorPropTypes } from "../shared/CountySelector/propTypes";
 import { CORRECTIONS, JAILS, LS_TAB_KEY } from "./constants";
 
 import "./MainPage.scss";
@@ -44,7 +43,7 @@ const MainPage = ({
   flowDiagramPrevDate,
   correctionsKeyInsightsData,
   jailsKeyInsightsData,
-  countySelectorData,
+  countySelector,
   sourceData,
   isNoData,
 }) => {
@@ -100,7 +99,7 @@ const MainPage = ({
       {activeTab === JAILS && (
         <Jails
           keyInsightsData={jailsKeyInsightsData}
-          countySelectorData={countySelectorData}
+          countySelector={countySelector}
           incarcerationRateChartData={incarcerationRateChartData}
           incarcerationRateTopCountiesChartData={incarcerationRateTopCountiesChartData}
         />
@@ -123,7 +122,7 @@ MainPage.propTypes = {
   flowDiagramData: flowDiagramDataPropTypes.isRequired,
   correctionsKeyInsightsData: keyInsightsPropTypes.isRequired,
   jailsKeyInsightsData: keyInsightsPropTypes.isRequired,
-  countySelectorData: countySelectorPropTypes.isRequired,
+  countySelector: PropTypes.node.isRequired,
   sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
   isNoData: PropTypes.bool.isRequired,
 };
