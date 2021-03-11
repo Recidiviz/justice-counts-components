@@ -50,7 +50,8 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
   const stateName = states[stateCode];
   const stateMetricData = getNormalizedStateData(correctionsData, stateCode);
   const jailsMetricData = getNormalizedStateData(jailsData, stateCode);
-  const countyNamesData = getNormalizedCountyData(countiesData, stateCode);
+  const normalizedCountyData = getNormalizedCountyData(countiesData, stateCode);
+  const topCountiesByPopulation = generateTopCountiesByPopulation(countiesData, stateCode);
 
   const isNoData = isEmptyObj(stateMetricData);
 
@@ -108,7 +109,7 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
   const { jailsKeyInsightsData, countyCoverage } = generateJailsKeyInsightsData(jailsMetricData);
 
   const { countySelectorComponent, selectorCountyCode, selectorCountyName } = CountySelector(
-    countyNamesData,
+    normalizedCountyData,
     stateName
   );
 
@@ -119,8 +120,6 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     ["Statewide", selectorCountyName],
     countyCoverage
   );
-
-  const topCountiesByPopulation = generateTopCountiesByPopulation(countyNamesData);
 
   const incarcerationRateTopCountiesChartData = generateJailsChartData(
     jailsMetricData,

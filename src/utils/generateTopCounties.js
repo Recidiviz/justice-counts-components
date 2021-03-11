@@ -14,10 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+import getNormalizedCountyData from "./getNormalizedCountyData";
 import sortByPopulation from "./sortByPopulation";
 
-const generateTopCountiesByPopulation = (data) => {
-  const topCounties = data.sort(sortByPopulation).slice(0, 5);
+const generateTopCountiesByPopulation = (data, stateCode) => {
+  const normalizedData = getNormalizedCountyData(data, stateCode);
+  const topCounties = normalizedData.sort(sortByPopulation).slice(0, 5);
 
   return topCounties;
 };

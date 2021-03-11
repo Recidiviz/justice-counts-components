@@ -23,11 +23,13 @@ import getNormalizedStateData from "../utils/getNormalizedStateData";
 import generateCorrectionsChartData from "../utils/generateCorrectionsChartData";
 import generateJailsChartData from "../utils/generateJailsChartData";
 import states from "../constants/states";
+import CountySelector from "../components/Jails/CountySelector";
 
 jest.mock("../components/MainPage");
 jest.mock("../utils/getNormalizedStateData");
 jest.mock("../utils/generateCorrectionsChartData");
 jest.mock("../utils/generateJailsChartData");
+jest.mock("../components/Jails/CountySelector");
 describe("App.js", () => {
   const mockStateCode = "US_CO";
   const mockData = [];
@@ -36,6 +38,7 @@ describe("App.js", () => {
 
   beforeEach(() => {
     MainPage.mockReturnValue(null);
+    CountySelector.mockReturnValue(mockNormalizedData);
     getNormalizedStateData.mockReturnValue(mockNormalizedData);
     generateCorrectionsChartData.mockReturnValue(mockChartData);
     generateJailsChartData.mockReturnValue(mockChartData);

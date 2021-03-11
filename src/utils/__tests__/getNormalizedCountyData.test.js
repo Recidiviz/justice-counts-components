@@ -22,6 +22,7 @@ describe("getNormalizedCountyData.test.js", () => {
   const mockCounty2 = "US_CO_ARAPAHOE";
   const mockCounty3 = "US_CO_ADAMS";
   const mockContyName = "Mock county";
+  const mockContyName1 = "ZMock county";
   const mockStateCode1 = "US_CO";
   const mockStateCode2 = "US_MO";
   const mockData = [
@@ -41,7 +42,7 @@ describe("getNormalizedCountyData.test.js", () => {
       state_code: mockStateCode1,
       county_code: mockCounty3,
       population: "12345678",
-      name: mockContyName,
+      name: mockContyName1,
     },
   ];
 
@@ -60,18 +61,18 @@ describe("getNormalizedCountyData.test.js", () => {
     expect(normalizedCountyData.some((county) => county.mockCounty3)).toBe(false);
   });
 
-  it("should sort population (descending)", () => {
+  it("should sort by alphabet (ascending)", () => {
     const normalizedCountyData = getNormalizedCountyData(mockData, mockStateCode1);
 
     expect(normalizedCountyData).toMatchObject([
       {
-        population: 12345678,
+        name: mockContyName,
       },
       {
-        population: 876543,
+        name: mockContyName,
       },
       {
-        population: 87688,
+        name: mockContyName1,
       },
     ]);
   });
@@ -81,8 +82,8 @@ describe("getNormalizedCountyData.test.js", () => {
 
     expect(normalizedCountyData).toMatchObject([
       {
-        code: mockCounty3,
-        population: 12345678,
+        code: mockCounty1,
+        population: 87688,
         name: mockContyName,
       },
       {
@@ -91,9 +92,9 @@ describe("getNormalizedCountyData.test.js", () => {
         name: mockContyName,
       },
       {
-        code: mockCounty1,
-        population: 87688,
-        name: mockContyName,
+        code: mockCounty3,
+        population: 12345678,
+        name: mockContyName1,
       },
     ]);
   });
