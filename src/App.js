@@ -29,7 +29,7 @@ import generateJailsChartData from "./utils/generateJailsChartData";
 import generateSourceData from "./utils/generateSourceData";
 import getNormalizedCountyData from "./utils/getNormalizedCountyData";
 import CountySelector from "./components/Jails/CountySelector";
-import generateTopCountiesByPopulation from "./utils/generateTopCounties";
+import generateTopCountiesByPopulation from "./utils/generateTopCountiesByPopulation";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
   ADMISSIONS_FROM_PAROLE,

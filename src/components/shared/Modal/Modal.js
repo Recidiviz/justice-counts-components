@@ -31,7 +31,14 @@ const Modal = ({ isShowing, hide, children }) => {
     ? createPortal(
         <div className="Modal">
           <div className="Modal__overlay" />
-          <div className="Modal__wrapper" aria-modal aria-hidden tabIndex={-1} role="dialog">
+          <div
+            className="Modal__wrapper"
+            aria-modal
+            aria-hidden
+            aria-label="Modal"
+            tabIndex={-1}
+            role="dialog"
+          >
             <div className="Modal__body" ref={ref}>
               <div className="Modal__header">
                 <button
@@ -53,7 +60,7 @@ const Modal = ({ isShowing, hide, children }) => {
 
 Modal.propTypes = {
   isShowing: PropTypes.bool.isRequired,
-  hide: PropTypes.func.isRequired,
+
   children: PropTypes.node.isRequired,
 };
 
