@@ -23,11 +23,17 @@ import getNormalizedStateData from "../utils/getNormalizedStateData";
 import generateCorrectionsChartData from "../utils/generateCorrectionsChartData";
 import generateJailsChartData from "../utils/generateJailsChartData";
 import states from "../constants/states";
+import CountySelector from "../components/Jails/CountySelector";
+import generateTopCountiesByPopulation from "../utils/generateTopCountiesByPopulation";
+import getNormalizedCountyData from "../utils/getNormalizedCountyData";
 
 jest.mock("../components/MainPage");
 jest.mock("../utils/getNormalizedStateData");
+jest.mock("../utils/getNormalizedCountyData");
+jest.mock("../utils/generateTopCountiesByPopulation");
 jest.mock("../utils/generateCorrectionsChartData");
 jest.mock("../utils/generateJailsChartData");
+jest.mock("../components/Jails/CountySelector");
 describe("App.js", () => {
   const mockStateCode = "US_CO";
   const mockData = [];
@@ -36,9 +42,12 @@ describe("App.js", () => {
 
   beforeEach(() => {
     MainPage.mockReturnValue(null);
+    CountySelector.mockReturnValue(mockNormalizedData);
     getNormalizedStateData.mockReturnValue(mockNormalizedData);
     generateCorrectionsChartData.mockReturnValue(mockChartData);
     generateJailsChartData.mockReturnValue(mockChartData);
+    getNormalizedCountyData.mockReturnValue(mockData);
+    generateTopCountiesByPopulation.mockReturnValue(mockData);
     jest.clearAllMocks();
   });
 
@@ -54,6 +63,7 @@ describe("App.js", () => {
 
     expect(MainPage).toHaveBeenCalledTimes(1);
     expect(MainPage.mock.calls[0][0].stateName).toBe(states[mockStateCode]);
+    expect(MainPage.mock.calls[0][0].countySelector).not.toBeNull();
     expect(MainPage.mock.calls[0][0].populationsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].prisonAdmissionsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].releasesChartData).toBe(mockChartData);

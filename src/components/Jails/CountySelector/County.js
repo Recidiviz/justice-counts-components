@@ -14,37 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import sortByAlphabet from "./sortByAlphabet";
-import toInt from "./toInt";
+import React from "react";
+import PropTypes from "prop-types";
+import cn from "classnames";
 
-/**
- * Filters data by state, normalizes, groups and sorts by population
- * @param data {{
- *   state_code: string
- *   county_code: string
- *   name: string,
- *   population: string,
- * }[]}
- * @param stateCode {string}
- * @returns {{
- *   code: string
- *   name: string
- *   population: number
- * }[]}
- */
+import "./County.scss";
 
-const getNormalizedCountyData = (data, stateCode) => {
-  const normalizedData = data.reduce((acc, item) => {
-    if (item.state_code === stateCode) {
-      acc.push({ code: item.county_code, name: item.name, population: toInt(item.population) });
-    }
-
-    return acc;
-  }, []);
-
-  normalizedData.sort(sortByAlphabet);
-
-  return normalizedData;
+const County = ({ name, population, isSelected, onClick }) => {
+  return (
+    <button
+      type="button"
+      className={cn("County", {
+        "County--selected": isSelected === name,
+      })}
+      onClick={onClick}
+    >
+      <span>{name}</span>&nbsp;
+      <span className="County__population">({population.toLocaleString("en-US")} people)</span>
+    </button>
+  );
 };
 
-export default getNormalizedCountyData;
+County.propTypes = {
+  name: PropTypes.string.isRequired,
+  population: PropTypes.number.isRequired,
+  isSelected: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+export default County;

@@ -28,6 +28,8 @@ import generateJailsKeyInsightsData from "./utils/generateJailsKeyInsightsData";
 import generateJailsChartData from "./utils/generateJailsChartData";
 import generateSourceData from "./utils/generateSourceData";
 import getNormalizedCountyData from "./utils/getNormalizedCountyData";
+import CountySelector from "./components/Jails/CountySelector";
+import generateTopCountiesByPopulation from "./utils/generateTopCountiesByPopulation";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
   ADMISSIONS_FROM_PAROLE,
@@ -48,7 +50,8 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
   const stateName = states[stateCode];
   const stateMetricData = getNormalizedStateData(correctionsData, stateCode);
   const jailsMetricData = getNormalizedStateData(jailsData, stateCode);
-  const countyNamesData = getNormalizedCountyData(countiesData, stateCode);
+  const normalizedCountyData = getNormalizedCountyData(countiesData, stateCode);
+  const topCountiesByPopulation = generateTopCountiesByPopulation(countiesData, stateCode);
 
   const isNoData = isEmptyObj(stateMetricData);
 
@@ -105,24 +108,30 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
 
   const { jailsKeyInsightsData, countyCoverage } = generateJailsKeyInsightsData(jailsMetricData);
 
+  const { countySelectorComponent, selectorCountyCode, selectorCountyName } = CountySelector(
+    normalizedCountyData,
+    stateName
+  );
+
   const incarcerationRateChartData = generateJailsChartData(
     jailsMetricData,
     INCARCERATION_RATE_JAIL,
-    ["Statewide", "US_CO_ARAPAHOE"],
-    ["Statewide", "Arapahoe county"],
+    ["Statewide", selectorCountyCode],
+    ["Statewide", selectorCountyName],
     countyCoverage
   );
 
   const incarcerationRateTopCountiesChartData = generateJailsChartData(
     jailsMetricData,
     INCARCERATION_RATE_JAIL,
-    countyNamesData.slice(0, 5).map((county) => county.code),
-    countyNamesData.slice(0, 5).map((county) => county.name)
+    topCountiesByPopulation.map((county) => county.code),
+    topCountiesByPopulation.map((county) => county.name)
   );
 
   return (
     <MainPage
       stateName={stateName}
+      countySelector={countySelectorComponent}
       populationsChartData={populationsChartData}
       prisonAdmissionsChartData={prisonAdmissionsChartData}
       paroleRevocationsChartData={paroleRevocationsChartData}

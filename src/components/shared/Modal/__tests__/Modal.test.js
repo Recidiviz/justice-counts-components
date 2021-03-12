@@ -14,37 +14,30 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import sortByAlphabet from "./sortByAlphabet";
-import toInt from "./toInt";
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import Modal from "../Modal";
 
-/**
- * Filters data by state, normalizes, groups and sorts by population
- * @param data {{
- *   state_code: string
- *   county_code: string
- *   name: string,
- *   population: string,
- * }[]}
- * @param stateCode {string}
- * @returns {{
- *   code: string
- *   name: string
- *   population: number
- * }[]}
- */
+describe("Modal.js", () => {
+  const mockHide = jest.fn();
 
-const getNormalizedCountyData = (data, stateCode) => {
-  const normalizedData = data.reduce((acc, item) => {
-    if (item.state_code === stateCode) {
-      acc.push({ code: item.county_code, name: item.name, population: toInt(item.population) });
-    }
+  it("should render standard modal", () => {
+    render(
+      <>
+        <Modal isShowing>Some content</Modal>
+      </>
+    );
 
-    return acc;
-  }, []);
+    expect(screen.queryByText("Some content")).toBeInTheDocument();
+  });
 
-  normalizedData.sort(sortByAlphabet);
+  it("should not be rendered if isShowing is false", () => {
+    render(
+      <Modal isShowing={false} hide={mockHide}>
+        Some content
+      </Modal>
+    );
 
-  return normalizedData;
-};
-
-export default getNormalizedCountyData;
+    expect(screen.queryByText("Some content")).not.toBeInTheDocument();
+  });
+});

@@ -14,37 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import sortByAlphabet from "./sortByAlphabet";
-import toInt from "./toInt";
+import getNormalizedCountyData from "./getNormalizedCountyData";
+import sortByPopulation from "./sortByPopulation";
 
-/**
- * Filters data by state, normalizes, groups and sorts by population
- * @param data {{
- *   state_code: string
- *   county_code: string
- *   name: string,
- *   population: string,
- * }[]}
- * @param stateCode {string}
- * @returns {{
- *   code: string
- *   name: string
- *   population: number
- * }[]}
- */
+const generateTopCountiesByPopulation = (data, stateCode) => {
+  const normalizedData = getNormalizedCountyData(data, stateCode);
+  const topCounties = normalizedData.sort(sortByPopulation).slice(0, 5);
 
-const getNormalizedCountyData = (data, stateCode) => {
-  const normalizedData = data.reduce((acc, item) => {
-    if (item.state_code === stateCode) {
-      acc.push({ code: item.county_code, name: item.name, population: toInt(item.population) });
-    }
-
-    return acc;
-  }, []);
-
-  normalizedData.sort(sortByAlphabet);
-
-  return normalizedData;
+  return topCounties;
 };
 
-export default getNormalizedCountyData;
+export default generateTopCountiesByPopulation;

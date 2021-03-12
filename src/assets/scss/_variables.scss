@@ -1,4 +1,5 @@
 $lg: 1024;
+$md: 640;
 $sm: 380;
 @mixin up($media) {
   @media only screen and (min-width: #{$media}px) {

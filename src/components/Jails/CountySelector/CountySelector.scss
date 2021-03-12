@@ -1,0 +1,99 @@
+// Recidiviz - a data platform for criminal justice reform
+// Copyright (C) 2021 Recidiviz, Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// =============================================================================
+@import "../../../assets/scss/variables";
+
+.CountySelector {
+  &__button {
+    font-family: "GT America", sans-serif;
+    background: none;
+    color: #06aeee;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 0.9375rem;
+    text-decoration: underline;
+  }
+
+  &__title {
+    font-weight: 800;
+    font-size: 2.25rem;
+    margin-bottom: 0.625rem;
+    @include down($md) {
+      font-size: 1.625rem;
+    }
+    @include down($sm) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__subtitle {
+    font-weight: normal;
+    font-size: 1rem;
+    margin-bottom: 0.625rem;
+    @include down($md) {
+      font-size: 0.875rem;
+    }
+  }
+
+  &__body-content {
+    overflow-y: auto;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-top: 1px solid #a3a3a3;
+    padding-top: 1rem;
+    margin-top: auto;
+    @include down($md) {
+      justify-content: space-between;
+    }
+
+    &-button {
+      font-family: "GT America", sans-serif;
+      background: #06aeee;
+      border-radius: 0.3125rem;
+      padding: 1rem 1.875rem;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      @include down($md) {
+        font-size: 0.875rem;
+      }
+    }
+
+    &-county {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #808c99;
+      padding-right: 1.25rem;
+      @include down($md) {
+        font-size: 0.875rem;
+      }
+
+      &--selected {
+        font-weight: normal;
+        @include down($md) {
+          display: block;
+        }
+      }
+    }
+  }
+}

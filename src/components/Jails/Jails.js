@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,6 +15,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import React from "react";
+import PropTypes from "prop-types";
+
 import KeyInsights from "../shared/KeyInsights";
 import Chart from "../shared/Chart";
 import Sources from "../shared/Sources";
@@ -23,6 +25,7 @@ import { chartDataPropTypes } from "../shared/Chart/propTypes";
 
 const Jails = ({
   keyInsightsData,
+  countySelector,
   incarcerationRateChartData,
   incarcerationRateTopCountiesChartData,
 }) => {
@@ -33,7 +36,7 @@ const Jails = ({
         hint="By Type"
         title="Jail Incarceration Rate"
         chartData={incarcerationRateChartData}
-        switchCounties={<a href="/">(Switch counties)</a>}
+        countySelector={countySelector}
       />
       <Chart
         hint="By Type"
@@ -47,6 +50,7 @@ const Jails = ({
 
 Jails.propTypes = {
   keyInsightsData: keyInsightsPropTypes.isRequired,
+  countySelector: PropTypes.node.isRequired,
   incarcerationRateChartData: chartDataPropTypes.isRequired,
   incarcerationRateTopCountiesChartData: chartDataPropTypes.isRequired,
 };
