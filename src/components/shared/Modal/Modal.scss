@@ -59,6 +59,7 @@
     border-radius: 0.625rem;
     width: 927px;
     height: 608px;
+    max-height: 100vh;
     padding: 2.5rem 3.125rem;
     @include down($lg) {
       padding: 1.25rem;
