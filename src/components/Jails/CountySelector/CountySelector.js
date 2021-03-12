@@ -58,7 +58,8 @@ const CountySelector = (counties, stateName) => {
           <h1 className="CountySelector__title">{`Counties in ${stateName}`}</h1>
           <div className="CountySelector__subtitle">
             Select a county below and click “View County” to see the trend of the county’s
-            incarceration rate over time. Counties are arranged in alphabetical order.
+            incarceration rate over time.
+            <br /> Counties are arranged in alphabetical order.
           </div>
           <div className="CountySelector__body-content">
             {counties.map((county) => (
@@ -68,9 +69,7 @@ const CountySelector = (counties, stateName) => {
                 population={county.population}
                 isSelected={selectedCountyName}
                 onClick={createOnSelect(county.name, county.code)}
-              >
-                {county.name}
-              </County>
+              />
             ))}
           </div>
           <div className="CountySelector__footer">
