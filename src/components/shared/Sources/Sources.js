@@ -20,17 +20,21 @@ import PropTypes from "prop-types";
 import Source from "./Source";
 
 import { sourcePropTypes } from "./propTypes";
+import { CORRECTIONS, JAILS } from "../../MainPage/constants";
 
 import "./Sources.scss";
 
-const Sources = ({ data }) => (
+const Sources = ({ data, tab }) => (
   <div className="Sources">
     <h2 className="Sources__title">Sources</h2>
     {!data.length ? (
       <p className="Sources__no-data">No public sources available.</p>
     ) : (
       <p className="Sources__data">
-        All data for these visualizations comes from public reports published by the{" "}
+        {tab === JAILS && "This dashboard is powered by data conducted by the"}
+        {tab === CORRECTIONS &&
+          "All data for these visualizations comes from public reports published by the"}
+        &nbsp;
         {data.map((source) => (
           <Source key={source.name} {...source} />
         ))}
@@ -39,8 +43,13 @@ const Sources = ({ data }) => (
   </div>
 );
 
+Sources.defaultProps = {
+  tab: CORRECTIONS,
+};
+
 Sources.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
+  tab: PropTypes.string,
 };
 
 export default Sources;

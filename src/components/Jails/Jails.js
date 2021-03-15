@@ -22,12 +22,15 @@ import Chart from "../shared/Chart";
 import Sources from "../shared/Sources";
 import { keyInsightsPropTypes } from "../shared/KeyInsights/propTypes";
 import { chartDataPropTypes } from "../shared/Chart/propTypes";
+import { sourcePropTypes } from "../shared/Sources/propTypes";
+import { JAILS } from "../MainPage/constants";
 
 const Jails = ({
   keyInsightsData,
   countySelector,
   incarcerationRateChartData,
   incarcerationRateTopCountiesChartData,
+  sourceData,
 }) => {
   return (
     <div className="Jails">
@@ -43,7 +46,7 @@ const Jails = ({
         title="Jail Incarceration Rate (Top Counties)"
         chartData={incarcerationRateTopCountiesChartData}
       />
-      <Sources data={[]} />
+      <Sources tab={JAILS} data={sourceData} />
     </div>
   );
 };
@@ -53,6 +56,7 @@ Jails.propTypes = {
   countySelector: PropTypes.node.isRequired,
   incarcerationRateChartData: chartDataPropTypes.isRequired,
   incarcerationRateTopCountiesChartData: chartDataPropTypes.isRequired,
+  sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
 };
 
 export default Jails;

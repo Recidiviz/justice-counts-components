@@ -98,7 +98,7 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
 
   const correctionsKeyInsightsData = generateCorrectionsKeyInsightsData(flowData);
 
-  const sourceData = generateSourceData(flowData, [
+  const correctionsSourceData = generateSourceData(flowData, [
     populationsChartData.sourceData,
     prisonAdmissionsChartData.sourceData,
     paroleRevocationsChartData.sourceData,
@@ -128,6 +128,28 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     topCountiesByPopulation.map((county) => county.name)
   );
 
+  const jailsSourceData = [
+    {
+      name: "Vera Institute of Justice",
+      links: [
+        {
+          name: "Vera Jails Survey",
+          src:
+            "https://github.com/vera-institute/jail-population-data/blob/master/jail_population.csv",
+        },
+      ],
+    },
+    {
+      name: "Bureau of Justice Statistics (BJS)",
+      links: [
+        {
+          name: "Annual Survey of Jails",
+          src: "https://www.icpsr.umich.edu/web/NACJD/studies/37392",
+        },
+      ],
+    },
+  ];
+
   return (
     <MainPage
       stateName={stateName}
@@ -144,7 +166,8 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
       flowDiagramPrevDate={comparedToDate}
       correctionsKeyInsightsData={correctionsKeyInsightsData}
       jailsKeyInsightsData={jailsKeyInsightsData}
-      sourceData={sourceData}
+      correctionsSourceData={correctionsSourceData}
+      jailsSourceData={jailsSourceData}
       isNoData={isNoData}
     />
   );

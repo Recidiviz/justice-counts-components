@@ -44,7 +44,8 @@ const MainPage = ({
   correctionsKeyInsightsData,
   jailsKeyInsightsData,
   countySelector,
-  sourceData,
+  correctionsSourceData,
+  jailsSourceData,
   isNoData,
 }) => {
   const [activeTab, setActiveTab] = useState(localStorage.getItem(LS_TAB_KEY) || CORRECTIONS);
@@ -93,7 +94,7 @@ const MainPage = ({
           flowDiagramLastDate={flowDiagramLastDate}
           flowDiagramPrevDate={flowDiagramPrevDate}
           keyInsightsData={correctionsKeyInsightsData}
-          sourceData={sourceData}
+          sourceData={correctionsSourceData}
         />
       )}
       {activeTab === JAILS && (
@@ -102,6 +103,7 @@ const MainPage = ({
           countySelector={countySelector}
           incarcerationRateChartData={incarcerationRateChartData}
           incarcerationRateTopCountiesChartData={incarcerationRateTopCountiesChartData}
+          sourceData={jailsSourceData}
         />
       )}
     </section>
@@ -123,7 +125,8 @@ MainPage.propTypes = {
   correctionsKeyInsightsData: keyInsightsPropTypes.isRequired,
   jailsKeyInsightsData: keyInsightsPropTypes.isRequired,
   countySelector: PropTypes.node.isRequired,
-  sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
+  correctionsSourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
+  jailsSourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
   isNoData: PropTypes.bool.isRequired,
 };
 
