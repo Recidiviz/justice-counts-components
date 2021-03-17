@@ -39,7 +39,7 @@
     font-size: 0.9375rem;
     line-height: 1.6;
     .Card--not-available & {
-      color: #8c8c8c;
+      color: #808c99;
     }
     .Card--population &:before {
       margin-right: 0.5rem;
@@ -88,7 +88,7 @@
     left: 50%;
     padding: 0.75rem;
     width: 15.125rem;
-    background-color: #00475d;
+    background-color: #082249;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 0.25rem;
     color: #ffffff;
@@ -114,7 +114,7 @@
       display: block;
       bottom: -0.3125rem;
       left: 50%;
-      background-color: #00475d;
+      background-color: #082249;
       width: 0.625rem;
       height: 0.625rem;
       transform: translateX(-50%) rotate(-45deg);
@@ -167,7 +167,7 @@
     font-size: 2.5rem;
     line-height: 1;
     font-weight: 700;
-    color: #8c8c8c;
+    color: #808c99;
     letter-spacing: -0.01em;
     text-transform: capitalize;
     white-space: nowrap;
