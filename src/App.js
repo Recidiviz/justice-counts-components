@@ -57,7 +57,7 @@ const App = ({ stateCode, data }) => {
     [ADMISSIONS, ADMISSIONS_NEW_COMMITMENTS, ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PROBATION],
     [
       "Total Prison Admissions",
-      "New Court Admissions",
+      "New Prison Commitments",
       "Parole Revocations (Total)",
       "Probation Revocations (Total)",
     ]
