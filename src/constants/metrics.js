@@ -30,8 +30,8 @@ export const ADMISSIONS_FROM_PAROLE_TECHNICAL = "ADMISSIONS_FROM_PAROLE_TECHNICA
 export const ADMISSIONS_FROM_PROBATION_TECHNICAL = "ADMISSIONS_FROM_PROBATION_TECHNICAL";
 
 export const metricToCardName = {
-  [ADMISSIONS_NEW_COMMITMENTS]: "Prison Sentences",
-  [PROBATION_SENTENCES]: "Probation Sentences",
+  [ADMISSIONS_NEW_COMMITMENTS]: "New Prison Commitments",
+  [PROBATION_SENTENCES]: "New Probation Commitments",
   [POPULATION_PROBATION]: "Probation Population",
   [ADMISSIONS_FROM_PROBATION]: "Probation Revocations",
   [POPULATION_PRISON]: "Prison Population",
