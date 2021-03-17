@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,6 +23,8 @@ import formatNumber from "../../../utils/formatNumber";
 import "./Card.scss";
 
 const Card = ({
+  lastDate,
+  comparedToDate,
   isNotAvailable,
   isPopulation,
   hint,
@@ -43,14 +45,8 @@ const Card = ({
   >
     <div className="Card__header">
       <h3 className="Card__title">{title}</h3>
-      {hint && (
-        <div className="Card__warning-box">
-          <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={hint} />
-          <div className="Card__warning">{hint}</div>
-        </div>
-      )}
       {sourceText && (
-        <div className="Card__warning-box Card__warning-box--hint">
+        <div className="Card__warning-box">
           <button
             type="button"
             tabIndex={0}
@@ -81,6 +77,23 @@ const Card = ({
               {Math.round(percentChange)}%)
             </span>
           )}
+          <div className="Card__bottom">
+            {hint && (
+              <span className="Card__warning-box Card__warning-box--hint">
+                <button
+                  type="button"
+                  tabIndex={0}
+                  className="Card__warning-icon"
+                  aria-label={hint}
+                />
+                <div className="Card__warning">{hint}</div>
+              </span>
+            )}
+            <div className="Card__date-range">
+              {lastDate}&nbsp;
+              {percentChange && <span>(compared to {comparedToDate})</span>}
+            </div>
+          </div>
         </>
       )}
     </div>
@@ -99,6 +112,8 @@ Card.defaultProps = {
   percentChange: null,
   className: "",
   children: null,
+  lastDate: null,
+  comparedToDate: null,
 };
 
 Card.propTypes = {
@@ -113,6 +128,8 @@ Card.propTypes = {
   percentChange: PropTypes.number,
   className: PropTypes.string,
   children: PropTypes.node,
+  lastDate: PropTypes.string,
+  comparedToDate: PropTypes.string,
 };
 
 export default Card;

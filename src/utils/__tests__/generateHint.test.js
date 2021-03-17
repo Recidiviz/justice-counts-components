@@ -43,7 +43,7 @@ describe("generateHint.js", () => {
         dateReported: { year: 2020, month: 8, day: 30 },
       })
     ).toBe(
-      "Releases to Parole was last reported on September 30, 2020 (% change relative to August 2019)."
+      "This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (August 2019 --> September 2020)."
     );
   });
 
@@ -58,7 +58,7 @@ describe("generateHint.js", () => {
         dateReported: { year: 2020, month: 9, day: 30 },
       })
     ).toBe(
-      "Releases to Parole was last reported on October 30, 2020 (% change relative to August 2019)."
+      "This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (August 2019 --> October 2020)."
     );
   });
 
@@ -73,7 +73,7 @@ describe("generateHint.js", () => {
         dateReported: { year: 2020, month: 9, day: 30 },
       })
     ).toBe(
-      "Releases to Parole was last reported on October 30, 2020 (% change relative to January 2019)."
+      "This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (January 2019 --> October 2020)."
     );
   });
 

@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@
     width: 1.5rem;
     height: 1.5rem;
     border: 0;
-    background: transparent url("../../../assets/icons/warning-icon.svg") center center no-repeat;
+    background: transparent url("../../../assets/icons/info-icon.svg") center center no-repeat;
     background-size: 1rem 1rem;
     cursor: pointer;
     &:hover ~ .Card__warning,
@@ -76,7 +76,10 @@
       transition: opacity 0.2s;
     }
     .Card__warning-box--hint & {
-      background: transparent url("../../../assets/icons/info-icon.svg") center center no-repeat;
+      background: transparent url("../../../assets/icons/warning-icon.svg") center bottom no-repeat;
+      display: inline-block;
+      background-size: 0.7rem;
+      outline: none;
     }
   }
 
@@ -124,6 +127,16 @@
         transform: rotate(-45deg);
       }
     }
+    .Card__warning-box--hint & {
+      bottom: 1.6rem;
+      @include down($lg) {
+        right: auto;
+        left: -0.3rem;
+        &:after {
+          right: auto;
+        }
+      }
+    }
   }
 
   &__source-link {
@@ -160,6 +173,22 @@
     color: #0db4e4;
     @media (max-width: 439px) {
       font-size: calc(1.5rem + ((100vw - 320px) / 119 * 16));
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: baseline;
+  }
+
+  &__date-range {
+    margin-top: 1rem;
+    font-size: 12px;
+    font-weight: 600;
+    color: #8c8c8c;
+
+    & span {
+      color: #0db4e4;
     }
   }
 
