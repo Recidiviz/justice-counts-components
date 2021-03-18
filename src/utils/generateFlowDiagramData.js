@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -72,11 +72,15 @@ const generateFlowDiagramData = (data) => {
         acc.flowData[metric] = {
           title: metricToCardName[metric],
           number: lastItem.value,
-          percentChange: lastItem.percentChange * 100,
+          percentChange: lastItem.percentChange ? lastItem.percentChange * 100 : null,
           numberChange: lastItem.valueChange,
           sourceText: generateSourceText(lastItem.sourceName, lastItem.sourceCategories),
           sourceUrl: lastItem.sourceUrl,
           reportName: lastItem.reportName,
+          lastDate: `${months[lastItem.month]} ${lastItem.year}`,
+          comparedToDate: lastItem.percentChange
+            ? `${months[lastItem.comparedToMonth]} ${lastItem.comparedToYear}`
+            : null,
           item: lastItem,
         };
 
