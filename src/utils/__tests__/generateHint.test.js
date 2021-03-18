@@ -43,7 +43,7 @@ describe("generateHint.js", () => {
         dateReported: { year: 2020, month: 8, day: 30 },
       })
     ).toBe(
-      "This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (August 2019 --> September 2020)."
+      "This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (September 2019 → September 2020)."
     );
   });
 
@@ -58,7 +58,7 @@ describe("generateHint.js", () => {
         dateReported: { year: 2020, month: 9, day: 30 },
       })
     ).toBe(
-      "This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (August 2019 --> October 2020)."
+      "This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (October 2019 → October 2020)."
     );
   });
 
@@ -73,7 +73,7 @@ describe("generateHint.js", () => {
         dateReported: { year: 2020, month: 9, day: 30 },
       })
     ).toBe(
-      "This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (January 2019 --> October 2020)."
+      "This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (October 2019 → October 2020)."
     );
   });
 

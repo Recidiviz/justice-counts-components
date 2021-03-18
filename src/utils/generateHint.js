@@ -43,13 +43,9 @@ const generateHint = (
     return null;
   }
 
-  let hint = `This icon indicates that the dates that correspond with this metric are not aligned with the primary date range`;
-
-  if (comparedToMonth !== null && comparedToYear !== null) {
-    hint += ` (${months[comparedToMonth]} ${comparedToYear} --> ${months[mostRecentMonth]} ${mostRecentYear})`;
-  }
-
-  return `${hint}.`;
+  return `This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (${
+    months[mostRecentMonth]
+  } ${mostRecentYear - 1} → ${months[mostRecentMonth]} ${mostRecentYear}).`;
 };
 
 export default generateHint;
