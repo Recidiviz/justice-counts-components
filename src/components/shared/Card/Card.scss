@@ -144,6 +144,10 @@
     text-decoration: underline;
   }
 
+  &__last-updated {
+    opacity: 0.5;
+  }
+
   &__body {
     border-top: 1px solid #eeeeee;
     padding: 2rem 1.5rem 2rem;

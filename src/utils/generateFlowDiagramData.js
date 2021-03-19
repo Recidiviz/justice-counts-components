@@ -77,7 +77,8 @@ const generateFlowDiagramData = (data) => {
           sourceText: generateSourceText(lastItem.sourceName, lastItem.sourceCategories),
           sourceUrl: lastItem.sourceUrl,
           reportName: lastItem.reportName,
-          lastDate: `${months[lastItem.month]} ${lastItem.year}`,
+          lastUpdatedDate: `${months[lastItem.month]} ${lastItem.day}, ${lastItem.year}`,
+          mostRecentDate: `${months[lastItem.month]} ${lastItem.year}`,
           comparedToDate: lastItem.percentChange
             ? `${months[lastItem.comparedToMonth]} ${lastItem.comparedToYear}`
             : null,

@@ -65,6 +65,7 @@ const getNormalizedStateData = (data, stateCode) => {
         metric: item.metric,
         year: toInt(item.year),
         month: toInt(item.month) - 1,
+        day: toInt(dayReported),
         dateReported: {
           year: toInt(yearReported),
           month: toInt(monthReported - 1),
