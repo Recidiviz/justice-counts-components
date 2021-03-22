@@ -82,6 +82,7 @@ const generateFlowDiagramData = (data) => {
             ? `${months[lastItem.comparedToMonth]} ${lastItem.comparedToYear}`
             : null,
           item: lastItem,
+          isTooStale: false,
         };
 
         if (acc.mostRecentYear < lastItem.year) {
@@ -97,14 +98,25 @@ const generateFlowDiagramData = (data) => {
     { flowData: {}, mostRecentYear: -Infinity, mostRecentMonth: -Infinity }
   );
 
-  Object.values(flowData).forEach((item) => {
-    const hint = item.isNotAvailable
+  Object.values(flowData).forEach((metric) => {
+    const hint = metric.isNotAvailable
       ? null
-      : generateHint(mostRecentYear, mostRecentMonth, item.item);
+      : generateHint(mostRecentYear, mostRecentMonth, metric.item);
 
     if (hint) {
       // eslint-disable-next-line no-param-reassign
-      item.hint = hint;
+      metric.hint = hint;
+    }
+
+    const { item } = metric;
+
+    const isTooStale = metric.isNotAvailable
+      ? null
+      : item.month < mostRecentMonth && item.year <= mostRecentYear - 1;
+
+    if (isTooStale) {
+      // eslint-disable-next-line no-param-reassign
+      metric.isTooStale = isTooStale;
     }
   });
 
