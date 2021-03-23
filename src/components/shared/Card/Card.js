@@ -116,6 +116,7 @@ Card.defaultProps = {
   children: null,
   lastDate: null,
   comparedToDate: null,
+  isTooStale: false,
 };
 
 Card.propTypes = {
@@ -132,6 +133,7 @@ Card.propTypes = {
   children: PropTypes.node,
   lastDate: PropTypes.string,
   comparedToDate: PropTypes.string,
+  isTooStale: PropTypes.bool,
 };
 
 export default Card;
