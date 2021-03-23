@@ -30,6 +30,7 @@ import {
 import generateHint from "./generateHint";
 import months from "../constants/months";
 import generateSourceText from "./generateSourceText";
+import metricIsTooStale from "./metricIsTooStale";
 
 /**
  * Prepares data for flow Diagram
@@ -82,6 +83,7 @@ const generateFlowDiagramData = (data) => {
             ? `${months[lastItem.comparedToMonth]} ${lastItem.comparedToYear}`
             : null,
           item: lastItem,
+          isTooStale: false,
         };
 
         if (acc.mostRecentYear < lastItem.year) {
@@ -98,13 +100,9 @@ const generateFlowDiagramData = (data) => {
   );
 
   Object.values(flowData).forEach((item) => {
-    const hint = item.isNotAvailable
-      ? null
-      : generateHint(mostRecentYear, mostRecentMonth, item.item);
-
-    if (hint) {
-      // eslint-disable-next-line no-param-reassign
-      item.hint = hint;
+    if (!item.isNotAvailable) {
+      item.isTooStale = metricIsTooStale(mostRecentYear, mostRecentMonth, item.item); // eslint-disable-line no-param-reassign
+      item.hint = generateHint(mostRecentYear, mostRecentMonth, item.item); // eslint-disable-line no-param-reassign
     }
   });
 

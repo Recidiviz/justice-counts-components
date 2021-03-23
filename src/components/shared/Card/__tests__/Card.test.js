@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -49,5 +49,13 @@ describe("Card.js", () => {
     );
 
     expect(container.querySelector(".Card__not-available-text")).toBeInTheDocument();
+  });
+
+  it("should render too stale card if isTooStale flag is set", () => {
+    const { container } = render(
+      <Card title="Some title" number={15} percentChange={-20} isTooStale />
+    );
+
+    expect(container.querySelector(".Card--too-stale")).toBeInTheDocument();
   });
 });
