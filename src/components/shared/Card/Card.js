@@ -59,7 +59,10 @@ const Card = ({
             <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
               {reportName}
             </a>
-            )<div className="Card__last-updated">Last updated: {lastUpdatedDate} </div>
+            )
+            {lastUpdatedDate && (
+              <div className="Card__last-updated">Last updated: {lastUpdatedDate} </div>
+            )}
           </div>
         </div>
       )}

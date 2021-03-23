@@ -69,6 +69,8 @@ const generateFlowDiagramData = (data) => {
         };
       } else {
         const lastItem = data[metric][data[metric].length - 1];
+        const { datePublished } = lastItem;
+
         acc.flowData[metric] = {
           title: metricToCardName[metric],
           number: lastItem.value,
@@ -77,7 +79,9 @@ const generateFlowDiagramData = (data) => {
           sourceText: generateSourceText(lastItem.sourceName, lastItem.sourceCategories),
           sourceUrl: lastItem.sourceUrl,
           reportName: lastItem.reportName,
-          lastUpdatedDate: `${months[lastItem.month]} ${lastItem.day}, ${lastItem.year}`,
+          lastUpdatedDate: datePublished
+            ? `${months[datePublished.month]} ${datePublished.day}, ${datePublished.year}`
+            : null,
           mostRecentDate: `${months[lastItem.month]} ${lastItem.year}`,
           comparedToDate: lastItem.percentChange
             ? `${months[lastItem.comparedToMonth]} ${lastItem.comparedToYear}`

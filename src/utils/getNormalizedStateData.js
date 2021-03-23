@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 // =============================================================================
 import toInt from "./toInt";
 import sortByYearAndMonth from "./sortByYearAndMonth";
+import getNormalizedDate from "./getNormalizedDate";
 
 /**
  * Filters data by state, normalizes, groups by metric type and sorts by date
@@ -25,6 +26,7 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
  *   year: string,
  *   month: string,
  *   date_reported: string,
+ *   date_published: string,
  *   value: number
  *   compared_to_year?: string
  *   compared_to_month?: string
@@ -42,6 +44,7 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
  *    year: number
  *    month: number
  *    dateReported: { year: number, month: number, day: number }
+ *    datePublished: { year: number, month: number, day: number }
  *    value: number
  *    comparedToYear: number | null,
  *    comparedToMonth: number | null
@@ -57,20 +60,15 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
 const getNormalizedStateData = (data, stateCode) => {
   const normalizedData = data.reduce((acc, item) => {
     if (item.state_code === stateCode) {
-      const [yearReported, monthReported, dayReported] = item.date_reported
-        ? item.date_reported.split("-")
-        : [];
+      const reportedDate = getNormalizedDate(item.date_reported);
+      const publishedDate = item.date_published && getNormalizedDate(item.date_published);
 
       const normalizedItem = {
         metric: item.metric,
         year: toInt(item.year),
         month: toInt(item.month) - 1,
-        day: toInt(dayReported),
-        dateReported: {
-          year: toInt(yearReported),
-          month: toInt(monthReported - 1),
-          day: toInt(dayReported),
-        },
+        dateReported: reportedDate,
+        datePublished: publishedDate,
         value: toInt(item.value),
         comparedToYear: item.compared_to_year ? toInt(item.compared_to_year) : null,
         comparedToMonth: item.compared_to_month ? toInt(item.compared_to_month) - 1 : null,
