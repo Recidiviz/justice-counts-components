@@ -41,6 +41,9 @@
     .Card--not-available & {
       color: #808c99;
     }
+    .Card--too-stale & {
+      color: #808c99;
+    }
     .Card--population &:before {
       margin-right: 0.5rem;
       content: "";
@@ -198,6 +201,10 @@
   }
 
   &__not-available-text {
+    .Card--too-stale & {
+      font-size: 2rem;
+      white-space: normal;
+    }
     font-size: 2.5rem;
     line-height: 1;
     font-weight: 700;
@@ -206,7 +213,7 @@
     text-transform: capitalize;
     white-space: nowrap;
     @media (max-width: 439px) {
-      font-size: calc(1.5rem + ((100vw - 320px) / 119 * 16));
+      font-size: calc(1.5rem + ((100vw - 320px) / 119 * 16)) !important;
     }
   }
 }

@@ -27,6 +27,7 @@ const Card = ({
   comparedToDate,
   lastUpdatedDate,
   isNotAvailable,
+  isTooStale,
   isPopulation,
   hint,
   title,
@@ -42,11 +43,12 @@ const Card = ({
     className={cn("Card", className, {
       "Card--population": isPopulation,
       "Card--not-available": isNotAvailable,
+      "Card--too-stale": isTooStale,
     })}
   >
     <div className="Card__header">
       <h3 className="Card__title">{title}</h3>
-      {sourceText && (
+      {!isTooStale && sourceText && (
         <div className="Card__warning-box">
           <button
             type="button"
@@ -68,9 +70,9 @@ const Card = ({
       )}
     </div>
     <div className="Card__body">
-      {isNotAvailable ? (
-        <span className="Card__not-available-text">Not available</span>
-      ) : (
+      {isNotAvailable && <span className="Card__not-available-text">Not available</span>}
+      {isTooStale && <span className="Card__not-available-text">Data is too stale to display</span>}
+      {!isNotAvailable && !isTooStale && (
         <>
           <span className="Card__number">{formatNumber(number)}</span>
           {percentChange === null ? (
@@ -119,6 +121,7 @@ Card.defaultProps = {
   mostRecentDate: null,
   comparedToDate: null,
   lastUpdatedDate: null,
+  isTooStale: false,
 };
 
 Card.propTypes = {
@@ -136,6 +139,7 @@ Card.propTypes = {
   mostRecentDate: PropTypes.string,
   comparedToDate: PropTypes.string,
   lastUpdatedDate: PropTypes.string,
+  isTooStale: PropTypes.bool,
 };
 
 export default Card;
