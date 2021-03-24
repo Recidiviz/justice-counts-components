@@ -23,8 +23,9 @@ import formatNumber from "../../../utils/formatNumber";
 import "./Card.scss";
 
 const Card = ({
-  lastDate,
+  mostRecentDate,
   comparedToDate,
+  lastUpdatedDate,
   isNotAvailable,
   isTooStale,
   isPopulation,
@@ -61,6 +62,9 @@ const Card = ({
               {reportName}
             </a>
             )
+            {lastUpdatedDate && (
+              <div className="Card__last-updated">Last updated: {lastUpdatedDate} </div>
+            )}
           </div>
         </div>
       )}
@@ -92,7 +96,7 @@ const Card = ({
               </span>
             )}
             <div className="Card__date-range">
-              {lastDate}&nbsp;
+              {mostRecentDate}&nbsp;
               {percentChange && <span>(compared to {comparedToDate})</span>}
             </div>
           </div>
@@ -114,8 +118,9 @@ Card.defaultProps = {
   percentChange: null,
   className: "",
   children: null,
-  lastDate: null,
+  mostRecentDate: null,
   comparedToDate: null,
+  lastUpdatedDate: null,
   isTooStale: false,
 };
 
@@ -131,8 +136,9 @@ Card.propTypes = {
   percentChange: PropTypes.number,
   className: PropTypes.string,
   children: PropTypes.node,
-  lastDate: PropTypes.string,
+  mostRecentDate: PropTypes.string,
   comparedToDate: PropTypes.string,
+  lastUpdatedDate: PropTypes.string,
   isTooStale: PropTypes.bool,
 };
 
