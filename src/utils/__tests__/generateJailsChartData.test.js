@@ -16,7 +16,7 @@
 // =============================================================================
 import generateJailsChartData, { noMetricData } from "../generateJailsChartData";
 import { INCARCERATION_RATE_JAIL } from "../../constants/metrics";
-import { COUNTIES_NOT_PROVIDED } from "../../constants/errors";
+import { METRICS_NOT_PROVIDED } from "../../constants/errors";
 import logger from "../logger";
 
 describe("generateJailsChartData.js", () => {
@@ -221,7 +221,7 @@ describe("generateJailsChartData.js", () => {
   });
 
   describe("edge cases", () => {
-    it("should throw error if counties array is empty", () => {
+    it("should throw error if metric is not provided", () => {
       const mockStateData = {
         [INCARCERATION_RATE_JAIL]: [
           { year: 2020, month: 8, value: 1002 },
@@ -230,32 +230,37 @@ describe("generateJailsChartData.js", () => {
         ],
       };
 
-      expect(() => generateJailsChartData(mockStateData, INCARCERATION_RATE_JAIL, [])).toThrowError(
-        COUNTIES_NOT_PROVIDED
+      expect(() => generateJailsChartData(mockStateData, [], mockStateData)).toThrowError(
+        METRICS_NOT_PROVIDED
       );
     });
-  });
 
-  it("should throw warning if metric data is not provided", () => {
-    const metricName = "INCARCERATION_RATE_JAIL";
-    const anotherMetric = "INCARCERATION_RATE_NOVALID";
-    const mockStateData = {
-      [anotherMetric]: [{ year: 2020, month: 8, value: 1002 }],
-    };
-    expect(
-      generateJailsChartData(mockStateData, metricName, [mockCountyCodes[0]], [mockCountyNames[0]])
-    ).toMatchObject({
-      datasets: [
-        {
-          metric: metricName,
-          label: mockCountyNames[0],
-          isNotAvailable: true,
-          data: [],
-        },
-      ],
-      labels: [],
+    it("should throw warning if metric data is not provided", () => {
+      const metricName = "INCARCERATION_RATE_JAIL";
+      const anotherMetric = "INCARCERATION_RATE_NOVALID";
+      const mockStateData = {
+        [anotherMetric]: [{ year: 2020, month: 8, value: 1002 }],
+      };
+      expect(
+        generateJailsChartData(
+          mockStateData,
+          metricName,
+          [mockCountyCodes[0]],
+          [mockCountyNames[0]]
+        )
+      ).toMatchObject({
+        datasets: [
+          {
+            metric: metricName,
+            label: mockCountyNames[0],
+            isNotAvailable: true,
+            data: [],
+          },
+        ],
+        labels: [],
+      });
+
+      expect(warnSpy).toBeCalledWith(noMetricData(metricName));
     });
-
-    expect(warnSpy).toBeCalledWith(noMetricData(metricName));
   });
 });

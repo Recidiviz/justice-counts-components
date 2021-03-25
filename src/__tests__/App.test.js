@@ -63,7 +63,6 @@ describe("App.js", () => {
 
     expect(MainPage).toHaveBeenCalledTimes(1);
     expect(MainPage.mock.calls[0][0].stateName).toBe(states[mockStateCode]);
-    expect(MainPage.mock.calls[0][0].countySelector).not.toBeNull();
     expect(MainPage.mock.calls[0][0].populationsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].prisonAdmissionsChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].releasesChartData).toBe(mockChartData);
