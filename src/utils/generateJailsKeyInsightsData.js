@@ -84,17 +84,24 @@ const generateJailsKeyInsightsData = (data) => {
         };
       } else {
         const generalData = data[metric].filter((item) => item.countyCode === undefined);
-        const lastItem = generalData[generalData.length - 1];
-        acc.flowData[metric] = {
-          title: metricToCardName[metric],
-          number: lastItem.value < 1 ? lastItem.value * 100 : lastItem.value,
-          percentChange: lastItem.percentChange * 100,
-          numberChange: lastItem.valueChange,
-          populationCoverage: lastItem.populationCoverage * 100,
-          countyCoverage: lastItem.countyCoverage * 100,
-          isNumberPercent: lastItem.value < 1,
-          item: lastItem,
-        };
+        if (!generalData.length) {
+          acc.flowData[metric] = {
+            title: metricToCardName[metric],
+            isNotAvailable: true,
+          };
+        } else {
+          const lastItem = generalData[generalData.length - 1];
+          acc.flowData[metric] = {
+            title: metricToCardName[metric],
+            number: lastItem.value < 1 ? lastItem.value * 100 : lastItem.value,
+            percentChange: lastItem.percentChange * 100,
+            numberChange: lastItem.valueChange,
+            populationCoverage: lastItem.populationCoverage * 100,
+            countyCoverage: lastItem.countyCoverage * 100,
+            isNumberPercent: lastItem.value < 1,
+            item: lastItem,
+          };
+        }
       }
 
       return acc;

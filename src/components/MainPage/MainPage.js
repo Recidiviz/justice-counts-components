@@ -110,6 +110,10 @@ const MainPage = ({
   );
 };
 
+MainPage.defaultProps = {
+  countySelector: null,
+};
+
 MainPage.propTypes = {
   stateName: PropTypes.string.isRequired,
   populationsChartData: chartDataPropTypes.isRequired,
@@ -124,7 +128,7 @@ MainPage.propTypes = {
   flowDiagramData: flowDiagramDataPropTypes.isRequired,
   correctionsKeyInsightsData: keyInsightsPropTypes.isRequired,
   jailsKeyInsightsData: keyInsightsPropTypes.isRequired,
-  countySelector: PropTypes.node.isRequired,
+  countySelector: PropTypes.node,
   correctionsSourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
   jailsSourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
   isNoData: PropTypes.bool.isRequired,
