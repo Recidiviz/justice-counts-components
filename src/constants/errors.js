@@ -16,6 +16,3 @@
 // =============================================================================
 export const METRICS_NOT_PROVIDED =
   "Cannot generate a chart with empty data. The metrics array should not be empty.";
-
-export const COUNTIES_NOT_PROVIDED =
-  "Cannot generate a chart with empty data. The counties array should not be empty.";

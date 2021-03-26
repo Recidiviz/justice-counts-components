@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import { COUNTIES_NOT_PROVIDED } from "../constants/errors";
+import { METRICS_NOT_PROVIDED } from "../constants/errors";
 import formatNumber from "./formatNumber";
 import logger from "./logger";
 import chartPeriods from "./chartPeriods";
@@ -44,8 +44,8 @@ export const noMetricData = (metric) =>
  */
 
 const generateJailsChartData = (data, metric, counties, countyLabels = [], countyCoverage) => {
-  if (!counties.length) {
-    throw new Error(COUNTIES_NOT_PROVIDED);
+  if (!metric.length) {
+    throw new Error(METRICS_NOT_PROVIDED);
   }
 
   const datasets = counties.reduce((acc, county, index) => {
@@ -82,7 +82,7 @@ const generateJailsChartData = (data, metric, counties, countyLabels = [], count
       if (!dataset.isNotAvailable) {
         const dataPoint = data[dataset.metric].find((item) =>
           dataset.isStatewide
-            ? item.year === year && item.month === month
+            ? item.year === year && item.month === month && item.countyCode === undefined
             : item.year === year && item.month === month && item.countyCode === dataset.county
         );
         if (dataPoint) {

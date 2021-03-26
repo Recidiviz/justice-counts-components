@@ -25,8 +25,10 @@ import "./CountySelector.scss";
 const CountySelector = (counties, stateName) => {
   const [open, setOpen] = useState(false);
 
-  const initialCountyName = counties[0].name;
-  const initialCountyCode = counties[0].code;
+  const isNoCounty = "County";
+
+  const initialCountyName = counties.length ? counties[0].name : isNoCounty;
+  const initialCountyCode = counties.length ? counties[0].code : isNoCounty;
 
   const [selectedCountyName, setSelectedCountyName] = useState(initialCountyName);
   const [selectedCountyCode, setSelectedCountyCode] = useState(initialCountyCode);
@@ -49,7 +51,7 @@ const CountySelector = (counties, stateName) => {
   }, [open, selectedCountyName, selectedCountyCode]);
 
   return {
-    countySelectorComponent: (
+    countySelectorComponent: counties.length ? (
       <span className="CountySelector">
         <button className="CountySelector__button" type="button" onClick={() => setOpen(!open)}>
           (Switch counties)
@@ -87,7 +89,7 @@ const CountySelector = (counties, stateName) => {
           </div>
         </Modal>
       </span>
-    ),
+    ) : null,
     selectorCountyCode: viewedCountyCode,
     selectorCountyName: viewedCountyName,
   };

@@ -51,9 +51,13 @@ const Jails = ({
   );
 };
 
+Jails.defaultProps = {
+  countySelector: null,
+};
+
 Jails.propTypes = {
   keyInsightsData: keyInsightsPropTypes.isRequired,
-  countySelector: PropTypes.node.isRequired,
+  countySelector: PropTypes.node,
   incarcerationRateChartData: chartDataPropTypes.isRequired,
   incarcerationRateTopCountiesChartData: chartDataPropTypes.isRequired,
   sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,

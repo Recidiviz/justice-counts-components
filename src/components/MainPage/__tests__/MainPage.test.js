@@ -45,6 +45,8 @@ describe("MainPage.js", () => {
         jailsKeyInsightsData={[]}
         incarcerationRateChartData={{}}
         incarcerationRateTopCountiesChartData={{}}
+        jailsSourceData={[]}
+        correctionsSourceData={[]}
       />
     );
 
