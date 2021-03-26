@@ -82,7 +82,7 @@ const generateJailsChartData = (data, metric, counties, countyLabels = [], count
       if (!dataset.isNotAvailable) {
         const dataPoint = data[dataset.metric].find((item) =>
           dataset.isStatewide
-            ? item.year === year && item.month === month
+            ? item.year === year && item.month === month && item.countyCode === undefined
             : item.year === year && item.month === month && item.countyCode === dataset.county
         );
         if (dataPoint) {
