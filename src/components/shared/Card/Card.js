@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,7 +23,11 @@ import formatNumber from "../../../utils/formatNumber";
 import "./Card.scss";
 
 const Card = ({
+  mostRecentDate,
+  comparedToDate,
+  lastUpdatedDate,
   isNotAvailable,
+  isTooStale,
   isPopulation,
   isNumberPercent,
   hint,
@@ -40,18 +44,13 @@ const Card = ({
     className={cn("Card", className, {
       "Card--population": isPopulation,
       "Card--not-available": isNotAvailable,
+      "Card--too-stale": isTooStale,
     })}
   >
     <div className="Card__header">
       <h3 className="Card__title">{title}</h3>
-      {hint && (
+      {!isTooStale && sourceText && (
         <div className="Card__warning-box">
-          <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={hint} />
-          <div className="Card__warning">{hint}</div>
-        </div>
-      )}
-      {sourceText && (
-        <div className="Card__warning-box Card__warning-box--hint">
           <button
             type="button"
             tabIndex={0}
@@ -64,14 +63,17 @@ const Card = ({
               {reportName}
             </a>
             )
+            {lastUpdatedDate && (
+              <div className="Card__last-updated">Last updated: {lastUpdatedDate} </div>
+            )}
           </div>
         </div>
       )}
     </div>
     <div className="Card__body">
-      {isNotAvailable ? (
-        <span className="Card__not-available-text">Not available</span>
-      ) : (
+      {isNotAvailable && <span className="Card__not-available-text">Not available</span>}
+      {isTooStale && <span className="Card__not-available-text">Data is too stale to display</span>}
+      {!isNotAvailable && !isTooStale && (
         <>
           <span className="Card__number">
             {formatNumber(number)}
@@ -86,6 +88,23 @@ const Card = ({
                 {Math.round(percentChange)}%)
               </span>
             ))}
+          <div className="Card__bottom">
+            {hint && (
+              <span className="Card__warning-box Card__warning-box--hint">
+                <button
+                  type="button"
+                  tabIndex={0}
+                  className="Card__warning-icon"
+                  aria-label={hint}
+                />
+                <div className="Card__warning">{hint}</div>
+              </span>
+            )}
+            <div className="Card__date-range">
+              {mostRecentDate}&nbsp;
+              {!isNumberPercent && percentChange && <span>(compared to {comparedToDate})</span>}
+            </div>
+          </div>
         </>
       )}
     </div>
@@ -105,6 +124,10 @@ Card.defaultProps = {
   percentChange: null,
   className: "",
   children: null,
+  mostRecentDate: null,
+  comparedToDate: null,
+  lastUpdatedDate: null,
+  isTooStale: false,
 };
 
 Card.propTypes = {
@@ -120,6 +143,10 @@ Card.propTypes = {
   percentChange: PropTypes.number,
   className: PropTypes.string,
   children: PropTypes.node,
+  mostRecentDate: PropTypes.string,
+  comparedToDate: PropTypes.string,
+  lastUpdatedDate: PropTypes.string,
+  isTooStale: PropTypes.bool,
 };
 
 export default Card;

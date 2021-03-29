@@ -65,7 +65,7 @@
   }
 
   &__box-name {
-    color: #8c8c8c;
+    color: #b8bfc6;
     font-weight: 700;
     letter-spacing: 0.05em;
     font-size: 0.8125rem;
@@ -88,6 +88,7 @@
 
   &__card {
     width: 20.5rem;
+    min-height: 11.94rem;
     &:not(:first-child) {
       @include up($lg) {
         margin-left: 2rem;
