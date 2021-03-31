@@ -16,7 +16,7 @@
 // =============================================================================
 import generateSourceText from "../generateSourceText";
 
-describe("generateKeyInsightsData.js", () => {
+describe("generateSourceText.js", () => {
   const mockSourceName = "Mock source name";
   const mockSourceCategories = ["Mock source category 1", "Mock source category 1"];
 
