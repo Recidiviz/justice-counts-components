@@ -15,7 +15,7 @@
     padding-bottom: 4rem;
     border-bottom: 1px solid #c4ccd4;
     @include down($lg) {
-      padding-bottom: 3rem;
+      padding-bottom: 0;
       padding-left: $mobile-offset;
       padding-right: $mobile-offset;
       border-bottom: 0;
@@ -47,6 +47,7 @@
     line-height: 1.5;
     letter-spacing: -0.02em;
     color: #808c99;
+    padding-bottom: 18px;
     @include down($lg) {
       font-size: 0.875rem;
     }
@@ -55,5 +56,43 @@
   &__contact-link {
     color: #0088b6;
     text-decoration: underline;
+  }
+
+  &__range {
+    padding-top: 37px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #c4ccd4;
+    @include down($lg) {
+      padding-bottom: 3rem;
+      padding-left: $mobile-offset;
+      padding-right: $mobile-offset;
+      border-bottom: 0;
+    }
+    @include down($sm) {
+      padding-left: $extra-mobile-offset;
+      padding-right: $extra-mobile-offset;
+    }
+
+    &-title {
+      font-size: 20px;
+      padding-bottom: 18px;
+    }
+  }
+
+  &__switch {
+    display: flex;
+
+    &-label {
+      font-size: 1.0625rem;
+      letter-spacing: -0.02em;
+      color: #808c99;
+      margin-left: 16px;
+      padding-left: 35px;
+      border-left: 1px solid #c4ccd4;
+      @include down($lg) {
+        font-size: 0.875rem;
+        padding-left: 1rem;
+      }
+    }
   }
 }
