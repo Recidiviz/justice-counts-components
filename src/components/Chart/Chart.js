@@ -141,7 +141,9 @@ const Chart = ({ title, hint, chartData, annual }) => {
             fontSize: 10,
             fontWeight: 700,
             lineHeight: "16px",
-            callback: (tick, index) => (index % 2 ? null : `${tick.month + 1}/${tick.year % 100}`),
+            callback: annual
+              ? (tick) => `${tick.month + 1}/${tick.year % 100}`
+              : (tick, index) => (index % 2 ? null : `${tick.month + 1}/${tick.year % 100}`),
           },
         },
       ],

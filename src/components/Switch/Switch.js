@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
@@ -23,8 +23,14 @@ import "./Switch.scss";
 import { MONTHLY, ANNUAL } from "../MainPage/constants";
 
 const Switch = ({ activeTab, onTabChange }) => {
+  const [isClicked, setIsClicked] = useState(false);
+
   const createOnTabChange = (tab) => () => {
     onTabChange(tab);
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 300);
   };
 
   const handleGlobalClick =
@@ -41,7 +47,7 @@ const Switch = ({ activeTab, onTabChange }) => {
       <button
         className={cn("Switch__button", {
           "Switch__button--active": activeTab === MONTHLY,
-          "Switch__slide-right": activeTab === MONTHLY,
+          "Switch__slide-right": activeTab === MONTHLY && isClicked,
         })}
         type="button"
         onClick={createOnTabChange(MONTHLY)}
@@ -51,7 +57,7 @@ const Switch = ({ activeTab, onTabChange }) => {
       <button
         className={cn("Switch__button", {
           "Switch__button--active": activeTab === ANNUAL,
-          "Switch__slide-left": activeTab === ANNUAL,
+          "Switch__slide-left": activeTab === ANNUAL && isClicked,
         })}
         type="button"
         onClick={createOnTabChange(ANNUAL)}
