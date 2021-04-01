@@ -16,10 +16,10 @@
 // =============================================================================
 .Switch {
   z-index: 2;
-  max-height: 44px;
+  max-height: 2.75rem;
   background: #eff0f7;
-  border-radius: 7px;
-  padding: 5px;
+  border-radius: 0.4375rem;
+  padding: 0.3125rem;
   display: inline-flex;
   outline: 0;
   border: 0;
@@ -30,12 +30,12 @@
   }
 
   &__button {
-    border-radius: 7px;
-    padding: 10px 20px;
+    border-radius: 0.4375rem;
+    padding: 0.625rem 0.625rem;
     background: #eff0f7;
     color: #8c8c8c;
     font-weight: 800;
-    font-size: 12px;
+    font-size: 0.75rem;
     outline: 0;
     border: 0;
     cursor: pointer;

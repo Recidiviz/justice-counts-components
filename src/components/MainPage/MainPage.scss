@@ -47,7 +47,7 @@
     line-height: 1.5;
     letter-spacing: -0.02em;
     color: #808c99;
-    padding-bottom: 18px;
+    padding-bottom: 1.125rem;
     @include down($lg) {
       font-size: 0.875rem;
     }
@@ -59,8 +59,8 @@
   }
 
   &__range {
-    padding-top: 37px;
-    padding-bottom: 22px;
+    padding-top: 2.313rem;
+    padding-bottom: 1.375rem;
     border-bottom: 1px solid #c4ccd4;
     @include down($lg) {
       padding-bottom: 3rem;
@@ -74,8 +74,8 @@
     }
 
     &-title {
-      font-size: 20px;
-      padding-bottom: 18px;
+      font-size: 1.25rem;
+      padding-bottom: 1.125rem;
     }
   }
 
@@ -86,8 +86,8 @@
       font-size: 1.0625rem;
       letter-spacing: -0.02em;
       color: #808c99;
-      margin-left: 16px;
-      padding-left: 35px;
+      margin-left: 1rem;
+      padding-left: 2.188rem;
       border-left: 1px solid #c4ccd4;
       @include down($lg) {
         font-size: 0.875rem;
