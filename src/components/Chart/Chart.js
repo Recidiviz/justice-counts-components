@@ -15,7 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useCallback, useEffect, useMemo } from "react";
+import React, { useState, useCallback, useEffect, useMemo, useRef } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 import { Bar, Line } from "react-chartjs-2";
@@ -32,6 +32,7 @@ import "./Chart.scss";
 
 const TICKS_COLOR = "#808C99";
 const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
+// const barChartHoverColors = ["#0479a6", "#003397", "#469400", "#00701f"];
 const CONNECTING_LINE_COLOR = "#00475D";
 
 const Chart = ({ title, hint, chartData, annual }) => {
@@ -108,6 +109,20 @@ const Chart = ({ title, hint, chartData, annual }) => {
     },
   };
 
+  const chartRef = useRef(null);
+
+  const onLegendFocus = (metric) => {
+    const activeSegment = chartRef.current.chartInstance.getDatasetMeta(
+      styledDatasets.findIndex((element) => element.metric === metric)
+    ).data;
+    chartRef.current.chartInstance.updateHoverStyle(activeSegment, null, true);
+    chartRef.current.chartInstance.draw();
+  };
+
+  const onLegendBlur = () => {
+    chartRef.current.chartInstance.update(true);
+  };
+
   const options = {
     hover: {
       intersect: false,
@@ -179,13 +194,10 @@ const Chart = ({ title, hint, chartData, annual }) => {
         <div className="Chart__chart">
           {isChartUnavailable && <div className="Chart__chart-unavailable">No Data Available</div>}
           {annual ? (
-            <Bar
-              data={{ datasets: styledDatasets, labels }}
-              options={options}
-              plugins={[drawLinePlugin]}
-            />
+            <Bar ref={chartRef} data={{ datasets: styledDatasets, labels }} options={options} />
           ) : (
             <Line
+              ref={chartRef}
               data={{ datasets: styledDatasets, labels }}
               options={options}
               plugins={[drawLinePlugin]}
@@ -195,6 +207,10 @@ const Chart = ({ title, hint, chartData, annual }) => {
         <div className="Chart__legends">
           {styledDatasets.map((dataset) => (
             <div
+              onMouseOver={() => onLegendFocus(dataset.metric)}
+              onFocus={() => onLegendFocus(dataset.metric)}
+              onMouseOut={onLegendBlur}
+              onBlur={onLegendBlur}
               key={dataset.label}
               className={cn("Chart__legend", { "Chart__legend--disabled": dataset.isNotAvailable })}
             >
