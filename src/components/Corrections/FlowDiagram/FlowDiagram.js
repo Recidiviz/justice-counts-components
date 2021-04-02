@@ -54,9 +54,9 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
                 data[ADMISSIONS_NEW_COMMITMENTS].isNotAvailable ||
                 data[POPULATION_PRISON].isNotAvailable
               }
-              height={28.375}
+              height={32.1}
               isMobile={isMobile}
-              mobileHeight={51}
+              mobileHeight={58}
               mobileWidth={2.5}
               mobilePlacement="left"
             />
@@ -96,12 +96,12 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
                 data[ADMISSIONS_NEW_COMMITMENTS].isNotAvailable
               }
               direction="topLeft"
-              height={23.25}
+              height={25}
               width={6.625}
               isMobile={isMobile}
               mobileDirection="top"
               mobilePlacement="right"
-              mobileHeight={37.375}
+              mobileHeight={43.5}
               mobileWidth={2.5}
             />
             <Arrow
@@ -124,10 +124,10 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
               isDisabled={
                 data[RELEASES_TO_PAROLE].isNotAvailable || data[POPULATION_PRISON].isNotAvailable
               }
-              height={14.25}
+              height={15.9}
               placement="right"
               isMobile={isMobile}
-              mobileHeight={37.375}
+              mobileHeight={43.5}
               mobileWidth={2.5}
               mobilePlacement="right"
             />

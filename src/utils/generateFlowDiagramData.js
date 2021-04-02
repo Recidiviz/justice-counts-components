@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@ import {
 import generateHint from "./generateHint";
 import months from "../constants/months";
 import generateSourceText from "./generateSourceText";
+import metricIsTooStale from "./metricIsTooStale";
 
 /**
  * Prepares data for flow Diagram
@@ -69,15 +70,25 @@ const generateFlowDiagramData = (data) => {
         };
       } else {
         const lastItem = data[metric][data[metric].length - 1];
+        const { datePublished } = lastItem;
+
         acc.flowData[metric] = {
           title: metricToCardName[metric],
           number: lastItem.value,
-          percentChange: lastItem.percentChange * 100,
+          percentChange: lastItem.percentChange ? lastItem.percentChange * 100 : null,
           numberChange: lastItem.valueChange,
           sourceText: generateSourceText(lastItem.sourceName, lastItem.sourceCategories),
           sourceUrl: lastItem.sourceUrl,
           reportName: lastItem.reportName,
+          lastUpdatedDate: datePublished
+            ? `${months[datePublished.month]} ${datePublished.day}, ${datePublished.year}`
+            : null,
+          mostRecentDate: `${months[lastItem.month]} ${lastItem.year}`,
+          comparedToDate: lastItem.percentChange
+            ? `${months[lastItem.comparedToMonth]} ${lastItem.comparedToYear}`
+            : null,
           item: lastItem,
+          isTooStale: false,
         };
 
         if (acc.mostRecentYear < lastItem.year) {
@@ -94,13 +105,9 @@ const generateFlowDiagramData = (data) => {
   );
 
   Object.values(flowData).forEach((item) => {
-    const hint = item.isNotAvailable
-      ? null
-      : generateHint(mostRecentYear, mostRecentMonth, item.item);
-
-    if (hint) {
-      // eslint-disable-next-line no-param-reassign
-      item.hint = hint;
+    if (!item.isNotAvailable) {
+      item.isTooStale = metricIsTooStale(mostRecentYear, mostRecentMonth, item.item); // eslint-disable-line no-param-reassign
+      item.hint = generateHint(mostRecentYear, mostRecentMonth, item.item); // eslint-disable-line no-param-reassign
     }
   });
 

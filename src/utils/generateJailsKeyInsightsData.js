@@ -20,6 +20,7 @@ import {
   INCARCERATION_RATE_JAIL,
   metricToCardName,
 } from "../constants/metrics";
+import months from "../constants/months";
 import formatNumber from "./formatNumber";
 
 const generateCountiesCaption = (countyCoverage, populationCoverage) => {
@@ -91,6 +92,8 @@ const generateJailsKeyInsightsData = (data) => {
           };
         } else {
           const lastItem = generalData[generalData.length - 1];
+          const { datePublished } = lastItem;
+
           acc.flowData[metric] = {
             title: metricToCardName[metric],
             number: lastItem.value < 1 ? lastItem.value * 100 : lastItem.value,
@@ -99,7 +102,15 @@ const generateJailsKeyInsightsData = (data) => {
             populationCoverage: lastItem.populationCoverage * 100,
             countyCoverage: lastItem.countyCoverage * 100,
             isNumberPercent: lastItem.value < 1,
+            lastUpdatedDate: datePublished
+              ? `${months[datePublished.month]} ${datePublished.day}, ${datePublished.year}`
+              : null,
+            mostRecentDate: `${months[lastItem.month]} ${lastItem.year}`,
+            comparedToDate: lastItem.percentChange
+              ? `${months[lastItem.comparedToMonth]} ${lastItem.comparedToYear}`
+              : null,
             item: lastItem,
+            isTooStale: false,
           };
         }
       }

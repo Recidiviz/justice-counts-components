@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import months from "../constants/months";
-import { metricToCardName } from "../constants/metrics";
 
 /**
  * Generates flow card hint if current date is not the most recent or is compared
@@ -33,7 +32,7 @@ import { metricToCardName } from "../constants/metrics";
 const generateHint = (
   mostRecentYear,
   mostRecentMonth,
-  { metric, year, month, comparedToYear, comparedToMonth, dateReported }
+  { year, month, comparedToYear, comparedToMonth }
 ) => {
   if (
     mostRecentYear === year &&
@@ -44,17 +43,9 @@ const generateHint = (
     return null;
   }
 
-  const formattedReportedDate = `${months[dateReported.month]} ${dateReported.day}, ${
-    dateReported.year
-  }`;
-
-  let hint = `${metricToCardName[metric]} was last reported on ${formattedReportedDate}`;
-
-  if (comparedToMonth !== null && comparedToYear !== null) {
-    hint += ` (% change relative to ${months[comparedToMonth]} ${comparedToYear})`;
-  }
-
-  return `${hint}.`;
+  return `This icon indicates that the dates that correspond with this metric are not aligned with the primary date range (${
+    months[mostRecentMonth]
+  } ${mostRecentYear - 1} → ${months[mostRecentMonth]} ${mostRecentYear}).`;
 };
 
 export default generateHint;
