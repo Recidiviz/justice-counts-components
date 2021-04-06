@@ -76,7 +76,7 @@ export const noMetricData = (metric) =>
  *   ]
  * }
  */
-const generateChartData = (data, metrics, metricLabels = []) => {
+const generateChartData = (data, metrics, metricLabels = [], annual) => {
   if (!metrics.length) {
     throw new Error(METRICS_NOT_PROVIDED);
   }
@@ -126,14 +126,14 @@ const generateChartData = (data, metrics, metricLabels = []) => {
   );
   const { startYear, startMonth, endYear, endMonth } = periods;
 
-  let i = startYear * 12 + startMonth;
-  const lastMonth = endYear * 12 + endMonth;
+  let i = annual ? startYear - 5 : startYear * 12 + startMonth;
+  const lastPeriod = annual ? endYear : endYear * 12 + endMonth;
 
   const sourceData = {};
 
-  while (i <= lastMonth) {
-    const year = Math.floor(i / 12);
-    const month = i % 12;
+  while (i <= lastPeriod) {
+    const year = annual ? i : Math.floor(i / 12);
+    const month = annual ? endMonth : i % 12;
 
     labels.push({ year, month });
     datasets.forEach((dataset) => {
@@ -141,6 +141,7 @@ const generateChartData = (data, metrics, metricLabels = []) => {
         const dataPoint = data[dataset.metric].find(
           (item) => item.year === year && item.month === month
         );
+
         if (dataPoint) {
           dataset.data.push(dataPoint.value);
         } else {

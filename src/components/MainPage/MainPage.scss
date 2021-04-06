@@ -12,8 +12,7 @@
   }
 
   &__header {
-    padding-bottom: 4rem;
-    border-bottom: 1px solid #c4ccd4;
+    padding-bottom: 1.375rem;
     @include down($lg) {
       padding-bottom: 0;
       padding-left: $mobile-offset;
@@ -63,14 +62,7 @@
     padding-bottom: 1.375rem;
     border-bottom: 1px solid #c4ccd4;
     @include down($lg) {
-      padding-bottom: 3rem;
-      padding-left: $mobile-offset;
-      padding-right: $mobile-offset;
       border-bottom: 0;
-    }
-    @include down($sm) {
-      padding-left: $extra-mobile-offset;
-      padding-right: $extra-mobile-offset;
     }
 
     &-title {

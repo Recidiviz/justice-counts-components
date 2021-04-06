@@ -18,35 +18,15 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
-import KeyInsights from "../KeyInsights/KeyInsights";
-import FlowDiagram from "../FlowDiagram";
-import Chart from "../Chart";
-import Sources from "../Sources";
-import ErrorBoundary from "../shared/ErrorBoundary";
 import Switch from "../Switch";
+import Corrections from "../Corrections";
 
-import { chartDataPropTypes } from "../Chart/propTypes";
-import { flowDiagramDataPropTypes } from "../FlowDiagram/propTypes";
-import { keyInsightsPropTypes } from "../KeyInsights/propTypes";
-import { sourcePropTypes } from "../Sources/propTypes";
 import { MONTHLY, LS_TAB_KEY, ANNUAL } from "./constants";
 
 import "./MainPage.scss";
+import { correctionsDataPropTypes } from "../Corrections/propTypes";
 
-const MainPage = ({
-  stateName,
-  populationsChartData,
-  prisonAdmissionsChartData,
-  paroleRevocationsChartData,
-  probationRevocationsChartData,
-  releasesChartData,
-  flowDiagramData,
-  flowDiagramLastDate,
-  flowDiagramPrevDate,
-  keyInsightsData,
-  sourceData,
-  isNoData,
-}) => {
+const MainPage = ({ stateName, monthlyCorrectionsData, annualCorrectionsData, isNoData }) => {
   const [activeTab, setActiveTab] = useState(localStorage.getItem(LS_TAB_KEY) || MONTHLY);
 
   const onActiveTabChange = (newTab) => {
@@ -73,71 +53,35 @@ const MainPage = ({
             .
           </p>
         ) : (
-          <p className="MainPage__description">
-            The following is a broad overview of the corrections system in {stateName}, representing
-            the latest data available and indicating changes over the course of the prior year.
-          </p>
+          <>
+            <p className="MainPage__description">
+              The following is a broad overview of the corrections system in {stateName},
+              representing the latest data available and indicating changes over the course of the
+              prior year.
+            </p>
+            <div className="MainPage__range">
+              <h3 className="MainPage__range-title">Data Aggregation Range</h3>
+              <p className="MainPage__description">
+                Use the control below to switch between{" "}
+                <strong>showing only monthly-aggregated data</strong> and showing{" "}
+                <strong>both monthly and annually-aggregated data</strong>.
+              </p>
+              <div className="MainPage__switch">
+                <Switch activeTab={activeTab} onTabChange={onActiveTabChange} />
+                <p className="MainPage__switch-label">
+                  Only data that is aggregated monthly will be shown in the Key Insights and flow
+                  diagram below.
+                </p>
+              </div>
+            </div>
+          </>
         )}
       </header>
-      <div className="MainPage__range">
-        <h3 className="MainPage__range-title">Data Aggregation Range</h3>
-        <p className="MainPage__description">
-          Use the control below to switch between{" "}
-          <strong>showing only monthly-aggregated data</strong> and showing{" "}
-          <strong>both monthly and annually-aggregated data</strong>.
-        </p>
-        <div className="MainPage__switch">
-          <Switch activeTab={activeTab} onTabChange={onActiveTabChange} />
-          <p className="MainPage__switch-label">
-            Only data that is aggregated monthly will be shown in the Key Insights and flow diagram
-            below.
-          </p>
-        </div>
-      </div>
       {!isNoData && (
-        <>
-          <KeyInsights keyInsightsData={keyInsightsData} />
-          <ErrorBoundary placeholder="Unable to render Flow Diagram. An unhandled error happened. More info could be found in the console.">
-            <FlowDiagram
-              data={flowDiagramData}
-              lastDate={flowDiagramLastDate}
-              prevDate={flowDiagramPrevDate}
-            />
-          </ErrorBoundary>
-          <ErrorBoundary placeholder="Unable to render Populations Chart. An unhandled error happened. More info could be found in the console.">
-            <Chart
-              annual={activeTab === ANNUAL}
-              chartData={populationsChartData}
-              title="Populations"
-              hint="By System"
-            />
-          </ErrorBoundary>
-          <ErrorBoundary placeholder="Unable to render Admissions to Prison. An unhandled error happened. More info could be found in the console.">
-            <Chart
-              chartData={prisonAdmissionsChartData}
-              title="Admissions to Prison"
-              hint="By Type"
-            />
-          </ErrorBoundary>
-          <ErrorBoundary placeholder="Unable to render Parole Revocations chart. An unhandled error happened. More info could be found in the console.">
-            <Chart
-              chartData={paroleRevocationsChartData}
-              title="Parole Revocations"
-              hint="By Type"
-            />
-          </ErrorBoundary>
-          <ErrorBoundary placeholder="Unable to render Probation Revocations Chart. An unhandled error happened. More info could be found in the console.">
-            <Chart
-              chartData={probationRevocationsChartData}
-              title="Probation Revocations"
-              hint="By Type"
-            />
-          </ErrorBoundary>
-          <ErrorBoundary placeholder="Unable to render Releases Chart. An unhandled error happened. More info could be found in the console.">
-            <Chart chartData={releasesChartData} title="Releases" hint="By Type" />
-          </ErrorBoundary>
-          <Sources data={sourceData} />
-        </>
+        <Corrections
+          isAnnual={activeTab === ANNUAL}
+          correctionsData={activeTab === ANNUAL ? annualCorrectionsData : monthlyCorrectionsData}
+        />
       )}
     </section>
   );
@@ -145,16 +89,8 @@ const MainPage = ({
 
 MainPage.propTypes = {
   stateName: PropTypes.string.isRequired,
-  populationsChartData: chartDataPropTypes.isRequired,
-  prisonAdmissionsChartData: chartDataPropTypes.isRequired,
-  paroleRevocationsChartData: chartDataPropTypes.isRequired,
-  probationRevocationsChartData: chartDataPropTypes.isRequired,
-  releasesChartData: chartDataPropTypes.isRequired,
-  flowDiagramLastDate: PropTypes.string.isRequired,
-  flowDiagramPrevDate: PropTypes.string.isRequired,
-  flowDiagramData: flowDiagramDataPropTypes.isRequired,
-  keyInsightsData: keyInsightsPropTypes.isRequired,
-  sourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
+  monthlyCorrectionsData: correctionsDataPropTypes.isRequired,
+  annualCorrectionsData: correctionsDataPropTypes.isRequired,
   isNoData: PropTypes.bool.isRequired,
 };
 

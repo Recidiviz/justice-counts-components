@@ -16,6 +16,7 @@
 // =============================================================================
 @import "../../../assets/scss/variables";
 .Card {
+  min-height: 205px;
   position: relative;
   background-color: #fff;
   border-radius: 0.25rem;

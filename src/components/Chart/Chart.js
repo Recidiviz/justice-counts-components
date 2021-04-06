@@ -41,7 +41,7 @@ const Chart = ({ title, hint, chartData, annual }) => {
       annual
         ? [
             { value: 5, label: "5 years" },
-            { value: chartData.labels.length, label: "All Time" },
+            { value: chartData.labels.length - 5, label: "All Time" },
           ]
         : [
             { value: 13, label: "1 year" },

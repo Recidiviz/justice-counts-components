@@ -26,7 +26,7 @@ import {
   POPULATION_PRISON,
   POPULATION_PROBATION,
   RELEASES_TO_PAROLE,
-} from "../../../constants/metrics";
+} from "../../../../constants/metrics";
 
 describe("FlowDiagram.js", () => {
   const mockLastDate = "September 2020";
