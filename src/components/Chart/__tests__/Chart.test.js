@@ -108,7 +108,7 @@ describe("Chart.js", () => {
     // should change options of period picker
     expect(PeriodPicker.mock.calls[0][0].periods).toMatchObject([
       { value: 5, label: "5 years" },
-      { value: 1, label: "All Time" },
+      { value: -4, label: "All Time" },
     ]);
 
     // should not hide even labels

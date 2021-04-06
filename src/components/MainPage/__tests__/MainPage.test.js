@@ -19,14 +19,26 @@ import { render } from "@testing-library/react";
 
 import MainPage from "../MainPage";
 import Chart from "../../Chart";
-import FlowDiagram from "../../FlowDiagram";
+import FlowDiagram from "../../Corrections/FlowDiagram";
 import KeyInsights from "../../KeyInsights";
 
-jest.mock("../../FlowDiagram");
+jest.mock("../../Corrections/FlowDiagram");
 jest.mock("../../KeyInsights");
 jest.mock("../../Chart");
 describe("MainPage.js", () => {
   const mockStateName = "Alabama";
+  const mockCorrectionsData = {
+    flowDiagramLastDate: "September 2019",
+    flowDiagramPrevDate: "October 2018",
+    flowData: {},
+    populationsChartData: {},
+    prisonAdmissionsChartData: {},
+    paroleRevocationsChartData: {},
+    probationRevocationsChartData: {},
+    sourceData: [],
+    releasesChartData: {},
+    keyInsightsData: [],
+  };
 
   beforeEach(() => {
     KeyInsights.mockReturnValue(null);
@@ -38,16 +50,8 @@ describe("MainPage.js", () => {
     const { container } = render(
       <MainPage
         stateName={mockStateName}
-        flowDiagramLastDate="September 2019"
-        flowDiagramPrevDate="October 2018"
-        flowDiagramData={{}}
-        populationsChartData={{}}
-        prisonAdmissionsChartData={{}}
-        paroleRevocationsChartData={{}}
-        probationRevocationsChartData={{}}
-        sourceData={[]}
-        releasesChartData={{}}
-        keyInsightsData={[]}
+        monthlyCorrectionsData={mockCorrectionsData}
+        annualCorrectionsData={mockCorrectionsData}
       />
     );
 
