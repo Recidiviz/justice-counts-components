@@ -49,7 +49,7 @@ import metricIsTooStale from "./metricIsTooStale";
  * },
  * }}
  */
-const generateFlowDiagramData = (data) => {
+const generateFlowDiagramData = (data, stateName) => {
   const { flowData, mostRecentYear, mostRecentMonth } = [
     ADMISSIONS_NEW_COMMITMENTS,
     PROBATION_SENTENCES,
@@ -65,6 +65,7 @@ const generateFlowDiagramData = (data) => {
     (acc, metric) => {
       if (!data[metric]) {
         acc.flowData[metric] = {
+          itemStateName: stateName,
           title: metricToCardName[metric],
           isNotAvailable: true,
         };
@@ -73,6 +74,7 @@ const generateFlowDiagramData = (data) => {
         const { datePublished } = lastItem;
 
         acc.flowData[metric] = {
+          itemStateName: stateName,
           title: metricToCardName[metric],
           number: lastItem.value,
           percentChange: lastItem.percentChange ? lastItem.percentChange * 100 : null,
