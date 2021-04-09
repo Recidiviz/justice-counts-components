@@ -86,7 +86,11 @@ const App = ({ stateCode, correctionsMonthlyData, correctionsAnnualData }) => {
     ["Releases"]
   );
 
-  const monthlyFlowData = generateFlowDiagramData(monthlyStateMetricData, annualStateMetricData);
+  const monthlyFlowData = generateFlowDiagramData(
+    monthlyStateMetricData,
+    annualStateMetricData,
+    stateName
+  );
 
   const monthlyKeyInsightsData = generateKeyInsightsData(monthlyFlowData.flowData);
 
@@ -155,7 +159,11 @@ const App = ({ stateCode, correctionsMonthlyData, correctionsAnnualData }) => {
     true
   );
 
-  const annualFlowData = generateFlowDiagramData(annualStateMetricData, monthlyStateMetricData);
+  const annualFlowData = generateFlowDiagramData(
+    annualStateMetricData,
+    monthlyStateMetricData,
+    stateName
+  );
 
   const annualKeyInsightsData = generateKeyInsightsData(annualFlowData.flowData);
 
