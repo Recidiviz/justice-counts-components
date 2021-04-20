@@ -32,11 +32,14 @@ import months from "../constants/months";
 import generateSourceText from "./generateSourceText";
 import metricIsTooStale from "./metricIsTooStale";
 import metricIsRestricted from "./metricIsRestricted";
+import metricIsPartiallyAvailable from "./metricIsPartiallyAvailable";
 
 /**
  * Prepares data for flow Diagram
  * @param data - normalized, grouped and sorted metric data (output of `getNormalizedStateData`)
  * @param compareData - normalized, grouped and sorted metric data of another data aggregation range (output of `getNormalizedStateData`)
+ * @param stateName - name of the current state
+ * @param isAnnual - boolean flag for indicating that data is annual
  * @returns {{
  * lastDate: string,
  * comparedToDate: string,
@@ -51,7 +54,7 @@ import metricIsRestricted from "./metricIsRestricted";
  * },
  * }}
  */
-const generateFlowDiagramData = (data, compareData, stateName) => {
+const generateFlowDiagramData = (data, compareData, stateName, isAnnual) => {
   const { flowData, mostRecentYear, mostRecentMonth } = [
     ADMISSIONS_NEW_COMMITMENTS,
     PROBATION_SENTENCES,
@@ -66,13 +69,24 @@ const generateFlowDiagramData = (data, compareData, stateName) => {
   ].reduce(
     (acc, metric) => {
       if (!data[metric]) {
-        acc.flowData[metric] = {
-          itemStateName: stateName,
-          title: metricToCardName[metric],
-          isNotAvailable: true,
-        };
+        if (compareData[metric]) {
+          const compareLastItem = compareData[metric][compareData[metric].length - 1];
+
+          acc.flowData[metric] = {
+            title: metricToCardName[metric],
+            isNotAvailable: true,
+            partiallyAvailable: metricIsPartiallyAvailable(compareLastItem, stateName, isAnnual),
+          };
+        } else {
+          acc.flowData[metric] = {
+            itemStateName: stateName,
+            title: metricToCardName[metric],
+            isNotAvailable: true,
+          };
+        }
       } else {
-        const compareLastItem = compareData && compareData[metric][compareData[metric].length - 1];
+        const compareLastItem =
+          compareData[metric] && compareData[metric][compareData[metric].length - 1];
         const lastItem = data[metric][data[metric].length - 1];
         const { datePublished } = lastItem;
 

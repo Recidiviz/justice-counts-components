@@ -39,6 +39,7 @@ const Card = ({
   reportName,
   sourceUrl,
   itemStateName,
+  partiallyAvailable,
   children,
 }) => {
   const handleScroll = () => {
@@ -66,7 +67,7 @@ const Card = ({
                 <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
                   {reportName}
                 </a>
-                ), but recent data is not available (Last Reported: {lastUpdatedDate}).
+                ), but recent data is not available (Last Reported: {mostRecentDate}).
               </p>
               <br />
               <p>
@@ -85,7 +86,7 @@ const Card = ({
             </div>
           </div>
         )}
-        {isNotAvailable && (
+        {!partiallyAvailable && isNotAvailable && (
           <div className="Card__warning-box Card__warning-box--warning">
             <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={hint} />
             <div className="Card__warning">
@@ -104,7 +105,7 @@ const Card = ({
             </div>
           </div>
         )}
-        {warning && (
+        {warning || partiallyAvailable ? (
           <div className="Card__warning-box Card__warning-box--warning">
             <button
               type="button"
@@ -114,16 +115,18 @@ const Card = ({
             />
             <div className="Card__warning">
               {warning}
+              {partiallyAvailable}
               <>
                 {" "}
-                To see the most recent monthly data use the{" "}
+                Use the{" "}
                 <button type="button" className="Card__warning-button" onClick={handleScroll}>
                   Reporting Frequency switch
-                </button>
+                </button>{" "}
+                at the top of the page to see the most recent available data.
               </>
             </div>
           </div>
-        )}
+        ) : null}
         {!isTooStale && sourceText && (
           <div className="Card__warning-box">
             <button
@@ -202,6 +205,7 @@ Card.defaultProps = {
   lastUpdatedDate: null,
   isTooStale: false,
   itemStateName: null,
+  partiallyAvailable: null,
 };
 
 Card.propTypes = {
@@ -222,6 +226,7 @@ Card.propTypes = {
   lastUpdatedDate: PropTypes.string,
   isTooStale: PropTypes.bool,
   itemStateName: PropTypes.string,
+  partiallyAvailable: PropTypes.string,
 };
 
 export default Card;

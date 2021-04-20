@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@ export const noMetricData = (metric) =>
  * @param data - normalized data (see @returns of getNormalizedStateData)
  * @param metrics {string[]} - metric names for which we generate chart data
  * @param metricLabels {string[]} - humanized metric names
+ * @param isAnnual - boolean flag for indicating that data is annual
  * @returns {{
  * datasets: {
  *   metric: string
@@ -76,7 +77,7 @@ export const noMetricData = (metric) =>
  *   ]
  * }
  */
-const generateChartData = (data, metrics, metricLabels = [], annual) => {
+const generateChartData = (data, metrics, metricLabels = [], isAnnual) => {
   if (!metrics.length) {
     throw new Error(METRICS_NOT_PROVIDED);
   }
@@ -126,14 +127,14 @@ const generateChartData = (data, metrics, metricLabels = [], annual) => {
   );
   const { startYear, startMonth, endYear, endMonth } = periods;
 
-  let i = annual ? startYear - 5 : startYear * 12 + startMonth;
-  const lastPeriod = annual ? endYear : endYear * 12 + endMonth;
+  let i = isAnnual ? startYear - 5 : startYear * 12 + startMonth;
+  const lastPeriod = isAnnual ? endYear : endYear * 12 + endMonth;
 
   const sourceData = {};
 
   while (i <= lastPeriod) {
-    const year = annual ? i : Math.floor(i / 12);
-    const month = annual ? endMonth : i % 12;
+    const year = isAnnual ? i : Math.floor(i / 12);
+    const month = isAnnual ? endMonth : i % 12;
 
     labels.push({ year, month });
     datasets.forEach((dataset) => {

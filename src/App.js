@@ -89,7 +89,8 @@ const App = ({ stateCode, correctionsMonthlyData, correctionsAnnualData }) => {
   const monthlyFlowData = generateFlowDiagramData(
     monthlyStateMetricData,
     annualStateMetricData,
-    stateName
+    stateName,
+    false
   );
 
   const monthlyKeyInsightsData = generateKeyInsightsData(monthlyFlowData.flowData);
@@ -162,7 +163,8 @@ const App = ({ stateCode, correctionsMonthlyData, correctionsAnnualData }) => {
   const annualFlowData = generateFlowDiagramData(
     annualStateMetricData,
     monthlyStateMetricData,
-    stateName
+    stateName,
+    true
   );
 
   const annualKeyInsightsData = generateKeyInsightsData(annualFlowData.flowData);
