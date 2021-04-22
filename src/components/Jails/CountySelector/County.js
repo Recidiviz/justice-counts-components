@@ -20,12 +20,13 @@ import cn from "classnames";
 
 import "./County.scss";
 
-const County = ({ name, population, isSelected, onClick }) => {
+const County = ({ name, population, isSelected, isNoData, onClick }) => {
   return (
     <button
       type="button"
       className={cn("County", {
         "County--selected": isSelected === name,
+        "County--not-available": isNoData,
       })}
       onClick={onClick}
     >
@@ -39,6 +40,7 @@ County.propTypes = {
   name: PropTypes.string.isRequired,
   population: PropTypes.number.isRequired,
   isSelected: PropTypes.string.isRequired,
+  isNoData: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
