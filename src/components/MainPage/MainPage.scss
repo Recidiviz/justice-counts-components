@@ -63,28 +63,30 @@
 
   &__tab {
     z-index: 2;
-    margin-right: 1.25rem;
-    min-width: 6.25rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-bottom: 6px;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.4375rem;
     font-weight: 800;
-    color: #cccccc;
-    font-size: 17px;
+    color: #8c8c8c;
+    font-size: 1rem;
     line-height: 1.41;
     background: transparent;
     border: 0;
-    border-bottom: 3px solid #cccccc;
-    transition: border-bottom-color 0.2s, color 0.2s;
+    outline: 0;
+    transition: all 0.1s;
     cursor: pointer;
+    &:first-of-type {
+      margin-left: 0.3125rem;
+    }
     &:last-of-type {
       margin-right: 0;
     }
 
     &_active,
     &:hover {
-      border-bottom-color: #06aeee;
-      color: #06aeee;
+      background: #06aeee;
+      color: #fff;
     }
   }
 }
