@@ -50,7 +50,7 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
   const stateName = states[stateCode];
   const stateMetricData = getNormalizedStateData(correctionsData, stateCode);
   const jailsMetricData = getNormalizedStateData(jailsData, stateCode);
-  const normalizedCountyData = getNormalizedCountyData(countiesData, stateCode);
+  const normalizedCountyData = getNormalizedCountyData(countiesData, stateCode, jailsData);
   const topCountiesByPopulation = generateTopCountiesByPopulation(countiesData, stateCode);
 
   const isNoData = isEmptyObj(stateMetricData);

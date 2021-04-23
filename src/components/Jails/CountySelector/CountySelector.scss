@@ -31,7 +31,7 @@
   &__title {
     font-weight: 800;
     font-size: 2.25rem;
-    margin-bottom: 0.625rem;
+    margin-bottom: 0.75rem;
     @include down($md) {
       font-size: 1.625rem;
     }
@@ -43,7 +43,7 @@
   &__subtitle {
     font-weight: normal;
     font-size: 1rem;
-    margin-bottom: 0.625rem;
+    margin-bottom: 1.688rem;
     @include down($md) {
       font-size: 0.875rem;
     }
@@ -51,13 +51,15 @@
 
   &__body-content {
     overflow-y: auto;
+    border-top: 1px solid #a3a3a3;
+    border-bottom: 1px solid #a3a3a3;
+    padding: 0.75rem 0;
   }
 
   &__footer {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    border-top: 1px solid #a3a3a3;
     padding-top: 1rem;
     margin-top: auto;
     @include down($md) {

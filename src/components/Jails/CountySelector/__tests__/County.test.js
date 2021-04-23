@@ -28,6 +28,7 @@ describe("County.js", () => {
         name={mockCounty}
         population={10019}
         isSelected="another county"
+        isNoData={false}
         onClick={mockOnClick}
       />
     );
@@ -39,9 +40,29 @@ describe("County.js", () => {
 
   it("should render selected county", () => {
     const { container } = render(
-      <County name={mockCounty} population={10019} isSelected={mockCounty} onClick={mockOnClick} />
+      <County
+        name={mockCounty}
+        population={10019}
+        isSelected={mockCounty}
+        isNoData={false}
+        onClick={mockOnClick}
+      />
     );
 
     expect(container.querySelector(".County--selected")).toBeInTheDocument();
+  });
+
+  it("should render not available county", () => {
+    const { container } = render(
+      <County
+        name={mockCounty}
+        population={10019}
+        isSelected={mockCounty}
+        isNoData
+        onClick={mockOnClick}
+      />
+    );
+
+    expect(container.querySelector(".County--not-available")).toBeInTheDocument();
   });
 });

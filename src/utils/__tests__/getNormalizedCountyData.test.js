@@ -98,4 +98,40 @@ describe("getNormalizedCountyData.test.js", () => {
       },
     ]);
   });
+
+  it("should put isNoData flag if there is no counties in metric data & metric data is provided", () => {
+    const mockMetricData = [
+      {
+        state_code: mockStateCode1,
+        county_code: mockCounty1,
+      },
+      {
+        state_code: mockStateCode1,
+        county_code: mockCounty2,
+      },
+    ];
+
+    const normalizedCountyData = getNormalizedCountyData(mockData, mockStateCode1, mockMetricData);
+
+    expect(normalizedCountyData).toMatchObject([
+      {
+        code: mockCounty1,
+        population: 87688,
+        name: mockCountyName,
+        isNoData: false,
+      },
+      {
+        code: mockCounty2,
+        population: 876543,
+        name: mockCountyName,
+        isNoData: false,
+      },
+      {
+        code: mockCounty3,
+        population: 12345678,
+        name: mockCountyName1,
+        isNoData: true,
+      },
+    ]);
+  });
 });

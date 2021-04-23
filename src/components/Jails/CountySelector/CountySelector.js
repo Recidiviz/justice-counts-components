@@ -69,6 +69,7 @@ const CountySelector = (counties, stateName) => {
                 key={county.name}
                 name={county.name}
                 population={county.population}
+                isNoData={county.isNoData}
                 isSelected={selectedCountyName}
                 onClick={createOnSelect(county.name, county.code)}
               />

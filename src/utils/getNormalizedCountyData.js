@@ -19,13 +19,14 @@ import toInt from "./toInt";
 
 /**
  * Filters data by state, normalizes, groups and sorts by population
- * @param data {{
+ * @param countyData {{
  *   state_code: string
  *   county_code: string
  *   name: string,
  *   population: string,
  * }[]}
  * @param stateCode {string}
+ * @param metricData - raw metric data
  * @returns {{
  *   code: string
  *   name: string
@@ -33,10 +34,19 @@ import toInt from "./toInt";
  * }[]}
  */
 
-const getNormalizedCountyData = (data, stateCode) => {
-  const normalizedData = data.reduce((acc, item) => {
-    if (item.state_code === stateCode) {
-      acc.push({ code: item.county_code, name: item.name, population: toInt(item.population) });
+const getNormalizedCountyData = (countyData, stateCode, metricData) => {
+  const normalizedData = countyData.reduce((acc, county) => {
+    if (county.state_code === stateCode) {
+      acc.push({
+        code: county.county_code,
+        name: county.name,
+        population: toInt(county.population),
+        isNoData:
+          metricData &&
+          !metricData.some(
+            (metric) => metric.state_code === stateCode && metric.county_code === county.county_code
+          ),
+      });
     }
 
     return acc;

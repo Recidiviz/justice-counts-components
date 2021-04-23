@@ -46,4 +46,13 @@
     background: transparent url("../../../assets/icons/check-icon.svg") 97% center no-repeat;
     background-color: #e7f7fe;
   }
+
+  &--not-available {
+    color: #808c99;
+    cursor: default;
+
+    &:hover {
+      background: #faf9f9;
+    }
+  }
 }
