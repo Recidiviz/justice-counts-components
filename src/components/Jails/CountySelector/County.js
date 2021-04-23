@@ -28,7 +28,7 @@ const County = ({ name, population, isSelected, isNoData, onClick }) => {
         "County--selected": isSelected === name,
         "County--not-available": isNoData,
       })}
-      onClick={onClick}
+      onClick={isNoData ? null : onClick}
     >
       <span>{name}</span>&nbsp;
       <span className="County__population">({population.toLocaleString("en-US")} people)</span>

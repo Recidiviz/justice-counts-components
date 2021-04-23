@@ -49,6 +49,10 @@
 
   &--not-available {
     color: #808c99;
-    pointer-events: none;
+    cursor: default;
+
+    &:hover {
+      background: #faf9f9;
+    }
   }
 }
