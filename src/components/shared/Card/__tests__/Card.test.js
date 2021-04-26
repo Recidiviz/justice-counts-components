@@ -51,12 +51,12 @@ describe("Card.js", () => {
     expect(container.querySelector(".Card__not-available-text")).toBeInTheDocument();
   });
 
-  it("should render too stale card if isTooStale flag is set", () => {
+  it("should render not available card if isTooStale flag is set", () => {
     const { container } = render(
       <Card title="Some title" number={15} percentChange={-20} isTooStale />
     );
 
-    expect(container.querySelector(".Card--too-stale")).toBeInTheDocument();
+    expect(container.querySelector(".Card__not-available-text")).toBeInTheDocument();
   });
 
   it("should display (--%) if percent change is null", () => {

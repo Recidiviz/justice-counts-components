@@ -81,7 +81,10 @@ const App = ({ stateCode, data }) => {
 
   const releasesChartData = generateChartData(stateMetricData, [RELEASES_COMPLETED], ["Releases"]);
 
-  const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
+  const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(
+    stateMetricData,
+    stateName
+  );
 
   const keyInsightsData = generateKeyInsightsData(flowData);
 
