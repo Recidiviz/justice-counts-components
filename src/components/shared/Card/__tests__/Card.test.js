@@ -15,7 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Card from "../Card";
 
 describe("Card.js", () => {
@@ -57,5 +57,19 @@ describe("Card.js", () => {
     );
 
     expect(container.querySelector(".Card--too-stale")).toBeInTheDocument();
+  });
+
+  it("should display (--%) if percent change is null", () => {
+    render(<Card title="Some title" number={15} percentChange={null} />);
+
+    expect(screen.queryByText("(--%)")).toBeInTheDocument();
+  });
+
+  it("should render card date range section", () => {
+    const { container } = render(
+      <Card title="Some title" number={15} percentChange={-20} mostRecentDate="September 2020" />
+    );
+
+    expect(container.querySelector(".Card__date-range")).toBeInTheDocument();
   });
 });
