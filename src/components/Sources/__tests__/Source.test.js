@@ -14,6 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-const sortByYearAndMonth = (a, b) => (a.year !== b.year ? a.year - b.year : a.month - b.month);
+import React from "react";
+import { render } from "@testing-library/react";
+import Source from "../Source";
 
-export default sortByYearAndMonth;
+describe("Source.js", () => {
+  const mockSourceItem = {
+    name: "Mock source name 1",
+    links: [
+      {
+        name: "Mock source report name 1",
+        src: "Mock source url 1",
+      },
+      {
+        name: "Mock source report name 2",
+        src: "Mock source url 2",
+      },
+    ],
+  };
+
+  it("should render source component", () => {
+    const { container } = render(
+      <>
+        <Source {...mockSourceItem} />
+      </>
+    );
+
+    expect(container.querySelector(".Sources__link")).toBeInTheDocument();
+  });
+});
