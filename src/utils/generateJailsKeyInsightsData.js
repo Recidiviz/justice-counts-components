@@ -61,6 +61,7 @@ const getCaptionMap = {
 
 /**
  * @param data - normalized, grouped and sorted metric data (output of `getNormalizedStateData`)
+ * @param reportingCountiesModal - reporting counties modal component
  * @returns {{
  *   keyInsightsData: {
  *     title: string
@@ -75,7 +76,7 @@ const getCaptionMap = {
  * }}
  */
 
-const generateJailsKeyInsightsData = (data) => {
+const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
   const { flowData } = [POPULATION_JAIL, PERCENTAGE_COVERED_COUNTY, INCARCERATION_RATE_JAIL].reduce(
     (acc, metric) => {
       if (!data[metric]) {
@@ -136,6 +137,10 @@ const generateJailsKeyInsightsData = (data) => {
             ? flowData[POPULATION_JAIL].populationCoverage
             : flowData[metric].numberChange
         ),
+        reportingCountiesModal:
+          flowData[metric].item.metric === PERCENTAGE_COVERED_COUNTY
+            ? reportingCountiesModal
+            : null,
       });
     }
 

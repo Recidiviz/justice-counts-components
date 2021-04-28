@@ -14,34 +14,44 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import React from "react";
-import PropTypes from "prop-types";
-import cn from "classnames";
+@import "../../../assets/scss/variables";
 
-import "./County.scss";
+.ReportingCounties {
+  &__button {
+    font-family: "GT America", sans-serif;
+    background: none;
+    color: #06aeee;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.0625rem;
+    text-decoration: underline;
+  }
 
-const County = ({ name, population, isSelected, isNoData, onClick }) => {
-  return (
-    <button
-      type="button"
-      className={cn("County", {
-        "County--selected": isSelected === name,
-        "County--not-available": isNoData,
-      })}
-      onClick={isNoData ? null : onClick}
-    >
-      <span>{name}</span>&nbsp;
-      <span className="County__population">({population.toLocaleString("en-US")} people)</span>
-    </button>
-  );
-};
+  &__title {
+    font-weight: 800;
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
+    @include down($md) {
+      font-size: 1.625rem;
+    }
+    @include down($sm) {
+      font-size: 1.5rem;
+    }
+  }
 
-County.propTypes = {
-  name: PropTypes.string.isRequired,
-  population: PropTypes.number.isRequired,
-  isSelected: PropTypes.string.isRequired,
-  isNoData: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
+  &__subtitle {
+    font-weight: normal;
+    font-size: 1rem;
+    margin-bottom: 1.688rem;
+    @include down($md) {
+      font-size: 0.875rem;
+    }
+  }
 
-export default County;
+  &__body-content {
+    overflow-y: auto;
+    border-top: 1px solid #a3a3a3;
+    padding: 0.75rem 0;
+  }
+}

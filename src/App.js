@@ -29,6 +29,7 @@ import generateJailsChartData from "./utils/generateJailsChartData";
 import generateSourceData from "./utils/generateSourceData";
 import getNormalizedCountyData from "./utils/getNormalizedCountyData";
 import CountySelector from "./components/Jails/CountySelector";
+import ReportingCounties from "./components/Jails/ReportingCounties";
 import generateTopCountiesByPopulation from "./utils/generateTopCountiesByPopulation";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
@@ -106,7 +107,10 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     releasesChartData.sourceData,
   ]);
 
-  const { jailsKeyInsightsData, countyCoverage } = generateJailsKeyInsightsData(jailsMetricData);
+  const { jailsKeyInsightsData, countyCoverage } = generateJailsKeyInsightsData(
+    jailsMetricData,
+    <ReportingCounties stateName={stateName} counties={normalizedCountyData} />
+  );
 
   const { countySelectorComponent, selectorCountyCode, selectorCountyName } = CountySelector(
     normalizedCountyData,

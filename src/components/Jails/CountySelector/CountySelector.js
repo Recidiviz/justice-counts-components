@@ -18,7 +18,7 @@ import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 
 import Modal from "../../shared/Modal";
-import County from "./County";
+import County from "../../shared/County";
 
 import "./CountySelector.scss";
 
