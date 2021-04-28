@@ -47,6 +47,9 @@
     overflow-x: hidden;
     overflow-y: auto;
     outline: 0;
+    @include down($md) {
+      align-items: flex-end;
+    }
   }
 
   &__body {
@@ -63,6 +66,9 @@
     padding: 2.5rem 3.125rem;
     @include down($lg) {
       padding: 1.25rem;
+    }
+    @include down($md) {
+      height: calc(100vh - 50px);
     }
   }
 

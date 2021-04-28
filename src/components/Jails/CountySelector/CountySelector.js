@@ -61,7 +61,8 @@ const CountySelector = (counties, stateName) => {
           <div className="CountySelector__subtitle">
             Select a county below and click “View County” to see the trend of the county’s
             incarceration rate over time.
-            <br /> Counties are arranged in alphabetical order.
+            <br /> Counties are arranged in alphabetical order. Some counties cannot be selected due
+            to missing data; see methodology for more details.
           </div>
           <div className="CountySelector__body-content">
             {counties.map((county) => (

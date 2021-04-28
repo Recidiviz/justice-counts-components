@@ -29,6 +29,9 @@
   outline: none;
   background: #fff;
   border-radius: 0.25rem;
+  &:not(:last-child) {
+    margin-bottom: 0.3125rem;
+  }
   @include down($md) {
     width: 100%;
     font-size: 0.875rem;
@@ -50,6 +53,7 @@
   &--not-available {
     color: #808c99;
     cursor: default;
+    text-decoration: line-through;
 
     &:hover {
       background: #faf9f9;
