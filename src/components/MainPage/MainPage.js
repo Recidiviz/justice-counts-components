@@ -21,17 +21,17 @@ import cn from "classnames";
 import Switch from "../Switch";
 import Corrections from "../Corrections";
 
-import { MONTHLY, LS_TAB_KEY, ANNUAL } from "./constants";
+import { MONTHLY, LS_SWITCH_KEY, ANNUAL } from "./constants";
 
 import "./MainPage.scss";
 import { correctionsDataPropTypes } from "../Corrections/propTypes";
 
 const MainPage = ({ stateName, monthlyCorrectionsData, annualCorrectionsData, isNoData }) => {
-  const [activeTab, setActiveTab] = useState(localStorage.getItem(LS_TAB_KEY) || MONTHLY);
+  const [activeTab, setActiveTab] = useState(localStorage.getItem(LS_SWITCH_KEY) || MONTHLY);
 
   const onActiveTabChange = (newTab) => {
     setActiveTab(newTab);
-    localStorage.setItem(LS_TAB_KEY, newTab);
+    localStorage.setItem(LS_SWITCH_KEY, newTab);
   };
 
   return (
