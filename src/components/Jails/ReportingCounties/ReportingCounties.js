@@ -31,6 +31,7 @@ const ReportingCounties = ({ counties, stateName }) => {
       <button className="ReportingCounties__button" type="button" onClick={() => setOpen(!open)}>
         here
       </button>
+      .
       <Modal isShowing={open} hide={() => setOpen(false)}>
         <h1 className="ReportingCounties__title">{`Counties in ${stateName}`}</h1>
         <div className="ReportingCounties__subtitle">
