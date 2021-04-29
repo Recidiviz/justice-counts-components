@@ -14,6 +14,54 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-const sortByYearAndMonth = (a, b) => (a.year !== b.year ? a.year - b.year : a.month - b.month);
+import sortByYearAndMonth from "../sortByYearAndMonth";
 
-export default sortByYearAndMonth;
+describe("sortByYearAndMonth.js", () => {
+  const mockData = [
+    {
+      year: 2018,
+      month: 3,
+    },
+    {
+      year: 2019,
+      month: 1,
+    },
+    {
+      year: 2017,
+      month: 8,
+    },
+    {
+      year: 2021,
+      month: 1,
+    },
+    {
+      year: 2019,
+      month: 4,
+    },
+  ];
+
+  it("should sort data by year and month ascending", () => {
+    expect(mockData.sort(sortByYearAndMonth)).toMatchObject([
+      {
+        year: 2017,
+        month: 8,
+      },
+      {
+        year: 2018,
+        month: 3,
+      },
+      {
+        year: 2019,
+        month: 1,
+      },
+      {
+        year: 2019,
+        month: 4,
+      },
+      {
+        year: 2021,
+        month: 1,
+      },
+    ]);
+  });
+});

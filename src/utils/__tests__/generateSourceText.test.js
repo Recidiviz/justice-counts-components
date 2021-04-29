@@ -14,6 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-const sortByYearAndMonth = (a, b) => (a.year !== b.year ? a.year - b.year : a.month - b.month);
+import generateSourceText from "../generateSourceText";
 
-export default sortByYearAndMonth;
+describe("generateSourceText.js", () => {
+  const mockSourceName = "Mock source name";
+  const mockSourceCategories = ["Mock source category 1", "Mock source category 1"];
+
+  const sourceText = generateSourceText(mockSourceName, mockSourceCategories);
+
+  it("should produce source text with multiple categories", () => {
+    expect(sourceText).toBe(
+      `Includes data for the following categories from ${mockSourceName}'s public reports: ${mockSourceCategories.join(
+        ", "
+      )}`
+    );
+  });
+
+  const sourceText1 = generateSourceText(mockSourceName, []);
+
+  it("should produce source text without categories if there is no categories", () => {
+    expect(sourceText1).toBe(`Includes data from ${mockSourceName}'s public reports`);
+  });
+});
