@@ -33,6 +33,7 @@ import {
   POPULATION_PRISON,
   POPULATION_PROBATION,
   RELEASES_COMPLETED,
+  RELEASES_TO_PAROLE,
   ADMISSIONS,
   ADMISSIONS_FROM_PAROLE_NEW_CRIME,
   ADMISSIONS_FROM_PAROLE_TECHNICAL,
@@ -79,7 +80,11 @@ const App = ({ stateCode, data }) => {
     ["Total", "New Crime", "Technical Violation"]
   );
 
-  const releasesChartData = generateChartData(stateMetricData, [RELEASES_COMPLETED], ["Releases"]);
+  const releasesChartData = generateChartData(
+    stateMetricData,
+    [RELEASES_COMPLETED, RELEASES_TO_PAROLE],
+    ["Releases to Liberty", "Releases to Parole"]
+  );
 
   const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(
     stateMetricData,
