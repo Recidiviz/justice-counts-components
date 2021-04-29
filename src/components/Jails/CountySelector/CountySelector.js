@@ -18,7 +18,7 @@ import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
 
 import Modal from "../../shared/Modal";
-import County from "./County";
+import County from "../../shared/County";
 
 import "./CountySelector.scss";
 
@@ -61,7 +61,8 @@ const CountySelector = (counties, stateName) => {
           <div className="CountySelector__subtitle">
             Select a county below and click “View County” to see the trend of the county’s
             incarceration rate over time.
-            <br /> Counties are arranged in alphabetical order.
+            <br /> Counties are arranged in alphabetical order. Some counties cannot be selected due
+            to missing data; see Methodology for more details.
           </div>
           <div className="CountySelector__body-content">
             {counties.map((county) => (

@@ -14,45 +14,4 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-@import "../../../assets/scss/variables";
-
-.County {
-  padding: 1rem;
-  font-size: 1rem;
-  font-family: "GT America", sans-serif;
-  font-style: normal;
-  text-align: left;
-  width: 50%;
-  float: left;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background: #fff;
-  border-radius: 0.25rem;
-  @include down($md) {
-    width: 100%;
-    font-size: 0.875rem;
-  }
-
-  &__population {
-    color: #808c99;
-  }
-
-  &:hover {
-    background-color: #e7f7fe;
-  }
-
-  &--selected {
-    background: transparent url("../../../assets/icons/check-icon.svg") 97% center no-repeat;
-    background-color: #e7f7fe;
-  }
-
-  &--not-available {
-    color: #808c99;
-    cursor: default;
-
-    &:hover {
-      background: #faf9f9;
-    }
-  }
-}
+export { default } from "./County";
