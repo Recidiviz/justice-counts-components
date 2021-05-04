@@ -41,12 +41,22 @@ describe("App.js", () => {
   });
 
   it("should provide corresponding state name", () => {
-    render(<App data={mockData} stateCode={mockStateCode} />);
+    render(
+      <App
+        stateCode={mockStateCode}
+        correctionsMonthlyData={mockData}
+        correctionsAnnualData={mockData}
+      />
+    );
 
     expect(MainPage).toHaveBeenCalledTimes(1);
     expect(MainPage.mock.calls[0][0].stateName).toBe(states[mockStateCode]);
-    expect(MainPage.mock.calls[0][0].populationsChartData).toBe(mockChartData);
-    expect(MainPage.mock.calls[0][0].prisonAdmissionsChartData).toBe(mockChartData);
-    expect(MainPage.mock.calls[0][0].releasesChartData).toBe(mockChartData);
+    expect(MainPage.mock.calls[0][0].monthlyCorrectionsData.populationsChartData).toBe(
+      mockChartData
+    );
+    expect(MainPage.mock.calls[0][0].monthlyCorrectionsData.prisonAdmissionsChartData).toBe(
+      mockChartData
+    );
+    expect(MainPage.mock.calls[0][0].monthlyCorrectionsData.releasesChartData).toBe(mockChartData);
   });
 });

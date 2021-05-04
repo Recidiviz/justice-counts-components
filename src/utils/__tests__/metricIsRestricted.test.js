@@ -14,23 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-/** @jsxRuntime classic */
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { correctionsMonthlyData, correctionsAnnualData } from "./data";
+import metricIsRestricted from "../metricIsRestricted";
 
-import "./index.scss";
+describe("metricIsRestricted.js", () => {
+  const mockMetric1 = {
+    year: 2019,
+    month: 2,
+  };
+  const mockMetric2 = {
+    year: 2020,
+    month: 2,
+  };
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App
-      stateCode="US_CO"
-      correctionsMonthlyData={correctionsMonthlyData}
-      correctionsAnnualData={correctionsAnnualData}
-    />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  it("should return hint if metric is artificially restricted", () => {
+    expect(metricIsRestricted(mockMetric1, mockMetric2)).toBe(
+      "Data is restricted to older reports in order to match the other reports shown; however, more recent data is available (as of March 2020)."
+    );
+  });
+});

@@ -16,6 +16,7 @@
 // =============================================================================
 @import "../../../assets/scss/variables";
 .Card {
+  min-height: 205px;
   position: relative;
   background-color: #fff;
   border-radius: 0.25rem;
@@ -145,6 +146,16 @@
   &__source-link {
     color: #ffa600;
     text-decoration: underline;
+    cursor: pointer;
+  }
+
+  &__warning-button {
+    color: #ffa600;
+    background: transparent;
+    text-decoration: underline;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
   }
 
   &__last-updated {

@@ -17,48 +17,48 @@
 import generateKeyInsightsData from "../generateKeyInsightsData";
 
 describe("generateKeyInsightsData.js", () => {
-  const mockData = {
-    ADMISSIONS_NEW_COMMITMENTS: {
-      title: "Prison Sentences",
-      number: 337,
-      percentChange: -20,
-      numberChange: -84,
-    },
-    ADMISSIONS_FROM_PROBATION: {
-      title: "Probation Revocations",
-      number: 23,
-      percentChange: -31,
-      numberChange: -10,
-    },
-    POPULATION_PRISON: {
-      title: "Prison Population",
-      number: 1223,
-      percentChange: -31,
-      numberChange: -10,
-    },
-    ADMISSIONS_FROM_PAROLE: {
-      title: "Parole Revocations",
-      number: 137,
-      percentChange: -20,
-      numberChange: -84,
-    },
-    ADMISSIONS_FROM_PAROLE_TECHNICAL: {
-      title: "Parole Revocations (Technical)",
-      number: 69,
-      percentChange: -37.83783784,
-      numberChange: -42,
-    },
-    ADMISSIONS_FROM_PROBATION_TECHNICAL: {
-      title: "Probation Revocations (Technical)",
-      number: 2,
-      percentChange: -90.47619048,
-      numberChange: -19,
-    },
-  };
-
-  const keyInsightsData = generateKeyInsightsData(mockData);
-
   it("should produce card data", () => {
+    const mockData = {
+      ADMISSIONS_NEW_COMMITMENTS: {
+        title: "Prison Sentences",
+        number: 337,
+        percentChange: -20,
+        numberChange: -84,
+      },
+      ADMISSIONS_FROM_PROBATION: {
+        title: "Probation Revocations",
+        number: 23,
+        percentChange: -31,
+        numberChange: -10,
+      },
+      POPULATION_PRISON: {
+        title: "Prison Population",
+        number: 1223,
+        percentChange: -31,
+        numberChange: -10,
+      },
+      ADMISSIONS_FROM_PAROLE: {
+        title: "Parole Revocations",
+        number: 137,
+        percentChange: -20,
+        numberChange: -84,
+      },
+      ADMISSIONS_FROM_PAROLE_TECHNICAL: {
+        title: "Parole Revocations (Technical)",
+        number: 69,
+        percentChange: -37.83783784,
+        numberChange: -42,
+      },
+      ADMISSIONS_FROM_PROBATION_TECHNICAL: {
+        title: "Probation Revocations (Technical)",
+        number: 2,
+        percentChange: -90.47619048,
+        numberChange: -19,
+      },
+    };
+
+    const keyInsightsData = generateKeyInsightsData(mockData);
+
     expect(keyInsightsData[0]).toMatchObject({
       title: "Prison Population",
       number: 1223,
@@ -73,6 +73,134 @@ describe("generateKeyInsightsData.js", () => {
       title: "Probation Revocations",
       number: 23,
       percentChange: -31,
+    });
+  });
+
+  it("should produce zero cases card captions", () => {
+    const zeroMockData = {
+      ADMISSIONS_NEW_COMMITMENTS: {
+        title: "Prison Sentences",
+        number: 337,
+        percentChange: -20,
+        numberChange: -84,
+      },
+      ADMISSIONS_FROM_PROBATION: {
+        title: "Probation Revocations",
+        number: 23,
+        percentChange: 0,
+        numberChange: 0,
+      },
+      POPULATION_PRISON: {
+        title: "Prison Population",
+        number: 1223,
+        percentChange: 0,
+        numberChange: 0,
+      },
+      ADMISSIONS_FROM_PAROLE: {
+        title: "Parole Revocations",
+        number: 137,
+        percentChange: 0,
+        numberChange: 0,
+      },
+      ADMISSIONS_FROM_PAROLE_TECHNICAL: {
+        title: "Parole Revocations (Technical)",
+        number: 69,
+        percentChange: -37.83783784,
+        numberChange: -42,
+      },
+      ADMISSIONS_FROM_PROBATION_TECHNICAL: {
+        title: "Probation Revocations (Technical)",
+        number: 2,
+        percentChange: -90.47619048,
+        numberChange: -19,
+      },
+    };
+
+    const zeroKeyInsightsData = generateKeyInsightsData(zeroMockData);
+
+    expect(zeroKeyInsightsData[0]).toMatchObject({
+      title: "Prison Population",
+      number: 1223,
+      percentChange: 0,
+      caption: "There was no net change in prison population during this time period.",
+    });
+    expect(zeroKeyInsightsData[1]).toMatchObject({
+      title: "Parole Revocations",
+      number: 137,
+      percentChange: 0,
+      caption:
+        "There was no net change in number of people revoked from parole to prison during this time period.",
+    });
+    expect(zeroKeyInsightsData[2]).toMatchObject({
+      title: "Probation Revocations",
+      number: 23,
+      percentChange: 0,
+      caption:
+        "There was no net change in number of people revoked from probation to prison during this time period.",
+    });
+  });
+
+  it("should produce null cases card captions", () => {
+    const nullMockData = {
+      ADMISSIONS_NEW_COMMITMENTS: {
+        title: "Prison Sentences",
+        number: 337,
+        percentChange: -20,
+        numberChange: -84,
+      },
+      ADMISSIONS_FROM_PROBATION: {
+        title: "Probation Revocations",
+        number: 23,
+        percentChange: null,
+        numberChange: null,
+      },
+      POPULATION_PRISON: {
+        title: "Prison Population",
+        number: 1223,
+        percentChange: null,
+        numberChange: null,
+      },
+      ADMISSIONS_FROM_PAROLE: {
+        title: "Parole Revocations",
+        number: 137,
+        percentChange: null,
+        numberChange: null,
+      },
+      ADMISSIONS_FROM_PAROLE_TECHNICAL: {
+        title: "Parole Revocations (Technical)",
+        number: 69,
+        percentChange: -37.83783784,
+        numberChange: -42,
+      },
+      ADMISSIONS_FROM_PROBATION_TECHNICAL: {
+        title: "Probation Revocations (Technical)",
+        number: 2,
+        percentChange: -90.47619048,
+        numberChange: -19,
+      },
+    };
+
+    const nullKeyInsightsData = generateKeyInsightsData(nullMockData);
+
+    expect(nullKeyInsightsData[0]).toMatchObject({
+      title: "Prison Population",
+      number: 1223,
+      percentChange: null,
+      caption: "There is no available net change in prison population.",
+    });
+    expect(nullKeyInsightsData[1]).toMatchObject({
+      title: "Parole Revocations",
+      number: 137,
+      percentChange: null,
+      caption:
+        "There is no available net change in number of people revoked from parole to prison.",
+    });
+    expect(nullKeyInsightsData[2]).toMatchObject({
+      title: "Probation Revocations",
+      number: 23,
+      percentChange: null,
+      caption:
+        "There is no available net change in number of people revoked from probation to prison.",
     });
   });
 });

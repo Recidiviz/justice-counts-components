@@ -14,23 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-/** @jsxRuntime classic */
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { correctionsMonthlyData, correctionsAnnualData } from "./data";
+import months from "../constants/months";
 
-import "./index.scss";
+const metricIsRestricted = (data, compareData) => {
+  if (compareData) {
+    if (
+      compareData.year > data.year ||
+      (compareData.year === data.year && compareData.month > data.month)
+    ) {
+      return `Data is restricted to older reports in order to match the other reports shown; however, more recent data is available (as of ${
+        months[compareData.month]
+      } ${compareData.year}).`;
+    }
+  }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App
-      stateCode="US_CO"
-      correctionsMonthlyData={correctionsMonthlyData}
-      correctionsAnnualData={correctionsAnnualData}
-    />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  return null;
+};
+
+export default metricIsRestricted;

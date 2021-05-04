@@ -14,23 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-/** @jsxRuntime classic */
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { correctionsMonthlyData, correctionsAnnualData } from "./data";
+import months from "../constants/months";
 
-import "./index.scss";
+const metricIsPartiallyAvailable = (data, stateName, annual) => {
+  return `${
+    annual ? "Annual" : "Monthly"
+  } data is not available in a public report from ${stateName}; however, ${
+    annual ? "monthly" : "annual"
+  } data is available (as of ${months[data.month]} ${data.year}).`;
+};
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App
-      stateCode="US_CO"
-      correctionsMonthlyData={correctionsMonthlyData}
-      correctionsAnnualData={correctionsAnnualData}
-    />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+export default metricIsPartiallyAvailable;

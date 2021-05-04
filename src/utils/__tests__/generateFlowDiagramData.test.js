@@ -80,7 +80,7 @@ describe("generateFlowDiagramData.js", () => {
 
   generateSourceText.mockReturnValue(mockSourceText);
 
-  const flowDiagramData = generateFlowDiagramData(mockData);
+  const flowDiagramData = generateFlowDiagramData(mockData, mockData);
 
   it("should return most recent year", () => {
     expect(flowDiagramData.lastDate).toBe("February 2020");

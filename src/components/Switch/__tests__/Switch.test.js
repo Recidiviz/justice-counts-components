@@ -14,23 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-/** @jsxRuntime classic */
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
 import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { correctionsMonthlyData, correctionsAnnualData } from "./data";
+import { render } from "@testing-library/react";
+import Switch from "../Switch";
+import { MONTHLY } from "../../MainPage/constants";
 
-import "./index.scss";
+describe("Switch.js", () => {
+  const mockFn = jest.fn();
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App
-      stateCode="US_CO"
-      correctionsMonthlyData={correctionsMonthlyData}
-      correctionsAnnualData={correctionsAnnualData}
-    />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  it("should render active button", () => {
+    const { queryAllByText } = render(<Switch activeTab={MONTHLY} onTabChange={mockFn} />);
+
+    expect(queryAllByText((_, element) => element.classList.contains("Switch__button--active")));
+  });
+});

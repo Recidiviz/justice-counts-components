@@ -15,7 +15,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import { act, render } from "@testing-library/react";
 import PeriodPicker from "../PeriodPicker";
 
@@ -100,5 +100,27 @@ describe("Chart.js", () => {
     });
 
     expect(PeriodPicker.mock.calls[1][0].period).toBe(option.value);
+  });
+
+  it("should render bar chart if annual flag is true", () => {
+    render(<Chart hint={mockHint} title={mockTitle} chartData={mockChartData} annual />);
+
+    // should change options of period picker
+    expect(PeriodPicker.mock.calls[0][0].periods).toMatchObject([
+      { value: 5, label: "5 years" },
+      { value: -4, label: "All Time" },
+    ]);
+
+    // should not hide even labels
+    expect(
+      [
+        { year: 2019, month: 0 },
+        { year: 2019, month: 1 },
+        { year: 2019, month: 2 },
+        { year: 2019, month: 3 },
+      ].map((item, index) =>
+        Bar.mock.calls[0][0].options.scales.xAxes[0].ticks.callback(item, index)
+      )
+    ).toStrictEqual(["1/19", "2/19", "3/19", "4/19"]);
   });
 });

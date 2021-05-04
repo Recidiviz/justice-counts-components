@@ -14,23 +14,51 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-/** @jsxRuntime classic */
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { correctionsMonthlyData, correctionsAnnualData } from "./data";
+.Switch {
+  z-index: 2;
+  max-height: 2.75rem;
+  background: #eff0f7;
+  border-radius: 0.4375rem;
+  padding: 0.3125rem;
+  display: inline-flex;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
 
-import "./index.scss";
+  :first-child {
+    margin-right: 6px;
+  }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App
-      stateCode="US_CO"
-      correctionsMonthlyData={correctionsMonthlyData}
-      correctionsAnnualData={correctionsAnnualData}
-    />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  &__button {
+    border-radius: 0.4375rem;
+    padding: 0.625rem 0.625rem;
+    background: #eff0f7;
+    color: #8c8c8c;
+    font-weight: 800;
+    font-size: 0.75rem;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+
+    &--active {
+      animation: slide 0.3s forwards;
+      background: #06aeee;
+      color: #fff;
+      z-index: 3;
+    }
+  }
+
+  &__slide-right {
+    transform: translateX(100%);
+  }
+
+  &__slide-left {
+    transform: translateX(-100%);
+  }
+
+  @keyframes slide {
+    100% {
+      transform: translateX(0%);
+    }
+  }
+}

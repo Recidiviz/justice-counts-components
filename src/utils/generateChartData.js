@@ -25,6 +25,7 @@ export const noMetricData = (metric) =>
  * @param data - normalized data (see @returns of getNormalizedStateData)
  * @param metrics {string[]} - metric names for which we generate chart data
  * @param metricLabels {string[]} - humanized metric names
+ * @param isAnnual - boolean flag for indicating that data is annual
  * @returns {{
  * datasets: {
  *   metric: string
@@ -76,7 +77,7 @@ export const noMetricData = (metric) =>
  *   ]
  * }
  */
-const generateChartData = (data, metrics, metricLabels = []) => {
+const generateChartData = (data, metrics, metricLabels = [], isAnnual) => {
   if (!metrics.length) {
     throw new Error(METRICS_NOT_PROVIDED);
   }
@@ -126,14 +127,14 @@ const generateChartData = (data, metrics, metricLabels = []) => {
   );
   const { startYear, startMonth, endYear, endMonth } = periods;
 
-  let i = startYear * 12 + startMonth;
-  const lastMonth = endYear * 12 + endMonth;
+  let i = isAnnual ? startYear - 5 : startYear * 12 + startMonth;
+  const lastPeriod = isAnnual ? endYear : endYear * 12 + endMonth;
 
   const sourceData = {};
 
-  while (i <= lastMonth) {
-    const year = Math.floor(i / 12);
-    const month = i % 12;
+  while (i <= lastPeriod) {
+    const year = isAnnual ? i : Math.floor(i / 12);
+    const month = isAnnual ? endMonth : i % 12;
 
     labels.push({ year, month });
     datasets.forEach((dataset) => {
@@ -141,6 +142,7 @@ const generateChartData = (data, metrics, metricLabels = []) => {
         const dataPoint = data[dataset.metric].find(
           (item) => item.year === year && item.month === month
         );
+
         if (dataPoint) {
           dataset.data.push(dataPoint.value);
         } else {

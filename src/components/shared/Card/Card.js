@@ -30,6 +30,7 @@ const Card = ({
   isTooStale,
   isPopulation,
   hint,
+  warning,
   title,
   number,
   percentChange,
@@ -38,31 +39,60 @@ const Card = ({
   reportName,
   sourceUrl,
   itemStateName,
+  partiallyAvailable,
   children,
-}) => (
-  <div
-    className={cn("Card", className, {
-      "Card--population": isPopulation,
-      "Card--not-available": isNotAvailable || isTooStale,
-    })}
-  >
-    <div className="Card__header">
-      <h3 className="Card__title">{title}</h3>
-      {isTooStale && (
-        <div className="Card__warning-box Card__warning-box--warning">
-          <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={hint} />
-          <div className="Card__warning">
-            <p>
-              This data is available in a public report from {itemStateName} (
-              <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
-                {reportName}
-              </a>
-              ), but recent data is not available (Last Reported: {lastUpdatedDate}).
-            </p>
-            <br />
-            <p>
-              If you believe there is a public report containing this data, please let us know
-              at&nbsp;
+}) => {
+  const handleScroll = () => {
+    window.scrollTo({
+      top: 250,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <div
+      className={cn("Card", className, {
+        "Card--population": isPopulation,
+        "Card--not-available": isNotAvailable || isTooStale,
+      })}
+    >
+      <div className="Card__header">
+        <h3 className="Card__title">{title}</h3>
+        {isTooStale && (
+          <div className="Card__warning-box Card__warning-box--warning">
+            <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={hint} />
+            <div className="Card__warning">
+              <p>
+                This data is available in a public report from {itemStateName} (
+                <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
+                  {reportName}
+                </a>
+                ), but recent data is not available (Last Reported: {mostRecentDate}).
+              </p>
+              <br />
+              <p>
+                If you believe there is a public report containing this data, please let us know
+                at&nbsp;
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href="mailto:justicecounts@csg.org"
+                  className="Card__source-link"
+                >
+                  justicecounts@csg.org
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+        )}
+        {!partiallyAvailable && isNotAvailable && (
+          <div className="Card__warning-box Card__warning-box--warning">
+            <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={hint} />
+            <div className="Card__warning">
+              This datapoint is not available in any of {itemStateName}&apos;s publicly available
+              reports. If you believe there is a public report containing this data, please let us
+              know at&nbsp;
               <a
                 target="_blank"
                 rel="noreferrer"
@@ -72,88 +102,91 @@ const Card = ({
                 justicecounts@csg.org
               </a>
               .
-            </p>
-          </div>
-        </div>
-      )}
-      {isNotAvailable && (
-        <div className="Card__warning-box Card__warning-box--warning">
-          <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={hint} />
-          <div className="Card__warning">
-            This datapoint is not available in any of {itemStateName}&apos;s publicly available
-            reports. If you believe there is a public report containing this data, please let us
-            know at&nbsp;
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href="mailto:justicecounts@csg.org"
-              className="Card__source-link"
-            >
-              justicecounts@csg.org
-            </a>
-            .
-          </div>
-        </div>
-      )}
-      {!isTooStale && sourceText && (
-        <div className="Card__warning-box">
-          <button
-            type="button"
-            tabIndex={0}
-            className="Card__warning-icon"
-            aria-label={sourceText}
-          />
-          <div className="Card__warning">
-            {sourceText} (
-            <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
-              {reportName}
-            </a>
-            )
-            {lastUpdatedDate && (
-              <div className="Card__last-updated">Last updated: {lastUpdatedDate} </div>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
-    <div className="Card__body">
-      {isNotAvailable || isTooStale ? (
-        <span className="Card__not-available-text">Not available</span>
-      ) : null}
-      {!isNotAvailable && !isTooStale && (
-        <>
-          <span className="Card__number">{formatNumber(number)}</span>
-          {percentChange === null ? (
-            <span className="Card__percent">(--%)</span>
-          ) : (
-            <span className="Card__percent">
-              ({Math.round(percentChange) > 0 && "+"}
-              {Math.round(percentChange)}%)
-            </span>
-          )}
-          <div className="Card__bottom">
-            {hint && (
-              <span className="Card__warning-box Card__warning-box--hint">
-                <button
-                  type="button"
-                  tabIndex={0}
-                  className="Card__warning-icon"
-                  aria-label={hint}
-                />
-                <div className="Card__warning">{hint}</div>
-              </span>
-            )}
-            <div className="Card__date-range">
-              {mostRecentDate}&nbsp;
-              {percentChange && <span>(compared to {comparedToDate})</span>}
             </div>
           </div>
-        </>
-      )}
+        )}
+        {warning || partiallyAvailable ? (
+          <div className="Card__warning-box Card__warning-box--warning">
+            <button
+              type="button"
+              tabIndex={0}
+              className="Card__warning-icon"
+              aria-label={warning}
+            />
+            <div className="Card__warning">
+              {warning}
+              {partiallyAvailable}
+              <>
+                {" "}
+                Use the{" "}
+                <button type="button" className="Card__warning-button" onClick={handleScroll}>
+                  Reporting Frequency switch
+                </button>{" "}
+                at the top of the page to see the most recent available data.
+              </>
+            </div>
+          </div>
+        ) : null}
+        {!isTooStale && sourceText && (
+          <div className="Card__warning-box">
+            <button
+              type="button"
+              tabIndex={0}
+              className="Card__warning-icon"
+              aria-label={sourceText}
+            />
+            <div className="Card__warning">
+              {sourceText} (
+              <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
+                {reportName}
+              </a>
+              )
+              {lastUpdatedDate && (
+                <div className="Card__last-updated">Last updated: {lastUpdatedDate} </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="Card__body">
+        {isNotAvailable || isTooStale ? (
+          <span className="Card__not-available-text">Not available</span>
+        ) : null}
+        {!isNotAvailable && !isTooStale && (
+          <>
+            <span className="Card__number">{formatNumber(number)}</span>
+            {percentChange === null ? (
+              <span className="Card__percent">(--%)</span>
+            ) : (
+              <span className="Card__percent">
+                ({Math.round(percentChange) > 0 && "+"}
+                {Math.round(percentChange)}%)
+              </span>
+            )}
+            <div className="Card__bottom">
+              {hint && (
+                <span className="Card__warning-box Card__warning-box--hint">
+                  <button
+                    type="button"
+                    tabIndex={0}
+                    className="Card__warning-icon"
+                    aria-label={hint}
+                  />
+                  <div className="Card__warning">{hint}</div>
+                </span>
+              )}
+              <div className="Card__date-range">
+                {mostRecentDate}&nbsp;
+                {percentChange && <span>(compared to {comparedToDate})</span>}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      <div className="Card__arrow">{children}</div>
     </div>
-    <div className="Card__arrow">{children}</div>
-  </div>
-);
+  );
+};
 
 Card.defaultProps = {
   isNotAvailable: false,
@@ -162,6 +195,7 @@ Card.defaultProps = {
   sourceUrl: null,
   isPopulation: false,
   hint: null,
+  warning: null,
   number: null,
   percentChange: null,
   className: "",
@@ -171,6 +205,7 @@ Card.defaultProps = {
   lastUpdatedDate: null,
   isTooStale: false,
   itemStateName: null,
+  partiallyAvailable: null,
 };
 
 Card.propTypes = {
@@ -181,6 +216,7 @@ Card.propTypes = {
   isNotAvailable: PropTypes.bool,
   isPopulation: PropTypes.bool,
   hint: PropTypes.string,
+  warning: PropTypes.string,
   number: PropTypes.number,
   percentChange: PropTypes.number,
   className: PropTypes.string,
@@ -190,6 +226,7 @@ Card.propTypes = {
   lastUpdatedDate: PropTypes.string,
   isTooStale: PropTypes.bool,
   itemStateName: PropTypes.string,
+  partiallyAvailable: PropTypes.string,
 };
 
 export default Card;
