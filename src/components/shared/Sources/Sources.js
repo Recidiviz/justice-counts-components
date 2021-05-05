@@ -31,13 +31,16 @@ const Sources = ({ data, tab }) => (
       <p className="Sources__no-data">No public sources available.</p>
     ) : (
       <p className="Sources__data">
-        {tab === JAILS && "This dashboard is powered by data conducted by the"}
+        {tab === JAILS && "This dashboard is powered by data compiled by the"}
         {tab === CORRECTIONS &&
           "All data for these visualizations comes from public reports published by the"}
         &nbsp;
         {data.map((source) => (
           <Source key={source.name} {...source} />
         ))}
+        &nbsp;
+        {tab === JAILS &&
+          "Data from Vera is continuously integrated from January 2020 onwards, while BJS data is pulled in manually as reports are published. Note that this leads to a gap in data in 2019, as no BJS Jail Survey has been produced for this year yet."}
       </p>
     )}
   </div>
