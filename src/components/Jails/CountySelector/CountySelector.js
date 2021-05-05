@@ -22,13 +22,13 @@ import County from "../../shared/County";
 
 import "./CountySelector.scss";
 
-const CountySelector = (counties, stateName) => {
+const CountySelector = (counties, topCounties, stateName) => {
   const [open, setOpen] = useState(false);
 
   const isNoCounty = "County";
 
-  const initialCountyName = counties.length ? counties[0].name : isNoCounty;
-  const initialCountyCode = counties.length ? counties[0].code : isNoCounty;
+  const initialCountyName = topCounties.length ? topCounties[0].name : isNoCounty;
+  const initialCountyCode = topCounties.length ? topCounties[0].code : isNoCounty;
 
   const [selectedCountyName, setSelectedCountyName] = useState(initialCountyName);
   const [selectedCountyCode, setSelectedCountyCode] = useState(initialCountyCode);

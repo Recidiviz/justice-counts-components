@@ -36,14 +36,14 @@ const Jails = ({
     <div className="Jails">
       <KeyInsights keyInsightsData={keyInsightsData} />
       <Chart
-        hint="By Type"
-        title="Jail Incarceration Rate"
+        hint=""
+        title="Statewide vs County Incarceration Rates"
         chartData={incarcerationRateChartData}
         countySelector={countySelector}
       />
       <Chart
-        hint="By Type"
-        title="Jail Incarceration Rate (Top Counties)"
+        hint="By County"
+        title="Incarceration Rates for Most Populous Counties"
         chartData={incarcerationRateTopCountiesChartData}
       />
       <Sources tab={JAILS} data={sourceData} />

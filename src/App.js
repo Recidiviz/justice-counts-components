@@ -114,6 +114,7 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
 
   const { countySelectorComponent, selectorCountyCode, selectorCountyName } = CountySelector(
     normalizedCountyData,
+    topCountiesByPopulation,
     stateName
   );
 
