@@ -152,9 +152,15 @@ const Chart = ({ title, hint, chartData, countySelector }) => {
                 callbacks: {
                   title: (item) => `${months[item[0].xLabel.month]} ${item[0].xLabel.year}`,
                   label: (tooltipItem, data) =>
-                    `${data.datasets[tooltipItem.datasetIndex].label}: ${formatNumber(
-                      tooltipItem.value
-                    )} ${styledDatasets.some((dataset) => dataset.county) ? "per 100,000" : ""}`,
+                    `${
+                      data.datasets[tooltipItem.datasetIndex].isStatewide
+                        ? `${data.datasets[tooltipItem.datasetIndex].label} ${
+                            data.datasets[tooltipItem.datasetIndex].countyCoverage
+                          }`
+                        : data.datasets[tooltipItem.datasetIndex].label
+                    }: ${formatNumber(tooltipItem.value)} ${
+                      styledDatasets.some((dataset) => dataset.county) ? "per 100,000" : ""
+                    }`,
                 },
                 backgroundColor: CONNECTING_LINE_COLOR,
                 yPadding: 10,
