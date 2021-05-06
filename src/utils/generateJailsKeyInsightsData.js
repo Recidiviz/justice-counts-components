@@ -147,10 +147,7 @@ const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
     return keyInsights;
   }, []);
 
-  return {
-    jailsKeyInsightsData,
-    countyCoverage: flowData[PERCENTAGE_COVERED_COUNTY].number,
-  };
+  return jailsKeyInsightsData;
 };
 
 export default generateJailsKeyInsightsData;

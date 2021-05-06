@@ -15,7 +15,6 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
 import { METRICS_NOT_PROVIDED } from "../constants/errors";
-import formatNumber from "./formatNumber";
 import logger from "./logger";
 import chartPeriods from "./chartPeriods";
 
@@ -43,7 +42,7 @@ export const noMetricData = (metric) =>
  * }}
  */
 
-const generateJailsChartData = (data, metric, counties, countyLabels = [], countyCoverage) => {
+const generateJailsChartData = (data, metric, counties, countyLabels = []) => {
   if (!metric.length) {
     throw new Error(METRICS_NOT_PROVIDED);
   }
@@ -56,13 +55,11 @@ const generateJailsChartData = (data, metric, counties, countyLabels = [], count
     acc.push({
       metric,
       county,
-      countyCoverage: countyCoverage
-        ? `(${formatNumber(countyCoverage)}% counties reporting)`
-        : null,
       label: countyLabels[index],
       isNotAvailable: !data[metric],
       isStatewide: county === "Statewide",
       data: [],
+      countyCoverageData: [],
     });
 
     return acc;
@@ -87,6 +84,9 @@ const generateJailsChartData = (data, metric, counties, countyLabels = [], count
         );
         if (dataPoint) {
           dataset.data.push(dataPoint.value);
+          if (dataset.isStatewide) {
+            dataset.countyCoverageData.push(dataPoint.countyCoverage * 100);
+          }
         } else {
           dataset.data.push(null);
         }

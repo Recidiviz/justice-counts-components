@@ -155,13 +155,12 @@ describe("generateJailsChartData.js", () => {
   describe("should work with additional data", () => {
     const mockJailsData = {
       [INCARCERATION_RATE_JAIL]: [
-        { year: 2020, month: 8, value: 102 },
-        { year: 2020, month: 9, value: 103 },
-        { year: 2020, month: 10, value: 104 },
+        { year: 2020, month: 8, value: 102, countyCoverage: 0.123 },
+        { year: 2020, month: 9, value: 103, countyCoverage: 0.124 },
+        { year: 2020, month: 10, value: 104, countyCoverage: 0.125 },
       ],
     };
     const mockStatewide = "Statewide";
-    const mockCountyCoverage = 10;
 
     it("should put isStatewide flag if county set as Statewide", () => {
       expect(
@@ -190,14 +189,13 @@ describe("generateJailsChartData.js", () => {
       });
     });
 
-    it("should put countyCoverage caption if countyCoverage value is provided", () => {
+    it("should put fill countyCoverageData array if countyCoverage values are provided", () => {
       expect(
         generateJailsChartData(
           mockJailsData,
           INCARCERATION_RATE_JAIL,
           [mockStatewide],
-          [mockStatewide],
-          mockCountyCoverage
+          [mockStatewide]
         )
       ).toMatchObject({
         datasets: [
@@ -206,9 +204,9 @@ describe("generateJailsChartData.js", () => {
             county: mockStatewide,
             label: mockStatewide,
             data: [102, 103, 104],
+            countyCoverageData: [12.3, 12.4, 12.5],
             isNotAvailable: false,
             isStatewide: true,
-            countyCoverage: `(${mockCountyCoverage}% counties reporting)`,
           },
         ],
         labels: [

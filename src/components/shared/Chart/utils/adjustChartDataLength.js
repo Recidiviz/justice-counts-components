@@ -31,6 +31,11 @@ const adjustChartDataLength = (data, targetLength) => {
     datasets: data.datasets.map((dataset) => ({
       ...dataset,
       data: Array.from({ length: lengthDiff }).fill(null).concat(dataset.data.slice(-targetLength)),
+      countyCoverageData: dataset.countyCoverageData
+        ? Array.from({ length: lengthDiff })
+            .fill(null)
+            .concat(dataset.countyCoverageData.slice(-targetLength))
+        : [],
     })),
     labels: Array.from({ length: lengthDiff })
       .map((_, i) => ({

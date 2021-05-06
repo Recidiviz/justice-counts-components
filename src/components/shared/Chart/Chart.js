@@ -58,6 +58,7 @@ const Chart = ({ title, hint, chartData, countySelector }) => {
   const styledDatasets = datasets.map((dataset, i) => ({
     ...dataset,
     data: dataset.data,
+    countyCoverageData: dataset.countyCoverageData,
     borderColor: chartColors[i],
     isNotAvailable: dataset.isNotAvailable || dataset.data.every((dataPoint) => dataPoint === null),
     backgroundColor: "transparent",
@@ -154,12 +155,14 @@ const Chart = ({ title, hint, chartData, countySelector }) => {
                   label: (tooltipItem, data) =>
                     `${
                       data.datasets[tooltipItem.datasetIndex].isStatewide
-                        ? `${data.datasets[tooltipItem.datasetIndex].label} ${
-                            data.datasets[tooltipItem.datasetIndex].countyCoverage
-                          }`
+                        ? `${data.datasets[tooltipItem.datasetIndex].label} (${formatNumber(
+                            data.datasets[tooltipItem.datasetIndex].countyCoverageData[
+                              tooltipItem.index
+                            ]
+                          )}% counties reporting)`
                         : data.datasets[tooltipItem.datasetIndex].label
                     }: ${formatNumber(tooltipItem.value)} ${
-                      styledDatasets.some((dataset) => dataset.county) ? "per 100,000" : ""
+                      data.datasets.some((dataset) => dataset.county) ? "per 100,000" : ""
                     }`,
                 },
                 backgroundColor: CONNECTING_LINE_COLOR,
@@ -186,7 +189,7 @@ const Chart = ({ title, hint, chartData, countySelector }) => {
               />
               <span className="Chart__legend-label">
                 {dataset.label}&nbsp;
-                {dataset.isStatewide ? dataset.countyCoverage : countySelector}
+                {!dataset.isStatewide ? countySelector : null}
               </span>
               <span className="Chart__legend-percent">
                 {dataset.isNotAvailable ? "N/A" : calcMetricPercentage(dataset.data)}
