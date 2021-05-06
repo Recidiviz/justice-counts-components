@@ -86,6 +86,7 @@ const generateJailsChartData = (data, metric, counties, countyLabels = []) => {
           dataset.data.push(dataPoint.value);
           if (dataset.isStatewide) {
             dataset.countyCoverageData.push(dataPoint.countyCoverage * 100);
+            if (dataPoint.populationCoverage < 0.1) dataset.data.push(null);
           }
         } else {
           dataset.data.push(null);
