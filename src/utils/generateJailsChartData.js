@@ -96,7 +96,6 @@ const generateJailsChartData = (data, metric, counties, countyLabels = []) => {
         }
       }
     });
-    console.log(datasets);
 
     i += 1;
   }
