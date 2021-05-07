@@ -31,6 +31,7 @@ import generateHint from "./generateHint";
 import months from "../constants/months";
 import generateSourceText from "./generateSourceText";
 import metricIsTooStale from "./metricIsTooStale";
+import getLastUpdatedDate from "./getLastUpdatedDate";
 
 /**
  * Prepares data for flow Diagram
@@ -80,7 +81,7 @@ const generateFlowDiagramData = (data) => {
           sourceText: generateSourceText(lastItem.sourceName, lastItem.sourceCategories),
           sourceUrl: lastItem.sourceUrl,
           reportName: lastItem.reportName,
-          lastUpdatedDate: datePublished
+          metricLastUpdated: datePublished
             ? `${months[datePublished.month]} ${datePublished.day}, ${datePublished.year}`
             : null,
           mostRecentDate: `${months[lastItem.month]} ${lastItem.year}`,
@@ -115,6 +116,7 @@ const generateFlowDiagramData = (data) => {
     flowData,
     lastDate: `${months[mostRecentMonth]} ${mostRecentYear}`,
     comparedToDate: `${months[mostRecentMonth]} ${mostRecentYear - 1}`,
+    correctionsLastUpdatedDate: getLastUpdatedDate(flowData),
   };
 };
 
