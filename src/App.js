@@ -95,7 +95,12 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     ["Releases"]
   );
 
-  const { flowData, lastDate, comparedToDate } = generateFlowDiagramData(stateMetricData);
+  const {
+    flowData,
+    lastDate,
+    comparedToDate,
+    correctionsLastUpdatedDate,
+  } = generateFlowDiagramData(stateMetricData);
 
   const correctionsKeyInsightsData = generateCorrectionsKeyInsightsData(flowData);
 
@@ -107,7 +112,11 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     releasesChartData.sourceData,
   ]);
 
-  const { jailsKeyInsightsData, countyCoverage } = generateJailsKeyInsightsData(
+  const {
+    jailsKeyInsightsData,
+    countyCoverage,
+    jailsLastUpdatedDate,
+  } = generateJailsKeyInsightsData(
     jailsMetricData,
     <ReportingCounties stateName={stateName} counties={normalizedCountyData} />
   );
@@ -171,6 +180,8 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
       flowDiagramPrevDate={comparedToDate}
       correctionsKeyInsightsData={correctionsKeyInsightsData}
       jailsKeyInsightsData={jailsKeyInsightsData}
+      correctionsLastUpdatedDate={correctionsLastUpdatedDate}
+      jailsLastUpdatedDate={jailsLastUpdatedDate}
       correctionsSourceData={correctionsSourceData}
       jailsSourceData={jailsSourceData}
       isNoData={isNoData}
