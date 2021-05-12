@@ -17,6 +17,11 @@
 import months from "../constants/months";
 import sortByYearAndMonth from "./sortByYearAndMonth";
 
+/**
+ * Returns formatted latest published date for flow diagram (cards) data
+ * @param data - data used for flow diagram (output of `generateFlowDiagramData` and intermediate value of `generateJailsKeyInsightsData`)
+ */
+
 const getLastUpdatedDate = (data) => {
   const date = Array.from(
     Object.values(data).map((item) =>
