@@ -112,11 +112,7 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     releasesChartData.sourceData,
   ]);
 
-  const {
-    jailsKeyInsightsData,
-    countyCoverage,
-    jailsLastUpdatedDate,
-  } = generateJailsKeyInsightsData(
+  const { jailsKeyInsightsData, jailsLastUpdatedDate } = generateJailsKeyInsightsData(
     jailsMetricData,
     <ReportingCounties stateName={stateName} counties={normalizedCountyData} />
   );
@@ -131,8 +127,7 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     jailsMetricData,
     INCARCERATION_RATE_JAIL,
     ["Statewide", selectorCountyCode],
-    ["Statewide", selectorCountyName],
-    countyCoverage
+    ["Statewide", selectorCountyName]
   );
 
   const incarcerationRateTopCountiesChartData = generateJailsChartData(
