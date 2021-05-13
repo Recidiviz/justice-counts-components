@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+import { MIN_COVERED_POPULATION } from "../constants/constraints";
 import { METRICS_NOT_PROVIDED } from "../constants/errors";
 import logger from "./logger";
 import chartPeriods from "./chartPeriods";
@@ -86,7 +87,7 @@ const generateJailsChartData = (data, metric, counties, countyLabels = []) => {
           dataset.data.push(dataPoint.value);
           if (dataset.isStatewide) {
             dataset.countyCoverageData.push(dataPoint.countyCoverage * 100);
-            if (dataPoint.populationCoverage < 0.1) {
+            if (dataPoint.populationCoverage < MIN_COVERED_POPULATION) {
               dataset.data.pop();
               dataset.data.push(null);
             }

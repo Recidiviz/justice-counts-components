@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
+import { MIN_COVERED_POPULATION } from "../constants/constraints";
 import {
   POPULATION_JAIL,
   PERCENTAGE_COVERED_COUNTY,
@@ -36,6 +37,10 @@ const generatePopulationCaption = (percentChange, numberChange) => {
     return `There was no net change in jail population during this time period.`;
   }
 
+  if (numberChange === null) {
+    return `There is no available net change in jail population during this time period.`;
+  }
+
   return `The jail population ${numberChange > 0 ? "rose" : "fell"} by ${Math.abs(
     Math.round(percentChange)
   )} percent in the past year, a ${numberChange > 0 ? "increase" : "decline"} of ${Math.abs(
@@ -46,6 +51,10 @@ const generatePopulationCaption = (percentChange, numberChange) => {
 const generateIncarcerationCaption = (percentChange, numberChange) => {
   if (numberChange === 0) {
     return `There was no net change in incarceration rate during this time period.`;
+  }
+
+  if (numberChange === null) {
+    return `There is no available net change in incarceration rate during this time period.`;
   }
 
   return `The incarceration rate for those in jail ${
@@ -85,7 +94,14 @@ const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
           isNotAvailable: true,
         };
       } else {
-        const generalData = data[metric].filter((item) => item.countyCode === undefined);
+        const constraintMonths = data[INCARCERATION_RATE_JAIL].filter(
+          (item) => item.populationCoverage < MIN_COVERED_POPULATION
+        ).map((item) => item.month);
+
+        const generalData = data[metric].filter(
+          (item) => item.countyCode === undefined && !constraintMonths.includes(item.month)
+        );
+
         if (!generalData.length) {
           acc.flowData[metric] = {
             title: metricToCardName[metric],
@@ -98,7 +114,7 @@ const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
           acc.flowData[metric] = {
             title: metricToCardName[metric],
             number: lastItem.value < 1 ? lastItem.value * 100 : lastItem.value,
-            percentChange: lastItem.percentChange * 100,
+            percentChange: lastItem.percentChange ? lastItem.percentChange * 100 : null,
             numberChange: lastItem.valueChange,
             populationCoverage: lastItem.populationCoverage * 100,
             countyCoverage: lastItem.countyCoverage * 100,
