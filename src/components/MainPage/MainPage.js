@@ -43,6 +43,8 @@ const MainPage = ({
   flowDiagramPrevDate,
   correctionsKeyInsightsData,
   jailsKeyInsightsData,
+  jailsLastUpdatedDate,
+  correctionsLastUpdatedDate,
   countySelector,
   correctionsSourceData,
   jailsSourceData,
@@ -78,6 +80,11 @@ const MainPage = ({
             The following is a broad overview of the corrections system in {stateName}, representing
             up-to-date data and changes compared to last year. An additional section on crime
             indicators will be added at a later date.
+            <br />
+            <i>
+              Last updated:{" "}
+              {activeTab === JAILS ? jailsLastUpdatedDate : correctionsLastUpdatedDate}
+            </i>
           </p>
         )}
       </header>
@@ -115,6 +122,8 @@ MainPage.defaultProps = {
 
 MainPage.propTypes = {
   stateName: PropTypes.string.isRequired,
+  correctionsLastUpdatedDate: PropTypes.string.isRequired,
+  jailsLastUpdatedDate: PropTypes.string.isRequired,
   populationsChartData: chartDataPropTypes.isRequired,
   prisonAdmissionsChartData: chartDataPropTypes.isRequired,
   paroleRevocationsChartData: chartDataPropTypes.isRequired,

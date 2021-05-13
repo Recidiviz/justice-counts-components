@@ -55,7 +55,7 @@ describe("generateJailsKeyInsightsData.js", () => {
     ],
   };
 
-  const jailsKeyInsightsData = generateJailsKeyInsightsData(mockData);
+  const { jailsKeyInsightsData } = generateJailsKeyInsightsData(mockData);
 
   it("should put isNumberPercent flag if metric value less than 1", () => {
     expect(jailsKeyInsightsData[1].isNumberPercent).toBe(true);

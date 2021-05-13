@@ -25,7 +25,7 @@ import "./Card.scss";
 const Card = ({
   mostRecentDate,
   comparedToDate,
-  lastUpdatedDate,
+  metricLastUpdated,
   isNotAvailable,
   isTooStale,
   isPopulation,
@@ -63,8 +63,8 @@ const Card = ({
               {reportName}
             </a>
             )
-            {lastUpdatedDate && (
-              <div className="Card__last-updated">Last updated: {lastUpdatedDate} </div>
+            {metricLastUpdated && (
+              <div className="Card__last-updated">Last updated: {metricLastUpdated} </div>
             )}
           </div>
         </div>
@@ -126,7 +126,7 @@ Card.defaultProps = {
   children: null,
   mostRecentDate: null,
   comparedToDate: null,
-  lastUpdatedDate: null,
+  metricLastUpdated: null,
   isTooStale: false,
 };
 
@@ -145,7 +145,7 @@ Card.propTypes = {
   children: PropTypes.node,
   mostRecentDate: PropTypes.string,
   comparedToDate: PropTypes.string,
-  lastUpdatedDate: PropTypes.string,
+  metricLastUpdated: PropTypes.string,
   isTooStale: PropTypes.bool,
 };
 

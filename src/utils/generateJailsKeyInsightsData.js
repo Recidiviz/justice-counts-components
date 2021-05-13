@@ -23,6 +23,7 @@ import {
 } from "../constants/metrics";
 import months from "../constants/months";
 import formatNumber from "./formatNumber";
+import getLastUpdatedDate from "./getLastUpdatedDate";
 
 const generateCountiesCaption = (countyCoverage, populationCoverage) => {
   return `Currently, about ${formatNumber(
@@ -119,7 +120,7 @@ const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
             populationCoverage: lastItem.populationCoverage * 100,
             countyCoverage: lastItem.countyCoverage * 100,
             isNumberPercent: lastItem.value < 1,
-            lastUpdatedDate: datePublished
+            metricLastUpdated: datePublished
               ? `${months[datePublished.month]} ${datePublished.day}, ${datePublished.year}`
               : null,
             mostRecentDate: `${months[lastItem.month]} ${lastItem.year}`,
@@ -163,7 +164,10 @@ const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
     return keyInsights;
   }, []);
 
-  return jailsKeyInsightsData;
+  return {
+    jailsKeyInsightsData,
+    jailsLastUpdatedDate: getLastUpdatedDate(flowData),
+  };
 };
 
 export default generateJailsKeyInsightsData;
