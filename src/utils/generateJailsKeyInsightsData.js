@@ -95,12 +95,18 @@ const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
           isNotAvailable: true,
         };
       } else {
-        const constraintMonths = data[INCARCERATION_RATE_JAIL].filter(
-          (item) => item.populationCoverage < MIN_COVERED_POPULATION
-        ).map((item) => item.month);
+        console.log(data[INCARCERATION_RATE_JAIL]);
+        const constraintMonths = new Set(
+          data[INCARCERATION_RATE_JAIL].filter(
+            (item) =>
+              item.countyCode === undefined && item.populationCoverage < MIN_COVERED_POPULATION
+          ).map((item) => `${item.year}-${item.month}`)
+        );
+        console.log(constraintMonths);
 
         const generalData = data[metric].filter(
-          (item) => item.countyCode === undefined && !constraintMonths.includes(item.month)
+          (item) =>
+            item.countyCode === undefined && !constraintMonths.has(`${item.year}-${item.month}`)
         );
 
         if (!generalData.length) {
