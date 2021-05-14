@@ -95,14 +95,12 @@ const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
           isNotAvailable: true,
         };
       } else {
-        console.log(data[INCARCERATION_RATE_JAIL]);
         const constraintMonths = new Set(
           data[INCARCERATION_RATE_JAIL].filter(
             (item) =>
               item.countyCode === undefined && item.populationCoverage < MIN_COVERED_POPULATION
           ).map((item) => `${item.year}-${item.month}`)
         );
-        console.log(constraintMonths);
 
         const generalData = data[metric].filter(
           (item) =>
