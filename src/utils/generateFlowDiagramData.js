@@ -29,6 +29,7 @@ import {
 } from "../constants/metrics";
 import generateHint from "./generateHint";
 import months from "../constants/months";
+import generateMeasurementTypeText from "./generateMeasurementTypeText";
 import generateSourceText from "./generateSourceText";
 import metricIsTooStale from "./metricIsTooStale";
 import metricIsRestricted from "./metricIsRestricted";
@@ -100,6 +101,7 @@ const generateFlowDiagramData = (data, compareData, stateName, isAnnual) => {
           sourceText: generateSourceText(lastItem.sourceName, lastItem.sourceCategories),
           sourceUrl: lastItem.sourceUrl,
           reportName: lastItem.reportName,
+          measurementTypeText: generateMeasurementTypeText(lastItem.measurementType),
           lastUpdatedDate: datePublished
             ? `${months[datePublished.month]} ${datePublished.day}, ${datePublished.year}`
             : null,

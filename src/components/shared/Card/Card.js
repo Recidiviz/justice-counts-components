@@ -38,6 +38,7 @@ const Card = ({
   sourceText,
   reportName,
   sourceUrl,
+  measurementTypeText,
   itemStateName,
   partiallyAvailable,
   children,
@@ -144,6 +145,9 @@ const Card = ({
               {lastUpdatedDate && (
                 <div className="Card__last-updated">Last updated: {lastUpdatedDate} </div>
               )}
+              {measurementTypeText && (
+                <div className="Card__last-updated">Measurement type: {measurementTypeText} </div>
+              )}
             </div>
           </div>
         )}
@@ -203,6 +207,7 @@ Card.defaultProps = {
   mostRecentDate: null,
   comparedToDate: null,
   lastUpdatedDate: null,
+  measurementTypeText: null,
   isTooStale: false,
   itemStateName: null,
   partiallyAvailable: null,
@@ -224,6 +229,7 @@ Card.propTypes = {
   mostRecentDate: PropTypes.string,
   comparedToDate: PropTypes.string,
   lastUpdatedDate: PropTypes.string,
+  measurementTypeText: PropTypes.string,
   isTooStale: PropTypes.bool,
   itemStateName: PropTypes.string,
   partiallyAvailable: PropTypes.string,
