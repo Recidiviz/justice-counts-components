@@ -18,15 +18,20 @@
  * Takes source name and source categories and produces formatted string.
  * @param sourceName {string}
  * @param sourceCategories {string[]}
+ * @param sourceUrl {string}
  * @returns {string}
  */
-const generateSourceText = (sourceName, sourceCategories) => {
-  if (sourceCategories.length) {
-    return `Includes data for the following categories from ${sourceName}'s public reports: ${sourceCategories.join(
-      ", "
-    )}`;
+const generateSourceText = (sourceName, sourceCategories, sourceUrl) => {
+  if (sourceUrl) {
+    if (sourceCategories.length) {
+      return `Sourced from ${sourceName}'s public reports. Includes data for the following categories: ${sourceCategories.join(
+        ", "
+      )}`;
+    }
+    return `Sourced from ${sourceName}'s public reports`;
   }
-  return `Includes data from ${sourceName}'s public reports`;
+
+  return `Sourced from data provided to the CSG Justice Center by ${sourceName}`;
 };
 
 export default generateSourceText;

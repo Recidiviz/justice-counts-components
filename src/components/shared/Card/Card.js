@@ -63,11 +63,25 @@ const Card = ({
             <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={hint} />
             <div className="Card__warning">
               <p>
-                This data is available in a public report from {itemStateName} (
-                <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
-                  {reportName}
-                </a>
-                ), but recent data is not available (Last Reported: {mostRecentDate}).
+                {sourceUrl ? (
+                  <>
+                    This data is available in a public report from {itemStateName} (
+                    <a
+                      className="Card__source-link"
+                      href={sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {reportName}
+                    </a>
+                    )
+                  </>
+                ) : (
+                  <>
+                    This data is available from {itemStateName} ({reportName})
+                  </>
+                )}
+                , but recent data is not available (Last Reported: {mostRecentDate}).
               </p>
               <br />
               <p>
@@ -137,10 +151,14 @@ const Card = ({
             />
             <div className="Card__warning">
               {sourceText} (
-              <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
-                {reportName}
-              </a>
-              )
+              {sourceUrl ? (
+                <a className="Card__source-link" href={sourceUrl} target="_blank" rel="noreferrer">
+                  {reportName}
+                </a>
+              ) : (
+                <>{reportName}</>
+              )}
+              ).
               {lastUpdatedDate && (
                 <div className="Card__last-updated">Last updated: {lastUpdatedDate} </div>
               )}

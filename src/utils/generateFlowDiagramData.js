@@ -97,7 +97,11 @@ const generateFlowDiagramData = (data, compareData, stateName, isAnnual) => {
           number: lastItem.value,
           percentChange: lastItem.percentChange ? lastItem.percentChange * 100 : null,
           numberChange: lastItem.valueChange,
-          sourceText: generateSourceText(lastItem.sourceName, lastItem.sourceCategories),
+          sourceText: generateSourceText(
+            lastItem.sourceName,
+            lastItem.sourceCategories,
+            lastItem.sourceUrl
+          ),
           sourceUrl: lastItem.sourceUrl,
           reportName: lastItem.reportName,
           lastUpdatedDate: datePublished
