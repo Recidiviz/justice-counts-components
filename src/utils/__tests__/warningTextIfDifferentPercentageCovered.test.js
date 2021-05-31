@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import isDifferentPercentageCovered from "../isDifferentPercentageCovered";
+import warningTextIfDifferentPercentageCovered from "../warningTextIfDifferentPercentageCovered";
 
-describe("isDifferentPercentageCovered.js", () => {
+describe("warningTextIfDifferentPercentageCovered.js", () => {
   const mockPopulationData = {
     countyCoverage: 9.245,
     populationCoverage: 25.5678,
@@ -26,8 +26,10 @@ describe("isDifferentPercentageCovered.js", () => {
     populationCoverage: 45.9876,
   };
 
-  it("should return true if data is too stale", () => {
-    expect(isDifferentPercentageCovered(mockPopulationData, mockIncarcerationRateData)).toBe(
+  it("should return warning if covered percentage is different", () => {
+    expect(
+      warningTextIfDifferentPercentageCovered(mockPopulationData, mockIncarcerationRateData)
+    ).toBe(
       "This value covers 9 percent of counties, representing about 26 percent of the state population."
     );
   });

@@ -16,10 +16,18 @@
 // =============================================================================
 import formatNumber from "./formatNumber";
 
-const isDifferentPercentageCovered = (populationData, incarcerationRateData) => {
+/**
+ * Returns warning if covered percentage is different for jails metrics
+ * @param populationData - normalized population data
+ * @param incarcerationRateData - normalized incarceration rate data
+ */
+
+const warningTextIfDifferentPercentageCovered = (populationData, incarcerationRateData) => {
   if (
-    populationData.countyCoverage !== incarcerationRateData.countyCoverage ||
-    populationData.populationCoverage !== incarcerationRateData.populationCoverage
+    formatNumber(populationData.countyCoverage) !==
+      formatNumber(incarcerationRateData.countyCoverage) ||
+    formatNumber(populationData.populationCoverage) !==
+      formatNumber(incarcerationRateData.populationCoverage)
   )
     return `This value covers ${formatNumber(
       populationData.countyCoverage
@@ -30,4 +38,4 @@ const isDifferentPercentageCovered = (populationData, incarcerationRateData) => 
   return null;
 };
 
-export default isDifferentPercentageCovered;
+export default warningTextIfDifferentPercentageCovered;

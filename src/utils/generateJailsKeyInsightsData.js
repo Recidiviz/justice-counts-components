@@ -24,12 +24,12 @@ import {
 import months from "../constants/months";
 import formatNumber from "./formatNumber";
 import getLastUpdatedDate from "./getLastUpdatedDate";
-import isDifferentPercentageCovered from "./isDifferentPercentageCovered";
+import warningTextIfDifferentPercentageCovered from "./warningTextIfDifferentPercentageCovered";
 
 const generateCountiesCaption = (countyCoverage, populationCoverage) => {
   return `Currently, about ${formatNumber(
     countyCoverage
-  )} percent of counties report their incarceration rate on at least a monthly basis, representing about ${formatNumber(
+  )} percent of counties report their jail populations on at least a monthly basis, representing about ${formatNumber(
     populationCoverage
   )} percent of the state population.`;
 };
@@ -165,7 +165,7 @@ const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
             : null,
         warning:
           flowData[metric].item.metric === POPULATION_JAIL
-            ? isDifferentPercentageCovered(
+            ? warningTextIfDifferentPercentageCovered(
                 flowData[POPULATION_JAIL],
                 flowData[INCARCERATION_RATE_JAIL]
               )
