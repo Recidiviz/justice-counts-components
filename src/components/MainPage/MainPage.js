@@ -69,8 +69,10 @@ const MainPage = ({ stateName, monthlyCorrectionsData, annualCorrectionsData, is
               <div className="MainPage__switch">
                 <Switch activeTab={activeTab} onTabChange={onActiveTabChange} />
                 <p className="MainPage__switch-label">
-                  Only data that is aggregated monthly will be shown in the Key Insights and flow
-                  diagram below.
+                  {activeTab === ANNUAL
+                    ? `Only data that is aggregated monthly will be shown in the Key Insights and flow diagram below. Click the control to the left to see monthly data.`
+                    : `Only data that is aggregated monthly will be shown in the Key Insights and flow
+                  diagram below. Click the control to the left to see annualized data.`}
                 </p>
               </div>
             </div>
