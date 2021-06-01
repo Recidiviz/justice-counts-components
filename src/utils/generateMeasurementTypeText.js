@@ -25,6 +25,10 @@ const generateMeasurementTypeText = (measurementType) => {
       return "Point in Time";
     case "AVERAGE":
       return "Average";
+    case "DELTA":
+      return "";
+    case "PERSON_BASED_DELTA":
+      return "";
     default:
       return "";
   }
