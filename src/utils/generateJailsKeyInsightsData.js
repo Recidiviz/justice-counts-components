@@ -24,6 +24,7 @@ import {
 import months from "../constants/months";
 import formatNumber from "./formatNumber";
 import getLastUpdatedDate from "./getLastUpdatedDate";
+import warningTextIfDifferentPercentageCovered from "./warningTextIfDifferentPercentageCovered";
 
 const generateCountiesCaption = (countyCoverage, populationCoverage) => {
   return `Currently, about ${formatNumber(
@@ -152,15 +153,22 @@ const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
         ...flowData[metric],
         caption: getCaptionMap[metric](
           flowData[metric].isNumberPercent
-            ? flowData[POPULATION_JAIL].countyCoverage
+            ? flowData[INCARCERATION_RATE_JAIL].countyCoverage
             : flowData[metric].percentChange,
           flowData[metric].isNumberPercent
-            ? flowData[POPULATION_JAIL].populationCoverage
+            ? flowData[INCARCERATION_RATE_JAIL].populationCoverage
             : flowData[metric].numberChange
         ),
         reportingCountiesModal:
           flowData[metric].item.metric === PERCENTAGE_COVERED_COUNTY
             ? reportingCountiesModal
+            : null,
+        warning:
+          flowData[metric].item.metric === POPULATION_JAIL
+            ? warningTextIfDifferentPercentageCovered(
+                flowData[POPULATION_JAIL],
+                flowData[INCARCERATION_RATE_JAIL]
+              )
             : null,
       });
     }

@@ -31,6 +31,7 @@ const Card = ({
   isPopulation,
   isNumberPercent,
   hint,
+  warning,
   title,
   number,
   percentChange,
@@ -49,6 +50,12 @@ const Card = ({
   >
     <div className="Card__header">
       <h3 className="Card__title">{title}</h3>
+      {warning && (
+        <div className="Card__warning-box Card__warning-box--warning">
+          <button type="button" tabIndex={0} className="Card__warning-icon" aria-label={warning} />
+          <div className="Card__warning">{warning}</div>
+        </div>
+      )}
       {!isTooStale && sourceText && (
         <div className="Card__warning-box">
           <button
@@ -120,6 +127,7 @@ Card.defaultProps = {
   sourceUrl: null,
   isPopulation: false,
   hint: null,
+  warning: null,
   number: null,
   percentChange: null,
   className: "",
@@ -139,6 +147,7 @@ Card.propTypes = {
   isPopulation: PropTypes.bool,
   isNumberPercent: PropTypes.bool,
   hint: PropTypes.string,
+  warning: PropTypes.string,
   number: PropTypes.number,
   percentChange: PropTypes.number,
   className: PropTypes.string,

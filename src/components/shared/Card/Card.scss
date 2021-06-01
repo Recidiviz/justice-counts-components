@@ -84,6 +84,9 @@
       background-size: 0.7rem;
       outline: none;
     }
+    .Card__warning-box--warning & {
+      background: transparent url("../../../assets/icons/warning-icon.svg") center center no-repeat;
+    }
   }
 
   &__warning {
