@@ -17,9 +17,7 @@
 import months from "../constants/months";
 
 const metricIsPartiallyAvailable = (data, stateName, annual) => {
-  return `${
-    annual ? "Annual" : "Monthly"
-  } data is not available in a public report from ${stateName}; however, ${
+  return `${annual ? "Annual" : "Monthly"} data is not available from ${stateName}; however, ${
     annual ? "monthly" : "annual"
   } data is available (as of ${months[data.month]} ${data.year}).`;
 };

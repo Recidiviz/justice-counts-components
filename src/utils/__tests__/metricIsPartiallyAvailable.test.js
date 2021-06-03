@@ -27,13 +27,13 @@ describe("metricIsPartiallyAvailable.js", () => {
 
   it("should return hint if metric is partially available in monthly range", () => {
     expect(metricIsPartiallyAvailable(mockMetric1, mockStateName, isAnnual)).toBe(
-      "Annual data is not available in a public report from Colorado; however, monthly data is available (as of March 2019)."
+      "Annual data is not available from Colorado; however, monthly data is available (as of March 2019)."
     );
   });
 
   it("should return hint if metric is partially available in annual range", () => {
     expect(metricIsPartiallyAvailable(mockMetric1, mockStateName, isNotAnnual)).toBe(
-      "Monthly data is not available in a public report from Colorado; however, annual data is available (as of March 2019)."
+      "Monthly data is not available from Colorado; however, annual data is available (as of March 2019)."
     );
   });
 });
