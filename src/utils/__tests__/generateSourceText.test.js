@@ -37,10 +37,20 @@ describe("generateSourceText.js", () => {
     expect(sourceText1).toBe(`Sourced from ${mockSourceName}'s public reports`);
   });
 
-  const sourceText2 = generateSourceText(mockSourceName, [], "");
+  const sourceText2 = generateSourceText(mockSourceName, mockSourceCategories, "");
+
+  it("should produce CSG source text with categories", () => {
+    expect(sourceText2).toBe(
+      `Sourced from data provided to the CSG Justice Center by ${mockSourceName}. Includes data for the following categories: ${mockSourceCategories.join(
+        ", "
+      )}`
+    );
+  });
+
+  const sourceText3 = generateSourceText(mockSourceName, [], "");
 
   it("should produce CSG source text", () => {
-    expect(sourceText2).toBe(
+    expect(sourceText3).toBe(
       `Sourced from data provided to the CSG Justice Center by ${mockSourceName}`
     );
   });

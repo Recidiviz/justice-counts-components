@@ -31,6 +31,12 @@ const generateSourceText = (sourceName, sourceCategories, sourceUrl) => {
     return `Sourced from ${sourceName}'s public reports`;
   }
 
+  if (sourceCategories.length) {
+    return `Sourced from data provided to the CSG Justice Center by ${sourceName}. Includes data for the following categories: ${sourceCategories.join(
+      ", "
+    )}`;
+  }
+
   return `Sourced from data provided to the CSG Justice Center by ${sourceName}`;
 };
 
