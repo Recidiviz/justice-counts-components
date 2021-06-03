@@ -39,6 +39,7 @@ import {
   POPULATION_PRISON,
   POPULATION_PROBATION,
   RELEASES_COMPLETED,
+  RELEASES_TO_PAROLE,
   ADMISSIONS,
   ADMISSIONS_FROM_PAROLE_NEW_CRIME,
   ADMISSIONS_FROM_PAROLE_TECHNICAL,
@@ -59,7 +60,7 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
   const populationsChartData = generateCorrectionsChartData(
     stateMetricData,
     [POPULATION_PRISON, POPULATION_PAROLE, POPULATION_PROBATION],
-    ["Prison Population", "Parole Population", "Probation Population"]
+    ["Prison Population", "Post-Release Supervision Population", "Probation Population"]
   );
 
   const prisonAdmissionsChartData = generateCorrectionsChartData(
@@ -68,7 +69,7 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     [
       "Total Prison Admissions",
       "New Prison Commitments",
-      "Parole Revocations (Total)",
+      "Post-Release Supervision Revocations (Total)",
       "Probation Revocations (Total)",
     ]
   );
@@ -91,8 +92,8 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
 
   const releasesChartData = generateCorrectionsChartData(
     stateMetricData,
-    [RELEASES_COMPLETED],
-    ["Releases"]
+    [RELEASES_COMPLETED, RELEASES_TO_PAROLE],
+    ["Releases to Community (without supervision)", "Releases to Parole"]
   );
 
   const {
@@ -127,7 +128,7 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     jailsMetricData,
     INCARCERATION_RATE_JAIL,
     ["Statewide", selectorCountyCode],
-    ["Statewide", selectorCountyName]
+    ["Statewide Confinement Rate", selectorCountyName]
   );
 
   const incarcerationRateTopCountiesChartData = generateJailsChartData(

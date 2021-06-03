@@ -37,13 +37,13 @@ const Jails = ({
       <KeyInsights keyInsightsData={keyInsightsData} />
       <Chart
         hint=""
-        title="Statewide vs County Incarceration Rates"
+        title="Statewide Confinement Rate vs County Confinement Rates"
         chartData={incarcerationRateChartData}
         countySelector={countySelector}
       />
       <Chart
         hint="By County"
-        title="Incarceration Rates for Most Populous Counties"
+        title="Confinement Rates for Most Populous Counties"
         chartData={incarcerationRateTopCountiesChartData}
       />
       <Sources tab={JAILS} data={sourceData} />
