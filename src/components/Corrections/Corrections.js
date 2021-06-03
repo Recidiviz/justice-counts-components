@@ -55,7 +55,11 @@ const Corrections = ({
       <Chart chartData={prisonAdmissionsChartData} title="Admissions to Prison" hint="By Type" />
     </ErrorBoundary>
     <ErrorBoundary placeholder="Unable to render Parole Revocations chart. An unhandled error happened. More info could be found in the console.">
-      <Chart chartData={paroleRevocationsChartData} title="Parole Revocations" hint="By Type" />
+      <Chart
+        chartData={paroleRevocationsChartData}
+        title="Post-Release Supervision Revocations"
+        hint="By Type"
+      />
     </ErrorBoundary>
     <ErrorBoundary placeholder="Unable to render Probation Revocations Chart. An unhandled error happened. More info could be found in the console.">
       <Chart
