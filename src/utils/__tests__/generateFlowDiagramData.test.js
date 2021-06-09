@@ -19,7 +19,7 @@ import generateHint from "../generateHint";
 import generateSourceText from "../generateSourceText";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
-  PROBATION_SENTENCES,
+  SUPERVISION_STARTS_PROBATION,
   ADMISSIONS_FROM_PAROLE,
   ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
@@ -88,7 +88,7 @@ describe("generateFlowDiagramData.js", () => {
   });
 
   it("should put isNotAvailable flag is no metric data provided", () => {
-    expect(flowDiagramData.flowData[PROBATION_SENTENCES].isNotAvailable).toBe(true);
+    expect(flowDiagramData.flowData[SUPERVISION_STARTS_PROBATION].isNotAvailable).toBe(true);
     expect(flowDiagramData.flowData[ADMISSIONS_FROM_PROBATION].isNotAvailable).toBe(true);
     expect(flowDiagramData.flowData[POPULATION_PRISON].isNotAvailable).toBe(true);
     expect(flowDiagramData.flowData[POPULATION_PAROLE].isNotAvailable).toBe(true);

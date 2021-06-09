@@ -19,7 +19,7 @@ import { render } from "@testing-library/react";
 import FlowDiagram from "../FlowDiagram";
 import {
   ADMISSIONS_NEW_COMMITMENTS,
-  PROBATION_SENTENCES,
+  SUPERVISION_STARTS_PROBATION,
   ADMISSIONS_FROM_PAROLE,
   ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
@@ -33,7 +33,7 @@ describe("FlowDiagram.js", () => {
   const mockPrevDate = "October 2019";
   const mockData = {
     [ADMISSIONS_NEW_COMMITMENTS]: { title: "ADMISSIONS", isNotAvailable: false },
-    [PROBATION_SENTENCES]: { title: "ADMISSIONS_NEW_COURT", isNotAvailable: false },
+    [SUPERVISION_STARTS_PROBATION]: { title: "ADMISSIONS_NEW_COURT", isNotAvailable: false },
     [POPULATION_PRISON]: { title: "POPULATION_PRISON", isNotAvailable: false },
     [POPULATION_PROBATION]: { title: "POPULATION_PROBATION", isNotAvailable: false },
     [ADMISSIONS_FROM_PROBATION]: {
