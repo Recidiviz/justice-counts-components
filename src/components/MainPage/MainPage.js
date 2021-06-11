@@ -106,7 +106,7 @@ const MainPage = ({
                 <Switch activeTab={activePane} onTabChange={onActivePaneChange} />
                 <p className="MainPage__switch-label">
                   {activePane === ANNUAL
-                    ? `Only data that is aggregated monthly will be shown in the Key Insights and flow diagram below. Click the control to the left to see monthly data.`
+                    ? `Only data that is aggregated annual will be shown in the Key Insights and flow diagram below. Click the control to the left to see monthly data.`
                     : `Only data that is aggregated monthly will be shown in the Key Insights and flow
                   diagram below. Click the control to the left to see annualized data.`}
                 </p>

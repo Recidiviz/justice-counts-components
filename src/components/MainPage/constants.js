@@ -16,7 +16,7 @@
 // =============================================================================
 export const CORRECTIONS = "CORRECTIONS";
 export const JAILS = "JAILS";
-export const LS_TAB_KEY = "activeTab";
+export const LS_TAB_KEY = "CORRECTIONS";
 export const MONTHLY = "MONTHLY";
 export const ANNUAL = "ANNUAL";
 export const LS_SWITCH_KEY = "MONTHLY";
