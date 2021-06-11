@@ -23,7 +23,7 @@ import Arrow from "./Arrow";
 
 import {
   ADMISSIONS_NEW_COMMITMENTS,
-  PROBATION_SENTENCES,
+  SUPERVISION_STARTS_PROBATION,
   ADMISSIONS_FROM_PAROLE,
   ADMISSIONS_FROM_PROBATION,
   POPULATION_PAROLE,
@@ -61,10 +61,10 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
               mobilePlacement="left"
             />
           </Card>
-          <Card className="FlowDiagram__card" {...data[PROBATION_SENTENCES]}>
+          <Card className="FlowDiagram__card" {...data[SUPERVISION_STARTS_PROBATION]}>
             <Arrow
               isDisabled={
-                data[PROBATION_SENTENCES].isNotAvailable ||
+                data[SUPERVISION_STARTS_PROBATION].isNotAvailable ||
                 data[POPULATION_PROBATION].isNotAvailable
               }
               height={4.25}

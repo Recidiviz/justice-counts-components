@@ -16,7 +16,7 @@
 // =============================================================================
 export const ADMISSIONS = "ADMISSIONS";
 export const ADMISSIONS_NEW_COMMITMENTS = "ADMISSIONS_NEW_COMMITMENTS";
-export const PROBATION_SENTENCES = "PROBATION_SENTENCES";
+export const SUPERVISION_STARTS_PROBATION = "SUPERVISION_STARTS_PROBATION";
 export const ADMISSIONS_FROM_PAROLE = "ADMISSIONS_FROM_PAROLE";
 export const ADMISSIONS_FROM_PAROLE_NEW_CRIME = "ADMISSIONS_FROM_PAROLE_NEW_CRIME";
 export const ADMISSIONS_FROM_PROBATION = "ADMISSIONS_FROM_PROBATION";
@@ -36,7 +36,7 @@ export const INCARCERATION_RATE_JAIL = "INCARCERATION_RATE_JAIL";
 
 export const metricToCardName = {
   [ADMISSIONS_NEW_COMMITMENTS]: "New Prison Commitments",
-  [PROBATION_SENTENCES]: "New Probation Commitments",
+  [SUPERVISION_STARTS_PROBATION]: "New Probation Commitments",
   [POPULATION_PROBATION]: "Probation Population",
   [ADMISSIONS_FROM_PROBATION]: "Probation Revocations",
   [POPULATION_PRISON]: "Prison Population",

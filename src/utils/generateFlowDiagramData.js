@@ -18,7 +18,7 @@ import {
   ADMISSIONS_NEW_COMMITMENTS,
   ADMISSIONS_FROM_PAROLE_TECHNICAL,
   ADMISSIONS_FROM_PROBATION_TECHNICAL,
-  PROBATION_SENTENCES,
+  SUPERVISION_STARTS_PROBATION,
   ADMISSIONS_FROM_PAROLE,
   ADMISSIONS_FROM_PROBATION,
   metricToCardName,
@@ -59,7 +59,7 @@ import metricIsPartiallyAvailable from "./metricIsPartiallyAvailable";
 const generateFlowDiagramData = (data, compareData, stateName, isAnnual) => {
   const { flowData, mostRecentYear, mostRecentMonth } = [
     ADMISSIONS_NEW_COMMITMENTS,
-    PROBATION_SENTENCES,
+    SUPERVISION_STARTS_PROBATION,
     POPULATION_PROBATION,
     ADMISSIONS_FROM_PROBATION,
     POPULATION_PRISON,
