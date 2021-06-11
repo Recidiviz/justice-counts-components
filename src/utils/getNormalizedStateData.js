@@ -80,6 +80,7 @@ const getNormalizedStateData = (data, stateCode) => {
         sourceName: item.source_name,
         sourceUrl: item.source_url,
         reportName: item.report_name,
+        measurementType: item.measurement_type,
         sourceCategories: item.raw_source_categories,
         valueChange: Number.isNaN(Number(item.value_change)) ? null : Number(item.value_change),
         percentChange: Number.isNaN(Number(item.percentage_change))

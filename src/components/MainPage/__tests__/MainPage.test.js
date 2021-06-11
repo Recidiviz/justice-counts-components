@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,6 +23,18 @@ import Corrections from "../../Corrections";
 jest.mock("../../Corrections");
 describe("MainPage.js", () => {
   const mockStateName = "Alabama";
+  const mockCorrectionsData = {
+    flowDiagramLastDate: "September 2019",
+    flowDiagramPrevDate: "October 2018",
+    flowData: {},
+    populationsChartData: {},
+    prisonAdmissionsChartData: {},
+    paroleRevocationsChartData: {},
+    probationRevocationsChartData: {},
+    sourceData: [],
+    releasesChartData: {},
+    keyInsightsData: [],
+  };
 
   beforeEach(() => {
     Corrections.mockReturnValue(null);
@@ -32,21 +44,12 @@ describe("MainPage.js", () => {
     const { container } = render(
       <MainPage
         stateName={mockStateName}
-        flowDiagramLastDate="September 2019"
-        flowDiagramPrevDate="October 2018"
-        flowDiagramData={{}}
-        populationsChartData={{}}
-        prisonAdmissionsChartData={{}}
-        paroleRevocationsChartData={{}}
-        probationRevocationsChartData={{}}
-        sourceData={[]}
-        releasesChartData={{}}
-        correctionsKeyInsightsData={[]}
+        monthlyCorrectionsData={mockCorrectionsData}
+        annualCorrectionsData={mockCorrectionsData}
         jailsKeyInsightsData={[]}
         incarcerationRateChartData={{}}
         incarcerationRateTopCountiesChartData={{}}
         jailsSourceData={[]}
-        correctionsSourceData={[]}
       />
     );
 

@@ -29,13 +29,19 @@ import {
 } from "../constants/metrics";
 import generateHint from "./generateHint";
 import months from "../constants/months";
+import generateMeasurementTypeText from "./generateMeasurementTypeText";
 import generateSourceText from "./generateSourceText";
 import metricIsTooStale from "./metricIsTooStale";
 import getLastUpdatedDate from "./getLastUpdatedDate";
+import metricIsRestricted from "./metricIsRestricted";
+import metricIsPartiallyAvailable from "./metricIsPartiallyAvailable";
 
 /**
  * Prepares data for flow Diagram
  * @param data - normalized, grouped and sorted metric data (output of `getNormalizedStateData`)
+ * @param compareData - normalized, grouped and sorted metric data of another data aggregation range (output of `getNormalizedStateData`)
+ * @param stateName - name of the current state
+ * @param isAnnual - boolean flag for indicating that data is annual
  * @returns {{
  * lastDate: string,
  * comparedToDate: string,
@@ -50,7 +56,7 @@ import getLastUpdatedDate from "./getLastUpdatedDate";
  * },
  * }}
  */
-const generateFlowDiagramData = (data) => {
+const generateFlowDiagramData = (data, compareData, stateName, isAnnual) => {
   const { flowData, mostRecentYear, mostRecentMonth } = [
     ADMISSIONS_NEW_COMMITMENTS,
     PROBATION_SENTENCES,
@@ -65,23 +71,43 @@ const generateFlowDiagramData = (data) => {
   ].reduce(
     (acc, metric) => {
       if (!data[metric]) {
-        acc.flowData[metric] = {
-          title: metricToCardName[metric],
-          isNotAvailable: true,
-        };
+        if (compareData[metric]) {
+          const compareLastItem = compareData[metric][compareData[metric].length - 1];
+
+          acc.flowData[metric] = {
+            title: metricToCardName[metric],
+            isNotAvailable: true,
+            partiallyAvailable: metricIsPartiallyAvailable(compareLastItem, stateName, isAnnual),
+          };
+        } else {
+          acc.flowData[metric] = {
+            itemStateName: stateName,
+            title: metricToCardName[metric],
+            isNotAvailable: true,
+          };
+        }
       } else {
+        const compareLastItem =
+          compareData[metric] && compareData[metric][compareData[metric].length - 1];
         const lastItem = data[metric][data[metric].length - 1];
         const { datePublished } = lastItem;
 
         acc.flowData[metric] = {
+          isTooStale: false,
+          itemStateName: stateName,
           title: metricToCardName[metric],
           number: lastItem.value,
           percentChange: lastItem.percentChange ? lastItem.percentChange * 100 : null,
           numberChange: lastItem.valueChange,
-          sourceText: generateSourceText(lastItem.sourceName, lastItem.sourceCategories),
+          sourceText: generateSourceText(
+            lastItem.sourceName,
+            lastItem.sourceCategories,
+            lastItem.sourceUrl
+          ),
           sourceUrl: lastItem.sourceUrl,
           reportName: lastItem.reportName,
-          metricLastUpdated: datePublished
+          measurementTypeText: generateMeasurementTypeText(lastItem.measurementType),
+          lastUpdatedDate: datePublished
             ? `${months[datePublished.month]} ${datePublished.day}, ${datePublished.year}`
             : null,
           mostRecentDate: `${months[lastItem.month]} ${lastItem.year}`,
@@ -89,7 +115,7 @@ const generateFlowDiagramData = (data) => {
             ? `${months[lastItem.comparedToMonth]} ${lastItem.comparedToYear}`
             : null,
           item: lastItem,
-          isTooStale: false,
+          compareItem: compareLastItem,
         };
 
         if (acc.mostRecentYear < lastItem.year) {
@@ -107,8 +133,9 @@ const generateFlowDiagramData = (data) => {
 
   Object.values(flowData).forEach((item) => {
     if (!item.isNotAvailable) {
-      item.isTooStale = metricIsTooStale(mostRecentYear, mostRecentMonth, item.item); // eslint-disable-line no-param-reassign
       item.hint = generateHint(mostRecentYear, mostRecentMonth, item.item); // eslint-disable-line no-param-reassign
+      item.isTooStale = metricIsTooStale(mostRecentYear, mostRecentMonth, item.item); // eslint-disable-line no-param-reassign
+      item.warning = metricIsRestricted(item.item, item.compareItem); // eslint-disable-line no-param-reassign
     }
   });
 

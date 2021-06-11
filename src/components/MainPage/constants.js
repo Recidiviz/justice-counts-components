@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,3 +17,6 @@
 export const CORRECTIONS = "CORRECTIONS";
 export const JAILS = "JAILS";
 export const LS_TAB_KEY = "activeTab";
+export const MONTHLY = "MONTHLY";
+export const ANNUAL = "ANNUAL";
+export const LS_SWITCH_KEY = "MONTHLY";

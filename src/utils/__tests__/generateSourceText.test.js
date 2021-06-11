@@ -16,23 +16,42 @@
 // =============================================================================
 import generateSourceText from "../generateSourceText";
 
-describe("generateKeyInsightsData.js", () => {
+describe("generateSourceText.js", () => {
   const mockSourceName = "Mock source name";
   const mockSourceCategories = ["Mock source category 1", "Mock source category 1"];
+  const mockSourceUrl = "Mock source url";
 
-  const sourceText = generateSourceText(mockSourceName, mockSourceCategories);
+  const sourceText = generateSourceText(mockSourceName, mockSourceCategories, mockSourceUrl);
 
   it("should produce source text with multiple categories", () => {
     expect(sourceText).toBe(
-      `Includes data for the following categories from ${mockSourceName}'s public reports: ${mockSourceCategories.join(
+      `Sourced from ${mockSourceName}'s public reports. Includes data for the following categories: ${mockSourceCategories.join(
         ", "
       )}`
     );
   });
 
-  const sourceText1 = generateSourceText(mockSourceName, []);
+  const sourceText1 = generateSourceText(mockSourceName, [], mockSourceUrl);
 
   it("should produce source text without categories if there is no categories", () => {
-    expect(sourceText1).toBe(`Includes data from ${mockSourceName}'s public reports`);
+    expect(sourceText1).toBe(`Sourced from ${mockSourceName}'s public reports`);
+  });
+
+  const sourceText2 = generateSourceText(mockSourceName, mockSourceCategories, "");
+
+  it("should produce CSG source text with categories", () => {
+    expect(sourceText2).toBe(
+      `Sourced from data provided to the CSG Justice Center by ${mockSourceName}. Includes data for the following categories: ${mockSourceCategories.join(
+        ", "
+      )}`
+    );
+  });
+
+  const sourceText3 = generateSourceText(mockSourceName, [], "");
+
+  it("should produce CSG source text", () => {
+    expect(sourceText3).toBe(
+      `Sourced from data provided to the CSG Justice Center by ${mockSourceName}`
+    );
   });
 });

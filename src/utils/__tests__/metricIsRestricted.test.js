@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,23 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import calcMetricPercentage, { NO_DATA_ERROR } from "../calcMetricPercentage";
-import logger from "../../../../utils/logger";
+import metricIsRestricted from "../metricIsRestricted";
 
-describe("calcPercentage.js", () => {
-  const logErrorSpy = jest.spyOn(logger, "error");
+describe("metricIsRestricted.js", () => {
+  const mockMetric1 = {
+    year: 2019,
+    month: 2,
+  };
+  const mockMetric2 = {
+    year: 2020,
+    month: 2,
+  };
 
-  it("should calculate percentage from chart dataset", () => {
-    expect(calcMetricPercentage([100, null, 95, 120, 75, 80, 155])).toBe("+55%");
-    expect(calcMetricPercentage([100, 95, 90, 80, 75, 70])).toBe("-30%");
-  });
-
-  it("should throw error to console when data array is empty", () => {
-    expect(calcMetricPercentage([])).toBe("N/A");
-    expect(logErrorSpy).toBeCalledWith(NO_DATA_ERROR);
-  });
-
-  it("should work when array consists of the only data point", () => {
-    expect(calcMetricPercentage([1])).toBe("0%");
+  it("should return hint if metric is artificially restricted", () => {
+    expect(metricIsRestricted(mockMetric1, mockMetric2)).toBe(
+      "Data is restricted to older reports in order to match the other reports shown; however, more recent data is available (as of March 2020)."
+    );
   });
 });

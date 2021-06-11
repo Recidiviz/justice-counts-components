@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -54,7 +54,8 @@ describe("App.js", () => {
   it("should provide corresponding state name and data", () => {
     render(
       <App
-        correctionsData={mockData}
+        correctionsMonthlyData={mockData}
+        correctionsAnnualData={mockData}
         jailsData={mockData}
         countiesData={mockData}
         stateCode={mockStateCode}
@@ -63,9 +64,13 @@ describe("App.js", () => {
 
     expect(MainPage).toHaveBeenCalledTimes(1);
     expect(MainPage.mock.calls[0][0].stateName).toBe(states[mockStateCode]);
-    expect(MainPage.mock.calls[0][0].populationsChartData).toBe(mockChartData);
-    expect(MainPage.mock.calls[0][0].prisonAdmissionsChartData).toBe(mockChartData);
-    expect(MainPage.mock.calls[0][0].releasesChartData).toBe(mockChartData);
+    expect(MainPage.mock.calls[0][0].monthlyCorrectionsData.populationsChartData).toBe(
+      mockChartData
+    );
+    expect(MainPage.mock.calls[0][0].monthlyCorrectionsData.prisonAdmissionsChartData).toBe(
+      mockChartData
+    );
+    expect(MainPage.mock.calls[0][0].monthlyCorrectionsData.releasesChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].incarcerationRateChartData).toBe(mockChartData);
     expect(MainPage.mock.calls[0][0].incarcerationRateTopCountiesChartData).toBe(mockChartData);
   });

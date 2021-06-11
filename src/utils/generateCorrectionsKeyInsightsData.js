@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,6 +27,10 @@ const generateRevocationsCaption = (source) => (percentChange, numberChange) => 
     return `There was no net change in number of people revoked from ${source} to prison during this time period.`;
   }
 
+  if (numberChange === null) {
+    return `There is no available net change in number of people revoked from ${source} to prison.`;
+  }
+
   const isPositive = numberChange > 0;
 
   return `The number of people revoked from ${source} to prison ${
@@ -39,6 +43,10 @@ const generateRevocationsCaption = (source) => (percentChange, numberChange) => 
 const generateTechnicalRevocationsCaption = (source) => (percentChange, numberChange) => {
   if (numberChange === 0) {
     return `There was no net change in revocations to prison for technical violations of ${source} during this time period.`;
+  }
+
+  if (numberChange === null) {
+    return `There is no available net change in revocations to prison for technical violations of ${source}.`;
   }
 
   const isPositive = numberChange > 0;
@@ -54,6 +62,10 @@ const getCaptionMap = {
   [POPULATION_PRISON]: (percentChange, numberChange) => {
     if (numberChange === 0) {
       return `There was no net change in prison population during this time period.`;
+    }
+
+    if (numberChange === null) {
+      return `There is no available net change in prison population.`;
     }
 
     return `The prison population ${numberChange > 0 ? "rose" : "fell"} ${Math.abs(

@@ -5,7 +5,8 @@ module.exports = {
     configure: (webpackConfig) => {
       const jsonLinesLoader = {
         test: [
-          require.resolve("./src/data/corrections_data.json"),
+          require.resolve("./src/data/corrections_monthly.json"),
+          require.resolve("./src/data/corrections_annual.json"),
           require.resolve("./src/data/jails_data.json"),
           require.resolve("./src/data/counties_data.json"),
         ],

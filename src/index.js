@@ -20,7 +20,7 @@ import "react-app-polyfill/stable";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { correctionsData, jailsData, countiesData } from "./data";
+import { correctionsMonthlyData, correctionsAnnualData, jailsData, countiesData } from "./data";
 
 import "./index.scss";
 
@@ -28,7 +28,8 @@ ReactDOM.render(
   <React.StrictMode>
     <App
       stateCode="US_CO"
-      correctionsData={correctionsData}
+      correctionsMonthlyData={correctionsMonthlyData}
+      correctionsAnnualData={correctionsAnnualData}
       jailsData={jailsData}
       countiesData={countiesData}
     />

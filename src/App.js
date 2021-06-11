@@ -48,23 +48,33 @@ import {
   INCARCERATION_RATE_JAIL,
 } from "./constants/metrics";
 
-const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
+const App = ({
+  stateCode,
+  correctionsMonthlyData,
+  correctionsAnnualData,
+  jailsData,
+  countiesData,
+}) => {
   const stateName = states[stateCode];
-  const stateMetricData = getNormalizedStateData(correctionsData, stateCode);
+  const monthlyStateMetricData = getNormalizedStateData(correctionsMonthlyData, stateCode);
+  const annualStateMetricData = getNormalizedStateData(correctionsAnnualData, stateCode);
   const jailsMetricData = getNormalizedStateData(jailsData, stateCode);
   const normalizedCountyData = getNormalizedCountyData(countiesData, stateCode, jailsData);
   const topCountiesByPopulation = generateTopCountiesByPopulation(countiesData, stateCode);
 
-  const isNoData = isEmptyObj(stateMetricData);
+  const isNoData =
+    isEmptyObj(monthlyStateMetricData) &&
+    isEmptyObj(annualStateMetricData) &&
+    isEmptyObj(jailsMetricData);
 
-  const populationsChartData = generateCorrectionsChartData(
-    stateMetricData,
+  const monthlyPopulationsChartData = generateCorrectionsChartData(
+    monthlyStateMetricData,
     [POPULATION_PRISON, POPULATION_PAROLE, POPULATION_PROBATION],
     ["Prison Population", "Post-Release Supervision Population", "Probation Population"]
   );
 
-  const prisonAdmissionsChartData = generateCorrectionsChartData(
-    stateMetricData,
+  const monthlyPrisonAdmissionsChartData = generateCorrectionsChartData(
+    monthlyStateMetricData,
     [ADMISSIONS, ADMISSIONS_NEW_COMMITMENTS, ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PROBATION],
     [
       "Total Prison Admissions",
@@ -74,14 +84,14 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     ]
   );
 
-  const paroleRevocationsChartData = generateCorrectionsChartData(
-    stateMetricData,
+  const monthlyParoleRevocationsChartData = generateCorrectionsChartData(
+    monthlyStateMetricData,
     [ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PAROLE_NEW_CRIME, ADMISSIONS_FROM_PAROLE_TECHNICAL],
     ["Total", "New Crime", "Technical Violation"]
   );
 
-  const probationRevocationsChartData = generateCorrectionsChartData(
-    stateMetricData,
+  const monthlyProbationRevocationsChartData = generateCorrectionsChartData(
+    monthlyStateMetricData,
     [
       ADMISSIONS_FROM_PROBATION,
       ADMISSIONS_FROM_PROBATION_NEW_CRIME,
@@ -90,28 +100,115 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
     ["Total", "New Crime", "Technical Violation"]
   );
 
-  const releasesChartData = generateCorrectionsChartData(
-    stateMetricData,
+  const monthlyReleasesChartData = generateCorrectionsChartData(
+    monthlyStateMetricData,
     [RELEASES_COMPLETED, RELEASES_TO_PAROLE],
-    ["Releases to Community (without supervision)", "Releases to Parole"]
+    ["Releases to Liberty", "Releases to Parole"]
   );
 
-  const {
-    flowData,
-    lastDate,
-    comparedToDate,
-    correctionsLastUpdatedDate,
-  } = generateFlowDiagramData(stateMetricData);
+  const monthlyFlowData = generateFlowDiagramData(
+    monthlyStateMetricData,
+    annualStateMetricData,
+    stateName,
+    false
+  );
 
-  const correctionsKeyInsightsData = generateCorrectionsKeyInsightsData(flowData);
+  const monthlyKeyInsightsData = generateCorrectionsKeyInsightsData(monthlyFlowData.flowData);
 
-  const correctionsSourceData = generateSourceData(flowData, [
-    populationsChartData.sourceData,
-    prisonAdmissionsChartData.sourceData,
-    paroleRevocationsChartData.sourceData,
-    probationRevocationsChartData.sourceData,
-    releasesChartData.sourceData,
+  const monthlySourceData = generateSourceData(monthlyFlowData.flowData, [
+    monthlyPopulationsChartData.sourceData,
+    monthlyPrisonAdmissionsChartData.sourceData,
+    monthlyParoleRevocationsChartData.sourceData,
+    monthlyProbationRevocationsChartData.sourceData,
+    monthlyReleasesChartData.sourceData,
   ]);
+
+  const monthlyCorrectionsData = {
+    populationsChartData: monthlyPopulationsChartData,
+    prisonAdmissionsChartData: monthlyPrisonAdmissionsChartData,
+    paroleRevocationsChartData: monthlyParoleRevocationsChartData,
+    probationRevocationsChartData: monthlyProbationRevocationsChartData,
+    releasesChartData: monthlyReleasesChartData,
+    flowData: monthlyFlowData.flowData,
+    keyInsightsData: monthlyKeyInsightsData,
+    flowDiagramLastDate: monthlyFlowData.lastDate,
+    flowDiagramPrevDate: monthlyFlowData.comparedToDate,
+    sourceData: monthlySourceData,
+  };
+
+  const annualPopulationsChartData = generateCorrectionsChartData(
+    annualStateMetricData,
+    [POPULATION_PRISON, POPULATION_PAROLE, POPULATION_PROBATION],
+    ["Prison Population", "Parole Population", "Probation Population"],
+    true
+  );
+
+  const annualPrisonAdmissionsChartData = generateCorrectionsChartData(
+    annualStateMetricData,
+    [ADMISSIONS, ADMISSIONS_NEW_COMMITMENTS, ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PROBATION],
+    [
+      "Total Prison Admissions",
+      "New Prison Commitments",
+      "Parole Revocations (Total)",
+      "Probation Revocations (Total)",
+    ],
+    true
+  );
+
+  const annualParoleRevocationsChartData = generateCorrectionsChartData(
+    annualStateMetricData,
+    [ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PAROLE_NEW_CRIME, ADMISSIONS_FROM_PAROLE_TECHNICAL],
+    ["Total", "New Crime", "Technical Violation"],
+    true
+  );
+
+  const annualProbationRevocationsChartData = generateCorrectionsChartData(
+    annualStateMetricData,
+    [
+      ADMISSIONS_FROM_PROBATION,
+      ADMISSIONS_FROM_PROBATION_NEW_CRIME,
+      ADMISSIONS_FROM_PROBATION_TECHNICAL,
+    ],
+    ["Total", "New Crime", "Technical Violation"],
+    true
+  );
+
+  const annualReleasesChartData = generateCorrectionsChartData(
+    annualStateMetricData,
+    [RELEASES_COMPLETED, RELEASES_TO_PAROLE],
+    ["Releases to Liberty", "Releases to Parole"],
+    true
+  );
+
+  const annualFlowData = generateFlowDiagramData(
+    annualStateMetricData,
+    monthlyStateMetricData,
+    stateName,
+    true
+  );
+
+  const annualKeyInsightsData = generateCorrectionsKeyInsightsData(annualFlowData.flowData);
+
+  const annualSourceData = generateSourceData(annualFlowData.flowData, [
+    annualPopulationsChartData.sourceData,
+    annualPrisonAdmissionsChartData.sourceData,
+    annualParoleRevocationsChartData.sourceData,
+    annualProbationRevocationsChartData.sourceData,
+    annualReleasesChartData.sourceData,
+  ]);
+
+  const annualCorrectionsData = {
+    populationsChartData: annualPopulationsChartData,
+    prisonAdmissionsChartData: annualPrisonAdmissionsChartData,
+    paroleRevocationsChartData: annualParoleRevocationsChartData,
+    probationRevocationsChartData: annualProbationRevocationsChartData,
+    releasesChartData: annualReleasesChartData,
+    flowData: annualFlowData.flowData,
+    keyInsightsData: annualKeyInsightsData,
+    flowDiagramLastDate: annualFlowData.lastDate,
+    flowDiagramPrevDate: annualFlowData.comparedToDate,
+    sourceData: annualSourceData,
+  };
 
   const { jailsKeyInsightsData, jailsLastUpdatedDate } = generateJailsKeyInsightsData(
     jailsMetricData,
@@ -163,22 +260,14 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
   return (
     <MainPage
       stateName={stateName}
+      monthlyCorrectionsData={monthlyCorrectionsData}
+      annualCorrectionsData={annualCorrectionsData}
       countySelector={countySelectorComponent}
-      populationsChartData={populationsChartData}
-      prisonAdmissionsChartData={prisonAdmissionsChartData}
-      paroleRevocationsChartData={paroleRevocationsChartData}
-      probationRevocationsChartData={probationRevocationsChartData}
       incarcerationRateChartData={incarcerationRateChartData}
       incarcerationRateTopCountiesChartData={incarcerationRateTopCountiesChartData}
-      releasesChartData={releasesChartData}
-      flowDiagramData={flowData}
-      flowDiagramLastDate={lastDate}
-      flowDiagramPrevDate={comparedToDate}
-      correctionsKeyInsightsData={correctionsKeyInsightsData}
       jailsKeyInsightsData={jailsKeyInsightsData}
-      correctionsLastUpdatedDate={correctionsLastUpdatedDate}
       jailsLastUpdatedDate={jailsLastUpdatedDate}
-      correctionsSourceData={correctionsSourceData}
+      correctionsLastUpdatedDate={monthlyFlowData.correctionsLastUpdatedDate}
       jailsSourceData={jailsSourceData}
       isNoData={isNoData}
     />
@@ -187,7 +276,22 @@ const App = ({ stateCode, correctionsData, jailsData, countiesData }) => {
 
 App.propTypes = {
   stateCode: PropTypes.string.isRequired,
-  correctionsData: PropTypes.arrayOf(
+  correctionsMonthlyData: PropTypes.arrayOf(
+    PropTypes.shape({
+      state_code: PropTypes.string.isRequired,
+      metric: PropTypes.string.isRequired,
+      year: PropTypes.string.isRequired,
+      month: PropTypes.string.isRequired,
+      date_reported: PropTypes.string.isRequired,
+      measurement_type: PropTypes.string,
+      value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      compared_to_year: PropTypes.string,
+      compared_to_month: PropTypes.string,
+      value_change: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      percentage_change: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    })
+  ).isRequired,
+  correctionsAnnualData: PropTypes.arrayOf(
     PropTypes.shape({
       state_code: PropTypes.string.isRequired,
       county_code: PropTypes.string,
@@ -195,6 +299,7 @@ App.propTypes = {
       year: PropTypes.string.isRequired,
       month: PropTypes.string.isRequired,
       date_reported: PropTypes.string.isRequired,
+      measurement_type: PropTypes.string,
       value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       compared_to_year: PropTypes.string,
       compared_to_month: PropTypes.string,

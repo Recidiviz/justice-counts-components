@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
 // =============================================================================
 import { METRICS_NOT_PROVIDED } from "../constants/errors";
 import logger from "./logger";
-import chartPeriods from "./chartPeriods";
 
 export const noMetricData = (metric) =>
   `${metric} doesn't appear in source files. Chart data is not generated.`;
@@ -26,6 +25,7 @@ export const noMetricData = (metric) =>
  * @param data - normalized data (see @returns of getNormalizedStateData)
  * @param metrics {string[]} - metric names for which we generate chart data
  * @param metricLabels {string[]} - humanized metric names
+ * @param isAnnual - boolean flag for indicating that data is annual
  * @returns {{
  * datasets: {
  *   metric: string
@@ -77,7 +77,7 @@ export const noMetricData = (metric) =>
  *   ]
  * }
  */
-const generateCorrectionsChartData = (data, metrics, metricLabels = []) => {
+const generateCorrectionsChartData = (data, metrics, metricLabels = [], isAnnual) => {
   if (!metrics.length) {
     throw new Error(METRICS_NOT_PROVIDED);
   }
@@ -99,14 +99,42 @@ const generateCorrectionsChartData = (data, metrics, metricLabels = []) => {
 
   const labels = [];
 
-  const { firstMonth, lastMonth } = chartPeriods(data, datasets);
-  let i = firstMonth;
+  const periods = datasets.reduce(
+    (acc, { metric, isNotAvailable }) => {
+      if (isNotAvailable) {
+        return acc;
+      }
+      const { year: startYear, month: startMonth } = data[metric][0];
+      const { year: endYear, month: endMonth } = data[metric][data[metric].length - 1];
+
+      if (startYear < acc.startYear) {
+        acc.startYear = startYear;
+        acc.startMonth = startMonth;
+      } else if (startYear === acc.startYear) {
+        acc.startMonth = Math.min(acc.startMonth, startMonth);
+      }
+
+      if (endYear > acc.endYear) {
+        acc.endYear = endYear;
+        acc.endMonth = endMonth;
+      } else if (endYear === acc.endYear) {
+        acc.endMonth = Math.max(acc.endMonth, endMonth);
+      }
+
+      return acc;
+    },
+    { startYear: Infinity, startMonth: Infinity, endYear: -Infinity, endMonth: -Infinity }
+  );
+  const { startYear, startMonth, endYear, endMonth } = periods;
+
+  let i = isAnnual ? startYear - 5 : startYear * 12 + startMonth;
+  const lastPeriod = isAnnual ? endYear : endYear * 12 + endMonth;
 
   const sourceData = {};
 
-  while (i <= lastMonth) {
-    const year = Math.floor(i / 12);
-    const month = i % 12;
+  while (i <= lastPeriod) {
+    const year = isAnnual ? i : Math.floor(i / 12);
+    const month = isAnnual ? endMonth : i % 12;
 
     labels.push({ year, month });
     datasets.forEach((dataset) => {

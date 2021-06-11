@@ -1,5 +1,5 @@
 // Recidiviz - a data platform for criminal justice reform
-// Copyright (C) 2020 Recidiviz, Inc.
+// Copyright (C) 2021 Recidiviz, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -80,7 +80,7 @@ describe("generateFlowDiagramData.js", () => {
 
   generateSourceText.mockReturnValue(mockSourceText);
 
-  const flowDiagramData = generateFlowDiagramData(mockData);
+  const flowDiagramData = generateFlowDiagramData(mockData, mockData);
 
   it("should return most recent year", () => {
     expect(flowDiagramData.lastDate).toBe("February 2020");

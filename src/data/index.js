@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-export { default as correctionsData } from "./corrections_data.json";
+export { default as correctionsMonthlyData } from "./corrections_monthly.json";
+export { default as correctionsAnnualData } from "./corrections_annual.json";
 export { default as jailsData } from "./jails_data.json";
 export { default as countiesData } from "./counties_data.json";
