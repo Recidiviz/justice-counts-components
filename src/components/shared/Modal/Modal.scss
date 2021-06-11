@@ -1,0 +1,90 @@
+// Recidiviz - a data platform for criminal justice reform
+// Copyright (C) 2021 Recidiviz, Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+// =============================================================================
+@import "../../../assets/scss/variables";
+
+.Modal {
+  font-family: "GT America", sans-serif;
+  font-style: normal;
+
+  &__open {
+    overflow: hidden;
+  }
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(19, 37, 54, 0.75);
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    @include down($md) {
+      align-items: flex-end;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    z-index: 99;
+    background: white;
+    position: relative;
+    box-shadow: 0px 0.625rem 1.25rem rgba(0, 0, 0, 0.4);
+    border-radius: 0.625rem;
+    width: 927px;
+    height: 608px;
+    max-height: 100vh;
+    padding: 2.5rem 3.125rem;
+    @include down($lg) {
+      padding: 1.25rem;
+    }
+    @include down($md) {
+      height: calc(100vh - 50px);
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__close-button {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    background: transparent url("../../../assets/icons/close-icon.svg") center center no-repeat;
+    cursor: pointer;
+  }
+}

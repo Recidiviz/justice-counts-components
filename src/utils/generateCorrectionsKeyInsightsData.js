@@ -80,7 +80,7 @@ const getCaptionMap = {
   [ADMISSIONS_FROM_PROBATION_TECHNICAL]: generateTechnicalRevocationsCaption("probation"),
 };
 
-const generateKeyInsightsData = (flowData) =>
+const generateCorrectionsKeyInsightsData = (flowData) =>
   [
     POPULATION_PRISON,
     ADMISSIONS_FROM_PAROLE,
@@ -103,4 +103,4 @@ const generateKeyInsightsData = (flowData) =>
     }, [])
     .slice(0, 3);
 
-export default generateKeyInsightsData;
+export default generateCorrectionsKeyInsightsData;

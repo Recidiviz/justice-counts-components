@@ -28,7 +28,9 @@ const KeyInsights = ({ keyInsightsData }) => (
       {keyInsightsData.map((card) => (
         <div key={card.title} className="KeyInsights__card">
           <Card {...card} />
-          <p className="KeyInsights__card-description">{card.caption}</p>
+          <p className="KeyInsights__card-description">
+            {card.caption} {card.reportingCountiesModal}
+          </p>
         </div>
       ))}
     </div>

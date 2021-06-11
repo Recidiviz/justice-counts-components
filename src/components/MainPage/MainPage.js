@@ -18,20 +18,44 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
+import Tabs from "./Tabs";
 import Switch from "../Switch";
 import Corrections from "../Corrections";
+import Jails from "../Jails";
 
-import { MONTHLY, LS_SWITCH_KEY, ANNUAL } from "./constants";
+import { chartDataPropTypes } from "../Chart/propTypes";
+import { keyInsightsPropTypes } from "../KeyInsights/propTypes";
+import { sourcePropTypes } from "../Sources/propTypes";
+import { CORRECTIONS, JAILS, LS_TAB_KEY, MONTHLY, LS_SWITCH_KEY, ANNUAL } from "./constants";
 
 import "./MainPage.scss";
 import { correctionsDataPropTypes } from "../Corrections/propTypes";
 
-const MainPage = ({ stateName, monthlyCorrectionsData, annualCorrectionsData, isNoData }) => {
-  const [activeTab, setActiveTab] = useState(localStorage.getItem(LS_SWITCH_KEY) || MONTHLY);
+const MainPage = ({
+  stateName,
+  monthlyCorrectionsData,
+  annualCorrectionsData,
+  incarcerationRateChartData,
+  incarcerationRateTopCountiesChartData,
+  jailsKeyInsightsData,
+  jailsLastUpdatedDate,
+  correctionsLastUpdatedDate,
+  countySelector,
+  jailsSourceData,
+  isNoData,
+}) => {
+  const [activeTab, setActiveTab] = useState(localStorage.getItem(LS_TAB_KEY) || CORRECTIONS);
 
   const onActiveTabChange = (newTab) => {
     setActiveTab(newTab);
-    localStorage.setItem(LS_SWITCH_KEY, newTab);
+    localStorage.setItem(LS_TAB_KEY, newTab);
+  };
+
+  const [activePane, setActivePane] = useState(localStorage.getItem(LS_SWITCH_KEY) || MONTHLY);
+
+  const onActivePaneChange = (newPane) => {
+    setActivePane(newPane);
+    localStorage.setItem(LS_SWITCH_KEY, newPane);
   };
 
   return (
@@ -56,9 +80,21 @@ const MainPage = ({ stateName, monthlyCorrectionsData, annualCorrectionsData, is
           <>
             <p className="MainPage__description">
               The following is a broad overview of the corrections system in {stateName},
-              representing the latest data available and indicating changes over the course of the
-              prior year.
+              representing up-to-date data and changes compared to last year. An additional section
+              on crime indicators will be added at a later date.
+              <br />
+              <i>
+                Last updated:{" "}
+                {activeTab === JAILS ? jailsLastUpdatedDate : correctionsLastUpdatedDate}
+              </i>
             </p>
+          </>
+        )}
+      </header>
+      {!isNoData && (
+        <>
+          <Tabs activeTab={activeTab} onTabChange={onActiveTabChange} />
+          {activeTab === CORRECTIONS && (
             <div className="MainPage__range">
               <h3 className="MainPage__range-title">Data Aggregation Range</h3>
               <p className="MainPage__description">
@@ -67,32 +103,54 @@ const MainPage = ({ stateName, monthlyCorrectionsData, annualCorrectionsData, is
                 <strong>both monthly and annually-aggregated data</strong>.
               </p>
               <div className="MainPage__switch">
-                <Switch activeTab={activeTab} onTabChange={onActiveTabChange} />
+                <Switch activeTab={activePane} onTabChange={onActivePaneChange} />
                 <p className="MainPage__switch-label">
-                  {activeTab === ANNUAL
-                    ? `Only data that is aggregated monthly will be shown in the Key Insights and flow diagram below. Click the control to the left to see monthly data.`
+                  {activePane === ANNUAL
+                    ? `Only data that is aggregated annual will be shown in the Key Insights and flow diagram below. Click the control to the left to see monthly data.`
                     : `Only data that is aggregated monthly will be shown in the Key Insights and flow
                   diagram below. Click the control to the left to see annualized data.`}
                 </p>
               </div>
             </div>
-          </>
-        )}
-      </header>
-      {!isNoData && (
-        <Corrections
-          isAnnual={activeTab === ANNUAL}
-          correctionsData={activeTab === ANNUAL ? annualCorrectionsData : monthlyCorrectionsData}
-        />
+          )}
+          {activeTab === CORRECTIONS && (
+            <Corrections
+              isAnnual={activePane === ANNUAL}
+              correctionsData={
+                activePane === ANNUAL ? annualCorrectionsData : monthlyCorrectionsData
+              }
+            />
+          )}
+          {activeTab === JAILS && (
+            <Jails
+              keyInsightsData={jailsKeyInsightsData}
+              countySelector={countySelector}
+              incarcerationRateChartData={incarcerationRateChartData}
+              incarcerationRateTopCountiesChartData={incarcerationRateTopCountiesChartData}
+              sourceData={jailsSourceData}
+            />
+          )}
+        </>
       )}
     </section>
   );
+};
+
+MainPage.defaultProps = {
+  countySelector: null,
 };
 
 MainPage.propTypes = {
   stateName: PropTypes.string.isRequired,
   monthlyCorrectionsData: correctionsDataPropTypes.isRequired,
   annualCorrectionsData: correctionsDataPropTypes.isRequired,
+  jailsLastUpdatedDate: PropTypes.string.isRequired,
+  correctionsLastUpdatedDate: PropTypes.string.isRequired,
+  incarcerationRateChartData: chartDataPropTypes.isRequired,
+  incarcerationRateTopCountiesChartData: chartDataPropTypes.isRequired,
+  jailsKeyInsightsData: keyInsightsPropTypes.isRequired,
+  countySelector: PropTypes.node,
+  jailsSourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
   isNoData: PropTypes.bool.isRequired,
 };
 

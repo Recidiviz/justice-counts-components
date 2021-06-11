@@ -28,6 +28,11 @@ export const RELEASES_TO_PAROLE = "RELEASES_TO_PAROLE";
 export const RELEASES_COMPLETED = "RELEASES_COMPLETED";
 export const ADMISSIONS_FROM_PAROLE_TECHNICAL = "ADMISSIONS_FROM_PAROLE_TECHNICAL";
 export const ADMISSIONS_FROM_PROBATION_TECHNICAL = "ADMISSIONS_FROM_PROBATION_TECHNICAL";
+export const POPULATION_JAIL = "POPULATION_JAIL";
+export const POPULATION_COMMUNITY = "POPULATION_COMMUNITY";
+export const PERCENTAGE_COVERED_COUNTY = "PERCENTAGE_COVERED_COUNTY";
+export const PERCENTAGE_COVERED_POPULATION = "PERCENTAGE_COVERED_POPULATION";
+export const INCARCERATION_RATE_JAIL = "INCARCERATION_RATE_JAIL";
 
 export const metricToCardName = {
   [ADMISSIONS_NEW_COMMITMENTS]: "New Prison Commitments",
@@ -35,9 +40,12 @@ export const metricToCardName = {
   [POPULATION_PROBATION]: "Probation Population",
   [ADMISSIONS_FROM_PROBATION]: "Probation Revocations",
   [POPULATION_PRISON]: "Prison Population",
-  [POPULATION_PAROLE]: "Parole Population",
-  [ADMISSIONS_FROM_PAROLE]: "Parole Revocations",
-  [RELEASES_TO_PAROLE]: "Releases to Parole",
-  [ADMISSIONS_FROM_PAROLE_TECHNICAL]: "Parole Revocations (Technical)",
+  [POPULATION_PAROLE]: "Post-Release Supervision Population",
+  [ADMISSIONS_FROM_PAROLE]: "Post-Release Supervision Revocations",
+  [RELEASES_TO_PAROLE]: "Releases to Post-Release Supervision",
+  [ADMISSIONS_FROM_PAROLE_TECHNICAL]: "Post-Release Supervision Revocations (Technical)",
   [ADMISSIONS_FROM_PROBATION_TECHNICAL]: "Probation Revocations (Technical)",
+  [POPULATION_JAIL]: "Jail Population",
+  [INCARCERATION_RATE_JAIL]: "Jail Confinement Rate",
+  [PERCENTAGE_COVERED_COUNTY]: "Counties Represented",
 };

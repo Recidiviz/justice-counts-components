@@ -64,11 +64,11 @@ const Corrections = ({ correctionsData, isAnnual }) => {
           hint="By Type"
         />
       </ErrorBoundary>
-      <ErrorBoundary placeholder="Unable to render Parole Revocations chart. An unhandled error happened. More info could be found in the console.">
+      <ErrorBoundary placeholder="Unable to render Post-Release Supervision Revocations chart. An unhandled error happened. More info could be found in the console.">
         <Chart
           annual={isAnnual}
           chartData={paroleRevocationsChartData}
-          title="Parole Revocations"
+          title="Post-Release Supervision Revocations"
           hint="By Type"
         />
       </ErrorBoundary>

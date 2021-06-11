@@ -77,7 +77,7 @@ export const noMetricData = (metric) =>
  *   ]
  * }
  */
-const generateChartData = (data, metrics, metricLabels = [], isAnnual) => {
+const generateCorrectionsChartData = (data, metrics, metricLabels = [], isAnnual) => {
   if (!metrics.length) {
     throw new Error(METRICS_NOT_PROVIDED);
   }
@@ -142,7 +142,6 @@ const generateChartData = (data, metrics, metricLabels = [], isAnnual) => {
         const dataPoint = data[dataset.metric].find(
           (item) => item.year === year && item.month === month
         );
-
         if (dataPoint) {
           dataset.data.push(dataPoint.value);
         } else {
@@ -164,4 +163,4 @@ const generateChartData = (data, metrics, metricLabels = [], isAnnual) => {
   return { datasets, labels, sourceData };
 };
 
-export default generateChartData;
+export default generateCorrectionsChartData;

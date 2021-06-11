@@ -18,13 +18,9 @@ import React from "react";
 import { render } from "@testing-library/react";
 
 import MainPage from "../MainPage";
-import Chart from "../../Chart";
-import FlowDiagram from "../../Corrections/FlowDiagram";
-import KeyInsights from "../../KeyInsights";
+import Corrections from "../../Corrections";
 
-jest.mock("../../Corrections/FlowDiagram");
-jest.mock("../../KeyInsights");
-jest.mock("../../Chart");
+jest.mock("../../Corrections");
 describe("MainPage.js", () => {
   const mockStateName = "Alabama";
   const mockCorrectionsData = {
@@ -41,9 +37,7 @@ describe("MainPage.js", () => {
   };
 
   beforeEach(() => {
-    KeyInsights.mockReturnValue(null);
-    Chart.mockReturnValue(null);
-    FlowDiagram.mockReturnValue(null);
+    Corrections.mockReturnValue(null);
   });
 
   it("should render MainPage with specified state name", () => {
@@ -52,6 +46,10 @@ describe("MainPage.js", () => {
         stateName={mockStateName}
         monthlyCorrectionsData={mockCorrectionsData}
         annualCorrectionsData={mockCorrectionsData}
+        jailsKeyInsightsData={[]}
+        incarcerationRateChartData={{}}
+        incarcerationRateTopCountiesChartData={{}}
+        jailsSourceData={[]}
       />
     );
 

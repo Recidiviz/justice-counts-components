@@ -32,6 +32,7 @@ import months from "../constants/months";
 import generateMeasurementTypeText from "./generateMeasurementTypeText";
 import generateSourceText from "./generateSourceText";
 import metricIsTooStale from "./metricIsTooStale";
+import getLastUpdatedDate from "./getLastUpdatedDate";
 import metricIsRestricted from "./metricIsRestricted";
 import metricIsPartiallyAvailable from "./metricIsPartiallyAvailable";
 
@@ -142,6 +143,7 @@ const generateFlowDiagramData = (data, compareData, stateName, isAnnual) => {
     flowData,
     lastDate: `${months[mostRecentMonth]} ${mostRecentYear}`,
     comparedToDate: `${months[mostRecentMonth]} ${mostRecentYear - 1}`,
+    correctionsLastUpdatedDate: getLastUpdatedDate(flowData),
   };
 };
 

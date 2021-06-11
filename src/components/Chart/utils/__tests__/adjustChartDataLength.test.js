@@ -45,8 +45,8 @@ describe("processToLength.js", () => {
 
     it("should fill datasets with nulls", () => {
       expect(datasets).toStrictEqual([
-        { label: "One", data: [null, null, null, null, 300] },
-        { label: "Two", data: [null, null, 100, 201, 304] },
+        { label: "One", data: [null, null, null, null, 300], countyCoverageData: [] },
+        { label: "Two", data: [null, null, 100, 201, 304], countyCoverageData: [] },
       ]);
     });
   });
@@ -77,8 +77,8 @@ describe("processToLength.js", () => {
 
     it("should cut datasets", () => {
       expect(datasets).toStrictEqual([
-        { label: "One", data: [null, 300] },
-        { label: "Two", data: [201, 304] },
+        { label: "One", data: [null, 300], countyCoverageData: [] },
+        { label: "Two", data: [201, 304], countyCoverageData: [] },
       ]);
     });
   });

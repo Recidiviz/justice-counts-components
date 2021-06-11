@@ -16,3 +16,5 @@
 // =============================================================================
 export { default as correctionsMonthlyData } from "./corrections_monthly.json";
 export { default as correctionsAnnualData } from "./corrections_annual.json";
+export { default as jailsData } from "./jails_data.json";
+export { default as countiesData } from "./counties_data.json";

@@ -31,11 +31,11 @@ import months from "../../constants/months";
 import "./Chart.scss";
 
 const TICKS_COLOR = "#808C99";
-const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D"];
+const chartColors = ["#06AEEE", "#004AD9", "#64D400", "#00A12D", "#FFA600"];
 // const barChartHoverColors = ["#0479a6", "#003397", "#469400", "#00701f"];
 const CONNECTING_LINE_COLOR = "#00475D";
 
-const Chart = ({ title, hint, chartData, annual }) => {
+const Chart = ({ title, hint, chartData, annual, countySelector }) => {
   const availablePeriods = useMemo(
     () =>
       annual
@@ -73,6 +73,7 @@ const Chart = ({ title, hint, chartData, annual }) => {
   const styledDatasets = datasets.map((dataset, i) => ({
     ...dataset,
     data: dataset.data,
+    countyCoverageData: dataset.countyCoverageData,
     borderColor: chartColors[i],
     isNotAvailable: dataset.isNotAvailable || dataset.data.every((dataPoint) => dataPoint === null),
     backgroundColor: annual ? chartColors[i] : "transparent",
@@ -207,8 +208,8 @@ const Chart = ({ title, hint, chartData, annual }) => {
         <div className="Chart__legends">
           {styledDatasets.map((dataset) => (
             <div
-              onMouseOver={() => onLegendFocus(dataset.metric)}
-              onFocus={() => onLegendFocus(dataset.metric)}
+              onMouseOver={annual ? () => onLegendFocus(dataset.metric) : null}
+              onFocus={annual ? () => onLegendFocus(dataset.metric) : null}
               onMouseOut={onLegendBlur}
               onBlur={onLegendBlur}
               key={dataset.label}
@@ -218,7 +219,10 @@ const Chart = ({ title, hint, chartData, annual }) => {
                 className="Chart__legend-point"
                 style={{ backgroundColor: dataset.borderColor }}
               />
-              <span className="Chart__legend-label">{dataset.label}</span>
+              <span className="Chart__legend-label">
+                {dataset.label}&nbsp;
+                {!dataset.isStatewide ? countySelector : null}
+              </span>
               <span className="Chart__legend-percent">
                 {dataset.isNotAvailable ? "N/A" : calcMetricPercentage(dataset.data)}
               </span>
@@ -231,6 +235,7 @@ const Chart = ({ title, hint, chartData, annual }) => {
 };
 
 Chart.defaultProps = {
+  countySelector: null,
   annual: false,
 };
 
@@ -239,6 +244,7 @@ Chart.propTypes = {
   title: PropTypes.string.isRequired,
   hint: PropTypes.string.isRequired,
   chartData: chartDataPropTypes.isRequired,
+  countySelector: PropTypes.node,
 };
 
 export default Chart;

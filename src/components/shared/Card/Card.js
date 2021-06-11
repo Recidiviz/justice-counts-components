@@ -29,6 +29,7 @@ const Card = ({
   isNotAvailable,
   isTooStale,
   isPopulation,
+  isNumberPercent,
   hint,
   warning,
   title,
@@ -176,15 +177,19 @@ const Card = ({
         ) : null}
         {!isNotAvailable && !isTooStale && (
           <>
-            <span className="Card__number">{formatNumber(number)}</span>
-            {percentChange === null ? (
-              <span className="Card__percent">(--%)</span>
-            ) : (
-              <span className="Card__percent">
-                ({Math.round(percentChange) > 0 && "+"}
-                {Math.round(percentChange)}%)
-              </span>
-            )}
+            <span className="Card__number">
+              {formatNumber(number)}
+              {isNumberPercent && "%"}
+            </span>
+            {!isNumberPercent &&
+              (percentChange === null ? (
+                <span className="Card__percent">(--%)</span>
+              ) : (
+                <span className="Card__percent">
+                  ({Math.round(percentChange) > 0 && "+"}
+                  {Math.round(percentChange)}%)
+                </span>
+              ))}
             <div className="Card__bottom">
               {hint && (
                 <span className="Card__warning-box Card__warning-box--hint">
@@ -212,6 +217,7 @@ const Card = ({
 
 Card.defaultProps = {
   isNotAvailable: false,
+  isNumberPercent: false,
   sourceText: null,
   reportName: null,
   sourceUrl: null,
@@ -238,6 +244,7 @@ Card.propTypes = {
   sourceUrl: PropTypes.string,
   isNotAvailable: PropTypes.bool,
   isPopulation: PropTypes.bool,
+  isNumberPercent: PropTypes.bool,
   hint: PropTypes.string,
   warning: PropTypes.string,
   number: PropTypes.number,

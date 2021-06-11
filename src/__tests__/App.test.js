@@ -20,12 +20,20 @@ import { render } from "@testing-library/react";
 import App from "../App";
 import MainPage from "../components/MainPage";
 import getNormalizedStateData from "../utils/getNormalizedStateData";
-import generateChartData from "../utils/generateChartData";
+import generateCorrectionsChartData from "../utils/generateCorrectionsChartData";
+import generateJailsChartData from "../utils/generateJailsChartData";
 import states from "../constants/states";
+import CountySelector from "../components/Jails/CountySelector";
+import generateTopCountiesByPopulation from "../utils/generateTopCountiesByPopulation";
+import getNormalizedCountyData from "../utils/getNormalizedCountyData";
 
 jest.mock("../components/MainPage");
 jest.mock("../utils/getNormalizedStateData");
-jest.mock("../utils/generateChartData");
+jest.mock("../utils/getNormalizedCountyData");
+jest.mock("../utils/generateTopCountiesByPopulation");
+jest.mock("../utils/generateCorrectionsChartData");
+jest.mock("../utils/generateJailsChartData");
+jest.mock("../components/Jails/CountySelector");
 describe("App.js", () => {
   const mockStateCode = "US_CO";
   const mockData = [];
@@ -34,18 +42,23 @@ describe("App.js", () => {
 
   beforeEach(() => {
     MainPage.mockReturnValue(null);
+    CountySelector.mockReturnValue(mockNormalizedData);
     getNormalizedStateData.mockReturnValue(mockNormalizedData);
-    generateChartData.mockReturnValue(mockChartData);
-
+    generateCorrectionsChartData.mockReturnValue(mockChartData);
+    generateJailsChartData.mockReturnValue(mockChartData);
+    getNormalizedCountyData.mockReturnValue(mockData);
+    generateTopCountiesByPopulation.mockReturnValue(mockData);
     jest.clearAllMocks();
   });
 
-  it("should provide corresponding state name", () => {
+  it("should provide corresponding state name and data", () => {
     render(
       <App
-        stateCode={mockStateCode}
         correctionsMonthlyData={mockData}
         correctionsAnnualData={mockData}
+        jailsData={mockData}
+        countiesData={mockData}
+        stateCode={mockStateCode}
       />
     );
 
@@ -58,5 +71,7 @@ describe("App.js", () => {
       mockChartData
     );
     expect(MainPage.mock.calls[0][0].monthlyCorrectionsData.releasesChartData).toBe(mockChartData);
+    expect(MainPage.mock.calls[0][0].incarcerationRateChartData).toBe(mockChartData);
+    expect(MainPage.mock.calls[0][0].incarcerationRateTopCountiesChartData).toBe(mockChartData);
   });
 });

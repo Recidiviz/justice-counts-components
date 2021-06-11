@@ -28,6 +28,7 @@ import getNormalizedDate from "./getNormalizedDate";
  *   date_reported: string,
  *   date_published: string,
  *   value: number
+ *   countyCode: string
  *   compared_to_year?: string
  *   compared_to_month?: string
  *   value_change?: number
@@ -46,6 +47,7 @@ import getNormalizedDate from "./getNormalizedDate";
  *    dateReported: { year: number, month: number, day: number }
  *    datePublished: { year: number, month: number, day: number }
  *    value: number
+ *    countyCode: string | null
  *    comparedToYear: number | null,
  *    comparedToMonth: number | null
  *    valueChange: number | null
@@ -69,7 +71,10 @@ const getNormalizedStateData = (data, stateCode) => {
         month: toInt(item.month) - 1,
         dateReported: reportedDate,
         datePublished: publishedDate,
-        value: toInt(item.value),
+        value: parseFloat(item.value),
+        countyCode: item.county_code,
+        countyCoverage: parseFloat(item.percentage_covered_county),
+        populationCoverage: parseFloat(item.percentage_covered_population),
         comparedToYear: item.compared_to_year ? toInt(item.compared_to_year) : null,
         comparedToMonth: item.compared_to_month ? toInt(item.compared_to_month) - 1 : null,
         sourceName: item.source_name,
