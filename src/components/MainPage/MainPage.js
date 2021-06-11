@@ -21,10 +21,10 @@ import Tabs from "./Tabs";
 import Corrections from "../Corrections";
 import Jails from "../Jails";
 
-import { chartDataPropTypes } from "../shared/Chart/propTypes";
+import { chartDataPropTypes } from "../Chart/propTypes";
 import { flowDiagramDataPropTypes } from "../Corrections/FlowDiagram/propTypes";
-import { keyInsightsPropTypes } from "../shared/KeyInsights/propTypes";
-import { sourcePropTypes } from "../shared/Sources/propTypes";
+import { keyInsightsPropTypes } from "../KeyInsights/propTypes";
+import { sourcePropTypes } from "../Sources/propTypes";
 import { CORRECTIONS, JAILS, LS_TAB_KEY } from "./constants";
 
 import "./MainPage.scss";

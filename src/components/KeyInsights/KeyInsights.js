@@ -14,46 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-@import "../../../assets/scss/variables";
-.Sources {
-  padding-top: 1rem;
-  padding-bottom: 6rem;
-  border-top: 1px solid #c4ccd4;
-  @include down($lg) {
-    padding-left: $mobile-offset;
-    padding-right: $mobile-offset;
-  }
-  @include down($sm) {
-    padding-left: $extra-mobile-offset;
-    padding-right: $extra-mobile-offset;
-  }
+import React from "react";
 
-  &__title {
-    margin-bottom: 1.25rem;
-    font-weight: 800;
-    font-size: 1.25rem;
-    line-height: 1.2;
-  }
+import Card from "../shared/Card";
+import { keyInsightsPropTypes } from "./propTypes";
 
-  &__data {
-    font-weight: 400;
-    font-size: 0.9375rem;
-    line-height: 1.6;
-  }
+import "./KeyInsights.scss";
 
-  &__text {
-    &:after {
-      content: ", ";
-    }
-    &:last-child:before {
-      content: "and ";
-    }
-    &:last-child:after {
-      content: ".";
-    }
-  }
+const KeyInsights = ({ keyInsightsData }) => (
+  <div className="KeyInsights">
+    <h2 className="KeyInsights__title">Key Insights</h2>
+    <div className="KeyInsights__cards">
+      {keyInsightsData.map((card) => (
+        <div key={card.title} className="KeyInsights__card">
+          <Card {...card} />
+          <p className="KeyInsights__card-description">
+            {card.caption} {card.reportingCountiesModal}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
-  &__link {
-    color: #0db4e4;
-  }
-}
+KeyInsights.propTypes = {
+  keyInsightsData: keyInsightsPropTypes.isRequired,
+};
+
+export default KeyInsights;

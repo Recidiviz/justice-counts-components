@@ -17,12 +17,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import KeyInsights from "../shared/KeyInsights";
-import Chart from "../shared/Chart";
-import Sources from "../shared/Sources";
-import { keyInsightsPropTypes } from "../shared/KeyInsights/propTypes";
-import { chartDataPropTypes } from "../shared/Chart/propTypes";
-import { sourcePropTypes } from "../shared/Sources/propTypes";
+import KeyInsights from "../KeyInsights";
+import Chart from "../Chart";
+import Sources from "../Sources";
+import { keyInsightsPropTypes } from "../KeyInsights/propTypes";
+import { chartDataPropTypes } from "../Chart/propTypes";
+import { sourcePropTypes } from "../Sources/propTypes";
 import { JAILS } from "../MainPage/constants";
 
 const Jails = ({

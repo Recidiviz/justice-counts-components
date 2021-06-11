@@ -14,23 +14,46 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import calcMetricPercentage, { NO_DATA_ERROR } from "../calcMetricPercentage";
-import logger from "../../../../../utils/logger";
+@import "../../assets/scss/variables";
+.Sources {
+  padding-top: 1rem;
+  padding-bottom: 6rem;
+  border-top: 1px solid #c4ccd4;
+  @include down($lg) {
+    padding-left: $mobile-offset;
+    padding-right: $mobile-offset;
+  }
+  @include down($sm) {
+    padding-left: $extra-mobile-offset;
+    padding-right: $extra-mobile-offset;
+  }
 
-describe("calcPercentage.js", () => {
-  const logErrorSpy = jest.spyOn(logger, "error");
+  &__title {
+    margin-bottom: 1.25rem;
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
 
-  it("should calculate percentage from chart dataset", () => {
-    expect(calcMetricPercentage([100, null, 95, 120, 75, 80, 155])).toBe("+55%");
-    expect(calcMetricPercentage([100, 95, 90, 80, 75, 70])).toBe("-30%");
-  });
+  &__data {
+    font-weight: 400;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
 
-  it("should throw error to console when data array is empty", () => {
-    expect(calcMetricPercentage([])).toBe("N/A");
-    expect(logErrorSpy).toBeCalledWith(NO_DATA_ERROR);
-  });
+  &__text {
+    &:after {
+      content: ", ";
+    }
+    &:last-child:before {
+      content: "and ";
+    }
+    &:last-child:after {
+      content: ".";
+    }
+  }
 
-  it("should work when array consists of the only data point", () => {
-    expect(calcMetricPercentage([1])).toBe("0%");
-  });
-});
+  &__link {
+    color: #0db4e4;
+  }
+}

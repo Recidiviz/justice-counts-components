@@ -20,7 +20,7 @@ import PropTypes from "prop-types";
 import Source from "./Source";
 
 import { sourcePropTypes } from "./propTypes";
-import { CORRECTIONS, JAILS } from "../../MainPage/constants";
+import { CORRECTIONS, JAILS } from "../MainPage/constants";
 
 import "./Sources.scss";
 
