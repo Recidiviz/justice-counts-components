@@ -38,6 +38,7 @@ import {
   POPULATION_PAROLE,
   POPULATION_PRISON,
   POPULATION_PROBATION,
+  RELEASES,
   RELEASES_COMPLETED,
   RELEASES_TO_PAROLE,
   ADMISSIONS,
@@ -102,8 +103,12 @@ const App = ({
 
   const monthlyReleasesChartData = generateCorrectionsChartData(
     monthlyStateMetricData,
-    [RELEASES_COMPLETED, RELEASES_TO_PAROLE],
-    ["Releases to Community (without supervision)", "Releases to Post-Release Supervision"]
+    [RELEASES, RELEASES_COMPLETED, RELEASES_TO_PAROLE],
+    [
+      "Total Prison Releases",
+      "Releases to Community (without supervision)",
+      "Releases to Post-Release Supervision",
+    ]
   );
 
   const monthlyFlowData = generateFlowDiagramData(
@@ -175,8 +180,12 @@ const App = ({
 
   const annualReleasesChartData = generateCorrectionsChartData(
     annualStateMetricData,
-    [RELEASES_COMPLETED, RELEASES_TO_PAROLE],
-    ["Releases to Community (without supervision)", "Releases to Post-Release Supervision"],
+    [RELEASES, RELEASES_COMPLETED, RELEASES_TO_PAROLE],
+    [
+      "Total Prison Releases",
+      "Releases to Community (without supervision)",
+      "Releases to Post-Release Supervision",
+    ],
     true
   );
 
