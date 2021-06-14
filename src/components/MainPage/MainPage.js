@@ -43,8 +43,13 @@ const MainPage = ({
   countySelector,
   jailsSourceData,
   isNoData,
+  isUnified,
+  additionalDescription,
 }) => {
-  const [activeTab, setActiveTab] = useState(localStorage.getItem(LS_TAB_KEY) || CORRECTIONS);
+  const [storedActiveTab, setActiveTab] = useState(localStorage.getItem(LS_TAB_KEY) || CORRECTIONS);
+
+  // Force the active tab to 'CORRECTIONS' in a unified state.
+  const activeTab = isUnified ? CORRECTIONS : storedActiveTab;
 
   const onActiveTabChange = (newTab) => {
     setActiveTab(newTab);
@@ -81,7 +86,7 @@ const MainPage = ({
             <p className="MainPage__description">
               The following is a broad overview of the corrections system in {stateName},
               representing up-to-date data and changes compared to last year. An additional section
-              on crime indicators will be added at a later date.
+              on crime indicators will be added at a later date. {additionalDescription}
               <br />
               <i>
                 Last updated:{" "}
@@ -93,7 +98,7 @@ const MainPage = ({
       </header>
       {!isNoData && (
         <>
-          <Tabs activeTab={activeTab} onTabChange={onActiveTabChange} />
+          <Tabs activeTab={activeTab} onTabChange={onActiveTabChange} isUnified={isUnified} />
           {activeTab === CORRECTIONS && (
             <div className="MainPage__range">
               <h3 className="MainPage__range-title">Data Aggregation Range</h3>
@@ -138,6 +143,7 @@ const MainPage = ({
 
 MainPage.defaultProps = {
   countySelector: null,
+  additionalDescription: null,
 };
 
 MainPage.propTypes = {
@@ -152,6 +158,8 @@ MainPage.propTypes = {
   countySelector: PropTypes.node,
   jailsSourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
   isNoData: PropTypes.bool.isRequired,
+  isUnified: PropTypes.bool.isRequired,
+  additionalDescription: PropTypes.string,
 };
 
 export default MainPage;

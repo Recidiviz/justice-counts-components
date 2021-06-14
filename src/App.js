@@ -47,6 +47,8 @@ import {
   ADMISSIONS_FROM_PROBATION_NEW_CRIME,
   INCARCERATION_RATE_JAIL,
 } from "./constants/metrics";
+import getIsUnified from "./utils/getIsUnified";
+import getAdditionalDescription from "./utils/getAdditionalDescription";
 
 const App = ({
   stateCode,
@@ -257,6 +259,9 @@ const App = ({
     },
   ];
 
+  const isUnified = getIsUnified(stateCode);
+  const additionalDescription = getAdditionalDescription(stateCode);
+
   return (
     <MainPage
       stateName={stateName}
@@ -270,6 +275,8 @@ const App = ({
       correctionsLastUpdatedDate={monthlyFlowData.correctionsLastUpdatedDate}
       jailsSourceData={jailsSourceData}
       isNoData={isNoData}
+      isUnified={isUnified}
+      additionalDescription={additionalDescription}
     />
   );
 };

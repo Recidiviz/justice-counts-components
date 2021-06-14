@@ -102,9 +102,16 @@
 
     &_active,
     &:hover {
-      background: #06aeee;
-      color: #fff;
+      &:not(.MainPage__tab--disabled) {
+        background: #06aeee;
+        color: #fff;
+      }
     }
+
+    // .MainPage__tab--disabled &:hover {
+    //   background: none;
+    //   color: none;
+    // }
   }
 
   &__range {
