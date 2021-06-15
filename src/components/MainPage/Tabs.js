@@ -47,7 +47,6 @@ const Tabs = ({ activeTab, onTabChange, isUnified }) => {
     </div>
   );
 };
-// This state operates a "unified corrections system," which combines the jail and prison systems. As such, some of the numbers below may include pre-trial populations.
 
 Tabs.propTypes = {
   activeTab: PropTypes.oneOf([CORRECTIONS, JAILS]).isRequired,

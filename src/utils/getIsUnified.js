@@ -17,15 +17,10 @@
 const getIsUnified = (stateCode) => {
   switch (stateCode) {
     case "US_AK":
-      return true;
     case "US_CT":
-      return true;
     case "US_DE":
-      return true;
     case "US_HI":
-      return true;
     case "US_RI":
-      return true;
     case "US_VT":
       return true;
     default:
