@@ -102,8 +102,10 @@
 
     &_active,
     &:hover {
-      background: #06aeee;
-      color: #fff;
+      &:not(.MainPage__tab--disabled) {
+        background: #06aeee;
+        color: #fff;
+      }
     }
   }
 

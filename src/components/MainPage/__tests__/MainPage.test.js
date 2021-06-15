@@ -19,6 +19,7 @@ import { render } from "@testing-library/react";
 
 import MainPage from "../MainPage";
 import Corrections from "../../Corrections";
+import { JAILS, LS_TAB_KEY } from "../constants";
 
 jest.mock("../../Corrections");
 describe("MainPage.js", () => {
@@ -50,9 +51,51 @@ describe("MainPage.js", () => {
         incarcerationRateChartData={{}}
         incarcerationRateTopCountiesChartData={{}}
         jailsSourceData={[]}
+        isUnified={false}
       />
     );
 
     expect(container.querySelector(".MainPage__title").innerHTML).toBe("Alabama data dashboard");
+  });
+
+  it("should always render corrections if unified", () => {
+    localStorage.setItem(LS_TAB_KEY, JAILS);
+    const { container } = render(
+      <MainPage
+        stateName={mockStateName}
+        monthlyCorrectionsData={mockCorrectionsData}
+        annualCorrectionsData={mockCorrectionsData}
+        jailsKeyInsightsData={[]}
+        incarcerationRateChartData={{}}
+        incarcerationRateTopCountiesChartData={{}}
+        jailsSourceData={[]}
+        isUnified
+      />
+    );
+
+    expect(container.querySelector(".MainPage__tab_active").innerHTML).toBe("Corrections");
+  });
+
+  const mockJailChartData = {
+    datasets: [],
+    labels: [],
+  };
+
+  it("should always render jails if not unified", () => {
+    localStorage.setItem(LS_TAB_KEY, JAILS);
+    const { container } = render(
+      <MainPage
+        stateName={mockStateName}
+        monthlyCorrectionsData={mockCorrectionsData}
+        annualCorrectionsData={mockCorrectionsData}
+        jailsKeyInsightsData={[]}
+        incarcerationRateChartData={mockJailChartData}
+        incarcerationRateTopCountiesChartData={mockJailChartData}
+        jailsSourceData={[]}
+        isUnified={false}
+      />
+    );
+
+    expect(container.querySelector(".MainPage__tab_active").innerHTML).toBe("Jails");
   });
 });

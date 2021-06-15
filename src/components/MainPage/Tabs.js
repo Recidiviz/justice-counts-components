@@ -20,7 +20,7 @@ import cn from "classnames";
 
 import { CORRECTIONS, JAILS } from "./constants";
 
-const Tabs = ({ activeTab, onTabChange }) => {
+const Tabs = ({ activeTab, onTabChange, isUnified }) => {
   const createOnTabChange = (tab) => () => {
     onTabChange(tab);
   };
@@ -36,10 +36,13 @@ const Tabs = ({ activeTab, onTabChange }) => {
       </button>
       <button
         type="button"
-        className={cn("MainPage__tab", { MainPage__tab_active: activeTab === JAILS })}
-        onClick={createOnTabChange(JAILS)}
+        className={cn("MainPage__tab", {
+          MainPage__tab_active: activeTab === JAILS,
+          "MainPage__tab--disabled": isUnified,
+        })}
+        onClick={isUnified ? null : createOnTabChange(JAILS)}
       >
-        Jails
+        Jails{isUnified && " (Not Applicable)"}
       </button>
     </div>
   );
@@ -48,6 +51,7 @@ const Tabs = ({ activeTab, onTabChange }) => {
 Tabs.propTypes = {
   activeTab: PropTypes.oneOf([CORRECTIONS, JAILS]).isRequired,
   onTabChange: PropTypes.func.isRequired,
+  isUnified: PropTypes.bool.isRequired,
 };
 
 export default Tabs;
