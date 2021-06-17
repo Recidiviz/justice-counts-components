@@ -41,18 +41,6 @@
     line-height: 1.6;
   }
 
-  &__text {
-    &:after {
-      content: ", ";
-    }
-    &:last-child:before {
-      content: "and ";
-    }
-    &:last-child:after {
-      content: ".";
-    }
-  }
-
   &__link {
     color: #0db4e4;
   }

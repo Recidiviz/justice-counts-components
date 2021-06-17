@@ -19,38 +19,29 @@ import { render } from "@testing-library/react";
 import Sources from "../Sources";
 
 describe("Sources.js", () => {
-  const mockSourceData = [
-    {
-      name: "Mock source name 1",
-      links: [
-        {
-          name: "Mock source report name 1",
-          src: "Mock source url 1",
-        },
-      ],
-    },
-    {
-      name: "Mock source name 2",
-      links: [
-        {
-          name: "Mock source report name 2",
-          src: "Mock source url 2",
-        },
-      ],
-    },
-  ];
+  const mockSource1 = {
+    name: "Mock source name 1",
+    links: [
+      {
+        name: "Mock source report name 1",
+        src: "Mock source url 1",
+      },
+    ],
+  };
+  const mockSource2 = {
+    name: "Mock source name 2",
+    links: [
+      {
+        name: "Mock source report name 2",
+        src: "Mock source url 2",
+      },
+    ],
+  };
 
   const mockEmptySourceData = [];
-
-  it("should render sources section if data is provided", () => {
-    const { container } = render(
-      <>
-        <Sources data={mockSourceData} />
-      </>
-    );
-
-    expect(container.querySelector(".Sources__data")).toBeInTheDocument();
-  });
+  const mockSourceData1 = [mockSource1];
+  const mockSourceData2 = [mockSource1, mockSource2];
+  const mockSourceData3 = [mockSource1, mockSource2, mockSource1];
 
   it("should render not available placeholder if data is empty", () => {
     const { container } = render(
@@ -60,5 +51,49 @@ describe("Sources.js", () => {
     );
 
     expect(container.querySelector(".Sources__no-data")).toBeInTheDocument();
+  });
+
+  it("should render sources section for 1 sources", () => {
+    const { container } = render(
+      <>
+        <Sources data={mockSourceData1} />
+      </>
+    );
+
+    expect(container.querySelector(".Sources__data")).toBeInTheDocument();
+    expect(container.querySelector(".Sources__data").textContent).toBe(
+      "All data for these visualizations comes from public reports published by " +
+        "the Mock source name 1 (Mock source report name 1)."
+    );
+  });
+
+  it("should render sources section for 2 sources", () => {
+    const { container } = render(
+      <>
+        <Sources data={mockSourceData2} />
+      </>
+    );
+
+    expect(container.querySelector(".Sources__data")).toBeInTheDocument();
+    expect(container.querySelector(".Sources__data").textContent).toBe(
+      "All data for these visualizations comes from public reports published by " +
+        "the Mock source name 1 (Mock source report name 1) and Mock source name 2 " +
+        "(Mock source report name 2)."
+    );
+  });
+
+  it("should render sources section for 3 sources", () => {
+    const { container } = render(
+      <>
+        <Sources data={mockSourceData3} />
+      </>
+    );
+
+    expect(container.querySelector(".Sources__data")).toBeInTheDocument();
+    expect(container.querySelector(".Sources__data").textContent).toBe(
+      "All data for these visualizations comes from public reports published by " +
+        "the Mock source name 1 (Mock source report name 1), Mock source name 2 " +
+        "(Mock source report name 2), and Mock source name 1 (Mock source report name 1)."
+    );
   });
 });

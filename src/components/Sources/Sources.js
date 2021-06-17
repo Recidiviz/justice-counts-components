@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
 import Source from "./Source";
@@ -35,12 +35,17 @@ const Sources = ({ data, tab }) => (
         {tab === CORRECTIONS &&
           "All data for these visualizations comes from public reports published by the"}
         &nbsp;
-        {data.map((source) => (
-          <Source key={source.name} {...source} />
+        {data.map((source, index) => (
+          <Fragment key={source.name}>
+            {index === data.length - 1 && data.length > 1 && "and "}
+            <Source key={source.name} {...source} />
+            {index !== data.length - 1 && data.length > 2 && ","}
+            {index !== data.length - 1 && " "}
+            {index === data.length - 1 && "."}
+          </Fragment>
         ))}
-        &nbsp;
         {tab === JAILS &&
-          "Data from Vera is continuously integrated from January 2020 onwards, while BJS data is pulled in manually as reports are published. Note that this leads to a gap in data in 2019, as no BJS Jail Survey has been produced for this year yet."}
+          " Data from Vera is continuously integrated from January 2020 onwards, while BJS data is pulled in manually as reports are published. Note that this leads to a gap in data in 2019, as no BJS Jail Survey has been produced for this year yet."}
       </p>
     )}
   </div>

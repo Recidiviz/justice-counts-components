@@ -14,14 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // =============================================================================
-import formatDatePeriod from "../formatDatePeriod";
 
-describe("formatDatePeriod.js", () => {
-  it("should format date periods to string", () => {
-    expect(formatDatePeriod(2018, 6, 2020, 11)).toBe("July 2018–December 2020");
-  });
+import formatNumber from "./formatNumber";
 
-  it("should return date if start date equal to end date", () => {
-    expect(formatDatePeriod(2018, 6, 2018, 6)).toBe("July 2018");
-  });
-});
+const getKeyInsightsCaptionFragment = (percentChange, numberChange, singleUnit, pluralUnit) => {
+  const isPositive = numberChange > 0;
+  const absoluteFormattedNumber = formatNumber(numberChange, true);
+
+  return `${isPositive ? "rose" : "fell"} ${formatNumber(percentChange, true)} percent, ${
+    isPositive ? "an increase" : "a decline"
+  } of ${absoluteFormattedNumber} ${absoluteFormattedNumber === "1" ? singleUnit : pluralUnit}`;
+};
+
+export default getKeyInsightsCaptionFragment;

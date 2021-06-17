@@ -21,6 +21,7 @@ import {
   ADMISSIONS_FROM_PROBATION_TECHNICAL,
   POPULATION_PRISON,
 } from "../constants/metrics";
+import getKeyInsightsCaptionFragment from "./getKeyInsightsCaptionFragment";
 
 const generateRevocationsCaption = (source) => (percentChange, numberChange) => {
   if (numberChange === 0) {
@@ -31,13 +32,12 @@ const generateRevocationsCaption = (source) => (percentChange, numberChange) => 
     return `There is no available net change in number of people revoked from ${source} to prison.`;
   }
 
-  const isPositive = numberChange > 0;
-
-  return `The number of people revoked from ${source} to prison ${
-    isPositive ? "rose" : "fell"
-  } by ${Math.abs(numberChange)} people, a ${Math.abs(Math.round(percentChange))} percent ${
-    isPositive ? "increase" : "decline"
-  }.`;
+  return `The number of people revoked from ${source} to prison ${getKeyInsightsCaptionFragment(
+    percentChange,
+    numberChange,
+    "person",
+    "people"
+  )}.`;
 };
 
 const generateTechnicalRevocationsCaption = (source) => (percentChange, numberChange) => {
@@ -49,13 +49,12 @@ const generateTechnicalRevocationsCaption = (source) => (percentChange, numberCh
     return `There is no available net change in revocations to prison for technical violations of ${source}.`;
   }
 
-  const isPositive = numberChange > 0;
-
-  return `Revocations to prison for technical violations of ${source} ${
-    isPositive ? "rose" : "fell"
-  } by ${Math.abs(numberChange)} people, a ${Math.abs(Math.round(percentChange))} percent ${
-    isPositive ? "increase" : "decline"
-  }.`;
+  return `Revocations to prison for technical violations of ${source} ${getKeyInsightsCaptionFragment(
+    percentChange,
+    numberChange,
+    "revocation",
+    "revocations"
+  )}.`;
 };
 
 const getCaptionMap = {
@@ -68,11 +67,12 @@ const getCaptionMap = {
       return `There is no available net change in prison population.`;
     }
 
-    return `The prison population ${numberChange > 0 ? "rose" : "fell"} ${Math.abs(
-      Math.round(percentChange)
-    )} percent, ${numberChange > 0 ? "an increase" : "a decline"} of ${Math.abs(
-      numberChange
-    )} people.`;
+    return `The prison population ${getKeyInsightsCaptionFragment(
+      percentChange,
+      numberChange,
+      "person",
+      "people"
+    )}.`;
   },
   [ADMISSIONS_FROM_PAROLE]: generateRevocationsCaption("parole"),
   [ADMISSIONS_FROM_PROBATION]: generateRevocationsCaption("probation"),

@@ -136,7 +136,7 @@ const Card = ({
                 {" "}
                 Use the{" "}
                 <button type="button" className="Card__warning-button" onClick={handleScroll}>
-                  Reporting Frequency switch
+                  Monthly/Annual switch
                 </button>{" "}
                 at the top of the page to see the most recent available data.
               </>
