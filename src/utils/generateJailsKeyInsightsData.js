@@ -23,6 +23,7 @@ import {
 } from "../constants/metrics";
 import months from "../constants/months";
 import formatNumber from "./formatNumber";
+import getKeyInsightsCaptionFragment from "./getKeyInsightsCaptionFragment";
 import getLastUpdatedDate from "./getLastUpdatedDate";
 import warningTextIfDifferentPercentageCovered from "./warningTextIfDifferentPercentageCovered";
 
@@ -43,11 +44,12 @@ const generatePopulationCaption = (percentChange, numberChange) => {
     return `There is no available net change in jail population during this time period.`;
   }
 
-  return `The jail population ${numberChange > 0 ? "rose" : "fell"} by ${Math.abs(
-    Math.round(percentChange)
-  )} percent in the past year, a ${numberChange > 0 ? "increase" : "decline"} of ${Math.abs(
-    numberChange
-  )} people.`;
+  return `The jail population ${getKeyInsightsCaptionFragment(
+    percentChange,
+    numberChange,
+    "person",
+    "people"
+  )}.`;
 };
 
 const generateIncarcerationCaption = (percentChange, numberChange) => {
@@ -59,9 +61,9 @@ const generateIncarcerationCaption = (percentChange, numberChange) => {
     return `There is no available net change in incarceration rate during this time period.`;
   }
 
-  return `The incarceration rate for those in jail ${
-    numberChange > 0 ? "rose" : "fell"
-  } by ${Math.abs(Math.round(percentChange))} percent in the past year.`;
+  return `The incarceration rate for those in jail ${numberChange > 0 ? "rose" : "fell"} ${Math.abs(
+    Math.round(percentChange)
+  )} percent in the past year.`;
 };
 
 const getCaptionMap = {

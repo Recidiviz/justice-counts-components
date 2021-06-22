@@ -104,8 +104,8 @@ const MainPage = ({
               <h3 className="MainPage__range-title">Data Aggregation Range</h3>
               <p className="MainPage__description">
                 Use the control below to switch between{" "}
-                <strong>showing only monthly-aggregated data</strong> and showing{" "}
-                <strong>both monthly and annually-aggregated data</strong>.
+                <strong>showing only monthly aggregated data</strong> and showing{" "}
+                <strong>both monthly and annually aggregated data</strong>.
               </p>
               <div className="MainPage__switch">
                 <Switch activeTab={activePane} onTabChange={onActivePaneChange} />

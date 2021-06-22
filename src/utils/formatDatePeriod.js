@@ -21,7 +21,7 @@ const formatDatePeriod = (startYear, startMonth, endYear, endMonth) => {
     return `${months[startMonth]} ${startYear}`;
   }
 
-  return `${months[startMonth]} ${startYear} - ${months[endMonth]} ${endYear}`;
+  return `${months[startMonth]} ${startYear}–${months[endMonth]} ${endYear}`;
 };
 
 export default formatDatePeriod;
