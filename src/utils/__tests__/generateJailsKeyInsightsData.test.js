@@ -173,7 +173,7 @@ describe("generateJailsKeyInsightsData.js", () => {
         mostRecentDate: "March 2021",
       });
       expect(jailsKeyInsightsData[2]).toMatchObject({
-        title: "Jail Population (counties represented only)",
+        title: "Jail Population (represented counties only)",
         number: 1800,
         isNumberPercent: false,
         mostRecentDate: "March 2021",
@@ -250,7 +250,7 @@ describe("generateJailsKeyInsightsData.js", () => {
         mostRecentDate: "February 2021",
       });
       expect(jailsKeyInsightsData[2]).toMatchObject({
-        title: "Jail Population (counties represented only)",
+        title: "Jail Population (represented counties only)",
         number: 2000,
         isNumberPercent: false,
         mostRecentDate: "February 2021",
