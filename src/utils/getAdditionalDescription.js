@@ -19,7 +19,7 @@ import getIsUnified from "./getIsUnified";
 // =============================================================================
 const getAdditionalDescription = (stateCode) => {
   if (getIsUnified(stateCode)) {
-    return `This state operates a "unified corrections system," which combines the jail and prison systems. As such, some of the numbers below may include pre-trial populations.`;
+    return `This state operates a "unified corrections system," which combines the jail and prison systems. As such, some of the numbers below may include pretrial populations.`;
   }
   return null;
 };

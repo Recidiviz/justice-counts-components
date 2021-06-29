@@ -84,7 +84,7 @@ const MainPage = ({
         ) : (
           <>
             <p className="MainPage__description">
-              The following is a broad overview of the corrections system in {stateName},
+              The following is a broad overview of the corrections and jail systems in {stateName},
               representing up-to-date data and changes compared to last year. An additional section
               on crime indicators will be added at a later date. {additionalDescription}
               <br />
