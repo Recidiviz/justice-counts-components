@@ -21,10 +21,14 @@ const Source = ({ name, links }) => (
   <span className="Sources__text">
     {name} (
     {links.map((link, index) => (
-      <Fragment key={link.src}>
-        <a target="_blank" rel="noreferrer" className="Sources__link" href={link.src}>
-          {link.name}
-        </a>
+      <Fragment key={link.name}>
+        {link.src ? (
+          <a target="_blank" rel="noreferrer" className="Sources__link" href={link.src}>
+            {link.name}
+          </a>
+        ) : (
+          link.name
+        )}
         {index !== links.length - 1 && ", "}
       </Fragment>
     ))}

@@ -46,7 +46,7 @@ export const metricToCardName = {
   [RELEASES_TO_PAROLE]: "Releases to Post-Release Supervision",
   [ADMISSIONS_FROM_PAROLE_TECHNICAL]: "Post-Release Supervision Revocations (Technical)",
   [ADMISSIONS_FROM_PROBATION_TECHNICAL]: "Probation Revocations (Technical)",
-  [POPULATION_JAIL]: "Jail Population",
-  [INCARCERATION_RATE_JAIL]: "Jail Confinement Rate",
+  [POPULATION_JAIL]: "Jail Population (represented counties only)",
+  [INCARCERATION_RATE_JAIL]: "Jail Confinement Rate (per 100k)",
   [PERCENTAGE_COVERED_COUNTY]: "Counties Represented",
 };

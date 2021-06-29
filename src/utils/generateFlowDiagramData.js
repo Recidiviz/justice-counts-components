@@ -135,7 +135,7 @@ const generateFlowDiagramData = (data, compareData, stateName, isAnnual) => {
     if (!item.isNotAvailable) {
       item.hint = generateHint(mostRecentYear, mostRecentMonth, item.item); // eslint-disable-line no-param-reassign
       item.isTooStale = metricIsTooStale(mostRecentYear, mostRecentMonth, item.item); // eslint-disable-line no-param-reassign
-      item.warning = metricIsRestricted(item.item, item.compareItem); // eslint-disable-line no-param-reassign
+      item.isRestrictedText = metricIsRestricted(item.item, item.compareItem); // eslint-disable-line no-param-reassign
     }
   });
 
