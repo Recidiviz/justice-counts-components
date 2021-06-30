@@ -161,7 +161,7 @@ describe("generateJailsKeyInsightsData.js", () => {
 
     it("produced data should be correct", () => {
       expect(jailsKeyInsightsData[0]).toMatchObject({
-        title: "Jail Confinement Rate",
+        title: "Jail Confinement Rate (per 100k)",
         number: 100,
         isNumberPercent: false,
         mostRecentDate: "March 2021",
@@ -173,7 +173,7 @@ describe("generateJailsKeyInsightsData.js", () => {
         mostRecentDate: "March 2021",
       });
       expect(jailsKeyInsightsData[2]).toMatchObject({
-        title: "Jail Population",
+        title: "Jail Population (represented counties only)",
         number: 1800,
         isNumberPercent: false,
         mostRecentDate: "March 2021",
@@ -238,7 +238,7 @@ describe("generateJailsKeyInsightsData.js", () => {
 
     it("produced data should be correct", () => {
       expect(jailsKeyInsightsData[0]).toMatchObject({
-        title: "Jail Confinement Rate",
+        title: "Jail Confinement Rate (per 100k)",
         number: 105,
         isNumberPercent: false,
         mostRecentDate: "February 2021",
@@ -250,7 +250,7 @@ describe("generateJailsKeyInsightsData.js", () => {
         mostRecentDate: "February 2021",
       });
       expect(jailsKeyInsightsData[2]).toMatchObject({
-        title: "Jail Population",
+        title: "Jail Population (represented counties only)",
         number: 2000,
         isNumberPercent: false,
         mostRecentDate: "February 2021",

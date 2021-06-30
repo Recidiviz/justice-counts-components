@@ -31,6 +31,7 @@ const Card = ({
   isPopulation,
   isNumberPercent,
   hint,
+  isRestrictedText,
   warning,
   title,
   number,
@@ -121,7 +122,7 @@ const Card = ({
             </div>
           </div>
         )}
-        {warning || partiallyAvailable ? (
+        {warning || isRestrictedText || partiallyAvailable ? (
           <div className="Card__warning-box Card__warning-box--warning">
             <button
               type="button"
@@ -131,15 +132,18 @@ const Card = ({
             />
             <div className="Card__warning">
               {warning}
+              {isRestrictedText}
               {partiallyAvailable}
-              <>
-                {" "}
-                Use the{" "}
-                <button type="button" className="Card__warning-button" onClick={handleScroll}>
-                  Monthly/Annual switch
-                </button>{" "}
-                at the top of the page to see the most recent available data.
-              </>
+              {isRestrictedText || partiallyAvailable ? (
+                <>
+                  {" "}
+                  Use the{" "}
+                  <button type="button" className="Card__warning-button" onClick={handleScroll}>
+                    Monthly/Annual switch
+                  </button>{" "}
+                  at the top of the page to see the most recent available data.
+                </>
+              ) : null}
             </div>
           </div>
         ) : null}
@@ -223,6 +227,7 @@ Card.defaultProps = {
   sourceUrl: null,
   isPopulation: false,
   hint: null,
+  isRestrictedText: null,
   warning: null,
   number: null,
   percentChange: null,
@@ -246,6 +251,7 @@ Card.propTypes = {
   isPopulation: PropTypes.bool,
   isNumberPercent: PropTypes.bool,
   hint: PropTypes.string,
+  isRestrictedText: PropTypes.string,
   warning: PropTypes.string,
   number: PropTypes.number,
   percentChange: PropTypes.number,

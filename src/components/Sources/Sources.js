@@ -45,7 +45,7 @@ const Sources = ({ data, tab }) => (
           </Fragment>
         ))}
         {tab === JAILS &&
-          " Data from Vera is continuously integrated from January 2020 onwards, while BJS data is pulled in manually as reports are published. Note that this leads to a gap in data in 2019, as no BJS Jail Survey has been produced for this year yet."}
+          " Data from Vera is continuously integrated from January 2020 onwards, while BJS data is pulled in manually as reports are published with the most recent report showing 2018 data. Note that this leads to a gap in data in 2019, as no BJS Jail Survey has been produced yet for that year."}
       </p>
     )}
   </div>

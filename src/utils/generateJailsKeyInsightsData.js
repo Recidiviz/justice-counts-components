@@ -37,14 +37,14 @@ const generateCountiesCaption = (countyCoverage, populationCoverage) => {
 
 const generatePopulationCaption = (percentChange, numberChange) => {
   if (numberChange === 0) {
-    return `There was no net change in jail population during this time period.`;
+    return `There was no net change in jail population across the counties represented during this time period.`;
   }
 
   if (numberChange === null) {
-    return `There is no available net change in jail population during this time period.`;
+    return `There is no available net change in jail population across the counties represented during this time period.`;
   }
 
-  return `The jail population ${getKeyInsightsCaptionFragment(
+  return `The jail population across the counties represented ${getKeyInsightsCaptionFragment(
     percentChange,
     numberChange,
     "person",
@@ -54,16 +54,16 @@ const generatePopulationCaption = (percentChange, numberChange) => {
 
 const generateIncarcerationCaption = (percentChange, numberChange) => {
   if (numberChange === 0) {
-    return `There was no net change in incarceration rate during this time period.`;
+    return `There was no net change in confinement rate across the counties represented during this time period.`;
   }
 
   if (numberChange === null) {
-    return `There is no available net change in incarceration rate during this time period.`;
+    return `There is no available net change in confinement rate across the counties represented during this time period.`;
   }
 
-  return `The incarceration rate for those in jail ${numberChange > 0 ? "rose" : "fell"} ${Math.abs(
-    Math.round(percentChange)
-  )} percent in the past year.`;
+  return `The confinement rate for people in jail ${
+    numberChange > 0 ? "rose" : "fell"
+  } ${formatNumber(percentChange, true)} percent across the counties represented.`;
 };
 
 const getCaptionMap = {
