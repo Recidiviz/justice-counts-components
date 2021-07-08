@@ -65,11 +65,6 @@ const App = ({
   const normalizedCountyData = getNormalizedCountyData(countiesData, stateCode, jailsData);
   const topCountiesByPopulation = generateTopCountiesByPopulation(countiesData, stateCode);
 
-  const isNoData =
-    isEmptyObj(monthlyStateMetricData) &&
-    isEmptyObj(annualStateMetricData) &&
-    isEmptyObj(jailsMetricData);
-
   const monthlyPopulationsChartData = generateCorrectionsChartData(
     monthlyStateMetricData,
     [POPULATION_PRISON, POPULATION_PAROLE, POPULATION_PROBATION],
@@ -281,9 +276,12 @@ const App = ({
       incarcerationRateTopCountiesChartData={incarcerationRateTopCountiesChartData}
       jailsKeyInsightsData={jailsKeyInsightsData}
       jailsLastUpdatedDate={jailsLastUpdatedDate}
-      correctionsLastUpdatedDate={monthlyFlowData.correctionsLastUpdatedDate}
+      monthlyCorrectionsLastUpdatedDate={monthlyFlowData.correctionsLastUpdatedDate}
+      annualCorrectionsLastUpdatedDate={annualFlowData.correctionsLastUpdatedDate}
       jailsSourceData={jailsSourceData}
-      isNoData={isNoData}
+      hasMonthlyCorrectionsData={!isEmptyObj(monthlyStateMetricData)}
+      hasAnnualCorrectionsData={!isEmptyObj(annualStateMetricData)}
+      hasJailsData={!isEmptyObj(jailsMetricData)}
       isUnified={isUnified}
       additionalDescription={additionalDescription}
     />

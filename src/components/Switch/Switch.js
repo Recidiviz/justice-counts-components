@@ -22,7 +22,7 @@ import "./Switch.scss";
 
 import { MONTHLY, ANNUAL } from "../MainPage/constants";
 
-const Switch = ({ activeTab, onTabChange }) => {
+const Switch = ({ activeTab, onTabChange, availablePanes }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const createOnTabChange = (tab) => () => {
@@ -44,26 +44,20 @@ const Switch = ({ activeTab, onTabChange }) => {
       onClick={handleGlobalClick}
       onKeyPress={handleGlobalClick}
     >
-      <button
-        className={cn("Switch__button", {
-          "Switch__button--active": activeTab === MONTHLY,
-          "Switch__slide-right": activeTab === MONTHLY && isClicked,
-        })}
-        type="button"
-        onClick={createOnTabChange(MONTHLY)}
-      >
-        Monthly
-      </button>
-      <button
-        className={cn("Switch__button", {
-          "Switch__button--active": activeTab === ANNUAL,
-          "Switch__slide-left": activeTab === ANNUAL && isClicked,
-        })}
-        type="button"
-        onClick={createOnTabChange(ANNUAL)}
-      >
-        Annual
-      </button>
+      {availablePanes.map((pane) => {
+        return (
+          <button
+            className={cn("Switch__button", {
+              "Switch__button--active": activeTab === pane,
+              "Switch__slide-right": activeTab === pane && isClicked,
+            })}
+            type="button"
+            onClick={createOnTabChange(pane)}
+          >
+            {pane === MONTHLY ? "Monthly" : "Annual"}
+          </button>
+        );
+      })}
     </div>
   );
 };
