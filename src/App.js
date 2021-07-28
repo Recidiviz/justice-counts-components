@@ -81,7 +81,7 @@ const App = ({
     [ADMISSIONS, ADMISSIONS_NEW_COMMITMENTS, ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PROBATION],
     [
       "Total Prison Admissions",
-      "New Prison Commitments",
+      "New Prison Admissions",
       "Post-Release Supervision Revocations (Total)",
       "Probation Revocations (Total)",
     ]
@@ -155,7 +155,7 @@ const App = ({
     [ADMISSIONS, ADMISSIONS_NEW_COMMITMENTS, ADMISSIONS_FROM_PAROLE, ADMISSIONS_FROM_PROBATION],
     [
       "Total Prison Admissions",
-      "New Prison Commitments",
+      "New Prison Admissions",
       "Post-Release Supervision Revocations (Total)",
       "Probation Revocations (Total)",
     ],
