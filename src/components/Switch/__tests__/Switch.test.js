@@ -17,14 +17,34 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import Switch from "../Switch";
-import { MONTHLY } from "../../MainPage/constants";
+import { ANNUAL, MONTHLY } from "../../MainPage/constants";
 
 describe("Switch.js", () => {
   const mockFn = jest.fn();
 
   it("should render active button", () => {
-    const { queryAllByText } = render(<Switch activeTab={MONTHLY} onTabChange={mockFn} />);
+    const { queryAllByText } = render(
+      <Switch activeTab={MONTHLY} onTabChange={mockFn} panesWithData={[MONTHLY, ANNUAL]} />
+    );
 
     expect(queryAllByText((_, element) => element.classList.contains("Switch__button--active")));
+  });
+
+  it("should not append suffix with data", () => {
+    const { container } = render(
+      <Switch activeTab={MONTHLY} onTabChange={mockFn} panesWithData={[MONTHLY, ANNUAL]} />
+    );
+
+    expect(container.querySelector("button:nth-child(1)").innerHTML).toBe("Monthly");
+    expect(container.querySelector("button:nth-child(2)").innerHTML).toBe("Annual");
+  });
+
+  it("should append suffix with no data", () => {
+    const { container } = render(
+      <Switch activeTab={MONTHLY} onTabChange={mockFn} panesWithData={[MONTHLY]} />
+    );
+
+    expect(container.querySelector("button:nth-child(1)").innerHTML).toBe("Monthly");
+    expect(container.querySelector("button:nth-child(2)").innerHTML).toBe("Annual (No Data)");
   });
 });
