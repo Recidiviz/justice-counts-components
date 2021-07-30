@@ -22,7 +22,7 @@ import "./Switch.scss";
 
 import { MONTHLY, ANNUAL } from "../MainPage/constants";
 
-const Switch = ({ activeTab, onTabChange }) => {
+const Switch = ({ activeTab, onTabChange, panesWithData }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const createOnTabChange = (tab) => () => {
@@ -52,7 +52,7 @@ const Switch = ({ activeTab, onTabChange }) => {
         type="button"
         onClick={createOnTabChange(MONTHLY)}
       >
-        Monthly
+        Monthly{panesWithData.includes(MONTHLY) || " (No Data)"}
       </button>
       <button
         className={cn("Switch__button", {
@@ -62,7 +62,7 @@ const Switch = ({ activeTab, onTabChange }) => {
         type="button"
         onClick={createOnTabChange(ANNUAL)}
       >
-        Annual
+        Annual{panesWithData.includes(ANNUAL) || " (No Data)"}
       </button>
     </div>
   );
@@ -71,6 +71,7 @@ const Switch = ({ activeTab, onTabChange }) => {
 Switch.propTypes = {
   activeTab: PropTypes.string.isRequired,
   onTabChange: PropTypes.func.isRequired,
+  panesWithData: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Switch;

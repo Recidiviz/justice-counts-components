@@ -133,8 +133,11 @@ const MainPage = ({
                 <strong>both monthly and annually aggregated data</strong>.
               </p>
               <div className="MainPage__switch">
-                {/* TODO: hide panes */}
-                <Switch activeTab={activePane} onTabChange={onActivePaneChange} />
+                <Switch
+                  activeTab={activePane}
+                  onTabChange={onActivePaneChange}
+                  panesWithData={availablePanes}
+                />
                 <p className="MainPage__switch-label">
                   {activePane === ANNUAL
                     ? `Only data that is aggregated annual will be shown in the Key Insights and flow diagram below. Click the control to the left to see monthly data.`
