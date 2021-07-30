@@ -236,7 +236,7 @@ const App = ({
     jailsMetricData,
     INCARCERATION_RATE_JAIL,
     ["Statewide", selectorCountyCode],
-    ["Statewide Confinement Rate (per 100k)", selectorCountyName]
+    ["Statewide Confinement Rate", selectorCountyName]
   );
 
   const incarcerationRateTopCountiesChartData = generateJailsChartData(
