@@ -39,13 +39,18 @@ const MainPage = ({
   incarcerationRateTopCountiesChartData,
   jailsKeyInsightsData,
   jailsLastUpdatedDate,
-  correctionsLastUpdatedDate,
+  monthlyCorrectionsLastUpdatedDate,
+  annualCorrectionsLastUpdatedDate,
   countySelector,
   jailsSourceData,
-  isNoData,
+  hasMonthlyCorrectionsData,
+  hasAnnualCorrectionsData,
+  hasJailsData,
   isUnified,
   additionalDescription,
 }) => {
+  const hasNoData = !hasMonthlyCorrectionsData && !hasAnnualCorrectionsData && !hasJailsData;
+
   const [storedActiveTab, setActiveTab] = useState(localStorage.getItem(LS_TAB_KEY) || CORRECTIONS);
 
   // Force the active tab to 'CORRECTIONS' in a unified state.
@@ -56,18 +61,38 @@ const MainPage = ({
     localStorage.setItem(LS_TAB_KEY, newTab);
   };
 
-  const [activePane, setActivePane] = useState(localStorage.getItem(LS_SWITCH_KEY) || MONTHLY);
+  const [storedActivePane, setActivePane] = useState(
+    localStorage.getItem(LS_SWITCH_KEY) || MONTHLY
+  );
+
+  // Force the active pane to an available pane.
+  const availablePanes = [MONTHLY, ANNUAL].filter((value) => {
+    switch (value) {
+      case MONTHLY:
+        return hasMonthlyCorrectionsData;
+      case ANNUAL:
+        return hasAnnualCorrectionsData;
+      default:
+        return true;
+    }
+  });
+  const activePane = availablePanes.includes(storedActivePane)
+    ? storedActivePane
+    : availablePanes[0];
 
   const onActivePaneChange = (newPane) => {
     setActivePane(newPane);
     localStorage.setItem(LS_SWITCH_KEY, newPane);
   };
 
+  const correctionsLastUpdatedDate =
+    activePane === MONTHLY ? monthlyCorrectionsLastUpdatedDate : annualCorrectionsLastUpdatedDate;
+
   return (
     <section className="MainPage">
-      <header className={cn("MainPage__header", { "MainPage__header--without-border": isNoData })}>
+      <header className={cn("MainPage__header", { "MainPage__header--without-border": hasNoData })}>
         <h1 className="MainPage__title">{stateName} data dashboard</h1>
-        {isNoData ? (
+        {hasNoData ? (
           <p className="MainPage__description">
             No data was publicly available for this state. If you are a representative of this state
             and would like to contribute your data to this site, please{" "}
@@ -96,7 +121,7 @@ const MainPage = ({
           </>
         )}
       </header>
-      {!isNoData && (
+      {!hasNoData && (
         <>
           <Tabs activeTab={activeTab} onTabChange={onActiveTabChange} isUnified={isUnified} />
           {activeTab === CORRECTIONS && (
@@ -108,7 +133,11 @@ const MainPage = ({
                 <strong>both monthly and annually aggregated data</strong>.
               </p>
               <div className="MainPage__switch">
-                <Switch activeTab={activePane} onTabChange={onActivePaneChange} />
+                <Switch
+                  activeTab={activePane}
+                  onTabChange={onActivePaneChange}
+                  panesWithData={availablePanes}
+                />
                 <p className="MainPage__switch-label">
                   {activePane === ANNUAL
                     ? `Only data that is aggregated annual will be shown in the Key Insights and flow diagram below. Click the control to the left to see monthly data.`
@@ -151,13 +180,16 @@ MainPage.propTypes = {
   monthlyCorrectionsData: correctionsDataPropTypes.isRequired,
   annualCorrectionsData: correctionsDataPropTypes.isRequired,
   jailsLastUpdatedDate: PropTypes.string.isRequired,
-  correctionsLastUpdatedDate: PropTypes.string.isRequired,
+  monthlyCorrectionsLastUpdatedDate: PropTypes.string.isRequired,
+  annualCorrectionsLastUpdatedDate: PropTypes.string.isRequired,
   incarcerationRateChartData: chartDataPropTypes.isRequired,
   incarcerationRateTopCountiesChartData: chartDataPropTypes.isRequired,
   jailsKeyInsightsData: keyInsightsPropTypes.isRequired,
   countySelector: PropTypes.node,
   jailsSourceData: PropTypes.arrayOf(PropTypes.shape(sourcePropTypes)).isRequired,
-  isNoData: PropTypes.bool.isRequired,
+  hasAnnualCorrectionsData: PropTypes.bool.isRequired,
+  hasMonthlyCorrectionsData: PropTypes.bool.isRequired,
+  hasJailsData: PropTypes.bool.isRequired,
   isUnified: PropTypes.bool.isRequired,
   additionalDescription: PropTypes.string,
 };

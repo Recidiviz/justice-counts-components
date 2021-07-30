@@ -39,6 +39,7 @@
     outline: 0;
     border: 0;
     cursor: pointer;
+    white-space: nowrap;
 
     &--active {
       animation: slide 0.3s forwards;

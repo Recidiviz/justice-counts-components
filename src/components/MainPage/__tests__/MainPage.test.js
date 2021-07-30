@@ -19,7 +19,7 @@ import { render } from "@testing-library/react";
 
 import MainPage from "../MainPage";
 import Corrections from "../../Corrections";
-import { JAILS, LS_TAB_KEY } from "../constants";
+import { CORRECTIONS, JAILS, LS_SWITCH_KEY, LS_TAB_KEY, MONTHLY } from "../constants";
 
 jest.mock("../../Corrections");
 describe("MainPage.js", () => {
@@ -52,6 +52,9 @@ describe("MainPage.js", () => {
         incarcerationRateTopCountiesChartData={{}}
         jailsSourceData={[]}
         isUnified={false}
+        hasAnnualCorrectionsData
+        hasMonthlyCorrectionsData
+        hasJailsData
       />
     );
 
@@ -70,6 +73,9 @@ describe("MainPage.js", () => {
         incarcerationRateTopCountiesChartData={{}}
         jailsSourceData={[]}
         isUnified
+        hasAnnualCorrectionsData
+        hasMonthlyCorrectionsData
+        hasJailsData
       />
     );
 
@@ -93,9 +99,56 @@ describe("MainPage.js", () => {
         incarcerationRateTopCountiesChartData={mockJailChartData}
         jailsSourceData={[]}
         isUnified={false}
+        hasAnnualCorrectionsData
+        hasMonthlyCorrectionsData
+        hasJailsData
       />
     );
 
     expect(container.querySelector(".MainPage__tab_active").innerHTML).toBe("Jails");
+  });
+
+  it("should render monthly if available", () => {
+    localStorage.setItem(LS_TAB_KEY, CORRECTIONS);
+    localStorage.setItem(LS_SWITCH_KEY, MONTHLY);
+    const { container } = render(
+      <MainPage
+        stateName={mockStateName}
+        monthlyCorrectionsData={mockCorrectionsData}
+        annualCorrectionsData={mockCorrectionsData}
+        jailsKeyInsightsData={[]}
+        incarcerationRateChartData={mockJailChartData}
+        incarcerationRateTopCountiesChartData={mockJailChartData}
+        jailsSourceData={[]}
+        isUnified={false}
+        hasAnnualCorrectionsData
+        hasMonthlyCorrectionsData
+        hasJailsData
+      />
+    );
+
+    expect(container.querySelector(".Switch__button--active").innerHTML).toBe("Monthly");
+  });
+
+  it("should not render monthly if not available", () => {
+    localStorage.setItem(LS_TAB_KEY, CORRECTIONS);
+    localStorage.setItem(LS_SWITCH_KEY, MONTHLY);
+    const { container } = render(
+      <MainPage
+        stateName={mockStateName}
+        monthlyCorrectionsData={mockCorrectionsData}
+        annualCorrectionsData={mockCorrectionsData}
+        jailsKeyInsightsData={[]}
+        incarcerationRateChartData={mockJailChartData}
+        incarcerationRateTopCountiesChartData={mockJailChartData}
+        jailsSourceData={[]}
+        isUnified={false}
+        hasAnnualCorrectionsData
+        hasMonthlyCorrectionsData={false}
+        hasJailsData
+      />
+    );
+
+    expect(container.querySelector(".Switch__button--active").innerHTML).toBe("Annual");
   });
 });
