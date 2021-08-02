@@ -15,11 +15,26 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import getIsUnified from "./getIsUnified";
+import states from "../constants/states";
 
 // =============================================================================
+const whenStatesAbolishedParole = { US_DE: "1990", US_ME: "1976" };
+
 const getAdditionalDescription = (stateCode) => {
+  const descriptions = [];
   if (getIsUnified(stateCode)) {
-    return `This state operates a "unified corrections system," which combines the jail and prison systems. As such, some of the numbers below may include pretrial populations.`;
+    descriptions.push(
+      `This state operates a "unified corrections system," which combines the jail and prison systems. As such, some of the numbers below may include pretrial populations.`
+    );
+  }
+  if (stateCode in whenStatesAbolishedParole) {
+    descriptions.push(
+      `Note: ${states[stateCode]} abolished parole in ${whenStatesAbolishedParole[stateCode]}.`
+    );
+  }
+
+  if (descriptions.length) {
+    return descriptions.join(" ");
   }
   return null;
 };
