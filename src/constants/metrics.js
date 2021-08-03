@@ -36,8 +36,8 @@ export const PERCENTAGE_COVERED_POPULATION = "PERCENTAGE_COVERED_POPULATION";
 export const INCARCERATION_RATE_JAIL = "INCARCERATION_RATE_JAIL";
 
 export const metricToCardName = {
-  [ADMISSIONS_NEW_COMMITMENTS]: "New Prison Commitments",
-  [SUPERVISION_STARTS_PROBATION]: "New Probation Commitments",
+  [ADMISSIONS_NEW_COMMITMENTS]: "New Prison Admissions",
+  [SUPERVISION_STARTS_PROBATION]: "New Probation Admissions",
   [POPULATION_PROBATION]: "Probation Population",
   [ADMISSIONS_FROM_PROBATION]: "Probation Revocations",
   [POPULATION_PRISON]: "Prison Population",
