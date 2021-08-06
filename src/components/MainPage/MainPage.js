@@ -53,8 +53,18 @@ const MainPage = ({
 
   const [storedActiveTab, setActiveTab] = useState(localStorage.getItem(LS_TAB_KEY) || CORRECTIONS);
 
-  // Force the active tab to 'CORRECTIONS' in a unified state.
-  const activeTab = isUnified ? CORRECTIONS : storedActiveTab;
+  // Disable tabs based on data availability and if this is a unified state.
+  const availableTabs = [CORRECTIONS, JAILS].filter((value) => {
+    switch (value) {
+      case CORRECTIONS:
+        return hasMonthlyCorrectionsData || hasAnnualCorrectionsData;
+      case JAILS:
+        return hasJailsData && !isUnified;
+      default:
+        return true;
+    }
+  });
+  const activeTab = availableTabs.includes(storedActiveTab) ? storedActiveTab : availableTabs[0];
 
   const onActiveTabChange = (newTab) => {
     setActiveTab(newTab);
@@ -123,7 +133,12 @@ const MainPage = ({
       </header>
       {!hasNoData && (
         <>
-          <Tabs activeTab={activeTab} onTabChange={onActiveTabChange} isUnified={isUnified} />
+          <Tabs
+            activeTab={activeTab}
+            onTabChange={onActiveTabChange}
+            tabsWithData={availableTabs}
+            isUnified={isUnified}
+          />
           {activeTab === CORRECTIONS && (
             <div className="MainPage__range">
               <h3 className="MainPage__range-title">Data Aggregation Range</h3>
