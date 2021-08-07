@@ -19,11 +19,10 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
 
 /**
  * Returns formatted latest published date for flow diagram (cards) data
- * @param data - data used for flow diagram (output of `generateFlowDiagramData` and intermediate value of `generateJailsKeyInsightsData`)
+ * @param data - normalized, sorted metric data (output of `getNormalizedStateData`)
  */
 
 const getLastUpdatedDate = (data) => {
-  Object.values(data).map(console.log);
   const date = Array.from(
     Object.values(data).map((metric) => metric[metric.length - 1].datePublished)
   ).sort(sortByYearAndMonth)[Object.values(data).length - 1];

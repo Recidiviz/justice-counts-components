@@ -38,8 +38,6 @@ const Corrections = ({ correctionsData, isAnnual }) => {
     sourceData,
   } = correctionsData;
 
-  console.log(flowData);
-
   return (
     <>
       <KeyInsights keyInsightsData={keyInsightsData} />
