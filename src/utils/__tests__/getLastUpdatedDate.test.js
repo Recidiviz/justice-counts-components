@@ -18,21 +18,27 @@ import getLastUpdatedDate from "../getLastUpdatedDate";
 
 describe("getLastUpdatedDate.js", () => {
   const mockData = {
-    metric1: {
-      item: {
+    metric1: [
+      {
+        datePublished: { month: 10, day: 11, year: 2020 },
+      },
+      {
         datePublished: { month: 11, day: 11, year: 2020 },
       },
-    },
-    metric2: {
-      item: {
+    ],
+    metric2: [
+      {
+        datePublished: { month: 7, day: 11, year: 2021 },
+      },
+      {
         datePublished: { month: 8, day: 11, year: 2021 },
       },
-    },
-    metric3: {
-      item: {
-        datePublished: { month: 11, day: 11, year: 2018 },
+    ],
+    metric3: [
+      {
+        datePublished: { month: 11, day: 10, year: 2018 },
       },
-    },
+    ],
   };
 
   it("should return latest & processed published date", () => {

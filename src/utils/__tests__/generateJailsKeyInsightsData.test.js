@@ -56,7 +56,7 @@ describe("generateJailsKeyInsightsData.js", () => {
       ],
     };
 
-    const { jailsKeyInsightsData } = generateJailsKeyInsightsData(mockData);
+    const jailsKeyInsightsData = generateJailsKeyInsightsData(mockData);
 
     it("should put isNumberPercent flag if metric value less than 1", () => {
       expect(jailsKeyInsightsData[1].isNumberPercent).toBe(true);
@@ -153,7 +153,7 @@ describe("generateJailsKeyInsightsData.js", () => {
       ],
     };
 
-    const { jailsKeyInsightsData } = generateJailsKeyInsightsData(mockData);
+    const jailsKeyInsightsData = generateJailsKeyInsightsData(mockData);
 
     it("should produce card data", () => {
       expect(jailsKeyInsightsData.length).toBe(3);
@@ -230,7 +230,7 @@ describe("generateJailsKeyInsightsData.js", () => {
       ],
     };
 
-    const { jailsKeyInsightsData } = generateJailsKeyInsightsData(mockData);
+    const jailsKeyInsightsData = generateJailsKeyInsightsData(mockData);
 
     it("should produce card data", () => {
       expect(jailsKeyInsightsData.length).toBe(3);
