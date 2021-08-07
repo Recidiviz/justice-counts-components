@@ -24,7 +24,6 @@ import {
 import months from "../constants/months";
 import formatNumber from "./formatNumber";
 import getKeyInsightsCaptionFragment from "./getKeyInsightsCaptionFragment";
-import getLastUpdatedDate from "./getLastUpdatedDate";
 import warningTextIfDifferentPercentageCovered from "./warningTextIfDifferentPercentageCovered";
 
 const generateCountiesCaption = (countyCoverage, populationCoverage) => {
@@ -178,10 +177,7 @@ const generateJailsKeyInsightsData = (data, reportingCountiesModal) => {
     return keyInsights;
   }, []);
 
-  return {
-    jailsKeyInsightsData,
-    jailsLastUpdatedDate: getLastUpdatedDate(flowData),
-  };
+  return jailsKeyInsightsData;
 };
 
 export default generateJailsKeyInsightsData;

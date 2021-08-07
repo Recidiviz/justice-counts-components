@@ -42,6 +42,17 @@
     }
   }
 
+  &__description {
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: #808c99;
+    padding-bottom: 1.125rem;
+    @include down($lg) {
+      font-size: 0.875rem;
+    }
+  }
+
   &__cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

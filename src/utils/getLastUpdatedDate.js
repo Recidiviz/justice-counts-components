@@ -23,10 +23,9 @@ import sortByYearAndMonth from "./sortByYearAndMonth";
  */
 
 const getLastUpdatedDate = (data) => {
+  Object.values(data).map(console.log);
   const date = Array.from(
-    Object.values(data).map((item) =>
-      !item.isNotAvailable ? item.item.datePublished : { month: null, year: null }
-    )
+    Object.values(data).map((metric) => metric[metric.length - 1].datePublished)
   ).sort(sortByYearAndMonth)[Object.values(data).length - 1];
 
   return date && `${months[date.month]} ${date.day}, ${date.year}`;

@@ -50,6 +50,7 @@ import {
 } from "./constants/metrics";
 import getIsUnified from "./utils/getIsUnified";
 import getAdditionalDescription from "./utils/getAdditionalDescription";
+import getLastUpdatedDate from "./utils/getLastUpdatedDate";
 
 const App = ({
   stateCode,
@@ -116,6 +117,8 @@ const App = ({
   );
 
   const monthlyKeyInsightsData = generateCorrectionsKeyInsightsData(monthlyFlowData.flowData);
+
+  const monthlyCorrectionsLastUpdatedDate = getLastUpdatedDate(monthlyStateMetricData);
 
   const monthlySourceData = generateSourceData(monthlyFlowData.flowData, [
     monthlyPopulationsChartData.sourceData,
@@ -195,6 +198,8 @@ const App = ({
 
   const annualKeyInsightsData = generateCorrectionsKeyInsightsData(annualFlowData.flowData);
 
+  const annualCorrectionsLastUpdatedDate = getLastUpdatedDate(annualStateMetricData);
+
   const annualSourceData = generateSourceData(annualFlowData.flowData, [
     annualPopulationsChartData.sourceData,
     annualPrisonAdmissionsChartData.sourceData,
@@ -216,10 +221,12 @@ const App = ({
     sourceData: annualSourceData,
   };
 
-  const { jailsKeyInsightsData, jailsLastUpdatedDate } = generateJailsKeyInsightsData(
+  const jailsKeyInsightsData = generateJailsKeyInsightsData(
     jailsMetricData,
     <ReportingCounties stateName={stateName} counties={normalizedCountyData} />
   );
+
+  const jailsLastUpdatedDate = getLastUpdatedDate(jailsMetricData);
 
   const { countySelectorComponent, selectorCountyCode, selectorCountyName } = CountySelector(
     normalizedCountyData,
@@ -276,8 +283,8 @@ const App = ({
       incarcerationRateTopCountiesChartData={incarcerationRateTopCountiesChartData}
       jailsKeyInsightsData={jailsKeyInsightsData}
       jailsLastUpdatedDate={jailsLastUpdatedDate}
-      monthlyCorrectionsLastUpdatedDate={monthlyFlowData.correctionsLastUpdatedDate}
-      annualCorrectionsLastUpdatedDate={annualFlowData.correctionsLastUpdatedDate}
+      monthlyCorrectionsLastUpdatedDate={monthlyCorrectionsLastUpdatedDate}
+      annualCorrectionsLastUpdatedDate={annualCorrectionsLastUpdatedDate}
       jailsSourceData={jailsSourceData}
       hasMonthlyCorrectionsData={!isEmptyObj(monthlyStateMetricData)}
       hasAnnualCorrectionsData={!isEmptyObj(annualStateMetricData)}

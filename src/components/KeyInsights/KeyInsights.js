@@ -24,16 +24,23 @@ import "./KeyInsights.scss";
 const KeyInsights = ({ keyInsightsData }) => (
   <div className="KeyInsights">
     <h2 className="KeyInsights__title">Key Insights</h2>
-    <div className="KeyInsights__cards">
-      {keyInsightsData.map((card) => (
-        <div key={card.title} className="KeyInsights__card">
-          <Card {...card} />
-          <p className="KeyInsights__card-description">
-            {card.caption} {card.reportingCountiesModal}
-          </p>
-        </div>
-      ))}
-    </div>
+    {!keyInsightsData.length ? (
+      <p className="KeyInsights__description">
+        None of the metrics that are used to power Key Insights are available at this time. Some
+        data is still available, see below.
+      </p>
+    ) : (
+      <div className="KeyInsights__cards">
+        {keyInsightsData.map((card) => (
+          <div key={card.title} className="KeyInsights__card">
+            <Card {...card} />
+            <p className="KeyInsights__card-description">
+              {card.caption} {card.reportingCountiesModal}
+            </p>
+          </div>
+        ))}
+      </div>
+    )}
   </div>
 );
 
