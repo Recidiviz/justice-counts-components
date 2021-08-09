@@ -39,11 +39,22 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
   const width = useWindowWidth();
   const isMobile = width < 1024;
 
+  const hasData = Object.values(data).reduce(
+    (hasSomeData, cardData) => hasSomeData || !cardData.isNotAvailable,
+    false
+  );
+
   return (
     <section className="FlowDiagram">
       <div className="FlowDiagram__header">
-        <div className="FlowDiagram__date">{lastDate}</div>
-        <div className="FlowDiagram__hint">(% change compared to {prevDate})</div>
+        {hasData ? (
+          <>
+            <div className="FlowDiagram__date">{lastDate}</div>
+            <div className="FlowDiagram__hint">(% change compared to {prevDate})</div>
+          </>
+        ) : (
+          <div className="FlowDiagram__date">No Data Available</div>
+        )}
       </div>
       <div className="FlowDiagram__box">
         <span className="FlowDiagram__box-name">Court</span>

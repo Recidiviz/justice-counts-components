@@ -24,16 +24,22 @@ import "./KeyInsights.scss";
 const KeyInsights = ({ keyInsightsData }) => (
   <div className="KeyInsights">
     <h2 className="KeyInsights__title">Key Insights</h2>
-    <div className="KeyInsights__cards">
-      {keyInsightsData.map((card) => (
-        <div key={card.title} className="KeyInsights__card">
-          <Card {...card} />
-          <p className="KeyInsights__card-description">
-            {card.caption} {card.reportingCountiesModal}
-          </p>
-        </div>
-      ))}
-    </div>
+    {!keyInsightsData.length ? (
+      <p className="KeyInsights__description">
+        No data is available for this section; other sections on this page may still be populated.
+      </p>
+    ) : (
+      <div className="KeyInsights__cards">
+        {keyInsightsData.map((card) => (
+          <div key={card.title} className="KeyInsights__card">
+            <Card {...card} />
+            <p className="KeyInsights__card-description">
+              {card.caption} {card.reportingCountiesModal}
+            </p>
+          </div>
+        ))}
+      </div>
+    )}
   </div>
 );
 
