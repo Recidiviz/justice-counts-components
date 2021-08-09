@@ -20,29 +20,34 @@ import cn from "classnames";
 
 import { CORRECTIONS, JAILS } from "./constants";
 
-const Tabs = ({ activeTab, onTabChange, isUnified }) => {
+const Tabs = ({ activeTab, onTabChange, tabsWithData, isUnified }) => {
   const createOnTabChange = (tab) => () => {
     onTabChange(tab);
   };
+  const disableCorrections = !tabsWithData.includes(CORRECTIONS);
+  const disableJails = isUnified || !tabsWithData.includes(JAILS);
 
   return (
     <div className="MainPage__tabs">
       <button
         type="button"
-        className={cn("MainPage__tab", { MainPage__tab_active: activeTab === CORRECTIONS })}
-        onClick={createOnTabChange(CORRECTIONS)}
+        className={cn("MainPage__tab", {
+          MainPage__tab_active: activeTab === CORRECTIONS,
+          "MainPage__tab--disabled": disableCorrections,
+        })}
+        onClick={disableCorrections ? null : createOnTabChange(CORRECTIONS)}
       >
-        Corrections
+        Corrections{tabsWithData.includes(CORRECTIONS) || " (No Data)"}
       </button>
       <button
         type="button"
         className={cn("MainPage__tab", {
           MainPage__tab_active: activeTab === JAILS,
-          "MainPage__tab--disabled": isUnified,
+          "MainPage__tab--disabled": disableJails,
         })}
-        onClick={isUnified ? null : createOnTabChange(JAILS)}
+        onClick={disableJails ? null : createOnTabChange(JAILS)}
       >
-        Jails{isUnified && " (Not Applicable)"}
+        Jails{(isUnified && " (Not Applicable)") || (!tabsWithData.includes(JAILS) && " (No Data)")}
       </button>
     </div>
   );
@@ -51,6 +56,7 @@ const Tabs = ({ activeTab, onTabChange, isUnified }) => {
 Tabs.propTypes = {
   activeTab: PropTypes.oneOf([CORRECTIONS, JAILS]).isRequired,
   onTabChange: PropTypes.func.isRequired,
+  tabsWithData: PropTypes.arrayOf(PropTypes.string).isRequired,
   isUnified: PropTypes.bool.isRequired,
 };
 

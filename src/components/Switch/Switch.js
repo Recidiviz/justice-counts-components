@@ -50,7 +50,7 @@ const Switch = ({ activeTab, onTabChange, panesWithData }) => {
           "Switch__slide-right": activeTab === MONTHLY && isClicked,
         })}
         type="button"
-        onClick={createOnTabChange(MONTHLY)}
+        onClick={panesWithData.includes(MONTHLY) ? createOnTabChange(MONTHLY) : null}
       >
         Monthly{panesWithData.includes(MONTHLY) || " (No Data)"}
       </button>
@@ -60,7 +60,7 @@ const Switch = ({ activeTab, onTabChange, panesWithData }) => {
           "Switch__slide-left": activeTab === ANNUAL && isClicked,
         })}
         type="button"
-        onClick={createOnTabChange(ANNUAL)}
+        onClick={panesWithData.includes(ANNUAL) ? createOnTabChange(ANNUAL) : null}
       >
         Annual{panesWithData.includes(ANNUAL) || " (No Data)"}
       </button>
