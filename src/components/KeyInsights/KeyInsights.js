@@ -26,8 +26,7 @@ const KeyInsights = ({ keyInsightsData }) => (
     <h2 className="KeyInsights__title">Key Insights</h2>
     {!keyInsightsData.length ? (
       <p className="KeyInsights__description">
-        None of the metrics that are used to power Key Insights are available at this time. Some
-        data is still available, see below.
+        No data is available for this section; other sections on this page may still be populated.
       </p>
     ) : (
       <div className="KeyInsights__cards">

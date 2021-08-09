@@ -47,11 +47,13 @@ const FlowDiagram = ({ data, lastDate, prevDate }) => {
   return (
     <section className="FlowDiagram">
       <div className="FlowDiagram__header">
-        {hasData && (
+        {hasData ? (
           <>
             <div className="FlowDiagram__date">{lastDate}</div>
             <div className="FlowDiagram__hint">(% change compared to {prevDate})</div>
           </>
+        ) : (
+          <div className="FlowDiagram__date">No Data Available</div>
         )}
       </div>
       <div className="FlowDiagram__box">
