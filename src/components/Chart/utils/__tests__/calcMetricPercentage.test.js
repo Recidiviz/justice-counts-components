@@ -33,4 +33,12 @@ describe("calcPercentage.js", () => {
   it("should work when array consists of the only data point", () => {
     expect(calcMetricPercentage([1])).toBe("0%");
   });
+
+  it("should handle decreases to zero", () => {
+    expect(calcMetricPercentage([1, 0])).toBe("-100%");
+  });
+
+  it("should handle increases from zero", () => {
+    expect(calcMetricPercentage([0, 1])).toBe("N/A");
+  });
 });
