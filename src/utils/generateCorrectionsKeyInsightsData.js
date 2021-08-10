@@ -74,9 +74,11 @@ const getCaptionMap = {
       "people"
     )}.`;
   },
-  [ADMISSIONS_FROM_PAROLE]: generateRevocationsCaption("parole"),
+  [ADMISSIONS_FROM_PAROLE]: generateRevocationsCaption("post-release supervision"),
   [ADMISSIONS_FROM_PROBATION]: generateRevocationsCaption("probation"),
-  [ADMISSIONS_FROM_PAROLE_TECHNICAL]: generateTechnicalRevocationsCaption("parole"),
+  [ADMISSIONS_FROM_PAROLE_TECHNICAL]: generateTechnicalRevocationsCaption(
+    "post-release supervision"
+  ),
   [ADMISSIONS_FROM_PROBATION_TECHNICAL]: generateTechnicalRevocationsCaption("probation"),
 };
 

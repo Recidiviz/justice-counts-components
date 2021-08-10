@@ -36,7 +36,14 @@ const ReportingCounties = ({ counties, stateName }) => {
         <h1 className="ReportingCounties__title">{`Counties in ${stateName}`}</h1>
         <div className="ReportingCounties__subtitle">
           These are all of the counties that are actively reporting data on a monthly basis in{" "}
-          {stateName}. See Methodology for more details on how these counties were determined.
+          {stateName}. See{" "}
+          <a
+            href="/justicecounts/data-dashboard-faqs/"
+            className="ReportingCounties__methodology-link"
+          >
+            Data Dashboard FAQs and Methodology
+          </a>{" "}
+          for more details on how these counties were determined.
         </div>
         <div className="ReportingCounties__body-content">
           {counties.map((county) => (
