@@ -96,7 +96,7 @@ const generateFlowDiagramData = (data, compareData, stateName, isAnnual) => {
           itemStateName: stateName,
           title: metricToCardName[metric],
           number: lastItem.value,
-          percentChange: lastItem.percentChange ? lastItem.percentChange * 100 : null,
+          percentChange: lastItem.percentChange !== null ? lastItem.percentChange * 100 : null,
           numberChange: lastItem.valueChange,
           sourceText: generateSourceText(
             lastItem.sourceName,
@@ -110,9 +110,10 @@ const generateFlowDiagramData = (data, compareData, stateName, isAnnual) => {
             ? `${months[datePublished.month]} ${datePublished.day}, ${datePublished.year}`
             : null,
           mostRecentDate: `${months[lastItem.month]} ${lastItem.year}`,
-          comparedToDate: lastItem.percentChange
-            ? `${months[lastItem.comparedToMonth]} ${lastItem.comparedToYear}`
-            : null,
+          comparedToDate:
+            lastItem.percentChange !== null
+              ? `${months[lastItem.comparedToMonth]} ${lastItem.comparedToYear}`
+              : null,
           item: lastItem,
           compareItem: compareLastItem,
         };

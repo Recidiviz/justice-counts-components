@@ -65,6 +65,15 @@ describe("Card.js", () => {
     expect(screen.queryByText("(--%)")).toBeInTheDocument();
   });
 
+  it("should display comparisons if percent change is 0", () => {
+    render(
+      <Card title="Some title" number={15} percentChange={0} comparedToDate="November 2020" />
+    );
+
+    expect(screen.queryByText("(0%)")).toBeInTheDocument();
+    expect(screen.queryByText("(compared to November 2020)")).toBeInTheDocument();
+  });
+
   it("should render card date range section", () => {
     const { container } = render(
       <Card title="Some title" number={15} percentChange={-20} mostRecentDate="September 2020" />
