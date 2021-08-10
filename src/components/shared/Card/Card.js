@@ -208,7 +208,7 @@ const Card = ({
               )}
               <div className="Card__date-range">
                 {mostRecentDate}&nbsp;
-                {percentChange && <span>(compared to {comparedToDate})</span>}
+                {percentChange !== null && <span>(compared to {comparedToDate})</span>}
               </div>
             </div>
           </>

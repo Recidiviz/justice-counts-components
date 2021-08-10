@@ -62,6 +62,26 @@ describe("generateFlowDiagramData.js", () => {
         comparedToMonth: 11,
       },
     ],
+    [ADMISSIONS_FROM_PAROLE]: [
+      {
+        value: 5,
+        valueChange: null,
+        percentChange: null,
+        year: 2019,
+        month: 11,
+      },
+    ],
+    [ADMISSIONS_FROM_PROBATION]: [
+      {
+        value: 5,
+        valueChange: 0,
+        percentChange: 0,
+        year: 2019,
+        month: 11,
+        comparedToYear: 2018,
+        comparedToMonth: 11,
+      },
+    ],
   };
   const mockHint = "some hint";
   const mockSourceText = "source text";
@@ -89,10 +109,8 @@ describe("generateFlowDiagramData.js", () => {
 
   it("should put isNotAvailable flag is no metric data provided", () => {
     expect(flowDiagramData.flowData[SUPERVISION_STARTS_PROBATION].isNotAvailable).toBe(true);
-    expect(flowDiagramData.flowData[ADMISSIONS_FROM_PROBATION].isNotAvailable).toBe(true);
     expect(flowDiagramData.flowData[POPULATION_PRISON].isNotAvailable).toBe(true);
     expect(flowDiagramData.flowData[POPULATION_PAROLE].isNotAvailable).toBe(true);
-    expect(flowDiagramData.flowData[ADMISSIONS_FROM_PAROLE].isNotAvailable).toBe(true);
   });
 
   it("should produce flow diagram card data", () => {
@@ -111,6 +129,24 @@ describe("generateFlowDiagramData.js", () => {
       number: 95,
       percentChange: 18,
       hint: mockHint,
+    });
+  });
+
+  it("should handle null comparison values", () => {
+    expect(flowDiagramData.flowData[ADMISSIONS_FROM_PAROLE]).toMatchObject({
+      number: 5,
+      numberChange: null,
+      percentChange: null,
+      comparedToDate: null,
+    });
+  });
+
+  it("should not null out zero changes", () => {
+    expect(flowDiagramData.flowData[ADMISSIONS_FROM_PROBATION]).toMatchObject({
+      number: 5,
+      numberChange: 0,
+      percentChange: 0,
+      comparedToDate: "December 2018",
     });
   });
 });
