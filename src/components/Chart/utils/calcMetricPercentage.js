@@ -34,10 +34,14 @@ function calcMetricPercentage(data) {
     return "0%";
   }
 
-  const filteredData = data.filter((item) => item);
+  const filteredData = data.filter((item) => item !== null);
 
   const ratio = filteredData[filteredData.length - 1] / filteredData[0];
   const diff = Math.round((ratio - 1) * 100);
+
+  if (!Number.isFinite(diff)) {
+    return "N/A";
+  }
 
   return `${diff > 0 ? "+" : ""}${diff}%`;
 }
