@@ -146,7 +146,14 @@ const MainPage = ({
                 Use the control below to switch between{" "}
                 <strong>showing only monthly aggregated data</strong> and showing{" "}
                 <strong>only annually aggregated data</strong>. Different metrics may be available
-                for each depending on the underlying data; see Methodology for more details.
+                for each depending on the underlying data; see{" "}
+                <a
+                  href="/justicecounts/data-dashboard-faqs/"
+                  className="MainPage__methodology-link"
+                >
+                  Data Dashboard FAQs and Methodology
+                </a>{" "}
+                for more details.
               </p>
               <div className="MainPage__switch">
                 <Switch
@@ -156,7 +163,7 @@ const MainPage = ({
                 />
                 <p className="MainPage__switch-label">
                   {activePane === ANNUAL
-                    ? `Only data that is aggregated annual will be shown below. Click the control to the left to see monthly data.`
+                    ? `Only data that is aggregated annually will be shown below. Click the control to the left to see monthly data.`
                     : `Only data that is aggregated monthly will be shown below. Click the control to the left to see annualized data.`}
                 </p>
               </div>

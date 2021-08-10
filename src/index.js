@@ -27,7 +27,7 @@ import "./index.scss";
 ReactDOM.render(
   <React.StrictMode>
     <App
-      stateCode="US_AK"
+      stateCode="US_CO"
       correctionsMonthlyData={correctionsMonthlyData}
       correctionsAnnualData={correctionsAnnualData}
       jailsData={jailsData}
