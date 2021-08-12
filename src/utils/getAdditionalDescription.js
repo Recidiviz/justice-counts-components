@@ -17,8 +17,9 @@
 import getIsUnified from "./getIsUnified";
 import states from "../constants/states";
 
-// =============================================================================
 const whenStatesAbolishedParole = { US_DE: "1990", US_ME: "1976" };
+
+const publishedButNotYetAcquired = ["US_IA", "US_MN", "US_ND", "US_NM"];
 
 const getAdditionalDescription = (stateCode) => {
   const descriptions = [];
@@ -30,6 +31,11 @@ const getAdditionalDescription = (stateCode) => {
   if (stateCode in whenStatesAbolishedParole) {
     descriptions.push(
       `Note: ${states[stateCode]} abolished parole in ${whenStatesAbolishedParole[stateCode]}.`
+    );
+  }
+  if (publishedButNotYetAcquired.includes(stateCode)) {
+    descriptions.push(
+      `Note: ${states[stateCode]} reports their prison population daily, but we do not currently have the ability to capture that data.`
     );
   }
 
