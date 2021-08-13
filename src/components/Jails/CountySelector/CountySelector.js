@@ -59,10 +59,10 @@ const CountySelector = (counties, topCounties, stateName) => {
         <Modal isShowing={open} hide={() => setOpen(false)}>
           <h1 className="CountySelector__title">{`Counties in ${stateName}`}</h1>
           <div className="CountySelector__subtitle">
-            Select a county below and click “View County” to see the trend of the county’s
-            incarceration rate over time.
+            Select a county below and click “View County” to see the trend of the county’s jail
+            confinement rate over time.
             <br /> Counties are arranged in alphabetical order. Some counties cannot be selected due
-            to missing data; see Methodology for more details.
+            to missing data; see FAQs and Methodology for more details.
           </div>
           <div className="CountySelector__body-content">
             {counties.map((county) => (

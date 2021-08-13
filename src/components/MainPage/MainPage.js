@@ -119,9 +119,13 @@ const MainPage = ({
         ) : (
           <>
             <p className="MainPage__description">
-              The following is a broad overview of the corrections and jail systems in {stateName},
-              representing up-to-date data and changes compared to last year. An additional section
-              on crime indicators will be added at a later date. {additionalDescription}
+              The following is a broad overview of the available data from corrections and jail
+              systems agencies in {stateName}, using the most up-to-date publicly available data to
+              show the latest trends across key indicators. The purpose of this page is to (A)
+              consolidate data from several sources to provide policymakers with timely information
+              on criminal justice trends at the state and local levels, and (B) to identify and
+              highlight agencies that are reporting this important data publicly.{" "}
+              {additionalDescription}
               <br />
               <i>
                 Last updated:{" "}
